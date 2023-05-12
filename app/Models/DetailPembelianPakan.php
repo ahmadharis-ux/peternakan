@@ -12,6 +12,9 @@ class DetailPembelianPakan extends Model
     function Pakan(){
         return $this->belongsTo(Pakan::class);
     }
+    function SatuanPakan(){
+        return $this->belongsTo(SatuanPakan::class);
+    }
     function PembelianPakan(){
         return $this->belongsTo(PembelianPakan::class);
     }
