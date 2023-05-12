@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TransaksiDebit extends Model
+class Jurnal extends Model
 {
     use HasFactory;
 
-
-    public function Debit(): BelongsTo
+    public function Debit(): HasMany
     {
-        return $this->belongsTo(Debit::class, 'foreign_key', 'other_key');
+        return $this->hasMany(Debit::class, 'foreign_key', 'local_key');
     }
 
-    public function Rekening(): BelongsTo
+    public function Kredit(): HasMany
     {
-        return $this->belongsTo(Rekening::class, 'foreign_key', 'other_key');
+        return $this->hasMany(Kredit::class, 'foreign_key', 'local_key');
     }
+
 
     public function User(): BelongsTo
     {
