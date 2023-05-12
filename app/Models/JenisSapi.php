@@ -7,5 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class JenisSapi extends Model
 {
-    use HasFactory;
+
+	use HasFactory;
+
+
+	public function Sapi()
+	{
+		return $this->HasMany(Sapi::class);
+	}
+
+	public function DetailPembelianSapi()
+	{
+		return $this->HasMany(DetailPembelianSapi::class);
+	}
+
 }

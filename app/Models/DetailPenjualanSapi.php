@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetailPenjualanSapi extends Model
 {
-    use HasFactory;
+
+	use HasFactory;
+
+	public function Sapi(): Has
+	{
+		return $this->has(Sapi::class);
+	}
+
+	public function PenjualanSapi()
+	{
+		return $this->belongsTo(PenjualanSapi::class);
+	}
+
 }

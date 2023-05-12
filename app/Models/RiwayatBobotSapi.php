@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class RiwayatBobotSapi extends Model
 {
-    use HasFactory;
+
+	use HasFactory;
+
+	public function Sapi()
+	{
+		return $this->BelongsTo(Sapi::class);
+	}
+
+	public function User()
+	{
+		return $this->BelongsTo(User::class);
+	}
+
 }

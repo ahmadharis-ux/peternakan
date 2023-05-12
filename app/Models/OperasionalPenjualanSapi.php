@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class OperasionalPenjualanSapi extends Model
 {
-    use HasFactory;
+
+	use HasFactory;
+
+	public function PenjualanSapi()
+	{
+		return $this->belongsTo(PenjualanSapi::class);
+	}
+
 }
