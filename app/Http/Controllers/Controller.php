@@ -11,10 +11,14 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+<<<<<<< HEAD
     public function index()
     {
         return view('welcome');
 
         // sip mantep
     }
+=======
+    // branch yafi ubah ku haris
+>>>>>>> master
 }
