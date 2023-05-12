@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Sapi;
-use App\Models\PenjualanSapi;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class DetailPenjualanSapi extends Model
 {
+
 	use HasFactory;
 
 	public function Sapi(): Has
@@ -20,4 +19,5 @@ class DetailPenjualanSapi extends Model
 	{
 		return $this->belongsTo(PenjualanSapi::class);
 	}
+
 }

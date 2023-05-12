@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\JenisSapi;
-use App\Models\PembelianSapi;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class DetailPembelianSapi extends Model
 {
+
 	use HasFactory;
 
 
@@ -17,14 +16,9 @@ class DetailPembelianSapi extends Model
 		return $this->belongsTo(PembelianSapi::class);
 	}
 
-	// public function JenisSapi()
-	// {
-	//     return $this->belongsTo(JenisSapi::class);
-	// }
-
-
 	public function JenisSapi()
 	{
 		return $this->belongsTo(JenisSapi::class);
 	}
+
 }

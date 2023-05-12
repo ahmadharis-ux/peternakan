@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Sapi;
-use App\Models\DetailPembelianSapi;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class JenisSapi extends Model
 {
+
 	use HasFactory;
 
 
@@ -21,4 +20,5 @@ class JenisSapi extends Model
 	{
 		return $this->HasMany(DetailPembelianSapi::class);
 	}
+
 }

@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\PembelianSapi;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class OperasionalPembelianSapi extends Model
 {
     use HasFactory;
 
+
     public function PembelianSapi()
     {
         return $this->belongsTo(PembelianSapi::class);
     }
+
 }

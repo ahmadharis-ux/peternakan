@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\JenisSapi;
-use App\Models\RiwayatBobotSapi;
-use App\Models\DetailPenjualanSapi;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Sapi extends Model
 {
+
 	use HasFactory;
 
 
@@ -27,4 +25,5 @@ class Sapi extends Model
 	{
 		return $this->HasMany(DetailPenjualanSapi::class);
 	}
+
 }

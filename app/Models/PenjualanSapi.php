@@ -2,15 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Debit;
-use App\Models\DetailPenjualanSapi;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\OperasionalPenjualanSapi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class PenjualanSapi extends Model
 {
+
 	use HasFactory;
 
 
@@ -37,4 +34,6 @@ class PenjualanSapi extends Model
 	{
 		return $this->belongsTo(Debit::class);
 	}
+
+  
 }
