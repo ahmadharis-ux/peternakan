@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class SatuanPakan extends Model
 {
     use HasFactory;
+    function PemakaianPakan(){
+        return $this->hasMany(PemakaianPakan::class,'id_satuan_pakan');
+    }
+    function StockPakan(){
+        return $this->hasMany(StockPakan::class,'id_satuan_pakan');
+    }
 }
