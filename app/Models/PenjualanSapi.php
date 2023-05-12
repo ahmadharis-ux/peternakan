@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Detail_penjualan_sapi extends Model
+class PenjualanSapi extends Model
 {
     use HasFactory;
 }

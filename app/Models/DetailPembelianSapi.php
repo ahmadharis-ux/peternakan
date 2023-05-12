@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Riwayat_bobot_sapi extends Model
+class DetailPembelianSapi extends Model
 {
     use HasFactory;
 }
