@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PemakaianPakan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DetailPemakaianPakan extends Model
 {
     use HasFactory;
-    function PemakaianPakan(){
+    function PemakaianPakan()
+    {
         return $this->belongsTo(PemakaianPakan::class);
     }
 }
