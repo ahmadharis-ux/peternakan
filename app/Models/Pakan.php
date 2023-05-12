@@ -28,4 +28,9 @@ class Pakan extends Model
     {
         return $this->hasMany(StockPakan::class, 'id_pakan');
     }
+
+    function User()
+    {
+        return $this->hasMany(User::class, 'id_pakan');
+    }
 }
