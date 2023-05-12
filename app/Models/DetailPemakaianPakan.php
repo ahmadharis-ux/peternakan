@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DetailPemakaianPakan extends Model
 {
     use HasFactory;
-    function Pakan(){
-        return $this->belongsTo(Pakan::class);
-    }
     function PemakaianPakan(){
         return $this->belongsTo(PemakaianPakan::class);
     }

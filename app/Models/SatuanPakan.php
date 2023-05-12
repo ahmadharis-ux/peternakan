@@ -14,4 +14,7 @@ class SatuanPakan extends Model
     function StockPakan(){
         return $this->hasMany(StockPakan::class,'id_satuan_pakan');
     }
+    function DetailPembelianPakan(){
+        return $this->hasMany(DetailPembelianPakan::class,'id_satuan_pakan');
+    }
 }

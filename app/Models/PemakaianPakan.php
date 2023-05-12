@@ -14,4 +14,7 @@ class PemakaianPakan extends Model
     function SatuanPakan(){
         return $this->belongsTo(SatuanPakan::class);
     }
+    function DetailPemakaianPakan(){
+        return $this->hasMany(DetailPemakaianPakan::class,'id_pemakaian_pakan');
+    }
 }
