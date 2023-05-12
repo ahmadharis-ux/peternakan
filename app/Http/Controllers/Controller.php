@@ -10,6 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
+    public function index()
+    {
+        return view('welcome');
 
-    // branch yafi ubah ku haris
+        // sip mantep
+    }
 }
