@@ -11,7 +11,7 @@ class KodeJurnal extends Model
     use HasFactory;
 
 
-    public function Jurnal(): HasMany
+    public function Jurnal()
     {
         return $this->hasMany(Jurnal::class, 'foreign_key', 'local_key');
     }

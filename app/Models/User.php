@@ -44,89 +44,89 @@ class User extends Authenticatable
 
 
 
-    public function Rekening(): HasMany
+    public function Rekening()
     {
         return $this->hasMany(Rekening::class, 'foreign_key', 'local_key');
     }
 
     // ================================== per sapian
-    public function PembelianSapi(): HasMany
+    public function PembelianSapi()
     {
         return $this->hasMany(PembelianSapi::class, 'foreign_key', 'local_key');
     }
 
-    public function PenjualanSapi(): HasMany
+    public function PenjualanSapi()
     {
         return $this->hasMany(PenjualanSapi::class, 'foreign_key', 'local_key');
     }
 
-    public function RiwayatBobotSapi(): HasMany
+    public function RiwayatBobotSapi()
     {
         return $this->hasMany(RiwayatBobotSapi::class, 'foreign_key', 'local_key');
     }
 
-    public function JenisSapi(): HasMany
+    public function JenisSapi()
     {
         return $this->hasMany(JenisSapi::class, 'foreign_key', 'local_key');
     }
 
 
     // ================================== per pakanan
-    public function Pakan(): HasMany
+    public function Pakan()
     {
         return $this->hasMany(Pakan::class, 'foreign_key', 'local_key');
     }
 
-    public function PembelianPakan(): HasMany
+    public function PembelianPakan()
     {
         return $this->hasMany(PembelianPakan::class, 'foreign_key', 'local_key');
     }
 
-    public function PemakaianPakan(): HasMany
+    public function PemakaianPakan()
     {
         return $this->hasMany(PemakaianPakan::class, 'foreign_key', 'local_key');
     }
 
 
     // ================================== per kreditan
-    public function Kredit(): HasMany
+    public function Kredit()
     {
         return $this->hasMany(Kredit::class, 'foreign_key', 'local_key');
     }
 
-    public function TransaksiKredit(): HasMany
+    public function TransaksiKredit()
     {
         return $this->hasMany(TransaksiKredit::class, 'foreign_key', 'local_key');
     }
 
-    public function FakturKredit(): HasMany
+    public function FakturKredit()
     {
         return $this->hasMany(FakturKredit::class, 'foreign_key', 'local_key');
     }
 
     // ================================== perdebitan
-    public function Debit(): HasMany
+    public function Debit()
     {
         return $this->hasMany(Debit::class, 'foreign_key', 'local_key');
     }
 
-    public function TransaksiDebit(): HasMany
+    public function TransaksiDebit()
     {
         return $this->hasMany(TransaksiDebit::class, 'foreign_key', 'local_key');
     }
 
-    public function FakturDebit(): HasMany
+    public function FakturDebit()
     {
         return $this->hasMany(FakturDebit::class, 'foreign_key', 'local_key');
     }
 
     // ================================== per jurnalan
-    public function KodeJurnal(): HasMany
+    public function KodeJurnal()
     {
         return $this->hasMany(KodeJurnal::class, 'foreign_key', 'local_key');
     }
 
-    public function Jurnal(): HasMany
+    public function Jurnal()
     {
         return $this->hasMany(Jurnal::class, 'foreign_key', 'local_key');
     }

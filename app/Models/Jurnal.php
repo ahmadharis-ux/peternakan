@@ -9,18 +9,18 @@ class Jurnal extends Model
 {
     use HasFactory;
 
-    public function Debit(): HasMany
+    public function Debit()
     {
         return $this->hasMany(Debit::class, 'foreign_key', 'local_key');
     }
 
-    public function Kredit(): HasMany
+    public function Kredit()
     {
         return $this->hasMany(Kredit::class, 'foreign_key', 'local_key');
     }
 
 
-    public function User(): BelongsTo
+    public function User()
     {
         return $this->belongsTo(User::class, 'foreign_key', 'other_key');
     }
