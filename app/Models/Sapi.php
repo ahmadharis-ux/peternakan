@@ -10,21 +10,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sapi extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
 
-    public function JenisSapi(): BelongsTo
-    {
-        return $this->belongsTo(JenisSapi::class);
-    }
+	public function JenisSapi()
+	{
+		return $this->belongsTo(JenisSapi::class);
+	}
 
-    public function RiwayatBobotSapi(): HasMany
-    {
-        return $this->HasMany(RiwayatBobotSapi::class);
-    }
+	public function RiwayatBobotSapi()
+	{
+		return $this->HasMany(RiwayatBobotSapi::class);
+	}
 
-    public function DetailPenjualanSapi(): HasMany
-    {
-        return $this->HasMany(DetailPenjualanSapi::class);
-    }
+	public function DetailPenjualanSapi()
+	{
+		return $this->HasMany(DetailPenjualanSapi::class);
+	}
 }

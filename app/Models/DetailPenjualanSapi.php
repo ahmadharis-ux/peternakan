@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DetailPenjualanSapi extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function Sapi(): Has
-    {
-        return $this->has(Sapi::class);
-    }
+	public function Sapi(): Has
+	{
+		return $this->has(Sapi::class);
+	}
 
-    public function PenjualanSapi(): BelongsTo
-    {
-        return $this->belongsTo(PenjualanSapi::class);
-    }
+	public function PenjualanSapi()
+	{
+		return $this->belongsTo(PenjualanSapi::class);
+	}
 }

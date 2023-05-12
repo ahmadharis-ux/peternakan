@@ -14,24 +14,24 @@ class PembelianSapi extends Model
     use HasFactory;
 
 
-    public function DetailPembelianSapi(): HasMany
+    public function DetailPembelianSapi()
     {
         return $this->hasMany(DetailPembelianSapi::class);
     }
 
-    public function OperasionalPembelianSapi(): HasMany
+    public function OperasionalPembelianSapi()
     {
         return $this->hasMany(OperasionalPembelianSapi::class);
     }
 
 
-    public function User(): BelongsTo
+    public function User()
     {
         return $this->belongsTo(User::class);
     }
 
 
-    public function Kredit(): BelongsTo
+    public function Kredit()
     {
         return $this->belongsTo(Kredit::class);
     }

@@ -9,22 +9,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DetailPembelianSapi extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
 
-    public function PembelianSapi(): BelongsTo
-    {
-        return $this->belongsTo(PembelianSapi::class);
-    }
+	public function PembelianSapi()
+	{
+		return $this->belongsTo(PembelianSapi::class);
+	}
 
-    // public function JenisSapi(): BelongsTo
-    // {
-    //     return $this->belongsTo(JenisSapi::class);
-    // }
+	// public function JenisSapi()
+	// {
+	//     return $this->belongsTo(JenisSapi::class);
+	// }
 
 
-    public function JenisSapi(): BelongsTo
-    {
-        return $this->belongsTo(JenisSapi::class);
-    }
+	public function JenisSapi()
+	{
+		return $this->belongsTo(JenisSapi::class);
+	}
 }

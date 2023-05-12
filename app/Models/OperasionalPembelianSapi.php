@@ -10,7 +10,7 @@ class OperasionalPembelianSapi extends Model
 {
     use HasFactory;
 
-    public function PembelianSapi(): BelongsTo
+    public function PembelianSapi()
     {
         return $this->belongsTo(PembelianSapi::class);
     }

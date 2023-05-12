@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RiwayatBobotSapi extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function Sapi(): BelongsTo
-    {
-        return $this->BelongsTo(Sapi::class);
-    }
+	public function Sapi()
+	{
+		return $this->BelongsTo(Sapi::class);
+	}
 
-    public function User(): BelongsTo
-    {
-        return $this->BelongsTo(User::class);
-    }
+	public function User()
+	{
+		return $this->BelongsTo(User::class);
+	}
 }
