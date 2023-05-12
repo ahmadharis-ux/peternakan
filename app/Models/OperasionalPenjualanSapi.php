@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PenjualanSapi;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OperasionalPenjualanSapi extends Model
 {
 
-	use HasFactory;
+    use HasFactory;
 
-	public function PenjualanSapi()
-	{
-		return $this->belongsTo(PenjualanSapi::class);
-	}
-
+    public function PenjualanSapi()
+    {
+        return $this->belongsTo(PenjualanSapi::class);
+    }
 }

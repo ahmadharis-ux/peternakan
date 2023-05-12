@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Kredit;
+use App\Models\DetailPembelianSapi;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\OperasionalPembelianSapi;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PembelianSapi extends Model
 {
@@ -32,5 +36,4 @@ class PembelianSapi extends Model
     {
         return $this->belongsTo(Kredit::class);
     }
-
 }

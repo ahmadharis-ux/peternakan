@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Sapi;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RiwayatBobotSapi extends Model
 {
 
-	use HasFactory;
+    use HasFactory;
 
-	public function Sapi()
-	{
-		return $this->BelongsTo(Sapi::class);
-	}
+    public function Sapi()
+    {
+        return $this->BelongsTo(Sapi::class);
+    }
 
-	public function User()
-	{
-		return $this->BelongsTo(User::class);
-	}
-
+    public function User()
+    {
+        return $this->BelongsTo(User::class);
+    }
 }
