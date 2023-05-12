@@ -10,7 +10,7 @@ class Pakan extends Model
     use HasFactory;
 
     function DetailPembelianPakan(){
-        return $this->hasMany(DetailPembelianPakan::class,'id_pakan');
+        return $this->hasMany(DetailPemakaianPakan::class,'id_pakan');
     }
     function DetailPemakaianPakan(){
         return $this->hasMany(DetailPemakaianPakan::class,'id_pakan');
