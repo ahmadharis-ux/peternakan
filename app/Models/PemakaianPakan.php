@@ -23,4 +23,14 @@ class PemakaianPakan extends Model
     {
         return $this->hasMany(DetailPemakaianPakan::class, 'id_pemakaian_pakan');
     }
+
+    function User()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    function Pekerja()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
