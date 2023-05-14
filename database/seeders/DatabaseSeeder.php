@@ -4,14 +4,17 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\JenisSapi;
 use Carbon\Carbon;
 use App\Models\Role;
+use App\Models\Sapi;
 use App\Models\User;
 use App\Models\Pakan;
 use App\Models\Jurnal;
 use App\Models\Rekening;
 use App\Models\KodeJurnal;
 use App\Models\SatuanPakan;
+use Database\Factories\SapiFactory;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -163,5 +166,22 @@ class DatabaseSeeder extends Seeder
                 "id_author" => $val["id_author"],
             ]);
         }
+
+        // ================= JENIS SAPI
+        $data = [
+            ["nama" => "Sapi hitam", "id_author" => mt_rand(1, 3)],
+            ["nama" => "Sapi perah", "id_author" => mt_rand(1, 3)],
+            ["nama" => "Sapi jadi-jadian", "id_author" => mt_rand(1, 3)],
+
+        ];
+        foreach ($data as $val) {
+            JenisSapi::insert([
+                "nama" => $val["nama"],
+                "id_author" => $val["id_author"],
+            ]);
+        }
+
+        // SAPI
+        Sapi::factory(20)->create();
     }
 }

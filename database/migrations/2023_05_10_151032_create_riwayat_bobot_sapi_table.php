@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('riwayat_bobot_sapis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_jenis_sapis')->unsigned();
+            $table->foreignId('id_jenis_sapi')->unsigned();
             $table->unsignedSmallInteger('bobot');
             $table->foreignId('id_author')->unsigned();
             $table->string('keterangan');
             $table->timestamps();
 
             $table->foreign('id_author')->references('id')->on('users');
-            $table->foreign('id_jenis_sapis')->references('id')->on('jenis_sapis');
+            $table->foreign('id_jenis_sapi')->references('id')->on('jenis_sapis');
         });
     }
 

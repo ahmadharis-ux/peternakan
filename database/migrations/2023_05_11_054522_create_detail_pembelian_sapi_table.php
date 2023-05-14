@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('detail_pembelian_sapis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pembelian_sapis')->unsigned();
-            $table->foreignId('id_jenis_sapis')->unsigned();
+            $table->foreignId('id_jenis_sapi')->unsigned();
             $table->string('eartag');
             $table->enum('jenis_kelamin', ['jantan', 'betina']);
             $table->unsignedSmallInteger('bobot')->default(0);
@@ -26,7 +26,7 @@ return new class extends Migration
 
             $table->timestamps();
             $table->foreign('id_pembelian_sapis')->references('id')->on('pembelian_sapis');
-            $table->foreign('id_jenis_sapis')->references('id')->on('jenis_sapis');
+            $table->foreign('id_jenis_sapi')->references('id')->on('jenis_sapis');
         });
     }
 

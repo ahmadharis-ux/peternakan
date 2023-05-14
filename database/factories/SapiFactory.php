@@ -20,17 +20,13 @@ class SapiFactory extends Factory
             "Hidup", "Mati", "Sehat", "Gila"
         ];
 
-        $statusSapi = [
-            "ada", "dipesan", "terjual"
-        ];
+        $statusSapi = ['ADA', 'DIBELI', 'SOLD'];
 
-        $jenisKelamin = [
-            "pejantan", "betina"
-        ];
+        $jenisKelamin = ['jantan', 'betina'];
 
         return [
             "id_jenis_sapi" => mt_rand(1, 3),
-            "eartag" => substr(uniqid(), 0, 2),
+            "eartag" => substr(fake()->uuid(), 3, 3),
             "harga_pokok" => mt_rand(1000, 5000),
             "bobot" => mt_rand(299, 400),
             "kondisi" => $kondisiSapi[mt_rand(0, 3)],

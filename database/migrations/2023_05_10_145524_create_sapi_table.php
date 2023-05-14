@@ -13,21 +13,21 @@ return new class extends Migration
     {
         Schema::create('sapis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_jenis_sapis')->unsigned();
+            $table->foreignId('id_jenis_sapi')->unsigned();
             $table->string('eartag');
             $table->unsignedInteger('harga_pokok');
             $table->unsignedSmallInteger('bobot');
-            $table->unsignedInteger('harga_kiloan');
-            $table->unsignedInteger('harga_ekor');
+            $table->unsignedInteger('harga_kiloan')->nullable();
+            $table->unsignedInteger('harga_ekor')->nullable();
             $table->string('kondisi');
             $table->enum('status', ['ADA', 'DIBELI', 'SOLD']);
-            $table->foreignId('id_author')->unsigned();
-            $table->string('keterangan');
+            // $table->foreignId('id_author')->unsigned();
+            $table->string('keterangan')->nullable();
             $table->enum('jenis_kelamin', ['jantan', 'betina']);
             $table->timestamps();
 
-            $table->foreign('id_author')->references('id')->on('users');
-            $table->foreign('id_jenis_sapis')->references('id')->on('jenis_sapis');
+            // $table->foreign('id_author')->references('id')->on('users');
+            $table->foreign('id_jenis_sapi')->references('id')->on('jenis_sapis');
         });
     }
 
