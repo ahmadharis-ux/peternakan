@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create('operasional_pembelian_sapi', function (Blueprint $table) {
+		Schema::create('operasional_pembelian_sapis', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('id_pembelian_sapi')->unsigned();
 			$table->integer('harga');

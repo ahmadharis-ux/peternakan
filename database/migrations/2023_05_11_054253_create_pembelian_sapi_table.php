@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pembelian_sapi', function (Blueprint $table) {
+        Schema::create('pembelian_sapis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_author')->unsigned();
             $table->foreignId('id_kredit')->unsigned();

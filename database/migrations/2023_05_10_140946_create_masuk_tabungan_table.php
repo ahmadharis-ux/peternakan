@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('masuk_tabungan', function (Blueprint $table) {
+        Schema::create('masuk_tabungans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_user')->unsigned();
             $table->foreignId('id_author')->unsigned();

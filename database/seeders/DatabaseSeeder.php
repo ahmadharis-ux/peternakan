@@ -40,21 +40,26 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // }
 
-        // $data = [
-        //     ['name' => 'Diva', 'norek' => '123456', 'bank' => 'BCA'],
-        //     ['name' => 'Shinta', 'norek' => '098765', 'bank' => 'BJB'],
-        // ];
-        // foreach ($data as $val) {
-        //     Rekening::insert([
-        //         'name' => $val['name'],
-        //         'norek' => $val['norek'],
-        //         'bank' => $val['bank'],
-        //         'created_at' => Carbon::now(), 'updated_at' => Carbon::now(),
-        //     ]);
-        // }
+
+        // ============= REKENING
+        $data = [
+            ["nomor" => '12345', "id_user" => mt_rand(1, 8), "atas_nama" => "test_atas_nama", "bank" => "test_bank"],
+            ["nomor" => '67890', "id_user" => mt_rand(1, 8), "atas_nama" => "test_atas_nama", "bank" => "test_bank"],
+        ];
+        foreach ($data as $val) {
+            Rekening::insert([
+                'nomor' => $val['nomor'],
+                'id_user' => $val['id_user'],
+                'atas_nama' => $val['atas_nama'],
+                'bank' => $val['bank'],
+                // 'created_at' => Carbon::now(), 'updated_at' => Carbon::now(),
+            ]);
+        }
+        // ======================
 
 
-        // ================================ ROLE
+
+        // ================================ ROLE dan USER
         $data = [
             ['name' => 'Owner'],
             ['name' => 'Admin'],
@@ -102,5 +107,6 @@ class DatabaseSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ],
         );
+        // ================================
     }
 }
