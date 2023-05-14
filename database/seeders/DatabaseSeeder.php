@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
                 "role_id" => 2,
                 "email" => "admin@gmail.com",
                 "email_verified_at" => now(),
-                "password" => Hash::make("admin"),
+                "password" => Hash::make("password"),
                 "remember_token" => Str::random(10),
             ],
         );
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
                 "role_id" => 1,
                 "email" => "owner@gmail.com",
                 "email_verified_at" => now(),
-                "password" => Hash::make("owner"),
+                "password" => Hash::make("password"),
                 "remember_token" => Str::random(10),
             ],
         );
@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
                 "role_id" => 3,
                 "email" => "accounting@gmail.com",
                 "email_verified_at" => now(),
-                "password" => Hash::make("accounting"),
+                "password" => Hash::make("password"),
                 "remember_token" => Str::random(10),
             ],
 
