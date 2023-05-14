@@ -13,8 +13,8 @@ return new class extends Migration
 	{
 		Schema::create('detail_penjualan_sapis', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('id_penjualan_sapi')->unsigned();
-			$table->foreignId('id_sapi')->unsigned();
+			$table->foreignId('id_penjualan_sapis')->unsigned();
+			$table->foreignId('id_sapis')->unsigned();
 			$table->unsignedSmallInteger('bobot')->default(0);
 			$table->integer('harga')->default(0);
 			$table->boolean('kiloan')->default(false);
@@ -24,8 +24,8 @@ return new class extends Migration
 
 
 			$table->timestamps();
-			$table->foreign('id_penjualan_sapi')->references('id')->on('penjualan_sapi');
-			$table->foreign('id_sapi')->references('id')->on('sapi');
+			$table->foreign('id_penjualan_sapis')->references('id')->on('penjualan_sapis');
+			$table->foreign('id_sapis')->references('id')->on('sapis');
 		});
 	}
 
@@ -34,6 +34,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('detail_penjualan_sapi');
+		Schema::dropIfExists('detail_penjualan_sapis');
 	}
 };

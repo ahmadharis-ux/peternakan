@@ -13,12 +13,12 @@ return new class extends Migration
 	{
 		Schema::create('operasional_pembelian_sapis', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('id_pembelian_sapi')->unsigned();
+			$table->foreignId('id_pembelian_sapis')->unsigned();
 			$table->integer('harga');
 			$table->string('keterangan');
 
 			$table->timestamps();
-			$table->foreign('id_pembelian_sapi')->references('id')->on('pembelian_sapi');
+			$table->foreign('id_pembelian_sapis')->references('id')->on('pembelian_sapis');
 		});
 	}
 
@@ -27,6 +27,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('operasional_pembelian_sapi');
+		Schema::dropIfExists('operasional_pembelian_sapis');
 	}
 };

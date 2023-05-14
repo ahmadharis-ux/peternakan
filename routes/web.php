@@ -30,75 +30,75 @@ use Illuminate\Support\Facades\Route;
 */
 //owner
 Route::middleware(['auth', 'role:Owner'])->group(function () {
-    Route::get('/owner', [OwnerController::class, 'index']);
+	Route::get('/owner', [OwnerController::class, 'index']);
 });
 
 //admin
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index']);
-    Route::get('/users', [AdminController::class, 'users']);
-    Route::put('/editrole/{id}', [AdminController::class, 'editRole']);
+	Route::get('/admin', [AdminController::class, 'index']);
+	Route::get('/users', [AdminController::class, 'users']);
+	Route::put('/editrole/{id}', [AdminController::class, 'editRole']);
 });
 
 //accounting
 Route::middleware(['auth', 'role:Accounting'])->group(function () {
-    Route::get('/acc', [AccController::class, 'index']);
-    Route::get('/acc/kas', [AccController::class, 'indexKas']);
-    Route::post('/storekas', [AccController::class, 'storeKas']);
-    Route::get('/detail/kas/{jurnal_id}/{id}', [AccController::class, 'detKas']);
-    Route::post('/storesapi', [AccController::class, 'storesapi']);
-    Route::post('/storeopr', [AccController::class, 'storeopr']);
-    Route::post('/storetrans', [AccController::class, 'storetrans']);
-    Route::post('/storepiutang', [AccController::class, 'storepiutang']);
+	Route::get('/acc', [AccController::class, 'index']);
+	Route::get('/acc/kas', [AccController::class, 'indexKas']);
+	Route::post('/storekas', [AccController::class, 'storeKas']);
+	Route::get('/detail/kas/{jurnal_id}/{id}', [AccController::class, 'detKas']);
+	Route::post('/storesapis', [AccController::class, 'storesapis']);
+	Route::post('/storeopr', [AccController::class, 'storeopr']);
+	Route::post('/storetrans', [AccController::class, 'storetrans']);
+	Route::post('/storepiutang', [AccController::class, 'storepiutang']);
 
-    //stok sapi
-    Route::get('/stoksapi', [AccController::class, 'stoksapi']);
+	//stok sapi
+	Route::get('/stoksapis', [AccController::class, 'stoksapis']);
 
-    //update status sapi
-    Route::put('/editstatus/{id}', [AccController::class, 'editstatus']);
+	//update status sapi
+	Route::put('/editstatus/{id}', [AccController::class, 'editstatus']);
 
-    //total hutang
-    Route::get('/total_hutang', [AccController::class, 'allhutang']);
+	//total hutang
+	Route::get('/total_hutang', [AccController::class, 'allhutang']);
 
-    //pakan
-    Route::get('/acc/pakan', [AccController::class, 'indexpakan']);
-    Route::post('/storepakan', [AccController::class, 'storepakan']);
-    Route::post('/belipakan', [AccController::class, 'beliPakan']);
-    Route::post('/pemakaianpakan', [AccController::class, 'pemakaianpakan']);
+	//pakan
+	Route::get('/acc/pakans', [AccController::class, 'indexpakans']);
+	Route::post('/storepakans', [AccController::class, 'storepakans']);
+	Route::post('/belipakans', [AccController::class, 'belipakans']);
+	Route::post('/pemakaianpakans', [AccController::class, 'pemakaianpakans']);
 
-    //hutang
-    Route::get('/acc/hutang', [AccController::class, 'indexhutang']);
+	//hutang
+	Route::get('/acc/hutang', [AccController::class, 'indexhutang']);
 
-    //piutang
-    Route::get('/acc/piutang', [AccController::class, 'indexpiutang']);
+	//piutang
+	Route::get('/acc/piutang', [AccController::class, 'indexpiutang']);
 
-    //gaji
-    Route::post('/inputsalary', [AccController::class, 'storesalary']);
-    Route::post('/kasihkasbon', [AccController::class, 'storekashbon']);
-    Route::get('/acc/pekerja', [PekerjaController::class, 'index']);
-    Route::get('/acc/pekerja/{id}', [PekerjaController::class, 'detail_pekerja']);
+	//gaji
+	Route::post('/inputsalary', [AccController::class, 'storesalary']);
+	Route::post('/kasihkasbon', [AccController::class, 'storekashbon']);
+	Route::get('/acc/pekerja', [PekerjaController::class, 'index']);
+	Route::get('/acc/pekerja/{id}', [PekerjaController::class, 'detail_pekerja']);
 
-    //customer
-    Route::get('/acc/customer', [CustomerController::class, 'index']);
-    Route::get('/acc/customer/{id}', [CustomerController::class, 'detail']);
+	//customer
+	Route::get('/acc/customer', [CustomerController::class, 'index']);
+	Route::get('/acc/customer/{id}', [CustomerController::class, 'detail']);
 
-    //suppliersapi
-    Route::get('/acc/supsapi', [SupSapiController::class, 'index']);
+	//suppliersapi
+	Route::get('/acc/supsapis', [SupSapiController::class, 'index']);
 
-    //faktur
-    Route::get('/faktur/{id}', [PDFController::class, 'fakturcust']);
+	//faktur
+	Route::get('/faktur/{id}', [PDFController::class, 'fakturcust']);
 });
 
 
 Route::get('/profile', function () {
-    $title = 'Profile';
-    $heading = 'Admin';
-    $active = 'profle';
-    return view('profile', [
-        'title' => $title,
-        'heading' => $heading,
-        'active' => $active,
-    ]);
+	$title = 'Profile';
+	$heading = 'Admin';
+	$active = 'profle';
+	return view('profile', [
+		'title' => $title,
+		'heading' => $heading,
+		'active' => $active,
+	]);
 })->middleware('auth');
 
 Route::get('/', [LoginController::class, 'index'])->middleware('guest');
@@ -111,5 +111,5 @@ Route::post('/changepass', [LoginController::class, 'changePassword']);
 Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/kabur', [LoginController::class, 'logout']);
 Route::get('/blank', function () {
-    return view('blank');
+	return view('blank');
 });

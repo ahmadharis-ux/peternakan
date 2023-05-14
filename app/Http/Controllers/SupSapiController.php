@@ -10,7 +10,7 @@ class SupSapiController extends Controller
 	function index()
 	{
 		return view('accounting.suppliersapi.index', [
-			'title' => 'Supplier Sapi',
+			'title' => 'Supplier sapis',
 			'heading' => 'Accounting',
 			'active' => 'users',
 			'customer' => User::where('role_id', '5')->get(),

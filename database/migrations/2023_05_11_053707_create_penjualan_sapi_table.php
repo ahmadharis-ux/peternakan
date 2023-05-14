@@ -14,12 +14,12 @@ return new class extends Migration
 		Schema::create('penjualan_sapis', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('id_author')->unsigned();
-			$table->foreignId('id_debit')->unsigned();
+			$table->foreignId('id_debits')->unsigned();
 			$table->string('keterangan')->nullable();
 
 			$table->timestamps();
 			$table->foreign('id_author')->references('id')->on('users');
-			$table->foreign('id_debit')->references('id')->on('debit');
+			$table->foreign('id_debits')->references('id')->on('debits');
 		});
 	}
 
@@ -28,6 +28,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('penjualan_sapi');
+		Schema::dropIfExists('penjualan_sapis');
 	}
 };

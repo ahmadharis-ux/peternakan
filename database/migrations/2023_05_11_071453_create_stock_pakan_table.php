@@ -13,13 +13,13 @@ return new class extends Migration
 	{
 		Schema::create('stok_pakans', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('id_pakan')->unsigned();
-			$table->foreignId('id_satuan_pakan')->unsigned();
+			$table->foreignId('id_pakans')->unsigned();
+			$table->foreignId('id_satuan_pakans')->unsigned();
 			$table->unsignedInteger('harga');
 
 			$table->timestamps();
-			$table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakan');
-			$table->foreign('id_pakan')->references('id')->on('pakan');
+			$table->foreign('id_satuan_pakans')->references('id')->on('satuan_pakans');
+			$table->foreign('id_pakans')->references('id')->on('pakans');
 		});
 	}
 
@@ -28,6 +28,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('stok_pakan');
+		Schema::dropIfExists('stok_pakans');
 	}
 };

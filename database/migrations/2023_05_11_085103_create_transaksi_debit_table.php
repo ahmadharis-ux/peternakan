@@ -14,15 +14,15 @@ return new class extends Migration
 		Schema::create('transaksi_debits', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('id_author')->unsigned();
-			$table->foreignId('id_debit')->unsigned();
-			$table->foreignId('id_rekening')->unsigned();
+			$table->foreignId('id_debits')->unsigned();
+			$table->foreignId('id_rekenings')->unsigned();
 			$table->unsignedInteger('nominal');
 
 			$table->timestamps();
 
 			$table->foreign('id_author')->references('id')->on('users');
-			$table->foreign('id_debit')->references('id')->on('debit');
-			$table->foreign('id_rekening')->references('id')->on('rekening');
+			$table->foreign('id_debits')->references('id')->on('debits');
+			$table->foreign('id_rekenings')->references('id')->on('rekenings');
 		});
 	}
 
@@ -31,6 +31,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('transaksi_debit');
+		Schema::dropIfExists('transaksi_debits');
 	}
 };

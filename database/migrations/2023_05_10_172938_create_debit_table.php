@@ -13,7 +13,7 @@ return new class extends Migration
 	{
 		Schema::create('debits', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('id_jurnal')->unsigned();
+			$table->foreignId('id_jurnals')->unsigned();
 			$table->foreignId('id_author')->unsigned();
 			$table->foreignId('id_pihak_kedua')->unsigned();
 			$table->unsignedInteger('nominal');
@@ -22,7 +22,7 @@ return new class extends Migration
 
 			$table->timestamps();
 
-			$table->foreign('id_jurnal')->references('id')->on('jurnal');
+			$table->foreign('id_jurnals')->references('id')->on('jurnals');
 			$table->foreign('id_author')->references('id')->on('users');
 			$table->foreign('id_pihak_kedua')->references('id')->on('users');
 		});
@@ -33,6 +33,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('debit');
+		Schema::dropIfExists('debits');
 	}
 };

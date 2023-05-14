@@ -6,32 +6,32 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-	/**
-	 * Run the migrations.
-	 */
-	public function up(): void
-	{
-		Schema::create('transaksi_kredits', function (Blueprint $table) {
-			$table->id();
-			$table->foreignId('id_author')->unsigned();
-			$table->foreignId('id_kredit')->unsigned();
-			$table->foreignId('id_rekening')->unsigned();
-			$table->unsignedInteger('nominal');
-			$table->unsignedInteger('adm');
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('transaksi_kredits', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_author')->unsigned();
+            $table->foreignId('id_kredits')->unsigned();
+            $table->foreignId('id_rekenings')->unsigned();
+            $table->unsignedInteger('nominal');
+            $table->unsignedInteger('adm');
 
-			$table->timestamps();
+            $table->timestamps();
 
-			$table->foreign('id_author')->references('id')->on('users');
-			$table->foreign('id_kredit')->references('id')->on('kredit');
-			$table->foreign('id_rekening')->references('id')->on('rekening');
-		});
-	}
+            $table->foreign('id_author')->references('id')->on('users');
+            $table->foreign('id_kredits')->references('id')->on('kredits');
+            $table->foreign('id_rekenings')->references('id')->on('rekenings');
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 */
-	public function down(): void
-	{
-		Schema::dropIfExists('transaksi_kredit');
-	}
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('transaksi_kredits');
+    }
 };

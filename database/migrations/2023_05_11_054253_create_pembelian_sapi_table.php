@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('pembelian_sapis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_author')->unsigned();
-            $table->foreignId('id_kredit')->unsigned();
+            $table->foreignId('id_kredits')->unsigned();
             $table->string('keterangan')->nullable();
 
 
             $table->timestamps();
             $table->foreign('id_author')->references('id')->on('users');
-            $table->foreign('id_kredit')->references('id')->on('kredit');
+            $table->foreign('id_kredits')->references('id')->on('kredits');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pembelian_sapi');
+        Schema::dropIfExists('pembelian_sapis');
     }
 };

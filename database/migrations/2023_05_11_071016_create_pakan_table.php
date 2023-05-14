@@ -6,26 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-	/**
-	 * Run the migrations.
-	 */
-	public function up(): void
-	{
-		Schema::create('pakans', function (Blueprint $table) {
-			$table->id();
-			$table->string('nama');
-			$table->foreignId('id_author')->unsigned();
-			$table->timestamps();
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('pakans', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->foreignId('id_author')->unsigned();
+            $table->timestamps();
 
-			$table->foreign('id_author')->references('id')->on('users');
-		});
-	}
+            $table->foreign('id_author')->references('id')->on('users');
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 */
-	public function down(): void
-	{
-		Schema::dropIfExists('pakan');
-	}
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('pakans');
+    }
 };

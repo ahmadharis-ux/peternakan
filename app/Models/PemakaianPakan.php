@@ -10,27 +10,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PemakaianPakan extends Model
 {
-    use HasFactory;
-    function Pakan()
-    {
-        return $this->belongsTo(Pakan::class);
-    }
-    function SatuanPakan()
-    {
-        return $this->belongsTo(SatuanPakan::class);
-    }
-    function DetailPemakaianPakan()
-    {
-        return $this->hasMany(DetailPemakaianPakan::class, 'id_pemakaian_pakan');
-    }
+	use HasFactory;
+	function Pakan()
+	{
+		return $this->belongsTo(Pakan::class);
+	}
+	function SatuanPakan()
+	{
+		return $this->belongsTo(SatuanPakan::class);
+	}
+	function DetailPemakaianPakan()
+	{
+		return $this->hasMany(DetailPemakaianPakan::class, 'id_pemakaian_pakans');
+	}
 
-    function User()
-    {
-        return $this->belongsTo(User::class);
-    }
+	function User()
+	{
+		return $this->belongsTo(User::class);
+	}
 
-    function Pekerja()
-    {
-        return $this->belongsTo(User::class);
-    }
+	function Pekerja()
+	{
+		return $this->belongsTo(User::class);
+	}
 }

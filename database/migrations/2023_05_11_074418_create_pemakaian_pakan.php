@@ -15,8 +15,8 @@ return new class extends Migration
 			$table->id();
 			$table->foreignId('id_author')->unsigned();
 			$table->foreignId('id_pekerja')->unsigned();
-			$table->foreignId('id_pakan')->unsigned();
-			$table->foreignId('id_satuan_pakan')->unsigned();
+			$table->foreignId('id_pakans')->unsigned();
+			$table->foreignId('id_satuan_pakans')->unsigned();
 			$table->unsignedInteger('nominal_pengeluaran');
 			$table->unsignedInteger('qty');
 			$table->string('keterangan');
@@ -26,8 +26,8 @@ return new class extends Migration
 
 			$table->foreign('id_author')->references('id')->on('users');
 			$table->foreign('id_pekerja')->references('id')->on('users');
-			$table->foreign('id_pakan')->references('id')->on('pakan');
-			$table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakan');
+			$table->foreign('id_pakans')->references('id')->on('pakans');
+			$table->foreign('id_satuan_pakans')->references('id')->on('satuan_pakans');
 		});
 	}
 
@@ -36,6 +36,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('riwayat_pemakaian_pakan');
+		Schema::dropIfExists('riwayat_pemakaian_pakans');
 	}
 };
