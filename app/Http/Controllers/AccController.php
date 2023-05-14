@@ -120,6 +120,7 @@ class AccController extends Controller
             'rekenings' => $rekening,
         ]);
     }
+
     function storeKas(Request $request)
     {
         $validasiData = $request->validate([
@@ -133,6 +134,7 @@ class AccController extends Controller
 
         return redirect()->back();
     }
+
     function detKas($jurnal_id, $id)
     {
         $data = Kas::where('id', $id)->with(['hutang', 'piutang', 'operasional', 'pembayaran', 'user', 'belipakans', 'salary', 'kasbon'])->first();
@@ -193,6 +195,7 @@ class AccController extends Controller
         Operasional::create($validasiData);
         return redirect()->back();
     }
+
     function storetrans(Request $request)
     {
         $validasiData = $request->validate([
@@ -243,6 +246,7 @@ class AccController extends Controller
 
         return redirect()->back();
     }
+
     //HUTANG
     function indexHutang()
     {
@@ -255,6 +259,7 @@ class AccController extends Controller
             'supsapis' => User::where('role_id', '5')->get(),
         ]);
     }
+
     //PIUTANG
     function indexPiutang()
     {
@@ -266,6 +271,7 @@ class AccController extends Controller
             'kas' => $kas,
         ]);
     }
+
     //PAKAN
     public function indexpakan()
     {
@@ -280,6 +286,7 @@ class AccController extends Controller
             'supplier' => User::where('role_id', '4')->get(),
         ]);
     }
+
     public function storepakan(Request $request)
     {
         $validasidata = $request->validate([
@@ -292,6 +299,7 @@ class AccController extends Controller
 
         return redirect()->back();
     }
+
     public function beliPakan(Request $request)
     {
         $validasiData = $request->validate([
@@ -307,6 +315,7 @@ class AccController extends Controller
 
         return redirect()->back();
     }
+
     function pemakaianpakan(Request $request)
     {
         $validasiData = $request->validate([
@@ -319,6 +328,7 @@ class AccController extends Controller
 
         return redirect()->back();
     }
+
     //GAJI
     function storesalary(Request $request)
     {
@@ -332,6 +342,7 @@ class AccController extends Controller
 
         return redirect()->back();
     }
+
     function storekashbon(Request $request)
     {
         $validasiData = $request->validate([
