@@ -14,7 +14,6 @@ use App\Models\Jurnal;
 use App\Models\Rekening;
 use App\Models\KodeJurnal;
 use App\Models\SatuanPakan;
-use Database\Factories\SapiFactory;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -83,7 +82,25 @@ class DatabaseSeeder extends Seeder
 
         );
 
-        \App\Models\User::factory(20)->create();
+
+        User::factory(20)->create();
+
+        for ($i = 0; $i < 20; $i++) {
+            User::create(
+                [
+                    "nama_depan" => "test",
+                    "nama_belakang" => "customer " . $i + 1,
+                    "role_id" => 6,
+                    "email" => "customer" . $i + 1 . "@gmail.com",
+                    "email_verified_at" => now(),
+                    "password" => Hash::make("password"),
+                    "remember_token" => Str::random(10),
+                ],
+
+            );
+        }
+
+
 
         // ================================
 
