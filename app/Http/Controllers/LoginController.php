@@ -29,9 +29,6 @@ class LoginController extends Controller
             return redirect('/acc');
         } elseif ($user->role_id === 1) {
             return redirect('/owner');
-            // return redirect('/acc');
-            // return redirect('/admin');
-            dd($user);
         }
         return redirect('/blank');
     }
