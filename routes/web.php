@@ -92,7 +92,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 });
 
 
-// rute biasa==================================
+// rute biasa ==================================
 
 
 Route::get('/profile', function () {
