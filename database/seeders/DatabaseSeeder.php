@@ -73,13 +73,34 @@ class DatabaseSeeder extends Seeder
         }
 
         \App\Models\User::factory(20)->create();
-        User::create([
-            'name' => 'admin',
-            'role_id' => 1,
-            'email' => 'admin@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-        ]);
+        User::create(
+            [
+                'nama_depan' => 'test',
+                'nama_belakang' => 'admin',
+                'role_id' => 2,
+                'email' => 'admin@gmail.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('admin'),
+                'remember_token' => Str::random(10),
+            ],
+            [
+                'nama_depan' => 'test',
+                'nama_belakang' => 'accounting',
+                'role_id' => 3,
+                'email' => 'accounting@gmail.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('accounting'),
+                'remember_token' => Str::random(10),
+            ],
+            [
+                'nama_depan' => 'test',
+                'nama_belakang' => 'owner',
+                'role_id' => 1,
+                'email' => 'owner@gmail.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('owner'),
+                'remember_token' => Str::random(10),
+            ],
+        );
     }
 }
