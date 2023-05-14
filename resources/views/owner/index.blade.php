@@ -17,8 +17,7 @@
                                 <div class="activite-label">Pengeluaran Hari ini </div>
                                 <i class='bi bi-circle-fill  activity-badge text-danger align-self-start'></i>
                                 <div class="activity-content">
-                                    <a href="#" class="fw-bold text-dark">Rp.
-                                        {{ number_format($trans->sum('kredits')) }}</a>
+                                    <a href="#" class="fw-bold text-dark">Rp [sum_kredit]</a>
                                 </div>
                             </div><!-- End activity item-->
                             {{-- kas --}}
@@ -26,8 +25,7 @@
                                 <div class="activite-label">Pemasukan Hari ini </div>
                                 <i class='bi bi-circle-fill  activity-badge text-success align-self-start'></i>
                                 <div class="activity-content">
-                                    <a href="#" class="fw-bold text-dark">Rp.
-                                        {{ number_format($trans->sum('debits')) }}</a>
+                                    <a href="#" class="fw-bold text-dark">Rp [sum_debit]</a>
                                 </div>
                             </div><!-- End activity item-->
 
@@ -51,7 +49,7 @@
 
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>{{ number_format($allhutang) }}</h6>
+                                            <h6>[sum_hutang]</h6>
                                             <h6></h6>
                                         </div>
                                     </div>
@@ -70,7 +68,7 @@
 
                                 <div class="d-flex align-items-center">
                                     <div class="ps-3">
-                                        <h6>{{ number_format($allpiutang) }}</h6>
+                                        <h6>[sum_piutang]</h6>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +86,7 @@
 
                                 <div class="d-flex align-items-center">
                                     <div class="ps-3">
-                                        <h6></h6>
+                                        <h6>[total_saldo]</h6>
                                     </div>
                                 </div>
 
@@ -106,7 +104,7 @@
                                     <h5 class="card-title">Total Stok Pakan</h5>
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>{{ $stokpakan }}</h6>
+                                            <h6>[stok_pakan]</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -123,9 +121,7 @@
                                     <h5 class="card-title">Stok Sapi</h5>
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>
-                                                {{ $stoksapi }}
-                                            </h6>
+                                            <h6>[stok_sapi]</h6>
                                         </div>
                                     </div>
 
