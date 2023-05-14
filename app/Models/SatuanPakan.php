@@ -11,15 +11,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SatuanPakan extends Model
 {
 	use HasFactory;
-	function PemakaianPakan()
+	function pemakaianPakan()
 	{
 		return $this->hasMany(PemakaianPakan::class, 'id_satuan_pakans');
 	}
-	function StockPakan()
+	function stockPakan()
 	{
 		return $this->hasMany(StockPakan::class, 'id_satuan_pakans');
 	}
-	function DetailPembelianPakan()
+	function detailPembelianPakan()
 	{
 		return $this->hasMany(DetailPembelianPakan::class, 'id_satuan_pakans');
 	}

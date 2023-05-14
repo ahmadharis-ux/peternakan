@@ -15,24 +15,24 @@ class PembelianSapi extends Model
 
 
 
-    public function DetailPembelianSapi()
+    public function detailPembelianSapi()
     {
         return $this->hasMany(DetailPembelianSapi::class);
     }
 
-    public function OperasionalPembelianSapi()
+    public function operasionalPembelianSapi()
     {
         return $this->hasMany(OperasionalPembelianSapi::class);
     }
 
 
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
 
-    public function Kredit()
+    public function kredit()
     {
         return $this->belongsTo(Kredit::class);
     }

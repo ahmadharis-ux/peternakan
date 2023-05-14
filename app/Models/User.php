@@ -43,91 +43,97 @@ class User extends Authenticatable
     ];
 
 
-
-    public function Rekening()
+    public function Role()
     {
-        return $this->hasMany(Rekening::class, 'foreign_key', 'local_key');
+        return $this->belongsTo(Role::class);
+    }
+
+
+
+    public function rekening()
+    {
+        return $this->hasMany(Rekening::class);
     }
 
     // ================================== per sapian
-    public function PembelianSapi()
+    public function pembelianSapi()
     {
-        return $this->hasMany(PembelianSapi::class, 'foreign_key', 'local_key');
+        return $this->hasMany(PembelianSapi::class);
     }
 
-    public function PenjualanSapi()
+    public function penjualanSapi()
     {
-        return $this->hasMany(PenjualanSapi::class, 'foreign_key', 'local_key');
+        return $this->hasMany(PenjualanSapi::class);
     }
 
-    public function RiwayatBobotSapi()
+    public function riwayatBobotSapi()
     {
-        return $this->hasMany(RiwayatBobotSapi::class, 'foreign_key', 'local_key');
+        return $this->hasMany(RiwayatBobotSapi::class);
     }
 
-    public function JenisSapi()
+    public function jenisSapi()
     {
-        return $this->hasMany(JenisSapi::class, 'foreign_key', 'local_key');
+        return $this->hasMany(JenisSapi::class);
     }
 
 
     // ================================== per pakanan
-    public function Pakan()
+    public function pakan()
     {
-        return $this->hasMany(Pakan::class, 'foreign_key', 'local_key');
+        return $this->hasMany(Pakan::class);
     }
 
-    public function PembelianPakan()
+    public function pembelianPakan()
     {
-        return $this->hasMany(PembelianPakan::class, 'foreign_key', 'local_key');
+        return $this->hasMany(PembelianPakan::class);
     }
 
-    public function PemakaianPakan()
+    public function pemakaianPakan()
     {
-        return $this->hasMany(PemakaianPakan::class, 'foreign_key', 'local_key');
+        return $this->hasMany(PemakaianPakan::class);
     }
 
 
     // ================================== per kreditan
-    public function Kredit()
+    public function kredit()
     {
-        return $this->hasMany(Kredit::class, 'foreign_key', 'local_key');
+        return $this->hasMany(Kredit::class);
     }
 
-    public function TransaksiKredit()
+    public function transaksiKredit()
     {
-        return $this->hasMany(TransaksiKredit::class, 'foreign_key', 'local_key');
+        return $this->hasMany(TransaksiKredit::class);
     }
 
-    public function FakturKredit()
+    public function fakturKredit()
     {
-        return $this->hasMany(FakturKredit::class, 'foreign_key', 'local_key');
+        return $this->hasMany(FakturKredit::class);
     }
 
     // ================================== perdebitan
-    public function Debit()
+    public function debit()
     {
-        return $this->hasMany(Debit::class, 'foreign_key', 'local_key');
+        return $this->hasMany(Debit::class);
     }
 
-    public function TransaksiDebit()
+    public function transaksiDebit()
     {
-        return $this->hasMany(TransaksiDebit::class, 'foreign_key', 'local_key');
+        return $this->hasMany(TransaksiDebit::class);
     }
 
-    public function FakturDebit()
+    public function fakturDebit()
     {
-        return $this->hasMany(FakturDebit::class, 'foreign_key', 'local_key');
+        return $this->hasMany(FakturDebit::class);
     }
 
     // ================================== per jurnalan
-    public function KodeJurnal()
+    public function kodeJurnal()
     {
-        return $this->hasMany(KodeJurnal::class, 'foreign_key', 'local_key');
+        return $this->hasMany(KodeJurnal::class);
     }
 
-    public function Jurnal()
+    public function jurnal()
     {
-        return $this->hasMany(Jurnal::class, 'foreign_key', 'local_key');
+        return $this->hasMany(Jurnal::class);
     }
 }

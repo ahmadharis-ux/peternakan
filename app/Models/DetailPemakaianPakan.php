@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class DetailPemakaianPakan extends Model
 {
     use HasFactory;
-    function PemakaianPakan()
+    function pemakaianPakan()
     {
         return $this->belongsTo(PemakaianPakan::class);
     }
 
-    function Sapi()
+    function sapi()
     {
         return $this->belongsTo(Sapi::class);
     }

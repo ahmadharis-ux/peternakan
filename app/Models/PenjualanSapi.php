@@ -17,24 +17,24 @@ class PenjualanSapi extends Model
 
 
 
-    public function DetailPenjualanSapi()
+    public function detailPenjualanSapi()
     {
         return $this->hasMany(DetailPenjualanSapi::class);
     }
 
-    public function OperasionalPenjualanSapi()
+    public function operasionalPenjualanSapi()
     {
         return $this->hasMany(OperasionalPenjualanSapi::class);
     }
 
 
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
 
-    public function Debit()
+    public function debit()
     {
         return $this->belongsTo(Debit::class);
     }

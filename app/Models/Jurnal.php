@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jurnal extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function Debit()
-    {
-        return $this->hasMany(Debit::class, 'foreign_key', 'local_key');
-    }
+	public function debit()
+	{
+		return $this->hasMany(Debit::class);
+	}
 
-    public function Kredit()
-    {
-        return $this->hasMany(Kredit::class, 'foreign_key', 'local_key');
-    }
+	public function kredit()
+	{
+		return $this->hasMany(Kredit::class);
+	}
 
 
-    public function User()
-    {
-        return $this->belongsTo(User::class, 'foreign_key', 'other_key');
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 }

@@ -9,29 +9,29 @@ class Kredit extends Model
 {
     use HasFactory;
 
-    public function User()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(User::class);
     }
 
-    public function PihakKedua()
+    public function pihakKedua()
     {
-        return $this->belongsTo(User::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(User::class);
     }
 
-    public function Jurnal()
+    public function jurnal()
     {
-        return $this->belongsTo(Jurnal::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(Jurnal::class);
     }
 
-    public function TransaksiKredit()
+    public function transaksiKredit()
     {
-        return $this->hasMany(TransaksiKredit::class, 'foreign_key', 'local_key');
+        return $this->hasMany(TransaksiKredit::class);
     }
 
 
-    public function FakturKredit()
+    public function fakturKredit()
     {
-        return $this->hasMany(FakturKredit::class, 'foreign_key', 'local_key');
+        return $this->hasMany(FakturKredit::class);
     }
 }

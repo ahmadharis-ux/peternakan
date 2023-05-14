@@ -14,17 +14,17 @@ class Sapi extends Model
     use HasFactory;
 
 
-    public function JenisSapi()
+    public function jenisSapi()
     {
         return $this->belongsTo(JenisSapi::class);
     }
 
-    public function RiwayatBobotSapi()
+    public function riwayatBobotSapi()
     {
         return $this->HasMany(RiwayatBobotSapi::class);
     }
 
-    public function DetailPenjualanSapi()
+    public function detailPenjualanSapi()
     {
         return $this->HasMany(DetailPenjualanSapi::class);
     }

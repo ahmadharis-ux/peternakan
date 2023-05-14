@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class TransaksiKredit extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
 
-    public function Kredit()
-    {
-        return $this->belongsTo(Kredit::class, 'foreign_key', 'other_key');
-    }
+	public function kredit()
+	{
+		return $this->belongsTo(Kredit::class);
+	}
 
-    public function Rekening()
-    {
-        return $this->belongsTo(Rekening::class, 'foreign_key', 'other_key');
-    }
+	public function rekening()
+	{
+		return $this->belongsTo(Rekening::class);
+	}
 
-    public function User()
-    {
-        return $this->belongsTo(User::class, 'foreign_key', 'other_key');
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 }

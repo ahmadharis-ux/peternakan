@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StockPakan extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    function Pakan()
-    {
-        return $this->belongsTo(Pakan::class);
-    }
-    function SatuanPakan()
-    {
-        return $this->belongsTo(SatuanPakan::class);
-    }
+	function pakan()
+	{
+		return $this->belongsTo(Pakan::class);
+	}
+	function satuanPakan()
+	{
+		return $this->belongsTo(SatuanPakan::class);
+	}
 }

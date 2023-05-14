@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class KodeJurnal extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
 
-    public function Jurnal()
-    {
-        return $this->hasMany(Jurnal::class, 'foreign_key', 'local_key');
-    }
+	public function jurnal()
+	{
+		return $this->hasMany(Jurnal::class);
+	}
 }

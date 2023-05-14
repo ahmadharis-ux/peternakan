@@ -9,13 +9,13 @@ class FakturKredit extends Model
 {
     use HasFactory;
 
-    public function Kredit()
+    public function kredit()
     {
-        return $this->belongsTo(Kredit::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(Kredit::class);
     }
 
-    public function User()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(User::class);
     }
 }

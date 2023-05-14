@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class OperasionalPenjualanSapi extends Model
 {
 
-    use HasFactory;
+	use HasFactory;
 
-    public function PenjualanSapi()
-    {
-        return $this->belongsTo(PenjualanSapi::class);
-    }
+	public function penjualanSapi()
+	{
+		return $this->belongsTo(PenjualanSapi::class);
+	}
 }

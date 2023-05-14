@@ -10,18 +10,18 @@ class TransaksiDebit extends Model
     use HasFactory;
 
 
-    public function Debit()
+    public function debit()
     {
-        return $this->belongsTo(Debit::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(Debit::class);
     }
 
-    public function Rekening()
+    public function rekening()
     {
-        return $this->belongsTo(Rekening::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(Rekening::class);
     }
 
-    public function User()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(User::class);
     }
 }
