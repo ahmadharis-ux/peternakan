@@ -42,7 +42,37 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
 //accounting
 Route::middleware(['auth', 'role:Accounting'])->group(function () {
-    Route::get('/acc', [AccController::class, 'index']);
+    Route::prefix('acc')->group(function () {
+        // Route::get('/', [AccController::class, 'index']);
+        $controller = AccController::class;
+        Route::get('/', [$controller, 'index']);
+
+        // PEMBUKUAN
+        Route::get('/kas');
+
+        Route::get('/kredit');
+        Route::get('/debit');
+
+        Route::get('/pakan');
+        Route::get('/gaji');
+        Route::get('/prive');
+        Route::get('/servis_mobil');
+
+
+
+
+        // USERS
+        Route::get('/customer');
+        Route::get('/akuntan');
+        Route::get('/supplier_pakan');
+        Route::get('/supplier_sapi');
+    });
+
+
+
+
+
+
     Route::get('/acc/kas', [AccController::class, 'indexKas']);
     Route::post('/storekas', [AccController::class, 'storeKas']);
     Route::get('/detail/kas/{jurnal_id}/{id}', [AccController::class, 'detKas']);
