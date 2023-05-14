@@ -7,9 +7,10 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Pakan;
 use App\Models\Jurnal;
-use App\Models\KodeJurnal;
 use App\Models\Rekening;
+use App\Models\KodeJurnal;
 use App\Models\SatuanPakan;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -157,8 +158,9 @@ class DatabaseSeeder extends Seeder
 
         ];
         foreach ($data as $val) {
-            SatuanPakan::insert([
-                "nama" => $val["nama"]
+            Pakan::insert([
+                "nama" => $val["nama"],
+                "id_author" => $val["id_author"],
             ]);
         }
     }
