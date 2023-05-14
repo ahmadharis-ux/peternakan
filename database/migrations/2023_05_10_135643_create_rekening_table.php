@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rekenings', function (Blueprint $table) {
             $table->id();
-            $table->string('nomor_rekenings')->unique();
+            $table->string('nomor_rekening')->unique();
             $table->foreignId('id_user')->unsigned();
             $table->string('atas_nama');
             $table->string('bank');

@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('jurnals', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->foreignId('id_kode_jurnals');
+            $table->foreignId('id_kode_jurnal');
             $table->foreignId('id_author')->unsigned();
 
             $table->timestamps();
 
             $table->foreign('id_author')->references('id')->on('users');
-            $table->foreign('id_kode_jurnals')->references('id')->on('kode_jurnals');
+            $table->foreign('id_kode_jurnal')->references('id')->on('kode_jurnals');
         });
     }
 
