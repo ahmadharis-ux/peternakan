@@ -15,20 +15,21 @@ class LoginController extends Controller
     }
     function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
 
-        if (!Auth::attempt($credentials)) {
+        $credentials = $request->only('email', 'password');
+        $loginAttempt =  (Auth::attempt($credentials));
+
+        if (!$loginAttempt) {
             return redirect()->back();
         }
         $user = Auth::user();
 
-
         if ($user->role_id === 2) {
-            return redirect('/admin');
+            return redirect()->intended('/admin');
         } elseif ($user->role_id === 3) {
-            return redirect('/acc');
+            return redirect()->intended('/acc');
         } elseif ($user->role_id === 1) {
-            return redirect('/owner');
+            return redirect()->intended('/owner');
         }
         return redirect('/blank');
     }
