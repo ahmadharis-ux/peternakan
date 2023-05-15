@@ -13,7 +13,7 @@ class KreditController extends Controller
     public function index()
     {
         $listSupplierSapi = User::where('role_id', '5')->get();
-        $listSupplierSapi = setFullname($listSupplierSapi);
+        $listSupplierSapi = withFullname($listSupplierSapi);
 
         $pageData = [
             'title' => "Buku - Hutang",
