@@ -19,7 +19,7 @@ class PembelianSapiController extends Controller
             'title' => "Buku - Hutang",
             'heading' => "Buku - Hutang",
             'active' => "buku",
-            'kreditSapi' => PembelianSapi::all(),
+            'listPembelianSapi' => PembelianSapi::all(),
             // 'listSupplierSapi' => $listSupplierSapi,
         ];
 
