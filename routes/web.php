@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AccController;
+use App\Http\Controllers\accounting\AccountingController;
+use App\Http\Controllers\accounting\DebitController;
+use App\Http\Controllers\accounting\KreditController;
+use App\Http\Controllers\accounting\PakanController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DaftarController;
@@ -28,30 +32,35 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//owner
+
+
+// ================================ OWNER
 Route::middleware(['auth', 'role:Owner'])->group(function () {
     Route::get('/owner', [OwnerController::class, 'index']);
 });
 
-//admin
+// ================================ ADMIN
 Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
     Route::get('/users', [AdminController::class, 'users']);
     Route::put('/editrole/{id}', [AdminController::class, 'editRole']);
 });
 
-//accounting
+// ================================ ACCOUNTING
 Route::middleware(['auth', 'role:Accounting'])->group(function () {
     Route::prefix('acc')->group(function () {
-        // Route::get('/', [AccController::class, 'index']);
-        $controller = AccController::class;
-        Route::get('/', [$controller, 'index']);
+        $accountingController = AccountingController::class;
+        $debitController = DebitController::class;
+        $kreditController = KreditController::class;
+        $pakanController = PakanController::class;
+
+        Route::get('/', [$accountingController, 'index']);
 
         // PEMBUKUAN
         Route::get('/kas');
 
-        Route::get('/kredit');
-        Route::get('/debit');
+        Route::get('/hutang', [$kreditController, 'index']);
+        Route::get('/piutang', [$debitController, 'index']);
 
         Route::get('/pakan');
         Route::get('/gaji');
@@ -73,7 +82,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
 
 
-    Route::get('/acc/kas', [AccController::class, 'indexKas']);
+    // Route::get('/acc/kas', [AccController::class, 'indexKas']);
     Route::post('/storekas', [AccController::class, 'storeKas']);
     Route::get('/detail/kas/{jurnal_id}/{id}', [AccController::class, 'detKas']);
 
@@ -93,29 +102,29 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
     Route::get('/total_hutang', [AccController::class, 'allhutang']);
 
     //pakan
-    Route::get('/acc/pakans', [AccController::class, 'indexpakans']);
+    // Route::get('/acc/pakans', [AccController::class, 'indexpakans']);
     Route::post('/storepakans', [AccController::class, 'storepakans']);
     Route::post('/belipakans', [AccController::class, 'belipakans']);
     Route::post('/pemakaianpakans', [AccController::class, 'pemakaianpakans']);
 
     //hutang
-    Route::get('/acc/hutang', [AccController::class, 'indexhutang']);
+    // Route::get('/acc/hutang', [AccController::class, 'indexhutang']);
 
     //piutang
-    Route::get('/acc/piutang', [AccController::class, 'indexpiutang']);
+    // Route::get('/acc/piutang', [AccController::class, 'indexpiutang']);
 
     //gaji
     Route::post('/inputsalary', [AccController::class, 'storesalary']);
     Route::post('/kasihkasbon', [AccController::class, 'storekashbon']);
-    Route::get('/acc/pekerja', [PekerjaController::class, 'index']);
-    Route::get('/acc/pekerja/{id}', [PekerjaController::class, 'detail_pekerja']);
+    // Route::get('/acc/pekerja', [PekerjaController::class, 'index']);
+    // Route::get('/acc/pekerja/{id}', [PekerjaController::class, 'detail_pekerja']);
 
     //customer
-    Route::get('/acc/customer', [CustomerController::class, 'index']);
-    Route::get('/acc/customer/{id}', [CustomerController::class, 'detail']);
+    // Route::get('/acc/customer', [CustomerController::class, 'index']);
+    // Route::get('/acc/customer/{id}', [CustomerController::class, 'detail']);
 
     //suppliersapi
-    Route::get('/acc/supsapis', [SupSapiController::class, 'index']);
+    // Route::get('/acc/supsapis', [SupSapiController::class, 'index']);
 
     //faktur
     Route::get('/faktur/{id}', [PDFController::class, 'fakturcust']);
@@ -136,7 +145,7 @@ Route::get('/profile', function () {
     ]);
 })->middleware('auth');
 
-Route::get('/', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
 
 Route::get('/daftar', [DaftarController::class, 'index']);
