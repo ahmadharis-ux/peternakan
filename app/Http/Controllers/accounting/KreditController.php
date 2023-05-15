@@ -18,7 +18,7 @@ class KreditController extends Controller
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Buku - Hutang",
-            'active' => "dashboard",
+            'active' => "buku",
             'kredit' => Kredit::all(),
             'listSupplierSapi' => $listSupplierSapi,
 
