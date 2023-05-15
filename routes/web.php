@@ -5,6 +5,7 @@ use App\Http\Controllers\accounting\AccountingController;
 use App\Http\Controllers\accounting\DebitController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
+use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DaftarController;
@@ -49,32 +50,20 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 // ================================ ACCOUNTING
 Route::middleware(['auth', 'role:Accounting'])->group(function () {
     Route::prefix('acc')->group(function () {
-        $accountingController = AccountingController::class;
-        $debitController = DebitController::class;
-        $kreditController = KreditController::class;
-        $pakanController = PakanController::class;
 
-        Route::get('/', [$accountingController, 'index']);
+        Route::get('/', [AccountingController::class, 'index']);
 
         // PEMBUKUAN
         Route::get('/kas');
-
-        Route::get('/hutang', [$kreditController, 'index']);
-        Route::get('/piutang', [$debitController, 'index']);
-
-        Route::get('/pakan');
+        Route::get('/hutang', [KreditController::class, 'index']);
+        Route::get('/piutang', [DebitController::class, 'index']);
+        Route::get('/pakan', [PakanController::class, 'index']);
         Route::get('/gaji');
         Route::get('/prive');
         Route::get('/servis_mobil');
 
-
-
-
-        // USERS
-        Route::get('/customer');
-        Route::get('/akuntan');
-        Route::get('/supplier_pakan');
-        Route::get('/supplier_sapi');
+        // USER
+        Route::get('/user/{role}', [UserController::class, 'index']);
     });
 
 
