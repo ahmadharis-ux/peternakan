@@ -69,7 +69,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="components-list-group.html">
+                         <a href="/acc/servis_mobil">
                              <i class="bi bi-circle"></i><span>Servis Mobil</span>
                          </a>
                      </li>
