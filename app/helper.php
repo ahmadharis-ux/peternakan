@@ -1,5 +1,5 @@
 <?php
-function setFullname($userList)
+function withFullname($userList)
 {
     for ($i = 0; $i < sizeof($userList); $i++) {
         $user = $userList[$i];
