@@ -20,12 +20,8 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application"s database.
-     *
-     * @return void
-     */
-    public function run()
+
+    private function seedRoleAndUser()
     {
         // ================================ ROLE dan USER
         $data = [
@@ -99,12 +95,10 @@ class DatabaseSeeder extends Seeder
 
             );
         }
+    }
 
-
-
-        // ================================
-
-        // ============= REKENING
+    private function seedRekening()
+    {
         $data = [
             ["nomor_rekening" => "12345", "id_user" => mt_rand(1, 8), "atas_nama" => "test_atas_nama", "bank" => "test_bank"],
             ["nomor_rekening" => "67890", "id_user" => mt_rand(1, 8), "atas_nama" => "test_atas_nama", "bank" => "test_bank"],
@@ -118,10 +112,10 @@ class DatabaseSeeder extends Seeder
                 "created_at" => Carbon::now(), "updated_at" => Carbon::now(),
             ]);
         }
-        // ======================
+    }
 
-
-        // ====================== KODE JURNAL dan JURNAL
+    private function seedKodeJurnalAndJurnal()
+    {
         $data = [
             ["kode" => "AB", "id_author" => 1],
             ["kode" => "CD", "id_author" => 2],
@@ -156,9 +150,10 @@ class DatabaseSeeder extends Seeder
                 "created_at" => Carbon::now(), "updated_at" => Carbon::now(),
             ]);
         }
-        // ======================
+    }
 
-        // ============== SATUAN PAKAN
+    private function seedSatuanPakanAndPakan()
+    {
         $data = [
             ["nama" => "kg"],
             ["nama" => "ikat"],
@@ -183,8 +178,11 @@ class DatabaseSeeder extends Seeder
                 "id_author" => $val["id_author"],
             ]);
         }
+    }
 
-        // ================= JENIS SAPI
+
+    private function seedJenisSapiAndSapi()
+    {
         $data = [
             ["nama" => "Sapi hitam", "id_author" => mt_rand(1, 3)],
             ["nama" => "Sapi perah", "id_author" => mt_rand(1, 3)],
@@ -198,7 +196,15 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // SAPI
         Sapi::factory(20)->create();
+    }
+
+    public function run()
+    {
+        $this->seedRoleAndUser();
+        $this->seedRekening();
+        $this->seedKodeJurnalAndJurnal();
+        $this->seedSatuanPakanAndPakan();
+        $this->seedJenisSapiAndSapi();
     }
 }
