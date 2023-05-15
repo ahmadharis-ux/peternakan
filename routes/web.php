@@ -5,6 +5,7 @@ use App\Http\Controllers\accounting\AccountingController;
 use App\Http\Controllers\accounting\DebitController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
+use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\PekerjaController;
 use App\Http\Controllers\SupSapiController;
 use App\Models\Kas;
 use App\Models\Pembayaran;
+use App\Models\PembelianSapi;
 use App\Models\Rekening;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
@@ -55,7 +57,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
         // PEMBUKUAN
         Route::get('/kas');
-        Route::get('/hutang', [KreditController::class, 'index']);
+        Route::get('/hutang', [PembelianSapiController::class, 'index']);
         Route::get('/piutang', [DebitController::class, 'index']);
         Route::get('/pakan', [PakanController::class, 'index']);
         Route::get('/gaji');
