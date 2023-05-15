@@ -12,28 +12,34 @@ class PembelianSapiController extends Controller
 {
     public function index()
     {
-        $listSupplierSapi = User::where('role_id', '5')->get();
-        $listSupplierSapi = withFullname($listSupplierSapi);
+        // $listSupplierSapi = User::where('role_id', '5')->get();
+        // $listSupplierSapi = withFullname($listSupplierSapi);
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Buku - Hutang",
             'active' => "buku",
-            'kreditSapi' => Kredit::all(),
+            'kreditSapi' => PembelianSapi::all(),
+            // 'listSupplierSapi' => $listSupplierSapi,
+        ];
+
+        return view('accounting.pembelian_sapi.index', $pageData);
+    }
+
+
+    public function create()
+    {
+        $listSupplierSapi = User::where('role_id', '5')->get();
+        $listSupplierSapi = withFullname($listSupplierSapi);
+
+        $pageData = [
+            'title' => "Buku - Hutang",
+            'heading' => "Hutang baru",
+            'active' => "buku",
             'listSupplierSapi' => $listSupplierSapi,
         ];
 
-        return view('accounting.kredit.index', $pageData);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('accounting.pembelian_sapi.create', $pageData);
     }
 
     /**
