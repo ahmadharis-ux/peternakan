@@ -64,7 +64,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/pekerja" class="{{ $title == 'Buku - Gaji' ? 'active' : '' }}">
+                         <a href="/acc/gaji" class="{{ $title == 'Buku - Gaji' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Gaji</span>
                          </a>
                      </li>
@@ -86,32 +86,32 @@
                      class="nav-content   {{ $active != 'users' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
-                         <a href="/acc/customer" class="{{ $title == 'Customer' ? 'active' : '' }}">
+                         <a href="/acc/user/customer" class="{{ $title == 'Customer' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Customer</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/supplier_sapi" class="{{ $title == 'Supplier Sapi' ? 'active' : '' }}">
+                         <a href="/acc/user/supplier_sapi" class="{{ $title == 'Supplier Sapi' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Supplier Sapi</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/supplier_pakan">
+                         <a href="/acc/user/supplier_pakan">
                              <i class="bi bi-circle"></i><span>Supplier Pakan</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/akuntan">
+                         <a href="/acc/user/akuntan">
                              <i class="bi bi-circle"></i><span>Akuntan</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/admin">
+                         <a href="/acc/user/admin">
                              <i class="bi bi-circle"></i><span>Admin</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/owner" class="">
+                         <a href="/acc/user/owner" class="">
                              <i class="bi bi-circle"></i><span>Owner</span>
                          </a>
                      </li>
@@ -169,7 +169,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="/admin/pekerja" class="{{ $title == 'Buku - Gaji' ? 'active' : '' }}">
+                         <a href="/admin/gaji" class="{{ $title == 'Buku - Gaji' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Gaji</span>
                          </a>
                      </li>
@@ -274,7 +274,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="/owner/pekerja" class="{{ $title == 'Buku - Gaji' ? 'active' : '' }}">
+                         <a href="/owner/gaji" class="{{ $title == 'Buku - Gaji' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Gaji</span>
                          </a>
                      </li>
