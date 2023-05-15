@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\StockPakan;
 use App\Models\PemakaianPakan;
 use App\Models\DetailPemakaianPakan;

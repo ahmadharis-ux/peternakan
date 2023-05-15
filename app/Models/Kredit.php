@@ -2,8 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Jurnal;
+use App\Models\FakturKredit;
+use App\Models\PembelianSapi;
+use App\Models\PenjualanSapi;
+use App\Models\TransaksiKredit;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kredit extends Model
 {
@@ -33,5 +39,15 @@ class Kredit extends Model
     public function fakturKredit()
     {
         return $this->hasMany(FakturKredit::class);
+    }
+
+    public function pembelianSapi()
+    {
+        return $this->hasMany(PembelianSapi::class);
+    }
+
+    public function penjualanSapi()
+    {
+        return $this->hasMany(PenjualanSapi::class);
     }
 }
