@@ -1,4 +1,8 @@
 <?php
+
+use Carbon\Carbon;
+
+
 function withFullname($userList)
 {
     for ($i = 0; $i < sizeof($userList); $i++) {
@@ -9,4 +13,9 @@ function withFullname($userList)
     }
 
     return $userList;
+}
+
+function carbonToday()
+{
+    return Carbon::now();
 }
