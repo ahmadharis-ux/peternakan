@@ -13,9 +13,9 @@ return new class extends Migration
 	{
 		Schema::create('detail_pembelian_pakans', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('id_pembelian_pakans')->unsigned();
-			$table->foreignId('id_pakans')->unsigned();
-			$table->foreignId('id_satuan_pakans')->unsigned();
+			$table->foreignId('id_pembelian_pakan')->unsigned();
+			$table->foreignId('id_pakan')->unsigned();
+			$table->foreignId('id_satuan_pakan')->unsigned();
 			$table->unsignedInteger('harga')->default(0);
 			$table->unsignedInteger('qty')->default(0);
 			$table->unsignedInteger('subtotal')->default(0);
@@ -23,9 +23,9 @@ return new class extends Migration
 
 			$table->timestamps();
 
-			$table->foreign('id_pembelian_pakans')->references('id')->on('pembelian_pakans');
-			$table->foreign('id_pakans')->references('id')->on('pakans');
-			$table->foreign('id_satuan_pakans')->references('id')->on('satuan_pakans');
+			$table->foreign('id_pembelian_pakan')->references('id')->on('pembelian_pakans');
+			$table->foreign('id_pakan')->references('id')->on('pakans');
+			$table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakans');
 		});
 	}
 

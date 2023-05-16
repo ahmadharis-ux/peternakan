@@ -15,7 +15,7 @@ return new class extends Migration
 			$table->id();
 			$table->foreignId('id_author')->unsigned();
 			$table->foreignId('id_kredit')->unsigned();
-			$table->foreignId('id_rekenings')->unsigned();
+			$table->foreignId('id_rekening')->unsigned();
 			$table->unsignedInteger('nominal')->default(0);
 			$table->unsignedInteger('adm');
 
@@ -23,7 +23,7 @@ return new class extends Migration
 
 			$table->foreign('id_author')->references('id')->on('users');
 			$table->foreign('id_kredit')->references('id')->on('kredits');
-			$table->foreign('id_rekenings')->references('id')->on('rekenings');
+			$table->foreign('id_rekening')->references('id')->on('rekenings');
 		});
 	}
 

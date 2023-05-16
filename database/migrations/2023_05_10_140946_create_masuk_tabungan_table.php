@@ -16,12 +16,12 @@ return new class extends Migration
 			$table->foreignId('id_user')->unsigned();
 			$table->foreignId('id_author')->unsigned();
 			$table->unsignedInteger('nominal')->default(0);
-			$table->foreignId('id_rekenings')->unsigned();
+			$table->foreignId('id_rekening')->unsigned();
 			$table->timestamps();
 
 			$table->foreign('id_user')->references('id')->on('users');
 			$table->foreign('id_author')->references('id')->on('users');
-			$table->foreign('id_rekenings')->references('id')->on('rekenings');
+			$table->foreign('id_rekening')->references('id')->on('rekenings');
 		});
 	}
 
