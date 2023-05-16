@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DetailPembelianSapi;
 use App\Models\JenisSapi;
 use App\Models\Jurnal;
+use App\Models\OperasionalPembelianSapi;
 use Illuminate\Support\Carbon;
 
 class PembelianSapiController extends Controller
@@ -83,9 +84,10 @@ class PembelianSapiController extends Controller
     public function storeDetail(Request $request)
     {
         $kiloan = $request->opsi_beli == 'kiloan';
+        $idPembelianSapi = $request->id_pembelian_sapi;
 
         $detailPembelianSapiBaru = [
-            "id_pembelian_sapi" => $request->id_pembelian_sapi,
+            "id_pembelian_sapi" => $idPembelianSapi,
             "id_jenis_sapi" => $request->id_jenis_sapi,
             "jenis_kelamin" => $request->jenis_kelamin,
             "eartag" => $request->eartag,
@@ -98,11 +100,18 @@ class PembelianSapiController extends Controller
         ];
 
         DetailPembelianSapi::insert($detailPembelianSapiBaru);
+        redirect('/acc/hutang/' . $)
     }
 
     public function storeOperasional(Request $request)
     {
-        dd($request);
+        $operasionalPembelianSapiBaru = [
+            'id_pembelian_sapi' => $request->id_pembelian_sapi,
+            'harga' => $request->harga,
+            'keterangan' => $request->keterangan,
+        ];
+
+        OperasionalPembelianSapi::insert($operasionalPembelianSapiBaru);
     }
 
     public function show($id)
@@ -111,16 +120,16 @@ class PembelianSapiController extends Controller
         $pembelianSapi = PembelianSapi::where('id_kredit', $idKredit)->limit(1)->get()[0];
 
         $listDetailPembelian = DetailPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
-        // $subTotalPembelianSapi = DetailPembelianSapi::sum
+        $listOperasionalPembelian = OperasionalPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Hutang baru",
             'active' => "buku",
             'pembelianSapi' => $pembelianSapi,
+            'listJenisSapi' => JenisSapi::all(),
             'listDetailPembelian' => $listDetailPembelian,
-            'listJenisSapi' => JenisSapi::all()
-
+            'listOperasionalPembelian' => $listOperasionalPembelian,
         ];
 
         return view('accounting.pembelian_sapi.detail', $pageData);

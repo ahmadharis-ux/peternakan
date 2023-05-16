@@ -1,4 +1,4 @@
- <form action="/acc/hutang/operasional" method="post">
+ <form action="/acc/hutang/operasional" method="post" enctype="multipart/form-data">
      @csrf
      <input type="hidden" name="id_pembelian_sapi" value="{{ $pembelianSapi->id }}">
      <div class="row mt-2">
