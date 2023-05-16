@@ -3,9 +3,9 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="/acc/hutang/detail" method="post" enctype="multipart/form-data">
                 @csrf
-                {{-- <input type="hidden" name="kas_id" value="" class="form-control"> --}}
+                <input type="hidden" name="id_pembelian_sapi" value="{{ $pembelianSapi->id }}" class="form-control">
 
 
                 <div class="modal-header">
@@ -19,9 +19,9 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="">Jenis sapi</label>
-                            <select name="jenis_sapi" class="form-select">
+                            <select name="id_jenis_sapi" class="form-select">
                                 @foreach ($listJenisSapi as $jenisSapi)
-                                    <option value="$jenisSapi->id">{{ $jenisSapi->nama }}</option>
+                                    <option value="{{ $jenisSapi->id }}">{{ $jenisSapi->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -31,7 +31,7 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="">Jenis kelamin sapi</label>
-                            <select name="jenis_sapi" class="form-select">
+                            <select name="jenis_kelamin" class="form-select">
                                 <option value="jantan" selected>Pejantan</option>
                                 <option value="betina">Betina</option>
                             </select>
@@ -47,8 +47,8 @@
 
                         <div class="col">
                             <label for="">Bobot (kg)</label>
-                            <input type="number" name="bobot" value="100" class="form-control number-only"
-                                required>
+                            <input type="number" min="0" name="bobot" value="100"
+                                class="form-control number-only" required>
                         </div>
                     </div>
 
@@ -65,33 +65,37 @@
                             <label for="">Kiloan</label>
                             <input type="radio" name="opsi_beli" value="kiloan" class="form-check-input">
                         </div>
-
-
                     </div>
-
-
-
-
 
                     <div class="col mb-3">
                         <label for="">Harga per Kg</label>
-                        <input type="number" name="kiloan" class="form-control number-only" disabled>
+                        <input type="number" min="0" name="kiloan" class="form-control number-only" disabled>
                     </div>
 
                     <div class="col-sm-12 mb-3">
                         <label for="">Total Harga</label>
-                        <input type="number" name="total_harga" class="form-control number-only" required>
+                        <input type="number" min="0" name="total_harga" class="form-control number-only"
+                            required>
                     </div>
+
+                    {{-- Kondisi --}}
+                    {{-- <div class="col-sm-12 mb-3">
+                        <label for="">Kondisi</label>
+                        <input type="text" value="" name="kondisi" class="form-control" list="listKondisi"
+                            required>
+                        <datalist id="listKondisi">
+                            <option value="Sempurna">Sempurna</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Cacat">Cacat</option>
+                        </datalist>
+                    </div> --}}
 
                     <div class="col-sm-12 mb-3">
                         <label for="">Keterangan</label>
                         <textarea name="keterangan" class="form-control" id="" cols="30" rows="10" required></textarea>
                     </div>
 
-                    <div class="col-sm-12 mb-3">
-                        <label for="">Kondisi</label>
-                        <input type="text" value="" name="kondisi" class="form-control" required>
-                    </div>
+
                 </div>
 
                 <div class="modal-footer">

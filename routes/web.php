@@ -66,6 +66,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::get('/{id}', [PembelianSapiController::class, 'show']);
 
             Route::post('/', [PembelianSapiController::class, 'store']);
+            Route::post('/detail', [PembelianSapiController::class, 'storeDetail']);
         });
 
         Route::prefix('piutang')->group(function () {

@@ -7,6 +7,7 @@ use App\Models\Kredit;
 use Illuminate\Http\Request;
 use App\Models\PembelianSapi;
 use App\Http\Controllers\Controller;
+use App\Models\DetailPembelianSapi;
 use App\Models\JenisSapi;
 use App\Models\Jurnal;
 use Illuminate\Support\Carbon;
@@ -33,20 +34,20 @@ class PembelianSapiController extends Controller
     }
 
 
-    public function create()
-    {
-        $listSupplierSapi = User::where('role_id', '5')->get();
-        $listSupplierSapi = withFullname($listSupplierSapi);
+    // public function create()
+    // {
+    //     $listSupplierSapi = User::where('role_id', '5')->get();
+    //     $listSupplierSapi = withFullname($listSupplierSapi);
 
-        $pageData = [
-            'title' => "Buku - Hutang",
-            'heading' => "Hutang baru",
-            'active' => "buku",
-            'listSupplierSapi' => $listSupplierSapi,
-        ];
+    //     $pageData = [
+    //         'title' => "Buku - Hutang",
+    //         'heading' => "Hutang baru",
+    //         'active' => "buku",
+    //         'listSupplierSapi' => $listSupplierSapi,
+    //     ];
 
-        return view('accounting.pembelian_sapi.create', $pageData);
-    }
+    //     return view('accounting.pembelian_sapi.create', $pageData);
+    // }
 
 
     public function store(Request $request)
@@ -60,30 +61,55 @@ class PembelianSapiController extends Controller
         ];
 
         $insertBerhasil = Kredit::insert($dataKreditBaru);
-
         if (!$insertBerhasil) {
             return redirect('/acc/hutang')->withErrors('insert kredit gagal');
         }
 
         $idKreditTerbaru = Kredit::latest()->limit(1)->get()[0]->id;
-
         $dataPembelianSapiBaru = [
             "id_author" => auth()->user()->id,
             "id_kredit" => $idKreditTerbaru,
             "created_at" => carbonToday(),
         ];
 
+        $insertBerhasil = PembelianSapi::insert($dataPembelianSapiBaru);
+        if (!$insertBerhasil) {
+            return redirect('/acc/hutang')->withErrors('insert pembelian sapi gagal');
+        }
+
         return redirect('/acc/hutang');
     }
 
+    public function storeDetail(Request $request)
+    {
+        $kiloan = $request->opsi_beli == 'kiloan';
+
+        $detailPembelianSapiBaru = [
+            "id_pembelian_sapi" => $request->id_pembelian_sapi,
+            "id_jenis_sapi" => $request->id_jenis_sapi,
+            "jenis_kelamin" => $request->jenis_kelamin,
+            "eartag" => $request->eartag,
+            "bobot" => $request->bobot,
+            "kiloan" => $kiloan,
+            "harga" => $request->total_harga,
+            // "kondisi" => $request->kondisi,
+            "keterangan" => $request->keterangan,
+            "created_at" => carbonToday(),
+        ];
+
+        DetailPembelianSapi::insert($detailPembelianSapiBaru);
+    }
 
     public function show($id)
     {
-        $kredit = Kredit::find($id);
+        $idKredit = Kredit::find($id)->id;
+        $pembelianSapi = PembelianSapi::where('id_kredit', $idKredit)->limit(1)->get()[0];
+
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Hutang baru",
             'active' => "buku",
+            'pembelianSapi' => $pembelianSapi,
             'listJenisSapi' => JenisSapi::all()
 
         ];
