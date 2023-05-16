@@ -33,22 +33,27 @@ class Kredit extends Model
 
     public function transaksiKredit()
     {
-        return $this->hasMany(TransaksiKredit::class);
+        return $this->hasMany(TransaksiKredit::class, 'id_kredit');
     }
 
 
     public function fakturKredit()
     {
-        return $this->hasMany(FakturKredit::class);
+        return $this->hasMany(FakturKredit::class, 'id_kredit');
     }
 
     public function pembelianSapi()
     {
-        return $this->hasMany(PembelianSapi::class);
+        return $this->hasMany(PembelianSapi::class, 'id_kredit');
     }
 
     public function penjualanSapi()
     {
-        return $this->hasMany(PenjualanSapi::class);
+        return $this->hasMany(PenjualanSapi::class, 'id_kredit');
+    }
+
+    public function pembelianPakan()
+    {
+        return $this->hasMany(PembelianPakan::class, 'id_kredit');
     }
 }
