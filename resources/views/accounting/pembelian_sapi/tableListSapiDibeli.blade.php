@@ -14,13 +14,13 @@
                  <th scope="row">{{ $loop->iteration }}</th>
                  <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                  <td>{{ $item->eartag }}</td>
-                 <td>{{ $item->bobot }} Kg</td>
+                 <td>{{ $item->bobot }} kg</td>
                  <td class="text-end">{{ number_format($item->harga) }}</td>
              </tr>
          @endforeach
          <tr>
              <th colspan="4">Subtotal</th>
-             <td class="text-end">Rp {{ number_format($listDetailPembelian->sum('harga')) }}</td>
+             <td class="text-end fw-bold">Rp {{ number_format($listDetailPembelian->sum('harga')) }}</td>
          </tr>
      </tbody>
  </table>
