@@ -8,7 +8,7 @@
                     <div class="container mb-3">
                         {{-- <a href="/acc/hutang/baru" class="btn btn-sm btn-primary">Hutang baru</a> --}}
                         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalPembelianSapiBaru">Hutang baru</button>
+                            data-bs-target="#modalCreate">Hutang baru</button>
                     </div>
                     <hr>
                     {{-- table --}}
@@ -19,5 +19,6 @@
         </div>
     </section>
 
-    @include('accounting.pembelian_sapi.modalPembelianSapiBaru')
+    {{-- modal --}}
+    @include('accounting.pembelian_sapi.modalCreate')
 @endsection
