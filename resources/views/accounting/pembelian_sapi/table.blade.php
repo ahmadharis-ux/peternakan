@@ -1,5 +1,3 @@
-{{ $listKreditSapi }}
-
 <table id="example" class="display " style="width:100%">
     <thead>
         <tr>
@@ -18,10 +16,14 @@
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $kreditSapi->created_at }}</td>
-                <td>{{ $kreditSapi->pihakKedua }}</td>
+                <td>{{ $kreditSapi->pihakKedua->nama_depan }}</td>
                 <td>{{ $kreditSapi->keterangan }}</td>
                 <td><span class="text-secondary">Rp</span> {{ number_format($kreditSapi->nominal) }}</td>
-                <td>{{ $namaBuku }}</td>
+                <td>
+                    <a href="#/acc/buku/hutang">
+                        {{ $kreditSapi->jurnal->nama }}
+                    </a>
+                </td>
                 <td>
                     <a href="/acc/hutang/{{ $kreditSapi->id }}" class="btn btn-primary">
                         <div class="icon">
