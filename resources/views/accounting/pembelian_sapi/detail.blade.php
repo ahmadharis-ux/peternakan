@@ -71,11 +71,12 @@
                             <div class="col-sm">
                                 @include('accounting.pembelian_sapi.tableHitungan')
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </section>

@@ -125,7 +125,7 @@ class PembelianSapiController extends Controller
             'listDetailPembelian' => $listDetailPembelian,
             'listOperasionalPembelian' => $listOperasionalPembelian,
             'listRekening' => Rekening::all(),
-            'listRiwayaTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
+            'listRiwayatTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
         ];
 
         return view('accounting.pembelian_sapi.detail', $pageData);
