@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="section">
                             {{-- table list sapi dijual --}}
-                            @include('accounting.pembelian_sapi.tableListSapiDibeli')
+                            @include('accounting.penjualan_sapi.tableListSapiDijual')
                         </div>
                     </div>
                 </div>
@@ -83,5 +83,5 @@
 
     {{-- modals --}}
     @include('accounting.penjualan_sapi.modalJualSapi')
-    {{-- @include('accounting.pembelian_sapi.modalPembayaran') --}}
+    @include('accounting.pembelian_sapi.modalPembayaran')
 @endsection

@@ -19,9 +19,9 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="">Eartag Sapi</label>
-                            <select name="jenis_sapi" class="form-select">
+                            <select name="id_sapi" class="form-select">
                                 @foreach ($listSapi as $sapi)
-                                    <option value="{{$sapi->id}}">{{ $sapi->eartag }}</option>
+                                    <option value="{{$sapi->id}}">{{$sapi->eartag}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -30,6 +30,8 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="">Bobot (kg)</label>
+                            <input type="hidden" name="id_penjualan_sapi" value="{{$listPenjualanSapi->id}}" class="form-control number-only"
+                                required>
                             <input type="number" name="bobot" value="100" class="form-control number-only"
                                 required>
                         </div>

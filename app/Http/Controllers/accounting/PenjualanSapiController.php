@@ -100,6 +100,7 @@ class PenjualanSapiController extends Controller
         ];
 
         DetailPenjualanSapi::insert($detailPenjualanSapi);
+        return redirect()->back();
     }
 
     /**
@@ -115,8 +116,9 @@ class PenjualanSapiController extends Controller
             'title' => "Buku - Piutang",
             'heading' => "Piutang baru",
             'active' => "buku",
-            'listJenisSapi' => JenisSapi::all(),
             'listSapi' => Sapi::where('status','ADA')->get(),
+            'listPenjualanSapi' => PenjualanSapi::where('id_debit', 3)->first(),
+            'listSapiDijual' => DetailPenjualanSapi::all(),
 
         ];
 
