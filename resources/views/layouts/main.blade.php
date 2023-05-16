@@ -9,6 +9,9 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    {{-- jquery offline --}}
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
     <!-- Favicons -->
     <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -33,6 +36,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
+
 
     <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0
@@ -158,8 +163,7 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
-    {{-- jquery offline --}}
-    {{-- <script src="{{ asset('assets/js/jquery.min.js') }}"></script> --}}
+
 
     {{-- input nomor only --}}
     {{-- <script>

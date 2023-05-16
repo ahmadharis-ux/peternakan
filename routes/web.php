@@ -74,7 +74,6 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         });
 
 
-        Route::get('/piutang', [DebitController::class, 'index']);
         Route::get('/pakan', [PakanController::class, 'index']);
         Route::get('/gaji');
         Route::get('/prive');

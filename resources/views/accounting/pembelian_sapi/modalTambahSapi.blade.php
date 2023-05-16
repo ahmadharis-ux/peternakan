@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
-            <form action="/storesapi" method="post" enctype="multipart/form-data">
+            <form action="#" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- <input type="hidden" name="kas_id" value="" class="form-control"> --}}
 
@@ -42,44 +42,45 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="">Eartag</label>
-                            <input type="text" name="eartag" value="" class="form-control" required>
+                            <input type="text" name="eartag" value="A5" class="form-control" required>
                         </div>
 
                         <div class="col">
                             <label for="">Bobot (kg)</label>
-                            <input type="number" name="bobot" value="" class="form-control number-only"
+                            <input type="number" name="bobot" value="100" class="form-control number-only"
                                 required>
                         </div>
                     </div>
 
 
                     {{-- opsi pembelian --}}
-                    <div class="row mb-3 form-check">
+                    <div class="row mb-3 mx-1 p-3 rounded" style="border: 1px grey solid">
                         <p>Opsi pembelian</p>
-                        <div class="col">
+                        <div class="col d-flex justify-content-center flex-column align-items-center">
+                            <label for="">Per ekor</label>
+                            <input type="radio" name="opsi_beli" value="ekoran" class="form-check-input" checked>
+                        </div>
+
+                        <div class="col d-flex justify-content-center flex-column align-items-center">
                             <label for="">Kiloan</label>
                             <input type="radio" name="opsi_beli" value="kiloan" class="form-check-input">
                         </div>
 
-                        <div class="col">
-                            <label for="">Per ekor</label>
-                            <input type="radio" name="opsi_beli" value="ekoran" class="form-check-input">
-                        </div>
+
                     </div>
 
 
 
 
 
-                    <div class="col-sm-4 mb-3">
-                        <label for="">Harga / Kg</label>
-                        <input type="number" name="harga_kg" value="" class="form-control number-only" required>
+                    <div class="col mb-3">
+                        <label for="">Harga per Kg</label>
+                        <input type="number" name="kiloan" class="form-control number-only" disabled>
                     </div>
 
                     <div class="col-sm-12 mb-3">
                         <label for="">Total Harga</label>
-                        <input type="number" name="total_harga" readonly value=""
-                            class="form-control number-only" required>
+                        <input type="number" name="total_harga" class="form-control number-only" required>
                     </div>
 
                     <div class="col-sm-12 mb-3">
@@ -103,4 +104,48 @@
     </div>
 </div>
 
-<script></script>
+<script>
+    $(document).ready(function() {
+        const radioOpsiBeli = $("input[name=opsi_beli]")
+        const inputTotalHarga = $("input[name=total_harga]")
+        const inputHargaKiloan = $("input[name=kiloan]")
+        const inputBobot = $("input[name=bobot]")
+
+        let opsiBeli = 'ekoran';
+
+        function beliKiloan() {
+            opsiBeli = 'kiloan'
+            inputTotalHarga.attr('disabled', 'disabled')
+            inputHargaKiloan.removeAttr('disabled')
+
+            inputTotalHarga.val(inputBobot.val() * inputHargaKiloan.val())
+        }
+
+        function beliEkoran() {
+            opsiBeli = 'ekoran';
+            inputHargaKiloan.val('')
+            inputHargaKiloan.attr('disabled', 'disabled')
+
+            inputTotalHarga.removeAttr('disabled')
+            inputTotalHarga.val()
+        }
+
+        radioOpsiBeli.click(function() {
+            const value = $(this).val()
+
+            if (value === 'kiloan') {
+                beliKiloan();
+            } else {
+                beliEkoran();
+            }
+        })
+
+        function updateHargaTotal() {
+            const totalHarga = inputHargaKiloan.val() * inputBobot.val()
+            inputTotalHarga.val(totalHarga)
+        }
+
+        inputHargaKiloan.keyup(updateHargaTotal)
+        inputBobot.keyup(updateHargaTotal)
+    })
+</script>
