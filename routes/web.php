@@ -72,7 +72,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::prefix('piutang')->group(function () {
             Route::get('/', [PenjualanSapiController::class, 'index']);
             Route::get('/{id}', [PenjualanSapiController::class, 'show']);
-            // Route::get('/baru', [PenjualanSapiController::class, 'create']);
+            Route::post('/storesapi', [PenjualanSapiController::class, 'storeDetail']);
 
             Route::post('/', [PenjualanSapiController::class, 'store']);
         });

@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="/acc/piutang/storesapi" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- <input type="hidden" name="kas_id" value="" class="form-control"> --}}
 
@@ -18,33 +18,16 @@
                     {{-- jenis sapi --}}
                     <div class="row mb-3">
                         <div class="col">
-                            <label for="">Jenis sapi</label>
+                            <label for="">Eartag Sapi</label>
                             <select name="jenis_sapi" class="form-select">
-                                @foreach ($listJenisSapi as $jenisSapi)
-                                    <option value="$jenisSapi->id">{{ $jenisSapi->nama }}</option>
+                                @foreach ($listSapi as $sapi)
+                                    <option value="{{$sapi->id}}">{{ $sapi->eartag }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-
-                    {{-- jenis kelamin sapi  --}}
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="">Jenis kelamin sapi</label>
-                            <select name="jenis_sapi" class="form-select">
-                                <option value="jantan" selected>Pejantan</option>
-                                <option value="betina">Betina</option>
-                            </select>
-                        </div>
-                    </div>
-
                     {{-- eartag dan bobot --}}
                     <div class="row mb-3">
-                        <div class="col">
-                            <label for="">Eartag</label>
-                            <input type="text" name="eartag" value="A5" class="form-control" required>
-                        </div>
-
                         <div class="col">
                             <label for="">Bobot (kg)</label>
                             <input type="number" name="bobot" value="100" class="form-control number-only"
@@ -69,10 +52,6 @@
 
                     </div>
 
-
-
-
-
                     <div class="col mb-3">
                         <label for="">Harga per Kg</label>
                         <input type="number" name="kiloan" class="form-control number-only" disabled>
@@ -86,11 +65,6 @@
                     <div class="col-sm-12 mb-3">
                         <label for="">Keterangan</label>
                         <textarea name="keterangan" class="form-control" id="" cols="30" rows="10" required></textarea>
-                    </div>
-
-                    <div class="col-sm-12 mb-3">
-                        <label for="">Kondisi</label>
-                        <input type="text" value="" name="kondisi" class="form-control" required>
                     </div>
                 </div>
 

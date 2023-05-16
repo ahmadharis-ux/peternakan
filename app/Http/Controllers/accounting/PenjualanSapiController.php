@@ -7,6 +7,7 @@ use App\Models\Debit;
 use App\Models\DetailPenjualanSapi;
 use App\Models\JenisSapi;
 use App\Models\PenjualanSapi;
+use App\Models\Sapi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -78,6 +79,7 @@ class PenjualanSapiController extends Controller
             "id_debit" => $idDebitTerbaru,
             "created_at" => carbonToday(),
         ];
+        PenjualanSapi::insert($dataPenjuaalanSapiBaru);
 
         return redirect('/acc/piutang');
     }
@@ -113,7 +115,8 @@ class PenjualanSapiController extends Controller
             'title' => "Buku - Piutang",
             'heading' => "Piutang baru",
             'active' => "buku",
-            'listJenisSapi' => JenisSapi::all()
+            'listJenisSapi' => JenisSapi::all(),
+            'listSapi' => Sapi::where('status','ADA')->get(),
 
         ];
 
