@@ -7,6 +7,7 @@ use App\Models\Kredit;
 use Illuminate\Http\Request;
 use App\Models\PembelianSapi;
 use App\Http\Controllers\Controller;
+use App\Models\JenisSapi;
 use App\Models\Jurnal;
 use Illuminate\Support\Carbon;
 
@@ -75,47 +76,34 @@ class PembelianSapiController extends Controller
         return redirect('/acc/hutang');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PembelianSapi  $pembelianSapi
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $kredit = Kredit::find($id);
-        return $kredit;
+        $pageData = [
+            'title' => "Buku - Hutang",
+            'heading' => "Hutang baru",
+            'active' => "buku",
+            'listJenisSapi' => JenisSapi::all()
+
+        ];
+
+        return view('accounting.pembelian_sapi.detail', $pageData);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PembelianSapi  $pembelianSapi
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(PembelianSapi $pembelianSapi)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PembelianSapi  $pembelianSapi
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, PembelianSapi $pembelianSapi)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PembelianSapi  $pembelianSapi
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(PembelianSapi $pembelianSapi)
     {
         //
