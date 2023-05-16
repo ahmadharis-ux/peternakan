@@ -37,6 +37,10 @@ class KreditController extends Controller
         //
     }
 
+    public function storeTransaksi(Request $request)
+    {
+    }
+
     public function show(Kredit $kredit)
     {
         //

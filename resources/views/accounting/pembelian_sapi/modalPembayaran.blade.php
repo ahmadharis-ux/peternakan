@@ -4,6 +4,8 @@
          <div class="modal-content">
              <form action="/storetrans" method="post" enctype="multipart/form-data">
                  @csrf
+                 <input type="hidden" readonly class="form-control" value="{{ $pembelianSapi->kredit->id }}"
+                     name="id_kredit">
                  <div class="modal-header">
                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal Pembayaran</h1>
                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -13,9 +15,8 @@
                          <div class="col-sm-12 mb-3">
                              <label for="">Keterangan</label>
                              <input type="text" class="form-control" name="ket" required>
-                             <input type="hidden" class="form-control" value="" name="kas_id">
-                             {{-- <input type="hidden" class="form-control" value="{{ auth()->user()->name }}"
-                                 name="author"> --}}
+
+
                          </div>
                          <div class="col-sm-12 mb-3">
                              <label for="">Kredit</label>

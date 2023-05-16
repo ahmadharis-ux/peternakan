@@ -3,7 +3,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Tanggal</th>
-            <th scope="col">Kredit</th>
+            <th scope="col">Keterangn</th>
             <th scope="col">Nominal</th>
         </tr>
     </thead>
