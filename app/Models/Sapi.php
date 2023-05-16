@@ -26,6 +26,6 @@ class Sapi extends Model
 
     public function detailPenjualanSapi()
     {
-        return $this->HasMany(DetailPenjualanSapi::class);
+        return $this->hasMany(DetailPenjualanSapi::class,'id_sapi');
     }
 }

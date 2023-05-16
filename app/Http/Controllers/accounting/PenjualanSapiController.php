@@ -118,7 +118,7 @@ class PenjualanSapiController extends Controller
             'active' => "buku",
             'listSapi' => Sapi::where('status','ADA')->get(),
             'listPenjualanSapi' => PenjualanSapi::where('id_debit', 3)->first(),
-            'listSapiDijual' => DetailPenjualanSapi::all(),
+            'listSapiDijual' => DetailPenjualanSapi::with('sapi')->get(),
 
         ];
 
