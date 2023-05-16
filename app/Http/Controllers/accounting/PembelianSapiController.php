@@ -78,16 +78,14 @@ class PembelianSapiController extends Controller
             return redirect('/acc/hutang')->withErrors('insert pembelian sapi gagal');
         }
 
-        return redirect('/acc/hutang');
+        return redirect()->back();;
     }
 
     public function storeDetail(Request $request)
     {
         $kiloan = $request->opsi_beli == 'kiloan';
-        $idPembelianSapi = $request->id_pembelian_sapi;
-
         $detailPembelianSapiBaru = [
-            "id_pembelian_sapi" => $idPembelianSapi,
+            "id_pembelian_sapi" => $request->id_pembelian_sapi,
             "id_jenis_sapi" => $request->id_jenis_sapi,
             "jenis_kelamin" => $request->jenis_kelamin,
             "eartag" => $request->eartag,
@@ -100,7 +98,7 @@ class PembelianSapiController extends Controller
         ];
 
         DetailPembelianSapi::insert($detailPembelianSapiBaru);
-        redirect('/acc/hutang/' . $)
+        return redirect()->back();
     }
 
     public function storeOperasional(Request $request)
@@ -112,6 +110,7 @@ class PembelianSapiController extends Controller
         ];
 
         OperasionalPembelianSapi::insert($operasionalPembelianSapiBaru);
+        return redirect()->back();
     }
 
     public function show($id)
