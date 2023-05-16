@@ -4,6 +4,7 @@ namespace App\Http\Controllers\accounting;
 
 use App\Http\Controllers\Controller;
 use App\Models\Debit;
+use App\Models\DetailPenjualanSapi;
 use App\Models\JenisSapi;
 use App\Models\PenjualanSapi;
 use App\Models\User;
@@ -80,6 +81,26 @@ class PenjualanSapiController extends Controller
 
         return redirect('/acc/piutang');
     }
+    
+    public function storeDetail(Request $request)
+    {
+        $kiloan = $request->opsi_beli == 'kiloan';
+
+        $detailPenjualanSapi = [
+            "id_pembelian_sapi" => $request->id_pembelian_sapi,
+            "id_jenis_sapi" => $request->id_jenis_sapi,
+            "jenis_kelamin" => $request->jenis_kelamin,
+            "eartag" => $request->eartag,
+            "bobot" => $request->bobot,
+            "kiloan" => $kiloan,
+            "harga" => $request->total_harga,
+            // "kondisi" => $request->kondisi,
+            "keterangan" => $request->keterangan,
+            "created_at" => carbonToday(),
+        ];
+
+        DetailPenjualanSapi::insert($detailPenjualanSapi);
+    }
 
     /**
      * Display the specified resource.
@@ -98,7 +119,7 @@ class PenjualanSapiController extends Controller
 
         ];
 
-        return view('accounting.pembelian_sapi.detail', $pageData);
+        return view('accounting.penjualan_sapi.detail', $pageData);
     }
 
     /**
