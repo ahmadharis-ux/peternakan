@@ -60,9 +60,10 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         // PEMBUKUAN
         Route::get('/kas');
 
+        // hutang = pembelian sapi
         Route::prefix('hutang')->group(function () {
             Route::get('/', [PembelianSapiController::class, 'index']);
-            // Route::get('/baru', [PembelianSapiController::class, 'create']);
+            Route::get('/{id}', [PembelianSapiController::class, 'show']);
 
             Route::post('/', [PembelianSapiController::class, 'store']);
         });
