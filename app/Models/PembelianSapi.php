@@ -28,12 +28,12 @@ class PembelianSapi extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_user');
     }
 
 
     public function kredit()
     {
-        return $this->belongsTo(Kredit::class);
+        return $this->belongsTo(Kredit::class, 'id_kredit');
     }
 }

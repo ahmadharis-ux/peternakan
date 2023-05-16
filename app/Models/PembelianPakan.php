@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PembelianPakan extends Model
 {
-    use HasFactory;
-    function operasionalPembelianPakan()
-    {
-        return $this->hasMany(OperasionalPembelianPakan::class, 'id_pembelian_pakans');
-    }
-    function detailPembelianPakan()
-    {
-        return $this->hasMany(DetailPembelianPakan::class, 'id_pembelian_pakans');
-    }
+	use HasFactory;
+	function operasionalPembelianPakan()
+	{
+		return $this->hasMany(OperasionalPembelianPakan::class, 'id_pembelian_pakan');
+	}
+	function detailPembelianPakan()
+	{
+		return $this->hasMany(DetailPembelianPakan::class, 'id_pembelian_pakan');
+	}
 }

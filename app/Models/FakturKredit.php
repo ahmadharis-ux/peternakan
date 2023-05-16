@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FakturKredit extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function kredit()
-    {
-        return $this->belongsTo(Kredit::class);
-    }
+	public function kredit()
+	{
+		return $this->belongsTo(Kredit::class, 'id_kredit');
+	}
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'id_user');
+	}
 }

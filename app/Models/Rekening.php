@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Rekening extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'id_user');
+	}
 
-    public function masukTabungan()
-    {
-        return $this->hasMany(MasukTabungan::class);
-    }
+	public function masukTabungan()
+	{
+		return $this->hasMany(MasukTabungan::class);
+	}
 }

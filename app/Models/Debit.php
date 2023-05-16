@@ -15,17 +15,17 @@ class Debit extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function pihakKedua()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_pihak_kedua');
     }
 
     public function jurnal()
     {
-        return $this->belongsTo(Jurnal::class);
+        return $this->belongsTo(Jurnal::class, 'id_jurnal');
     }
 
     public function transaksiDebit()

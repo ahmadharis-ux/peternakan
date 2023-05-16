@@ -12,7 +12,7 @@ class TransaksiKredit extends Model
 
 	public function kredit()
 	{
-		return $this->belongsTo(Kredit::class);
+		return $this->belongsTo(Kredit::class, 'id_kredit');
 	}
 
 	public function rekening()

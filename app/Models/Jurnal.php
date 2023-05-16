@@ -10,21 +10,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Jurnal extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    public function debit()
-    {
-        return $this->hasMany(Debit::class);
-    }
-
-    public function kredit()
-    {
-        return $this->hasMany(Kredit::class);
-    }
+	// protected $with = ['user'];
 
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+	public function debit()
+	{
+		return $this->hasMany(Debit::class);
+	}
+
+	public function kredit()
+	{
+		return $this->hasMany(Kredit::class);
+	}
+
+
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'id_user');
+	}
 }

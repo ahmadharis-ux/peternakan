@@ -12,7 +12,7 @@ class DetailPemakaianPakan extends Model
     use HasFactory;
     function pemakaianPakan()
     {
-        return $this->belongsTo(PemakaianPakan::class);
+        return $this->belongsTo(PemakaianPakan::class, 'id_penjualan_sapis');
     }
 
     function sapi()

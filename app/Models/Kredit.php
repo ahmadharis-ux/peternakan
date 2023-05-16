@@ -14,20 +14,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Kredit extends Model
 {
     use HasFactory;
+    protected $with = ['jurnal', 'user', 'pihakKedua', 'pembelianSapi', 'pembelianPakan'];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_author');
     }
 
     public function pihakKedua()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_pihak_kedua');
     }
 
     public function jurnal()
     {
-        return $this->belongsTo(Jurnal::class);
+        return $this->belongsTo(Jurnal::class, 'id_jurnal');
     }
 
     public function transaksiKredit()
