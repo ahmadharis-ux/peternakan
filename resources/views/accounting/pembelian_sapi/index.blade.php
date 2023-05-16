@@ -12,7 +12,7 @@
                     </div>
                     <hr>
                     {{-- table --}}
-                    @include('accounting.pembelian_sapi.table')
+                    @include('accounting.pembelian_sapi.tableListKreditSapi')
                 </div>
 
             </div>

@@ -8,17 +8,17 @@
           </tr>
       </thead>
       <tbody>
-          @foreach ($data->operasional as $item)
+          {{-- @foreach ($data->operasional as $item)
               <tr>
                   <th scope="row">{{ $loop->iteration }}</th>
                   <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                   <td>{{ $item->keterangan }}</td>
                   <td>Rp. {{ number_format($item->nominal) }}</td>
               </tr>
-          @endforeach
+          @endforeach --}}
           <tr>
               <th colspan="3">Subtotal</th>
-              <td>Rp. {{ number_format($data->operasional->sum('nominal')) }}</td>
+              <td>Rp [sum_nominal]</td>
           </tr>
       </tbody>
   </table>

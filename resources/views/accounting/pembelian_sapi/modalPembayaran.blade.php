@@ -13,9 +13,9 @@
                          <div class="col-sm-12 mb-3">
                              <label for="">Keterangan</label>
                              <input type="text" class="form-control" name="ket" required>
-                             <input type="hidden" class="form-control" value="{{ $data->id }}" name="kas_id">
-                             <input type="hidden" class="form-control" value="{{ auth()->user()->name }}"
-                                 name="author">
+                             <input type="hidden" class="form-control" value="" name="kas_id">
+                             {{-- <input type="hidden" class="form-control" value="{{ auth()->user()->name }}"
+                                 name="author"> --}}
                          </div>
                          <div class="col-sm-12 mb-3">
                              <label for="">Kredit</label>

@@ -158,6 +158,19 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
+    {{-- jquery offline --}}
+    {{-- <script src="{{ asset('assets/js/jquery.min.js') }}"></script> --}}
+
+    {{-- input nomor only --}}
+    {{-- <script>
+        document.querySelectorAll(".number-only").addEventListener("keypress", function(evt) {
+            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                evt.preventDefault();
+            }
+
+        });
+    </script> --}}
+
 </body>
 
 </html>

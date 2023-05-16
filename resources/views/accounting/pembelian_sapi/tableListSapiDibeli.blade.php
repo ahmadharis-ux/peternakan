@@ -9,7 +9,7 @@
          </tr>
      </thead>
      <tbody>
-         @foreach ($data->hutang as $item)
+         {{-- @foreach ($data->hutang as $item)
              <tr>
                  <th scope="row">{{ $loop->iteration }}</th>
                  <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
@@ -17,10 +17,10 @@
                  <td>{{ $item->bobot }}</td>
                  <td>{{ $item->kondisi }}</td>
              </tr>
-         @endforeach
+         @endforeach --}}
          <tr>
              <th colspan="4">Subtotal</th>
-             <td>Rp. {{ number_format($data->hutang->sum('total_harga')) }}</td>
+             <td>Rp [nominal]</td>
          </tr>
      </tbody>
  </table>

@@ -4,7 +4,7 @@
          <div class="col-sm-5 mb-3">
              <label for="">Keterangan</label>
              <input type="text" class="form-control" name="keterangan">
-             <input type="hidden" class="form-control" value="{{ $data->id }}" name="kas_id">
+             <input type="hidden" class="form-control" value="" name="kas_id">
          </div>
          <div class="col-sm-5 mb-3">
              <label for="">Nominal Operasional</label>

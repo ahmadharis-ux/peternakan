@@ -10,9 +10,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>
-                            <span>Data Produk</span>
+                            <span>Daftar sapi</span>
                             <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
-                                data-bs-target="#produk">Tambah</button>
+                                data-bs-target="#modalTambahSapi">Tambah</button>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -28,7 +28,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Data Opresional</h5>
+                        <h5>Biaya operasional</h5>
                     </div>
                     <div class="card-body">
                         {{-- form tambah operasional --}}
@@ -82,6 +82,6 @@
 
 
     {{-- modals --}}
-    @include('accounting.pembelian_sapi.modalDetailSapi')
+    @include('accounting.pembelian_sapi.modalTambahSapi')
     @include('accounting.pembelian_sapi.modalPembayaran')
 @endsection
