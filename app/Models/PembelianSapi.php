@@ -17,12 +17,12 @@ class PembelianSapi extends Model
 
     public function detailPembelianSapi()
     {
-        return $this->hasMany(DetailPembelianSapi::class);
+        return $this->hasMany(DetailPembelianSapi::class, 'id_pembelian_sapi');
     }
 
     public function operasionalPembelianSapi()
     {
-        return $this->hasMany(OperasionalPembelianSapi::class);
+        return $this->hasMany(OperasionalPembelianSapi::class, 'id_pembelian_sapi');
     }
 
 
