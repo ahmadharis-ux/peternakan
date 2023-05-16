@@ -119,7 +119,7 @@
 
         function beliKiloan() {
             opsiBeli = 'kiloan'
-            inputTotalHarga.attr('disabled', 'disabled')
+            inputTotalHarga.attr('readonly', 'readonly')
             inputHargaKiloan.removeAttr('disabled')
 
             inputTotalHarga.val(inputBobot.val() * inputHargaKiloan.val())
@@ -130,7 +130,7 @@
             inputHargaKiloan.val('')
             inputHargaKiloan.attr('disabled', 'disabled')
 
-            inputTotalHarga.removeAttr('disabled')
+            inputTotalHarga.removeAttr('readonly')
             inputTotalHarga.val()
         }
 
