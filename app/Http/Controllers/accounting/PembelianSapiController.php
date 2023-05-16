@@ -61,10 +61,7 @@ class PembelianSapiController extends Controller
             "created_at" => carbonToday(),
         ];
 
-        $insertBerhasil = Kredit::insert($dataKreditBaru);
-        if (!$insertBerhasil) {
-            return redirect('/acc/hutang')->withErrors('insert kredit gagal');
-        }
+        Kredit::insert($dataKreditBaru);
 
         $idKreditTerbaru = Kredit::latest()->limit(1)->get()[0]->id;
         $dataPembelianSapiBaru = [
@@ -73,11 +70,7 @@ class PembelianSapiController extends Controller
             "created_at" => carbonToday(),
         ];
 
-        $insertBerhasil = PembelianSapi::insert($dataPembelianSapiBaru);
-        if (!$insertBerhasil) {
-            return redirect('/acc/hutang')->withErrors('insert pembelian sapi gagal');
-        }
-
+        PembelianSapi::insert($dataPembelianSapiBaru);
         return redirect()->back();;
     }
 
