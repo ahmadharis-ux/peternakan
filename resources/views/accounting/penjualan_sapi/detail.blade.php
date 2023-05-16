@@ -82,6 +82,6 @@
 
 
     {{-- modals --}}
-    @include('accounting.pembelian_sapi.modalTambahSapi')
-    @include('accounting.pembelian_sapi.modalPembayaran')
+    @include('accounting.penjualan_sapi.modalJualSapi')
+    {{-- @include('accounting.pembelian_sapi.modalPembayaran') --}}
 @endsection

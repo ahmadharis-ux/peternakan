@@ -87,10 +87,8 @@ class PenjualanSapiController extends Controller
         $kiloan = $request->opsi_beli == 'kiloan';
 
         $detailPenjualanSapi = [
-            "id_pembelian_sapi" => $request->id_pembelian_sapi,
-            "id_jenis_sapi" => $request->id_jenis_sapi,
-            "jenis_kelamin" => $request->jenis_kelamin,
-            "eartag" => $request->eartag,
+            "id_penjualan_sapi" => $request->id_penjualan_sapi,
+            "id_sapi" => $request->id_sapi,
             "bobot" => $request->bobot,
             "kiloan" => $kiloan,
             "harga" => $request->total_harga,
