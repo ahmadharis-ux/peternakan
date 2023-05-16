@@ -16,7 +16,7 @@ return new class extends Migration
 			$table->foreignId('id_author')->unsigned();
 			$table->foreignId('id_debits')->unsigned();
 			$table->foreignId('id_rekenings')->unsigned();
-			$table->unsignedInteger('nominal');
+			$table->unsignedInteger('nominal')->default(0);
 
 			$table->timestamps();
 

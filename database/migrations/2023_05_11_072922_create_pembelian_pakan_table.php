@@ -14,13 +14,13 @@ return new class extends Migration
 		Schema::create('pembelian_pakans', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('id_author')->unsigned();
-			$table->foreignId('id_kredits')->unsigned();
+			$table->foreignId('id_kredit')->unsigned();
 			$table->string('keterangan')->nullable();
 
 
 			$table->timestamps();
 			$table->foreign('id_author')->references('id')->on('users');
-			$table->foreign('id_kredits')->references('id')->on('kredits');
+			$table->foreign('id_kredit')->references('id')->on('kredits');
 		});
 	}
 
