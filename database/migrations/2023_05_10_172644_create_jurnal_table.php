@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jurnal', function (Blueprint $table) {
+        Schema::create('jurnals', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->foreignId('id_kode_jurnal');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_author')->references('id')->on('users');
-            $table->foreign('id_kode_jurnal')->references('id')->on('kode_jurnal');
+            $table->foreign('id_kode_jurnal')->references('id')->on('kode_jurnals');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jurnal');
+        Schema::dropIfExists('jurnals');
     }
 };

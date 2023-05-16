@@ -13,12 +13,12 @@ class JenisSapi extends Model
     use HasFactory;
 
 
-    public function Sapi()
+    public function sapi()
     {
         return $this->HasMany(Sapi::class);
     }
 
-    public function DetailPembelianSapi()
+    public function detailPembelianSapi()
     {
         return $this->HasMany(DetailPembelianSapi::class);
     }

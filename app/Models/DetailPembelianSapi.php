@@ -13,12 +13,12 @@ class DetailPembelianSapi extends Model
     use HasFactory;
 
 
-    public function PembelianSapi()
+    public function pembelianSapi()
     {
         return $this->belongsTo(PembelianSapi::class);
     }
 
-    public function JenisSapi()
+    public function jenisSapi()
     {
         return $this->belongsTo(JenisSapi::class);
     }

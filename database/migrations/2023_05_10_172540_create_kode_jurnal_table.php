@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kode_jurnal', function (Blueprint $table) {
+        Schema::create('kode_jurnals', function (Blueprint $table) {
             $table->id();
             $table->string('kode')->unique();
             $table->foreignId('id_author')->unsigned();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kode_jurnal');
+        Schema::dropIfExists('kode_jurnals');
     }
 };

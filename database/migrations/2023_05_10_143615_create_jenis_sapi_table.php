@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jenis_sapi', function (Blueprint $table) {
+        Schema::create('jenis_sapis', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->foreignId('id_author')->unsigned();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jenis_sapi');
+        Schema::dropIfExists('jenis_sapis');
     }
 };

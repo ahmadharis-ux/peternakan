@@ -12,15 +12,15 @@ class DetailPembelianPakan extends Model
 {
     use HasFactory;
 
-    function Pakan()
+    function pakan()
     {
         return $this->belongsTo(Pakan::class);
     }
-    function SatuanPakan()
+    function satuanPakan()
     {
         return $this->belongsTo(SatuanPakan::class);
     }
-    function PembelianPakan()
+    function pembelianPakan()
     {
         return $this->belongsTo(PembelianPakan::class);
     }

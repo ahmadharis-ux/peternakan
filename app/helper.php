@@ -1,0 +1,21 @@
+<?php
+
+use Carbon\Carbon;
+
+
+function withFullname($userList)
+{
+    for ($i = 0; $i < sizeof($userList); $i++) {
+        $user = $userList[$i];
+        $fullName = $user->nama_depan . " " . $user->nama_belakang;
+
+        $userList[$i]->fullname = $fullName;
+    }
+
+    return $userList;
+}
+
+function carbonToday()
+{
+    return Carbon::now();
+}

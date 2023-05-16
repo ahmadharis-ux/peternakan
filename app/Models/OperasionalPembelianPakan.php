@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OperasionalPembelianPakan extends Model
 {
-    use HasFactory;
-    function PembelianPakan()
-    {
-        return $this->belongsTo(PembelianPakan::class);
-    }
+	use HasFactory;
+	function pembelianPakan()
+	{
+		return $this->belongsTo(PembelianPakan::class);
+	}
 }

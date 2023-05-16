@@ -6,30 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('masuk_tabungan', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_user')->unsigned();
-            $table->foreignId('id_author')->unsigned();
-            $table->unsignedInteger('nominal');
-            $table->foreignId('id_rekening')->unsigned();
-            $table->timestamps();
+	/**
+	 * Run the migrations.
+	 */
+	public function up(): void
+	{
+		Schema::create('masuk_tabungans', function (Blueprint $table) {
+			$table->id();
+			$table->foreignId('id_user')->unsigned();
+			$table->foreignId('id_author')->unsigned();
+			$table->unsignedInteger('nominal')->default(0);
+			$table->foreignId('id_rekening')->unsigned();
+			$table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->foreign('id_author')->references('id')->on('users');
-            $table->foreign('id_rekening')->references('id')->on('rekening');
-        });
-    }
+			$table->foreign('id_user')->references('id')->on('users');
+			$table->foreign('id_author')->references('id')->on('users');
+			$table->foreign('id_rekening')->references('id')->on('rekenings');
+		});
+	}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('masuk_tabungan');
-    }
+	/**
+	 * Reverse the migrations.
+	 */
+	public function down(): void
+	{
+		Schema::dropIfExists('masuk_tabungan');
+	}
 };

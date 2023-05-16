@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Rekening;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MasukTabungan extends Model
 {
     use HasFactory;
+
+    public function rekening()
+    {
+        return $this->belongsTo(Rekening::class);
+    }
 }

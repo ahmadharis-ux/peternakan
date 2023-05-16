@@ -11,7 +11,7 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create('pemakaian_pakan', function (Blueprint $table) {
+		Schema::create('pemakaian_pakans', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('id_author')->unsigned();
 			$table->foreignId('id_pekerja')->unsigned();
@@ -26,8 +26,8 @@ return new class extends Migration
 
 			$table->foreign('id_author')->references('id')->on('users');
 			$table->foreign('id_pekerja')->references('id')->on('users');
-			$table->foreign('id_pakan')->references('id')->on('pakan');
-			$table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakan');
+			$table->foreign('id_pakan')->references('id')->on('pakans');
+			$table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakans');
 		});
 	}
 
@@ -36,6 +36,6 @@ return new class extends Migration
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('riwayat_pemakaian_pakan');
+		Schema::dropIfExists('riwayat_pemakaian_pakans');
 	}
 };
