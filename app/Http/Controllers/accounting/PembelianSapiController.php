@@ -14,11 +14,6 @@ class PembelianSapiController extends Controller
 {
     public function index()
     {
-        $kredit = Kredit::find(1);
-
-        return $kredit->user;
-
-
         $listSupplierSapi = User::where('role_id', '5')->get();
         $listSupplierSapi = withFullname($listSupplierSapi);
 
@@ -29,11 +24,9 @@ class PembelianSapiController extends Controller
             'heading' => "Buku - Hutang",
             'active' => "buku",
             'listKreditSapi' => Kredit::where('id_jurnal', $id_jurnal)->get(),
-            'namaBuku' => Jurnal::find($id_jurnal)->nama,
             'listSupplierSapi' => $listSupplierSapi,
         ];
 
-        dd(Kredit::where('id_jurnal', $id_jurnal));
 
         return view('accounting.pembelian_sapi.index', $pageData);
     }
@@ -68,10 +61,18 @@ class PembelianSapiController extends Controller
         $insertBerhasil = Kredit::insert($dataKreditBaru);
 
         if (!$insertBerhasil) {
-            return 'insert gagal';
+            return redirect('/acc/hutang')->withErrors('insert kredit gagal');
         }
 
-        redirect('/acc/hutang');
+        $idKreditTerbaru = Kredit::latest()->limit(1)->get()[0]->id;
+
+        $dataPembelianSapiBaru = [
+            "id_author" => auth()->user()->id,
+            "id_kredit" => $idKreditTerbaru,
+            "created_at" => carbonToday(),
+        ];
+
+        return redirect('/acc/hutang');
     }
 
     /**
@@ -80,9 +81,10 @@ class PembelianSapiController extends Controller
      * @param  \App\Models\PembelianSapi  $pembelianSapi
      * @return \Illuminate\Http\Response
      */
-    public function show(PembelianSapi $pembelianSapi)
+    public function show($id)
     {
-        //
+        $kredit = Kredit::find($id);
+        return $kredit;
     }
 
     /**
