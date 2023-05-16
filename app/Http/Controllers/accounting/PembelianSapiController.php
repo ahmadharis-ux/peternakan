@@ -104,12 +104,15 @@ class PembelianSapiController extends Controller
     {
         $idKredit = Kredit::find($id)->id;
         $pembelianSapi = PembelianSapi::where('id_kredit', $idKredit)->limit(1)->get()[0];
+        $listDetailPembelian = DetailPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
+
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Hutang baru",
             'active' => "buku",
             'pembelianSapi' => $pembelianSapi,
+            'listDetailPembelian' => $listDetailPembelian,
             'listJenisSapi' => JenisSapi::all()
 
         ];

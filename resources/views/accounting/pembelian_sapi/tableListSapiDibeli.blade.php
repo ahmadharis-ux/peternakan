@@ -5,22 +5,22 @@
              <th scope="col">Tanggal</th>
              <th scope="col">Eartag</th>
              <th scope="col">Bobot</th>
-             <th scope="col">Kondisi</th>
+             <th scope="col" class="ps-3">Harga</th>
          </tr>
      </thead>
      <tbody>
-         {{-- @foreach ($data->hutang as $item)
+         @foreach ($listDetailPembelian as $item)
              <tr>
                  <th scope="row">{{ $loop->iteration }}</th>
                  <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                  <td>{{ $item->eartag }}</td>
-                 <td>{{ $item->bobot }}</td>
-                 <td>{{ $item->kondisi }}</td>
+                 <td>{{ $item->bobot }} Kg</td>
+                 <td class="text-end">{{ number_format($item->harga) }}</td>
              </tr>
-         @endforeach --}}
+         @endforeach
          <tr>
              <th colspan="4">Subtotal</th>
-             <td>Rp [nominal]</td>
+             <td class="text-end">Rp {{ number_format($listDetailPembelian->sum('harga')) }}</td>
          </tr>
      </tbody>
  </table>
