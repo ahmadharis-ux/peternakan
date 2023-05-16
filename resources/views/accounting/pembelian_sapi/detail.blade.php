@@ -60,7 +60,7 @@
                         <div class="row">
 
                             {{-- riwayat pembayaran --}}
-                            <div class="col-sm-8">
+                            <div class="col-sm-6">
                                 <div class="section">
                                     {{-- table list riwayat pembayaran --}}
                                     @include('accounting.pembelian_sapi.tableListRiwayatPembayaran')
@@ -68,7 +68,7 @@
                             </div>
 
                             {{-- table hitungan --}}
-                            <div class="col-sm-4">
+                            <div class="col-sm">
                                 @include('accounting.pembelian_sapi.tableHitungan')
                             </div>
 

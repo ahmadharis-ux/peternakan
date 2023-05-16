@@ -11,6 +11,8 @@ use App\Models\DetailPembelianSapi;
 use App\Models\JenisSapi;
 use App\Models\Jurnal;
 use App\Models\OperasionalPembelianSapi;
+use App\Models\Rekening;
+use App\Models\TransaksiKredit;
 use Illuminate\Support\Carbon;
 
 class PembelianSapiController extends Controller
@@ -122,6 +124,8 @@ class PembelianSapiController extends Controller
             'listJenisSapi' => JenisSapi::all(),
             'listDetailPembelian' => $listDetailPembelian,
             'listOperasionalPembelian' => $listOperasionalPembelian,
+            'listRekening' => Rekening::all(),
+            'listRiwayaTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
         ];
 
         return view('accounting.pembelian_sapi.detail', $pageData);

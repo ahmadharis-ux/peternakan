@@ -12,9 +12,9 @@ class DetailPenjualanSapi extends Model
 
     use HasFactory;
 
-    public function sapi(): Has
+    public function sapi()
     {
-        return $this->has(Sapi::class);
+        return $this->hasOne(Sapi::class);
     }
 
     public function penjualanSapi()
