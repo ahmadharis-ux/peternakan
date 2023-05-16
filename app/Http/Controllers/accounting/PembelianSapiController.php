@@ -100,12 +100,18 @@ class PembelianSapiController extends Controller
         DetailPembelianSapi::insert($detailPembelianSapiBaru);
     }
 
+    public function storeOperasional(Request $request)
+    {
+        dd($request);
+    }
+
     public function show($id)
     {
         $idKredit = Kredit::find($id)->id;
         $pembelianSapi = PembelianSapi::where('id_kredit', $idKredit)->limit(1)->get()[0];
-        $listDetailPembelian = DetailPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
 
+        $listDetailPembelian = DetailPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
+        // $subTotalPembelianSapi = DetailPembelianSapi::sum
 
         $pageData = [
             'title' => "Buku - Hutang",
