@@ -6,9 +6,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $heading }} </h5>
                     <div class="container mb-3">
-                        {{-- <a href="/acc/hutang/baru" class="btn btn-sm btn-primary">Hutang baru</a> --}}
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalPembelianSapiBaru">Hutang baru</button>
+                        <a href="/acc/hutang/baru" class="btn btn-sm btn-primary">Hutang baru</a>
                     </div>
                     <hr>
                     {{-- table --}}
@@ -18,6 +16,4 @@
             </div>
         </div>
     </section>
-
-    @include('accounting.pembelian_sapi.modalPembelianSapiBaru')
 @endsection
