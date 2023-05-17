@@ -39,16 +39,27 @@ class KreditController extends Controller
 
     public function storeTransaksi(Request $request)
     {
+        $idKredit = $request->id_kredit;
+        $sisaKredit = Kredit::getSisaPembayaran($idKredit);
+        $nominalBayar = $request->nominal;
+
+        if ($nominalBayar > $sisaKredit) {
+            return redirect()->back()->withErrors('Nominal pembayaran melebihi sisa kredit!');
+        }
 
         $transaksiKredit = [
-            "id_kredit" => $request->id_kredit,
+            "id_kredit" => $idKredit,
             "id_author" => auth()->user()->id,
             "id_rekening" => $request->id_rekening,
-            "nominal" => $request->nominal,
+            "nominal" => $nominalBayar,
             "adm" => $request->adm,
+            "created_at" => carbonToday(),
         ];
 
         TransaksiKredit::insert($transaksiKredit);
+
+        Kredit::updateStatusLunas($idKredit);
+
         return redirect()->back();
     }
 

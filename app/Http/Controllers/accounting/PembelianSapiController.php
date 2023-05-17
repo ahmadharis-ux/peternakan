@@ -22,13 +22,13 @@ class PembelianSapiController extends Controller
         $listSupplierSapi = User::where('role_id', '5')->get();
         $listSupplierSapi = withFullname($listSupplierSapi);
 
-        $id_jurnal_hutang = 1;
+        $idJurnalHutang = 1;
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Buku - Hutang",
             'active' => "buku",
-            'listKreditSapi' => Kredit::where('id_jurnal', $id_jurnal_hutang)->get(),
+            'listKreditSapi' => Kredit::where('id_jurnal', $idJurnalHutang)->get(),
             'listSupplierSapi' => $listSupplierSapi,
         ];
 
@@ -99,9 +99,11 @@ class PembelianSapiController extends Controller
 
         DetailPembelianSapi::insert($detailPembelianSapiBaru);
 
-        // Update nominal Kredit
         $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
+
         Kredit::tambahNominal($idKredit, $hargaSapi);
+        Kredit::updateStatusLunas($idKredit);
+
 
         return redirect()->back();
     }
@@ -115,13 +117,15 @@ class PembelianSapiController extends Controller
             'id_pembelian_sapi' => $idPembelianSapi,
             'harga' => $hargaOperasional,
             'keterangan' => $request->keterangan,
+            'created_at' => carbonToday(),
         ];
 
         OperasionalPembelianSapi::insert($operasionalPembelianSapiBaru);
 
-        // Update nominal Kredit
         $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
+
         Kredit::tambahNominal($idKredit, $hargaOperasional);
+        Kredit::updateStatusLunas($idKredit);
 
         return redirect()->back();
     }
