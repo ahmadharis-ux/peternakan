@@ -65,4 +65,31 @@ class Kredit extends Model
         $kredit->nominal = $nominalBaru;
         $kredit->save();
     }
+
+    public static function getNominalTerbayar($idKredit)
+    {
+        $kredit = Kredit::find($idKredit);
+        return $kredit->transaksiKredit->sum('nominal');
+    }
+
+    public static function getSisaPembayaran($idKredit)
+    {
+        $kredit = Kredit::find($idKredit);
+        $nominalTerbayar = Kredit::getNominalTerbayar($idKredit);
+
+        return $kredit->nominal - $nominalTerbayar;
+    }
+
+    public static function updateStatusLunas($idKredit)
+    {
+        $kredit = Kredit::find($idKredit);
+        if (Kredit::getSisaPembayaran($idKredit) > 0) {
+            $kredit->lunas = false;
+            $kredit->save();
+            return;
+        }
+
+        $kredit->lunas = true;
+        $kredit->save();
+    }
 }
