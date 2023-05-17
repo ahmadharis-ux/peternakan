@@ -18,7 +18,7 @@
           @endforeach
           <tr>
               <th colspan="3">Subtotal</th>
-              <td class="fw-bold">Rp {{ number_format($listOperasionalPembelian->sum('harga')) }}</td>
+              <td class="fw-bold text-end">Rp {{ number_format($listOperasionalPembelian->sum('harga')) }}</td>
           </tr>
       </tbody>
   </table>
