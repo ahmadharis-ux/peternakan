@@ -55,10 +55,12 @@ class PembelianSapiController extends Controller
 
     public function store(Request $request)
     {
+        $idJurnalHutang = 1;
+
         $dataKreditBaru = [
             "id_author" => auth()->user()->id,
             "id_pihak_kedua" => $request->id_pihak_kedua,
-            "id_jurnal" => 1, // id jurnal Hutang
+            "id_jurnal" => $idJurnalHutang,
             "keterangan" => $request->keterangan,
             "created_at" => carbonToday(),
         ];
@@ -100,6 +102,7 @@ class PembelianSapiController extends Controller
         // Update nominal Kredit
         $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
         Kredit::tambahNominal($idKredit, $hargaSapi);
+
         return redirect()->back();
     }
 
