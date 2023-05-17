@@ -7,7 +7,7 @@
     // pembayaran
     $totalBayar = $listRiwayatTransaksi->sum('nominal');
     $sisaPembayaran = $totalKredit - $totalBayar;
-    $statusKredit = $sisaPembayaran > 0 ? 'BELUM LUNAS' : 'LUNAS';
+    $statusKredit = $kredit->lunas ? 'LUNAS' : 'BELUM LUNAS';
 
 @endphp
 
