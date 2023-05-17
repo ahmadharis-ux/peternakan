@@ -22,13 +22,13 @@ class PembelianSapiController extends Controller
         $listSupplierSapi = User::where('role_id', '5')->get();
         $listSupplierSapi = withFullname($listSupplierSapi);
 
-        $id_jurnal = 1;
+        $id_jurnal_hutang = 1;
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Buku - Hutang",
             'active' => "buku",
-            'listKreditSapi' => Kredit::where('id_jurnal', $id_jurnal)->get(),
+            'listKreditSapi' => Kredit::where('id_jurnal', $id_jurnal_hutang)->get(),
             'listSupplierSapi' => $listSupplierSapi,
         ];
 
@@ -79,8 +79,10 @@ class PembelianSapiController extends Controller
     public function storeDetail(Request $request)
     {
         $kiloan = $request->opsi_beli == 'kiloan';
+        $idPembelianSapi = $request->id_pembelian_sapi;
+
         $detailPembelianSapiBaru = [
-            "id_pembelian_sapi" => $request->id_pembelian_sapi,
+            "id_pembelian_sapi" => $idPembelianSapi,
             "id_jenis_sapi" => $request->id_jenis_sapi,
             "jenis_kelamin" => $request->jenis_kelamin,
             "eartag" => $request->eartag,
@@ -93,6 +95,13 @@ class PembelianSapiController extends Controller
         ];
 
         DetailPembelianSapi::insert($detailPembelianSapiBaru);
+
+        $totalNominalKreditBaru = DetailPembelianSapi::where('id_pembelian_sapi', $idPembelianSapi)->get()->sum('harga');
+
+        $kredit = PembelianSapi::find($idPembelianSapi)->kredit;
+        $kredit->nominal = $totalNominalKreditBaru;
+        $kredit->save();
+
         return redirect()->back();
     }
 
@@ -110,22 +119,23 @@ class PembelianSapiController extends Controller
 
     public function show($id)
     {
-        $idKredit = Kredit::find($id)->id;
-        $pembelianSapi = PembelianSapi::where('id_kredit', $idKredit)->limit(1)->get()[0];
-
-        $listDetailPembelian = DetailPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
-        $listOperasionalPembelian = OperasionalPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
+        $kredit = Kredit::find($id);
+        $pembelianSapi = $kredit->pembelianSapi;
+        $listDetailPembelian = $pembelianSapi->detailPembelianSapi;
+        $listOperasionalPembelian = $pembelianSapi->operasionalPembelianSapi;
+        $listRiwayatTransaksi = $kredit->transaksiKredit;
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Hutang baru",
             'active' => "buku",
+            'kredit' => $kredit,
             'pembelianSapi' => $pembelianSapi,
-            'listJenisSapi' => JenisSapi::all(),
             'listDetailPembelian' => $listDetailPembelian,
             'listOperasionalPembelian' => $listOperasionalPembelian,
+            'listRiwayatTransaksi' => $listRiwayatTransaksi,
+            'listJenisSapi' => JenisSapi::all(),
             'listRekening' => Rekening::all(),
-            'listRiwayatTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
         ];
 
         return view('accounting.pembelian_sapi.detail', $pageData);
