@@ -100,8 +100,8 @@ class DatabaseSeeder extends Seeder
     private function seedRekening()
     {
         $data = [
-            ["nomor_rekening" => "12345", "id_user" => mt_rand(1, 8), "atas_nama" => "test_atas_nama", "bank" => "test_bank"],
-            ["nomor_rekening" => "67890", "id_user" => mt_rand(1, 8), "atas_nama" => "test_atas_nama", "bank" => "test_bank"],
+            ["nomor_rekening" => "323353235", "id_user" => mt_rand(1, 3), "atas_nama" => "Aiman Witjaksono", "bank" => "BCA"],
+            ["nomor_rekening" => "67890", "id_user" => mt_rand(1, 3), "atas_nama" => "Andi Odang", "bank" => "BRI"],
         ];
         foreach ($data as $val) {
             Rekening::insert([
