@@ -56,4 +56,13 @@ class Kredit extends Model
     {
         return $this->hasMany(PembelianPakan::class, 'id_kredit');
     }
+
+    public static function tambahNominal($idKredit, $nominalTambahan)
+    {
+        $kredit = Kredit::find($idKredit);
+        $nominalAsal = $kredit->nominal;
+        $nominalBaru = $nominalAsal + $nominalTambahan;
+        $kredit->nominal = $nominalBaru;
+        $kredit->save();
+    }
 }
