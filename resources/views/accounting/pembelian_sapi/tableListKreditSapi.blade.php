@@ -18,7 +18,7 @@
                 <td>{{ $kreditSapi->created_at }}</td>
                 <td>{{ $kreditSapi->pihakKedua->nama_depan }}</td>
                 <td>{{ $kreditSapi->keterangan }}</td>
-                <td><span class="text-secondary">Rp</span> {{ number_format($kreditSapi->nominal) }}</td>
+                <td><span class="text-secondary text-end">Rp</span> {{ number_format($kreditSapi->nominal) }}</td>
                 <td>
                     <a href="#/acc/buku/hutang">
                         {{ $kreditSapi->jurnal->nama }}

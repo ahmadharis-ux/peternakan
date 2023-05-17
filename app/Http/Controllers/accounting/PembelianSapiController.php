@@ -80,6 +80,7 @@ class PembelianSapiController extends Controller
     {
         $kiloan = $request->opsi_beli == 'kiloan';
         $idPembelianSapi = $request->id_pembelian_sapi;
+        $hargaSapi = $request->total_harga;
 
         $detailPembelianSapiBaru = [
             "id_pembelian_sapi" => $idPembelianSapi,
@@ -88,7 +89,7 @@ class PembelianSapiController extends Controller
             "eartag" => $request->eartag,
             "bobot" => $request->bobot,
             "kiloan" => $kiloan,
-            "harga" => $request->total_harga,
+            "harga" => $hargaSapi,
             // "kondisi" => $request->kondisi,
             "keterangan" => $request->keterangan,
             "created_at" => carbonToday(),
@@ -96,24 +97,29 @@ class PembelianSapiController extends Controller
 
         DetailPembelianSapi::insert($detailPembelianSapiBaru);
 
-        $totalNominalKreditBaru = DetailPembelianSapi::where('id_pembelian_sapi', $idPembelianSapi)->get()->sum('harga');
-
-        $kredit = PembelianSapi::find($idPembelianSapi)->kredit;
-        $kredit->nominal = $totalNominalKreditBaru;
-        $kredit->save();
-
+        // Update nominal Kredit
+        $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
+        Kredit::tambahNominal($idKredit, $hargaSapi);
         return redirect()->back();
     }
 
     public function storeOperasional(Request $request)
     {
+        $idPembelianSapi = $request->id_pembelian_sapi;
+        $hargaOperasional = $request->harga;
+
         $operasionalPembelianSapiBaru = [
-            'id_pembelian_sapi' => $request->id_pembelian_sapi,
-            'harga' => $request->harga,
+            'id_pembelian_sapi' => $idPembelianSapi,
+            'harga' => $hargaOperasional,
             'keterangan' => $request->keterangan,
         ];
 
         OperasionalPembelianSapi::insert($operasionalPembelianSapiBaru);
+
+        // Update nominal Kredit
+        $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
+        Kredit::tambahNominal($idKredit, $hargaOperasional);
+
         return redirect()->back();
     }
 
