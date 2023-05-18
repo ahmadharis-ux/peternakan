@@ -1,3 +1,12 @@
+@php
+   function getTotalKredit($kredit){
+    return number_format($kredit->transaksiKredit->sum('nominal'));
+   }
+
+   $idJurnalHutang = 1;
+@endphp
+
+
 <table id="example" class="display " style="width:100%">
     <thead>
         <tr>
@@ -7,7 +16,7 @@
             <th scope="col">Keterangan</th>
             <th scope="col">Kredit</th>
             {{-- <th scope="col">Saldo</th> --}}
-            <th scope="col">Jurnal</th>
+            {{-- <th scope="col">Jurnal</th> --}}
             <th scope="col">Detail</th>
         </tr>
     </thead>
@@ -18,12 +27,12 @@
                 <td>{{ $kreditSapi->created_at }}</td>
                 <td>{{ $kreditSapi->pihakKedua->nama_depan }}</td>
                 <td>{{ $kreditSapi->keterangan }}</td>
-                <td><span class="text-secondary">Rp</span> {{ number_format($kreditSapi->nominal) }}</td>
-                <td>
-                    <a href="#/acc/buku/hutang">
+                <td><span class="text-secondary text-end">Rp</span> {{ getTotalKredit($kreditSapi) }}</td>
+                {{-- <td>
+                    <a href="#/acc/jurnal/{{ $idJurnalHutang }}">
                         {{ $kreditSapi->jurnal->nama }}
                     </a>
-                </td>
+                </td> --}}
                 <td>
                     <a href="/acc/hutang/{{ $kreditSapi->id }}" class="btn btn-primary">
                         <div class="icon">

@@ -19,46 +19,28 @@ class PembelianSapiController extends Controller
 {
     public function index()
     {
-        $listSupplierSapi = User::where('role_id', '5')->get();
-        $listSupplierSapi = withFullname($listSupplierSapi);
-
-        $id_jurnal = 1;
+        $idJurnalHutang = 1;
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Buku - Hutang",
             'active' => "buku",
-            'listKreditSapi' => Kredit::where('id_jurnal', $id_jurnal)->get(),
-            'listSupplierSapi' => $listSupplierSapi,
+            'listKreditSapi' => Kredit::where('id_jurnal', $idJurnalHutang)->get(),
+            'listSupplierSapi' => User::getSupplierSapi(),
         ];
 
 
         return view('accounting.pembelian_sapi.index', $pageData);
     }
 
-
-    // public function create()
-    // {
-    //     $listSupplierSapi = User::where('role_id', '5')->get();
-    //     $listSupplierSapi = withFullname($listSupplierSapi);
-
-    //     $pageData = [
-    //         'title' => "Buku - Hutang",
-    //         'heading' => "Hutang baru",
-    //         'active' => "buku",
-    //         'listSupplierSapi' => $listSupplierSapi,
-    //     ];
-
-    //     return view('accounting.pembelian_sapi.create', $pageData);
-    // }
-
-
     public function store(Request $request)
     {
+        $idJurnalHutang = 1;
+
         $dataKreditBaru = [
             "id_author" => auth()->user()->id,
             "id_pihak_kedua" => $request->id_pihak_kedua,
-            "id_jurnal" => 1, // id jurnal Hutang
+            "id_jurnal" => $idJurnalHutang,
             "keterangan" => $request->keterangan,
             "created_at" => carbonToday(),
         ];
@@ -80,53 +62,74 @@ class PembelianSapiController extends Controller
     public function storeDetail(Request $request)
     {
         $kiloan = $request->opsi_beli == 'kiloan';
+        $idPembelianSapi = $request->id_pembelian_sapi;
+        $hargaSapi = $request->total_harga;
+
         $detailPembelianSapiBaru = [
-            "id_pembelian_sapi" => $request->id_pembelian_sapi,
+            "id_pembelian_sapi" => $idPembelianSapi,
             "id_jenis_sapi" => $request->id_jenis_sapi,
             "jenis_kelamin" => $request->jenis_kelamin,
             "eartag" => $request->eartag,
             "bobot" => $request->bobot,
             "kiloan" => $kiloan,
-            "harga" => $request->total_harga,
+            "harga" => $hargaSapi,
             // "kondisi" => $request->kondisi,
             "keterangan" => $request->keterangan,
             "created_at" => carbonToday(),
         ];
 
         DetailPembelianSapi::insert($detailPembelianSapiBaru);
+
+        $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
+
+        Kredit::tambahNominal($idKredit, $hargaSapi);
+        Kredit::updateStatusLunas($idKredit);
+
+
         return redirect()->back();
     }
 
     public function storeOperasional(Request $request)
     {
+        $idPembelianSapi = $request->id_pembelian_sapi;
+        $hargaOperasional = $request->harga;
+
         $operasionalPembelianSapiBaru = [
-            'id_pembelian_sapi' => $request->id_pembelian_sapi,
-            'harga' => $request->harga,
+            'id_pembelian_sapi' => $idPembelianSapi,
+            'harga' => $hargaOperasional,
             'keterangan' => $request->keterangan,
+            'created_at' => carbonToday(),
         ];
 
         OperasionalPembelianSapi::insert($operasionalPembelianSapiBaru);
+
+        $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
+
+        Kredit::tambahNominal($idKredit, $hargaOperasional);
+        Kredit::updateStatusLunas($idKredit);
+
         return redirect()->back();
     }
 
     public function show($id)
     {
-        $idKredit = Kredit::find($id)->id;
-        $pembelianSapi = PembelianSapi::where('id_kredit', $idKredit)->limit(1)->get()[0];
-
-        $listDetailPembelian = DetailPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
-        $listOperasionalPembelian = OperasionalPembelianSapi::where('id_pembelian_sapi', $pembelianSapi->id)->get();
+        $kredit = Kredit::find($id);
+        $pembelianSapi = $kredit->pembelianSapi;
+        $listDetailPembelian = $pembelianSapi->detailPembelianSapi;
+        $listOperasionalPembelian = $pembelianSapi->operasionalPembelianSapi;
+        $listRiwayatTransaksi = $kredit->transaksiKredit;
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Hutang baru",
             'active' => "buku",
+            'kredit' => $kredit,
             'pembelianSapi' => $pembelianSapi,
-            'listJenisSapi' => JenisSapi::all(),
             'listDetailPembelian' => $listDetailPembelian,
             'listOperasionalPembelian' => $listOperasionalPembelian,
+            'listRiwayatTransaksi' => $listRiwayatTransaksi,
+            'listJenisSapi' => JenisSapi::all(),
             'listRekening' => Rekening::all(),
-            'listRiwayaTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
         ];
 
         return view('accounting.pembelian_sapi.detail', $pageData);

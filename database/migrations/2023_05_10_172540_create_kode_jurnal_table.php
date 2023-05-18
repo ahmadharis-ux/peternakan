@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kode_jurnals', function (Blueprint $table) {
             $table->id();
             $table->string('kode')->unique();
+            $table->string('keterangan')->nullable();
             $table->foreignId('id_author')->unsigned();
 
             $table->timestamps();

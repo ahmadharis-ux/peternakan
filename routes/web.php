@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccController;
 use App\Http\Controllers\accounting\AccountingController;
+use App\Http\Controllers\accounting\KodeJurnalController;
 use App\Http\Controllers\accounting\DebitController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
@@ -58,7 +59,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::get('/', [AccountingController::class, 'index']);
 
         // PEMBUKUAN
-        Route::get('/kas');
+        Route::get('/kas', [AccountingController::class, 'kas']);
 
         // hutang = pembelian sapi
         Route::prefix('hutang')->group(function () {
@@ -78,6 +79,14 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/storesapi', [PenjualanSapiController::class, 'storeDetail']);
 
             Route::post('/', [PenjualanSapiController::class, 'store']);
+        });
+
+        //Kode Jurnal
+        Route::prefix('kodejurnal')->group(function(){
+            Route::get('/', [KodeJurnalController::class,'index']);
+            Route::post('/',[KodeJurnalController::class,'store']);
+            Route::put('/{id}',[KodeJurnalController::class,'edit']);
+            Route::delete('/delete/{id}',[KodeJurnalController::class,'delete']);
         });
         
 

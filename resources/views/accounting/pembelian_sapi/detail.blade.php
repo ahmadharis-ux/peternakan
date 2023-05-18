@@ -43,6 +43,8 @@
             </div>
         </div>
 
+
+
         {{--  ========== PEMBAYARAN =========== --}}
         <div class="row">
             <div class="col">
@@ -51,8 +53,12 @@
                     <div class="card-header">
                         <h5>
                             <span>Riwayat Pembayaran</span>
-                            <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
-                                data-bs-target="#modalPembayaran">Tambah</button>
+
+                            @if($kredit->lunas == false)
+                                <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
+                                    data-bs-target="#modalPembayaran">Tambah</button>
+                            @endif
+
                         </h5>
                     </div>
 
@@ -71,11 +77,12 @@
                             <div class="col-sm">
                                 @include('accounting.pembelian_sapi.tableHitungan')
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </section>

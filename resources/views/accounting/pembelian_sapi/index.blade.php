@@ -6,9 +6,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $heading }} </h5>
                     <div class="container mb-3">
-                        {{-- <a href="/acc/hutang/baru" class="btn btn-sm btn-primary">Hutang baru</a> --}}
                         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalCreate">Hutang baru</button>
+                            data-bs-target="#modalCreatePembelianSapi">Hutang baru</button>
                     </div>
                     <hr>
                     {{-- table --}}

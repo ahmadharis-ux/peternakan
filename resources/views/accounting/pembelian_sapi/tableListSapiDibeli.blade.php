@@ -14,7 +14,7 @@
                  <th scope="row">{{ $loop->iteration }}</th>
                  <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                  <td>{{ $item->eartag }}</td>
-                 <td>{{ $item->bobot }} kg</td>
+                 <td class="text-end">{{ $item->bobot }} kg</td>
                  <td class="text-end">{{ number_format($item->harga) }}</td>
              </tr>
          @endforeach

@@ -136,4 +136,28 @@ class User extends Authenticatable
     {
         return $this->hasMany(Jurnal::class);
     }
+
+    public static function getSupplierSapi()
+    {
+        $listSupplierSapi = User::where('role_id', '5')->get();
+        $listSupplierSapi = withFullname($listSupplierSapi);
+
+        return  $listSupplierSapi;
+    }
+
+    public static function getSupplierPakan()
+    {
+        $listSupplierPakan = User::where('role_id', '4')->get();
+        $listSupplierPakan = withFullname($listSupplierPakan);
+
+        return  $listSupplierPakan;
+    }
+
+    public static function getPekerja()
+    {
+        $listSupplierPakan = User::where('role_id', '7')->get();
+        $listSupplierPakan = withFullname($listSupplierPakan);
+
+        return  $listSupplierPakan;
+    }
 }
