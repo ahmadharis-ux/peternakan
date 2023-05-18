@@ -57,6 +57,11 @@ class Kredit extends Model
         return $this->hasMany(PembelianPakan::class, 'id_kredit');
     }
 
+    public static function getTotalNominal()
+    {
+        return Kredit::all()->sum('nominal');
+    }
+
     public static function tambahNominal($idKredit, $nominalTambahan)
     {
         $kredit = Kredit::find($idKredit);
@@ -76,8 +81,9 @@ class Kredit extends Model
     {
         $kredit = Kredit::find($idKredit);
         $nominalTerbayar = Kredit::getNominalTerbayar($idKredit);
+        $sisaPembayaran = $kredit->nominal - $nominalTerbayar;
 
-        return $kredit->nominal - $nominalTerbayar;
+        return $sisaPembayaran;
     }
 
     public static function updateStatusLunas($idKredit)

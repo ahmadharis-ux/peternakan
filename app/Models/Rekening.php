@@ -9,15 +9,38 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Rekening extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'id_user');
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 
-	public function masukTabungan()
-	{
-		return $this->hasMany(MasukTabungan::class);
-	}
+    public function masukTabungan()
+    {
+        return $this->hasMany(MasukTabungan::class);
+    }
+
+    public static function getTotalSaldo()
+    {
+        return Rekening::all()->sum('saldo');
+    }
+
+    public static function pemasukan($idRekening, $nominalPemasukan)
+    {
+        $rekening = Rekening::find($idRekening);
+        $saldoAwal = $rekening->saldo;
+        $saldoBaru = $saldoAwal + $nominalPemasukan;
+        $rekening->saldo = $saldoBaru;
+        $rekening->save();
+    }
+
+    public static function pengeluaran($idRekening, $nominalPengeluaran)
+    {
+        $rekening = Rekening::find($idRekening);
+        $saldoAwal = $rekening->saldo;
+        $saldoBaru = $saldoAwal - $nominalPengeluaran;
+        $rekening->saldo = $saldoBaru;
+        $rekening->save();
+    }
 }

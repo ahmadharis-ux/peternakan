@@ -21,9 +21,10 @@ class AccountingController extends Controller
             'heading' => 'Accounting',
             'active' => 'dashboard',
             'date' => Carbon::now()->format('d-m-Y'),
-            'totalHutang' => Kredit::all()->sum('nominal'),
-            'totalPiutang' => Debit::all()->sum('nominal'),
+            'totalHutang' => Kredit::getTotalNominal(),
+            'totalPiutang' => Debit::getTotalNominal(),
             'stokSapi' => Sapi::where('status', 'ADA')->get()->count(),
+            'totalSaldo' => Rekening::getTotalSaldo(),
         ];
 
         return view('accounting.index', $pageData);

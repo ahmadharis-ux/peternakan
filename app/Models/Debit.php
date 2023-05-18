@@ -39,6 +39,11 @@ class Debit extends Model
         return $this->hasMany(FakturDebit::class);
     }
 
+    public static function getTotalNominal()
+    {
+        return Debit::all()->sum('nominal');
+    }
+
     public static function tambahNominal($idDebit, $nominalTambahan)
     {
         $debit = Debit::find($idDebit);
