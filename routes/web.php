@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccController;
 use App\Http\Controllers\accounting\AccountingController;
 use App\Http\Controllers\accounting\DebitController;
+use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
 use App\Http\Controllers\accounting\PembelianSapiController;
@@ -81,6 +82,14 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::get('/gaji');
         Route::get('/prive');
         Route::get('/servis_mobil');
+
+        // jurnal
+        Route::prefix('jurnal')->group(function () {
+            Route::get('/', [JurnalController::class, 'index']);
+            Route::get('/{id}', [JurnalController::class, 'show']);
+
+            Route::post('/', [JurnalController::class, 'store']);
+        });
 
         // USER
         Route::get('/user/{role}', [UserController::class, 'index']);
