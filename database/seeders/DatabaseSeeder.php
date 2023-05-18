@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             ["name" => "Owner"],
             ["name" => "Admin"],
             ["name" => "Accounting"],
-            ["name" => "Supplier pakans"],
+            ["name" => "Supplier pakan"],
             ["name" => "Supplier sapi"],
             ["name" => "Customer"],
             ["name" => "Pekerja"],
