@@ -17,12 +17,17 @@
                 <td>{{ $kodejurnal->keterangan }}</td>
                 <td>{{ $kodejurnal->user->nama_depan }}</td>
                 <td>
-                    <button class="btn btn-sm btn-warning" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+
+                    <button class="badge bg-warning border-0" data-bs-toggle="modal"
                         data-bs-target="#modalEditKodeJurnalBaru{{$kodejurnal->id}}">Edit</button>
                         {{-- modal --}}
                         @include('accounting.kode_jurnal.modalEdit')
-                    <a href="/kodejurnal/delete/{{$kodejurnal->id}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Hapus</a>
-                    
+                    <form action="/acc/kodejurnal/delete/{{$kodejurnal->id}}" method="post" class="d-inline" >
+                        @method('delete')
+                        @csrf
+                        <button class="badge bg-danger border-0">Hapus</button>
+                    </form>
+
                 </td>
             </tr>
         @endforeach

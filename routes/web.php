@@ -83,12 +83,15 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         });
 
         //Kode Jurnal
-        Route::prefix('kodejurnal')->group(function () {
-            Route::get('/', [KodeJurnalController::class, 'index']);
-            Route::post('/', [KodeJurnalController::class, 'store']);
-            Route::put('/{id}', [KodeJurnalController::class, 'edit']);
-            Route::delete('/delete/{id}', [KodeJurnalController::class, 'delete']);
+
+        Route::prefix('kodejurnal')->group(function(){
+            Route::get('/', [KodeJurnalController::class,'index']);
+            Route::post('/',[KodeJurnalController::class,'store']);
+            Route::put('/{id}',[KodeJurnalController::class,'edit']);
+            Route::delete('/delete/{id}',[KodeJurnalController::class,'destroy']);
+
         });
+        
 
 
 
