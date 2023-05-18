@@ -7,7 +7,10 @@ use App\Models\Kredit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Kas;
+use App\Models\Rekening;
 use App\Models\Sapi;
+use App\Models\User;
 
 class AccountingController extends Controller
 {
@@ -35,7 +38,16 @@ class AccountingController extends Controller
          *  Jadi teu kudu nyieun controller lain.
          */
 
-        $pageData = [];
-        return view();
+        $pageData = [
+            'title' => 'Dashboard - Accounting',
+            'heading' => 'Accounting',
+            'active' => 'dashboard',
+            'date' => Carbon::now()->format('d-m-Y'),
+            'listKas' => Kas::getAll(),
+            'listRekening' => Rekening::all(),
+            'listSupplierSapi' => User::getSupplierSapi(),
+            'listSupplierPakan' => User::getSupplierPakan(),
+        ];
+        return view('accounting.kas.index', $pageData);
     }
 }

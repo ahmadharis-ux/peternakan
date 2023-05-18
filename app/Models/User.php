@@ -152,4 +152,12 @@ class User extends Authenticatable
 
         return  $listSupplierPakan;
     }
+
+    public static function getPekerja()
+    {
+        $listSupplierPakan = User::where('role_id', '7')->get();
+        $listSupplierPakan = withFullname($listSupplierPakan);
+
+        return  $listSupplierPakan;
+    }
 }

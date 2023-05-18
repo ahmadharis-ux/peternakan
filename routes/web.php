@@ -58,7 +58,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::get('/', [AccountingController::class, 'index']);
 
         // PEMBUKUAN
-        Route::get('/kas');
+        Route::get('/kas', [AccountingController::class, 'kas']);
 
         // hutang = pembelian sapi
         Route::prefix('hutang')->group(function () {
