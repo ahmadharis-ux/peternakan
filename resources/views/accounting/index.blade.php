@@ -11,58 +11,49 @@
                     <div class="col-xxl-8 col-md-6">
                         <a href="/total_hutang">
                             <div class="card info-card sales-card">
-
                                 <div class="card-body">
                                     <h5 class="card-title">Hutang</h5>
-
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>[sum_kredit / all hutang]</h6>
+                                            <h6>Rp {{ number_format($totalHutang) }}</h6>
                                             <h6></h6>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </a>
-                    </div><!-- End Sales Card -->
+                    </div>
 
                     <!-- Piutang Card -->
                     <div class="col-xxl-8 col-md-6">
                         <div class="card info-card revenue-card">
-
                             <div class="card-body">
                                 <h5 class="card-title">Piutang</h5>
-
                                 <div class="d-flex align-items-center">
                                     <div class="ps-3">
-                                        <h6>[sum_debit / all piutang]</h6>
+                                        <h6>Rp {{ number_format($totalPiutang) }}</h6>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div><!-- End Revenue Card -->
+                    </div>
 
                     <!-- Saldo Card -->
                     <div class="col-xxl-8 col-xl-12">
-
                         <div class="card info-card customers-card">
-
                             <div class="card-body">
                                 <h5 class="card-title">Total Saldo</h5>
-
                                 <div class="d-flex align-items-center">
                                     <div class="ps-3">
-                                        <h6>[total_saldo]</h6>
+                                        <h6>[sum_saldo]</h6>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
-                    </div><!-- End Customers Card -->
+                    </div>
                     <hr>
+
                     <!-- Total Pakan Card -->
                     <div class="col-xxl-4 col-md-6">
                         <a href="/acc/pakan">
@@ -79,34 +70,31 @@
 
                             </div>
                         </a>
-                    </div><!-- End Sales Card -->
+                    </div>
+
                     <!-- Stok Sapi Card -->
                     <div class="col-xxl-4 col-xl-12">
                         <a href="/stoksapi">
                             <div class="card info-card customers-card">
-
                                 <div class="card-body">
                                     <h5 class="card-title">Stok Sapi</h5>
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>[count_sapi where status = ada]</h6>
+                                            <h6>{{ $stokSapi }}</h6>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </a>
 
 
-                    </div><!-- End Customers Card -->
+                    </div>
 
                     <!-- Reports -->
                     <div class="col-12">
                         <div class="card">
-
                             <div class="card-body">
                                 <h5 class="card-title">Reports <span>/Today</span></h5>
-
                                 <!-- Line Chart -->
                                 <div id="reportsChart"></div>
 

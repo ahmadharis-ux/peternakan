@@ -58,7 +58,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::get('/', [AccountingController::class, 'index']);
 
         // PEMBUKUAN
-        Route::get('/kas');
+        Route::get('/kas', [AccountingController::class, 'kas']);
 
         // hutang = pembelian sapi
         Route::prefix('hutang')->group(function () {
@@ -66,6 +66,9 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::get('/{id}', [PembelianSapiController::class, 'show']);
 
             Route::post('/', [PembelianSapiController::class, 'store']);
+            Route::post('/detail', [PembelianSapiController::class, 'storeDetail']);
+            Route::post('/operasional', [PembelianSapiController::class, 'storeOperasional']);
+            Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
         });
 
         Route::prefix('piutang')->group(function () {

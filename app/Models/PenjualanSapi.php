@@ -12,30 +12,31 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class PenjualanSapi extends Model
 {
 
-	use HasFactory;
+    use HasFactory;
 
 
+    protected $with = ['detailPenjualanSapi', 'operasionalPenjualanSapi'];
 
 
-	public function detailPenjualanSapi()
-	{
-		return $this->hasMany(DetailPenjualanSapi::class);
-	}
+    public function detailPenjualanSapi()
+    {
+        return $this->hasMany(DetailPenjualanSapi::class);
+    }
 
-	public function operasionalPenjualanSapi()
-	{
-		return $this->hasMany(OperasionalPenjualanSapi::class);
-	}
-
-
-	public function user()
-	{
-		return $this->belongsTo(User::class, 'id_user');
-	}
+    public function operasionalPenjualanSapi()
+    {
+        return $this->hasMany(OperasionalPenjualanSapi::class);
+    }
 
 
-	public function debit()
-	{
-		return $this->belongsTo(Debit::class);
-	}
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+
+    public function debit()
+    {
+        return $this->belongsTo(Debit::class, 'id_debit');
+    }
 }

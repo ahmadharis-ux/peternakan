@@ -16,16 +16,16 @@ class Sapi extends Model
 
     public function jenisSapi()
     {
-        return $this->belongsTo(JenisSapi::class);
+        return $this->belongsTo(JenisSapi::class, 'id_jenis_sapi');
     }
 
     public function riwayatBobotSapi()
     {
-        return $this->HasMany(RiwayatBobotSapi::class);
+        return $this->hasMany(RiwayatBobotSapi::class, 'id_sapi');
     }
 
     public function detailPenjualanSapi()
     {
-        return $this->HasMany(DetailPenjualanSapi::class);
+        return $this->hasOne(DetailPenjualanSapi::class, 'id_sapi');
     }
 }

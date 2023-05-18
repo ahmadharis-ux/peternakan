@@ -1,14 +1,14 @@
- <form action="/storeopr" method="post">
+ <form action="/acc/hutang/operasional" method="post" enctype="multipart/form-data">
      @csrf
+     <input type="hidden" name="id_pembelian_sapi" value="{{ $pembelianSapi->id }}">
      <div class="row mt-2">
          <div class="col-sm-5 mb-3">
              <label for="">Keterangan</label>
              <input type="text" class="form-control" name="keterangan">
-             <input type="hidden" class="form-control" value="" name="kas_id">
          </div>
          <div class="col-sm-5 mb-3">
              <label for="">Nominal Operasional</label>
-             <input type="number" class="form-control" name="nominal">
+             <input type="number" min="0" class="form-control" name="harga">
          </div>
          <div class="col-sm-2 mb-3">
              <br>

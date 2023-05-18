@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Kredit extends Model
 {
     use HasFactory;
-    protected $with = ['jurnal', 'user', 'pihakKedua', 'pembelianSapi', 'pembelianPakan'];
+    protected $with = ['jurnal', 'user', 'pihakKedua', 'pembelianSapi', 'pembelianPakan', 'transaksiKredit'];
 
     public function user()
     {
@@ -55,5 +55,41 @@ class Kredit extends Model
     public function pembelianPakan()
     {
         return $this->hasMany(PembelianPakan::class, 'id_kredit');
+    }
+
+    public static function tambahNominal($idKredit, $nominalTambahan)
+    {
+        $kredit = Kredit::find($idKredit);
+        $nominalAsal = $kredit->nominal;
+        $nominalBaru = $nominalAsal + $nominalTambahan;
+        $kredit->nominal = $nominalBaru;
+        $kredit->save();
+    }
+
+    public static function getNominalTerbayar($idKredit)
+    {
+        $kredit = Kredit::find($idKredit);
+        return $kredit->transaksiKredit->sum('nominal');
+    }
+
+    public static function getSisaPembayaran($idKredit)
+    {
+        $kredit = Kredit::find($idKredit);
+        $nominalTerbayar = Kredit::getNominalTerbayar($idKredit);
+
+        return $kredit->nominal - $nominalTerbayar;
+    }
+
+    public static function updateStatusLunas($idKredit)
+    {
+        $kredit = Kredit::find($idKredit);
+        if (Kredit::getSisaPembayaran($idKredit) > 0) {
+            $kredit->lunas = false;
+            $kredit->save();
+            return;
+        }
+
+        $kredit->lunas = true;
+        $kredit->save();
     }
 }

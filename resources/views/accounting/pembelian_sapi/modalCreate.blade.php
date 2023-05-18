@@ -1,4 +1,4 @@
-  <div class="modal fade" id="modalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div class="modal fade" id="modalCreatePembelianSapi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -12,8 +12,6 @@
                   <div class="modal-body">
                       <div class="col-sm-12">
                           <label for="">Supplier Sapi</label>
-                          {{-- <input type="hidden" name="id_jurnal" value="{{ 1 }}" required> --}}
-                          {{-- <input type="hidden" name="author" value="{{ auth()->user()->name }}" required> --}}
                           <select name="id_pihak_kedua" id="" class="form-select">
                               @foreach ($listSupplierSapi as $supplier)
                                   <option value="{{ $supplier->id }}">{{ $supplier->fullname }}
