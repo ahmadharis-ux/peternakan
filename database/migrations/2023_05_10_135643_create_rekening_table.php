@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('id_user')->unsigned();
             $table->string('atas_nama');
             $table->string('bank');
+            $table->unsignedBigInteger('saldo')->default(0);
 
             $table->timestamps();
 

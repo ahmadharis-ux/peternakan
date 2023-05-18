@@ -76,8 +76,9 @@ class Kredit extends Model
     {
         $kredit = Kredit::find($idKredit);
         $nominalTerbayar = Kredit::getNominalTerbayar($idKredit);
+        $sisaPembayaran = $kredit->nominal - $nominalTerbayar;
 
-        return $kredit->nominal - $nominalTerbayar;
+        return $sisaPembayaran;
     }
 
     public static function updateStatusLunas($idKredit)
