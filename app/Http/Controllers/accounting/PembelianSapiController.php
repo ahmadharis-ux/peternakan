@@ -19,9 +19,6 @@ class PembelianSapiController extends Controller
 {
     public function index()
     {
-        $listSupplierSapi = User::where('role_id', '5')->get();
-        $listSupplierSapi = withFullname($listSupplierSapi);
-
         $idJurnalHutang = 1;
 
         $pageData = [
@@ -29,29 +26,12 @@ class PembelianSapiController extends Controller
             'heading' => "Buku - Hutang",
             'active' => "buku",
             'listKreditSapi' => Kredit::where('id_jurnal', $idJurnalHutang)->get(),
-            'listSupplierSapi' => $listSupplierSapi,
+            'listSupplierSapi' => User::getSupplierSapi(),
         ];
 
 
         return view('accounting.pembelian_sapi.index', $pageData);
     }
-
-
-    // public function create()
-    // {
-    //     $listSupplierSapi = User::where('role_id', '5')->get();
-    //     $listSupplierSapi = withFullname($listSupplierSapi);
-
-    //     $pageData = [
-    //         'title' => "Buku - Hutang",
-    //         'heading' => "Hutang baru",
-    //         'active' => "buku",
-    //         'listSupplierSapi' => $listSupplierSapi,
-    //     ];
-
-    //     return view('accounting.pembelian_sapi.create', $pageData);
-    // }
-
 
     public function store(Request $request)
     {
