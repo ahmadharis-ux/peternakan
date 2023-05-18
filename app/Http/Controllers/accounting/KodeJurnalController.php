@@ -40,9 +40,8 @@ class KodeJurnalController extends Controller
         return redirect()->back()->with('succes', 'Berhasil di Update');
     }
     function destroy($id){
-        $kodejurnal = KodeJurnal::find($id);
-        $kodejurnal->delete();
+        KodeJurnal::destroy($id);
 
-        return redirect()->back();
+        return redirect('acc/kodejurnal');
     }
 }
