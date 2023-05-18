@@ -53,6 +53,7 @@ class PembelianSapiController extends Controller
             "id_kredit" => $idKreditTerbaru,
             "created_at" => carbonToday(),
         ];
+        PembelianSapi::insert($dataPembelianSapiBaru);
 
         PembelianSapi::insert($dataPembelianSapiBaru);
         return redirect()->back();;

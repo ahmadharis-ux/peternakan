@@ -25,11 +25,6 @@
                           <input type="text" class="form-control" name="nama_jurnal" required>
                       </div>
 
-                      {{-- <div class="col-sm-12">
-                          <label for="">Keterangan</label>
-                          <textarea required name="keterangan" class="form-control" placeholder="keterangan" id="" cols="30"
-                              rows="10"></textarea>
-                      </div> --}}
                   </div>
 
                   <div class="modal-footer">

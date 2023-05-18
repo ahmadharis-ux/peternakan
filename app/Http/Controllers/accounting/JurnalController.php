@@ -65,13 +65,21 @@ class JurnalController extends Controller
     }
 
 
-    public function update(Request $request, Jurnal $jurnal)
+    public function update(Request $request)
     {
-        //
+        $jurnal = Jurnal::find($request->id_jurnal);
+        $jurnal->nama = $request->nama_jurnal;
+        $jurnal->id_kode_jurnal = $request->id_kode_jurnal;
+        $jurnal->save();
+
+        return redirect()->back();
     }
 
-    public function destroy(Jurnal $jurnal)
+    public function destroy(Request $request)
     {
-        //
+        $jurnal = Jurnal::find($request->id_jurnal);
+        $jurnal->delete();
+
+        return redirect()->back();
     }
 }

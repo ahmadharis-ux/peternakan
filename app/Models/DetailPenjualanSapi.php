@@ -14,11 +14,11 @@ class DetailPenjualanSapi extends Model
 
     public function sapi()
     {
-        return $this->hasOne(Sapi::class);
+        return $this->hasOne(Sapi::class,'id');
     }
 
     public function penjualanSapi()
     {
-        return $this->belongsTo(PenjualanSapi::class);
+        return $this->belongsTo(PenjualanSapi::class,'id_sapi');
     }
 }

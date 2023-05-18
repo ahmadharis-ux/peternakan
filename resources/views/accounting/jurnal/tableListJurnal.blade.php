@@ -21,8 +21,25 @@
                             <i class="bi bi-eye-fill"></i>
                         </div>
                     </a>
+
+                    <button data-bs-toggle="modal" data-bs-target="#modalEditJurnal-{{ $jurnal->id }}"
+                        class="btn btn-warning text-white btn-sm mx-1">
+                        <div class="icon">
+                            <i class="bi bi-pencil-fill"></i>
+                        </div>
+                    </button>
+
+                    <button data-bs-toggle="modal" data-bs-target="#modalDeleteJurnal-{{ $jurnal->id }}"
+                        class="btn btn-danger btn-sm mx-1">
+                        <div class="icon">
+                            <i class="bi bi-trash-fill"></i>
+                        </div>
+                    </button>
                 </td>
             </tr>
+
+            @include('accounting.jurnal.modalEdit')
+            @include('accounting.jurnal.modalDelete')
         @endforeach
     </tbody>
 </table>
