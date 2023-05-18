@@ -34,6 +34,7 @@
                                 </div>
 
                                 <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary">Sim</button>
                             </form>
                         </div>
 
