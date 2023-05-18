@@ -47,13 +47,13 @@ class JurnalController extends Controller
     {
         $jurnal = Jurnal::find($idJurnal);
 
-        return $jurnal;
 
         $pageData = [
             'title' => "Jurnal",
             'heading' => "Jurnal",
             'active' => "buku",
             'jurnal' => $jurnal,
+            'listKodeJurnal' => KodeJurnal::all(),
         ];
 
         return view('accounting.jurnal.detail', $pageData);
