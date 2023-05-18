@@ -126,6 +126,7 @@ class DatabaseSeeder extends Seeder
                 "id_user" => $val["id_user"],
                 "atas_nama" => $val["atas_nama"],
                 "bank" => $val["bank"],
+                "saldo" => 100000000,
                 "created_at" => Carbon::now(), "updated_at" => Carbon::now(),
             ]);
         }
