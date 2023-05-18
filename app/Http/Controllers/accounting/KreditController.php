@@ -60,7 +60,7 @@ class KreditController extends Controller
 
         TransaksiKredit::insert($transaksiKredit);
         Kredit::updateStatusLunas($idKredit);
-        Rekening::pemasukan($idRekening, $nominalBayar);
+        Rekening::pengeluaran($idRekening, $nominalBayar);
 
         return redirect()->back();
     }

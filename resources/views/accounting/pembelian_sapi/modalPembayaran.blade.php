@@ -48,11 +48,9 @@
                             <div class="col-sm-12 mb-3">
                                 <label for="">Nominal</label>
                                 <div class="d-flex ">
-                                    <input type="number" min="0" max="{{ $sisaPembayaran }}"
+                                    <input id="inputNominal" type="number" min="0" max="{{ $sisaPembayaran }}"
                                         class="form-control" name="nominal" required>
-                                    <span class="text-danger" style="display: none">
-                                        nominal tidak valid! (melebihi saldo / sisa pembayaran)
-                                    </span>
+
                                     {{-- tombol input nominal sisa bayar. TUNDA JANG FITUR TAMBAHAN --}}
                                     {{-- <button id="nominalLunas" class="btn btn-success ms-1">Lunasi</button> --}}
                                 </div>
@@ -111,7 +109,7 @@
 <script>
     $(document).ready(function() {
         const btnSimpan = $("#btnSimpan")
-        const inputNominal = $("input[name=nominal]")
+        const inputNominal = $("#inputNominal")
 
         const listRekening = {!! $listRekening !!}
         const firstRekening = listRekening[0]
@@ -153,10 +151,15 @@
 
             if (invalidNominal) {
                 btnSimpan.attr('disabled', 'disabled')
+                btnSimpan.text('Nominal tidak valid!')
+
                 inputNominal.addClasss('is-invalid')
+
 
             } else {
                 btnSimpan.removeAttr('disabled')
+                btnSimpan.text('Simpan')
+
                 inputNominal.removeClass('is-invalid')
 
 
