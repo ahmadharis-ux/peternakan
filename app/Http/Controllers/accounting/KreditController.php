@@ -4,6 +4,7 @@ namespace App\Http\Controllers\accounting;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kredit;
+use App\Models\Rekening;
 use App\Models\TransaksiKredit;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ class KreditController extends Controller
         $idKredit = $request->id_kredit;
         $sisaKredit = Kredit::getSisaPembayaran($idKredit);
         $nominalBayar = $request->nominal;
+        $idRekening = $request->id_rekening;
 
         if ($nominalBayar > $sisaKredit) {
             return redirect()->back()->withErrors('Nominal pembayaran melebihi sisa kredit!');
@@ -50,15 +52,15 @@ class KreditController extends Controller
         $transaksiKredit = [
             "id_kredit" => $idKredit,
             "id_author" => auth()->user()->id,
-            "id_rekening" => $request->id_rekening,
+            "id_rekening" => $idRekening,
             "nominal" => $nominalBayar,
             "adm" => $request->adm,
             "created_at" => carbonToday(),
         ];
 
         TransaksiKredit::insert($transaksiKredit);
-
         Kredit::updateStatusLunas($idKredit);
+        Rekening::pemasukan($idRekening, $nominalBayar);
 
         return redirect()->back();
     }

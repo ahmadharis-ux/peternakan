@@ -45,7 +45,7 @@
                                 <h5 class="card-title">Total Saldo</h5>
                                 <div class="d-flex align-items-center">
                                     <div class="ps-3">
-                                        <h6>[sum_saldo]</h6>
+                                        <h6>Rp {{ number_format($totalSaldo) }}</h6>
                                     </div>
                                 </div>
                             </div>

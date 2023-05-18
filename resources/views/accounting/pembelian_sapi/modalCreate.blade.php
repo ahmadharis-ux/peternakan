@@ -22,7 +22,7 @@
                       <div class="col-sm-12">
                           <label for="">Keterangan</label>
                           <textarea required name="keterangan" class="form-control" placeholder="keterangan" id="" cols="30"
-                              rows="10"></textarea>
+                              rows="10">asdfadf</textarea>
                       </div>
                   </div>
                   <div class="modal-footer">

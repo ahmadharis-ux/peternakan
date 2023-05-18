@@ -95,6 +95,22 @@ class DatabaseSeeder extends Seeder
 
             );
         }
+
+
+        for ($i = 0; $i < 5; $i++) {
+            User::create(
+                [
+                    "nama_depan" => "test",
+                    "nama_belakang" => "supplier sapi " . $i + 1,
+                    "role_id" => 5,
+                    "email" => "supplier_sapi" . $i + 1 . "@gmail.com",
+                    "email_verified_at" => now(),
+                    "password" => Hash::make("password"),
+                    "remember_token" => Str::random(10),
+                ],
+
+            );
+        }
     }
 
     private function seedRekening()
@@ -102,6 +118,7 @@ class DatabaseSeeder extends Seeder
         $data = [
             ["nomor_rekening" => "323353235", "id_user" => mt_rand(1, 3), "atas_nama" => "Aiman Witjaksono", "bank" => "BCA"],
             ["nomor_rekening" => "67890", "id_user" => mt_rand(1, 3), "atas_nama" => "Andi Odang", "bank" => "BRI"],
+            ["nomor_rekening" => "---", "id_user" => mt_rand(1, 3), "atas_nama" => "CASH", "bank" => "---"],
         ];
         foreach ($data as $val) {
             Rekening::insert([
