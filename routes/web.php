@@ -66,6 +66,9 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::get('/{id}', [PembelianSapiController::class, 'show']);
 
             Route::post('/', [PembelianSapiController::class, 'store']);
+            Route::post('/detail', [PembelianSapiController::class, 'storeDetail']);
+            Route::post('/operasional', [PembelianSapiController::class, 'storeOperasional']);
+            Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
         });
 
         //piutang = penjualan sapi

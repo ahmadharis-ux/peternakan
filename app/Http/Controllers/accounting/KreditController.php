@@ -4,6 +4,7 @@ namespace App\Http\Controllers\accounting;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kredit;
+use App\Models\TransaksiKredit;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,6 @@ class KreditController extends Controller
             'active' => "buku",
             'kredit' => Kredit::all(),
             'listSupplierSapi' => $listSupplierSapi,
-
         ];
 
         return view('accounting.kredit.index', $pageData);
@@ -35,6 +35,21 @@ class KreditController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function storeTransaksi(Request $request)
+    {
+
+        $transaksiKredit = [
+            "id_kredit" => $request->id_kredit,
+            "id_author" => auth()->user()->id,
+            "id_rekening" => $request->id_rekening,
+            "nominal" => $request->nominal,
+            "adm" => $request->adm,
+        ];
+
+        TransaksiKredit::insert($transaksiKredit);
+        return redirect()->back();
     }
 
     public function show(Kredit $kredit)
