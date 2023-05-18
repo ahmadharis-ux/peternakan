@@ -4,6 +4,7 @@ use App\Http\Controllers\AccController;
 use App\Http\Controllers\accounting\AccountingController;
 use App\Http\Controllers\accounting\KodeJurnalController;
 use App\Http\Controllers\accounting\DebitController;
+use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
 use App\Http\Controllers\accounting\PembelianSapiController;
@@ -82,19 +83,32 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         });
 
         //Kode Jurnal
+
         Route::prefix('kodejurnal')->group(function(){
             Route::get('/', [KodeJurnalController::class,'index']);
             Route::post('/',[KodeJurnalController::class,'store']);
             Route::put('/{id}',[KodeJurnalController::class,'edit']);
             Route::delete('/delete/{id}',[KodeJurnalController::class,'destroy']);
+
         });
         
+
 
 
         Route::get('/pakan', [PakanController::class, 'index']);
         Route::get('/gaji');
         Route::get('/prive');
         Route::get('/servis_mobil');
+
+        // jurnal
+        Route::prefix('jurnal')->group(function () {
+            Route::get('/', [JurnalController::class, 'index']);
+            Route::get('/{id}', [JurnalController::class, 'show']);
+
+            Route::post('/', [JurnalController::class, 'store']);
+            Route::put('/{id}', [JurnalController::class, 'update']);
+            Route::delete('/{id}', [JurnalController::class, 'destroy']);
+        });
 
         // USER
         Route::get('/user/{role}', [UserController::class, 'index']);

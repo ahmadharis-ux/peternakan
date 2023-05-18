@@ -9,7 +9,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
 
-                  <div class="modal-body">
+                  <div class="modal-body p-5">
                       <div class="col-sm-12">
                           <label for="">Supplier Sapi</label>
                           <select name="id_pihak_kedua" id="" class="form-select">
