@@ -4,7 +4,7 @@
             <th scope="col">#</th>
             <th scope="col">Kode jurnal</th>
             <th scope="col">Nama Jurnal</th>
-            <th scope="col">Detail</th>
+            <th scope="col">Aksi</th>
         </tr>
     </thead>
     <tbody>
@@ -14,7 +14,9 @@
                 <td>{{ $jurnal->kodeJurnal->kode }}</td>
                 <td>{{ $jurnal->nama }}</td>
                 <td>
-                    <a href="/acc/jurnal/{{ $jurnal->id }}" class="btn btn-primary btn-sm">
+
+                    {{-- btn lihat detail --}}
+                    <a href="/acc/jurnal/{{ $jurnal->id }}" class="btn btn-primary btn-sm mx-1">
                         <div class="icon">
                             <i class="bi bi-eye-fill"></i>
                         </div>
