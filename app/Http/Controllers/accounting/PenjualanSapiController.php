@@ -81,8 +81,8 @@ class PenjualanSapiController extends Controller
         $debit = Debit::find($id);
         $penjualanSapi = $debit->penjualanSapi;
         $listSapi = Sapi::all();
-        $listDetailpenjualan = $penjualanSapi->detailpenjualanSapi;
-        $listOperasionalpenjualan = $penjualanSapi->operasionalpenjualanSapi;
+        $listDetailPenjualan = $penjualanSapi->detailPenjualanSapi;
+        $listOperasionalPenjualan = $penjualanSapi->operasionalpenjualanSapi;
         $listRiwayatTransaksi = $debit->transaksiDebit;
 
 
@@ -93,10 +93,10 @@ class PenjualanSapiController extends Controller
             'active' => "buku",
             'debit' => $debit,
             'penjualanSapi' => $penjualanSapi,
-            'listDetailpenjualan' => $listDetailpenjualan,
-            'listOperasionalpenjualan' => $listOperasionalpenjualan,
+            'listSapi' => Sapi::all(),
+            'listDetailPenjualan' => $listDetailPenjualan,
+            'listOperasionalPenjualan' => $listOperasionalPenjualan,
             'listRiwayatTransaksi' => $listRiwayatTransaksi,
-            'listJenisSapi' => JenisSapi::all(),
             'listRekening' => Rekening::all(),
         ];
 

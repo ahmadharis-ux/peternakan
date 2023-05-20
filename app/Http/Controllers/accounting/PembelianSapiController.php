@@ -113,7 +113,6 @@ class PembelianSapiController extends Controller
     public function show($id)
     {
         $kredit = Kredit::find($id);
-        return $kredit;
         $pembelianSapi = $kredit->pembelianSapi;
         $listDetailPembelian = $pembelianSapi->detailPembelianSapi;
         $listOperasionalPembelian = $pembelianSapi->operasionalPembelianSapi;

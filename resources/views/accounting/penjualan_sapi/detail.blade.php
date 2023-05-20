@@ -10,9 +10,9 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>
-                            <span>Daftar sapi</span>
+                            <span>Daftar sapi dijual</span>
                             <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
-                                data-bs-target="#modalJualSapi">Tambah Sapi</button>
+                                data-bs-target="#modalPilihSapi">Tambah Sapi</button>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -32,11 +32,11 @@
                     </div>
                     <div class="card-body">
                         {{-- form tambah operasional --}}
-                        @include('accounting.pembelian_sapi.formTambahOperasional')
+                        @include('accounting.penjualan_sapi.formTambahOperasional')
                         <hr>
                         <div class="section">
                             {{-- table list operasional --}}
-                            @include('accounting.pembelian_sapi.tableListOperasional')
+                            @include('accounting.penjualan_sapi.tableListOperasional')
                         </div>
                     </div>
                 </div>
@@ -63,13 +63,13 @@
                             <div class="col-sm-8">
                                 <div class="section">
                                     {{-- table list riwayat pembayaran --}}
-                                    @include('accounting.pembelian_sapi.tableListRiwayatPembayaran')
+                                    @include('accounting.penjualan_sapi.tableListRiwayatPembayaran')
                                 </div>
                             </div>
 
                             {{-- table hitungan --}}
                             <div class="col-sm-4">
-                                @include('accounting.pembelian_sapi.tableHitungan')
+                                @include('accounting.penjualan_sapi.tableHitungan')
                             </div>
 
                         </div>
@@ -82,6 +82,6 @@
 
 
     {{-- modals --}}
-    @include('accounting.penjualan_sapi.modalJualSapi')
-    @include('accounting.pembelian_sapi.modalPembayaran')
+    @include('accounting.penjualan_sapi.modalPilihSapi')
+    @include('accounting.penjualan_sapi.modalPembayaran')
 @endsection
