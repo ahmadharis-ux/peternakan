@@ -14,7 +14,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Kredit extends Model
 {
     use HasFactory;
-    protected $with = ['jurnal', 'user', 'pihakKedua', 'pembelianSapi', 'pembelianPakan', 'transaksiKredit'];
+    protected $with = [
+        'jurnal',
+        'user',
+        'pihakKedua',
+        'pembelianSapi',
+        'pembelianPakan',
+        'transaksiKredit'
+    ];
 
     public function user()
     {
@@ -45,11 +52,6 @@ class Kredit extends Model
     public function pembelianSapi()
     {
         return $this->hasOne(PembelianSapi::class, 'id_kredit');
-    }
-
-    public function penjualanSapi()
-    {
-        return $this->hasMany(PenjualanSapi::class, 'id_kredit');
     }
 
     public function pembelianPakan()

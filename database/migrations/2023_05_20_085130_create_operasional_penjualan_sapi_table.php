@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('operasional_penjualan_sapi', function (Blueprint $table) {
+        Schema::create('operasional_penjualan_sapis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_penjualan_sapi')->unsigned();
             $table->integer('harga');

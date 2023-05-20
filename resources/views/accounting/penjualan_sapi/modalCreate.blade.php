@@ -1,19 +1,17 @@
-  <div class="modal fade" id="modalCreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div class="modal fade" id="modalCreatePenjualanSapi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
               <form action="/acc/piutang/" method="post" enctype="multipart/form-data">
                   @csrf
                   <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Kas Hutang</h1>
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Kas Piutang</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
 
-                  <div class="modal-body">
+                  <div class="modal-body p-5">
                       <div class="col-sm-12">
-                          <label for="">Customer Sapi</label>
-                          {{-- <input type="hidden" name="id_jurnal" value="{{ 1 }}" required> --}}
-                          {{-- <input type="hidden" name="author" value="{{ auth()->user()->name }}" required> --}}
+                          <label for="">Customer</label>
                           <select name="id_pihak_kedua" id="" class="form-select">
                               @foreach ($listCustomer as $customer)
                                   <option value="{{ $customer->id }}">{{ $customer->fullname }}
@@ -24,7 +22,7 @@
                       <div class="col-sm-12">
                           <label for="">Keterangan</label>
                           <textarea required name="keterangan" class="form-control" placeholder="keterangan" id="" cols="30"
-                              rows="10"></textarea>
+                              rows="10">asdfadf</textarea>
                       </div>
                   </div>
                   <div class="modal-footer">

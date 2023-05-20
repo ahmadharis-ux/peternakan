@@ -35,8 +35,11 @@ class LoginController extends Controller
             return redirect()->intended('/owner');
         }
 
+        return 'gagal auto login';
 
         // =======================
+
+
         return view('login');
     }
     function login(Request $request)

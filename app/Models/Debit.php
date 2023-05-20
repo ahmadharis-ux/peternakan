@@ -13,6 +13,17 @@ class Debit extends Model
 {
     use HasFactory;
 
+    // protected $with = ['jurnal', 'user', 'pihakKedua', 'penjualanSapi', 'transaksiDebit'];
+    protected $with = [
+        'jurnal',
+        'user',
+        'pihakKedua',
+        'penjualanSapi',
+        'transaksiDebit',
+    ];
+
+
+
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
@@ -28,9 +39,14 @@ class Debit extends Model
         return $this->belongsTo(Jurnal::class, 'id_jurnal');
     }
 
+    public function penjualanSapi()
+    {
+        return $this->hasOne(PenjualanSapi::class, 'id_debit');
+    }
+
     public function transaksiDebit()
     {
-        return $this->hasMany(TransaksiDebit::class);
+        return $this->hasMany(TransaksiDebit::class, 'id_debit');
     }
 
 
@@ -50,6 +66,34 @@ class Debit extends Model
         $nominalAsal = $debit->nominal;
         $nominalBaru = $nominalAsal + $nominalTambahan;
         $debit->nominal = $nominalBaru;
+        $debit->save();
+    }
+
+    public static function getNominalTerbayar($idDebit)
+    {
+        $debit = Debit::find($idDebit);
+        return $debit->transaksiDebit->sum('nominal');
+    }
+
+    public static function getSisaPembayaran($idDebit)
+    {
+        $debit = Debit::find($idDebit);
+        $nominalTerbayar = Debit::getNominalTerbayar($idDebit);
+        $sisaPembayaran = $debit->nominal - $nominalTerbayar;
+
+        return $sisaPembayaran;
+    }
+
+    public static function updateStatusLunas($idDebit)
+    {
+        $debit = Debit::find($idDebit);
+        if (Debit::getSisaPembayaran($idDebit) > 0) {
+            $debit->lunas = false;
+            $debit->save();
+            return;
+        }
+
+        $debit->lunas = true;
         $debit->save();
     }
 }
