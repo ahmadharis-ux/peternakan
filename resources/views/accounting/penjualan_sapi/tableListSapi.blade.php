@@ -35,10 +35,20 @@
 <script>
     $(document).ready(function() {
         const btnPilihSapi = $(".btnPilihSapi");
-        const jumlahBtnPilihSapi = btnPilihSapi.length
+        const formHarga = $("#formPenentuanHarga")
 
         const listSapi = {!! $listSapi !!};
         let sapiTerpilih
+
+        function cancelInfoSapi() {
+            formHarga.find('input').val('')
+            formHarga.text('')
+
+        }
+
+        function tampilInfoSapi(sapi) {
+            formHarga.text(sapi)
+        }
 
         function cancelPilihSapi() {
             sapiTerpilih = null;
@@ -46,10 +56,14 @@
             btnPilihSapi.removeAttr('disabled')
             btnPilihSapi.removeClass('btn-secondary')
             btnPilihSapi.text('Pilih')
+
+            cancelInfoSapi()
         }
 
         function pilihSapi(idSapi) {
             sapiTerpilih = listSapi.find((sapi) => sapi.id == idSapi)
+            tampilInfoSapi(JSON.stringify(sapiTerpilih))
+
 
             const btnLain = $('.btnPilihSapi').not(`[data-id-sapi=${idSapi}]`)
             btnLain.attr('disabled', 'disabled')
@@ -66,14 +80,12 @@
             pilihSapi(idSapiTerpilih)
 
             $(this).text('Batal pilih')
+
         }
 
 
 
 
         btnPilihSapi.click(togglePilihSapi)
-
-
-
     })
 </script>
