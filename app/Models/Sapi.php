@@ -13,6 +13,9 @@ class Sapi extends Model
 
     use HasFactory;
 
+    protected $with = [
+        'jenisSapi'
+    ];
 
     public function jenisSapi()
     {

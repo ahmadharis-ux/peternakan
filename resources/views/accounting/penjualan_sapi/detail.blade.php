@@ -2,6 +2,25 @@
 @section('container')
     <section class="section dashboard">
 
+        {{-- COBA --}}
+        <div class="container">
+            <div class="d-flex flex-row justify-content-between p-3">
+
+                {{-- table list sapi --}}
+                <div class="p-3" style="width: 70%">
+                    @include('accounting.penjualan_sapi.tableListSapi')
+                </div>
+
+                {{-- form penentuan harga --}}
+                <div class="p-3" style="width:30;">
+                    qwet
+                </div>
+            </div>
+
+        </div>
+        {{-- COBA --}}
+
+
         {{--  ========== PENJUALAN =========== --}}
         <div class="row">
 
@@ -78,10 +97,11 @@
             </div>
         </div>
 
+
     </section>
 
 
     {{-- modals --}}
-    @include('accounting.penjualan_sapi.modalPilihSapi')
+    {{-- @include('accounting.penjualan_sapi.modalPilihSapi') --}}
     @include('accounting.penjualan_sapi.modalPembayaran')
 @endsection
