@@ -10,16 +10,17 @@
                 <div class="d-flex flex-row justify-content-between p-3">
 
                     {{-- table list sapi --}}
-                    <div class="p-3" style="width: 70%">
-                        @include('accounting.penjualan_sapi.tableListSapi')
+                    <div class="px-3" style="width: 70%; min-height: 110%">
+                        <div class="sticky-top">
+                            @include('accounting.penjualan_sapi.tableListSapi')
+                        </div>
                     </div>
 
                     {{-- form penentuan harga --}}
-                    <div class="p-3" style="width:30;">
-                        qwet
+                    <div class="border rounded p-3" style="width:30;">
+                        @include('accounting.penjualan_sapi.formPenentuanHargaSapi')
                     </div>
                 </div>
-
             </div>
 
 
@@ -28,7 +29,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         const radioOpsiBeli = $("input[name=opsi_beli]")
         const inputTotalHarga = $("input[name=total_harga]")
@@ -72,4 +73,4 @@
         inputHargaKiloan.keyup(updateHargaTotal)
         inputBobot.keyup(updateHargaTotal)
     })
-</script>
+</script> --}}
