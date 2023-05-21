@@ -12,6 +12,7 @@ use App\Models\JenisSapi;
 use App\Models\Jurnal;
 use App\Models\OperasionalPembelianSapi;
 use App\Models\Rekening;
+use App\Models\Sapi;
 use App\Models\TransaksiKredit;
 use Illuminate\Support\Carbon;
 
@@ -62,14 +63,20 @@ class PembelianSapiController extends Controller
     {
         $kiloan = $request->opsi_beli == 'kiloan';
         $idPembelianSapi = $request->id_pembelian_sapi;
+
+        $idJenisSapi = $request->id_jenis_sapi;
         $hargaSapi = $request->total_harga;
+        $bobot = $request->bobot;
+        $eartag = $request->eartag;
+        $jenisKelamin = $request->jenis_kelamin;
+
 
         $detailPembelianSapiBaru = [
             "id_pembelian_sapi" => $idPembelianSapi,
-            "id_jenis_sapi" => $request->id_jenis_sapi,
-            "jenis_kelamin" => $request->jenis_kelamin,
-            "eartag" => $request->eartag,
-            "bobot" => $request->bobot,
+            "id_jenis_sapi" => $idJenisSapi,
+            "jenis_kelamin" => $jenisKelamin,
+            "eartag" => $eartag,
+            "bobot" => $bobot,
             "kiloan" => $kiloan,
             "harga" => $hargaSapi,
             // "kondisi" => $request->kondisi,
@@ -84,6 +91,15 @@ class PembelianSapiController extends Controller
         Kredit::tambahNominal($idKredit, $hargaSapi);
         Kredit::updateStatusLunas($idKredit);
 
+        $sapi = [
+            "id_jenis_sapi" => $idJenisSapi,
+            "eartag" => $eartag,
+            "harga_pokok" => $hargaSapi,
+            "bobot" => $bobot,
+            "jenis_kelamin" => $jenisKelamin,
+        ];
+
+        Sapi::insert($sapi);
 
         return redirect()->back();
     }

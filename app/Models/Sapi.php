@@ -31,4 +31,12 @@ class Sapi extends Model
     {
         return $this->hasOne(DetailPenjualanSapi::class, 'id_sapi');
     }
+
+
+    public static function terjual($idSapi)
+    {
+        $sapi = Sapi::find($idSapi);
+        $sapi->status = "DIBELI";
+        $sapi->save();
+    }
 }

@@ -13,7 +13,7 @@
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <form action="/acc/hutang/transaksi" method="post" enctype="multipart/form-data">
+            <form action="/acc/piutang/transaksi" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" readonly class="form-control" value="{{ $penjualanSapi->debit->id }}"
                     name="id_debit">
@@ -57,10 +57,10 @@
                             </div>
 
 
-                            <div class="col-sm-6 mb-3">
+                            {{-- <div class="col-sm-6 mb-3">
                                 <label for="">Biaya admin</label>
                                 <input type="number" min="0" class="form-control" name="adm">
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="col d-flex flex-column">

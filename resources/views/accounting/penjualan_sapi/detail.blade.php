@@ -3,22 +3,7 @@
     <section class="section dashboard">
 
         {{-- ======================== COBA ======================== --}}
-        <div class="container">
-            <div class="d-flex flex-row justify-content-between p-3">
 
-                {{-- table list sapi --}}
-                <div class="p-3" style="width: 70%">
-                    @include('accounting.penjualan_sapi.tableListSapi')
-                </div>
-
-                {{-- form penentuan harga --}}
-                <div class="border rounded p-3" style="width:30;">
-                    @include('accounting.penjualan_sapi.formPenentuanHargaSapi')
-                </div>
-            </div>
-
-
-        </div>
         {{-- ======================== COBA ======================== --}}
 
 
@@ -71,8 +56,10 @@
                     <div class="card-header">
                         <h5>
                             <span>Riwayat Pembayaran</span>
-                            <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
-                                data-bs-target="#modalPembayaran">Tambah</button>
+                            @if ($debit->lunas == false)
+                                <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
+                                    data-bs-target="#modalPembayaran">Tambah</button>
+                            @endif
                         </h5>
                     </div>
 
@@ -103,6 +90,6 @@
 
 
     {{-- modals --}}
-    {{-- @include('accounting.penjualan_sapi.modalPilihSapi') --}}
+    @include('accounting.penjualan_sapi.modalPilihSapi')
     @include('accounting.penjualan_sapi.modalPembayaran')
 @endsection

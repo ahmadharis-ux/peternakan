@@ -6,34 +6,34 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-	/**
-	 * Run the migrations.
-	 */
-	public function up(): void
-	{
-		Schema::create('detail_penjualan_sapis', function (Blueprint $table) {
-			$table->id();
-			$table->foreignId('id_penjualan_sapi')->unsigned();
-			$table->foreignId('id_sapi')->unsigned();
-			$table->unsignedSmallInteger('bobot')->default(0);
-			$table->integer('harga')->default(0);
-			$table->boolean('kiloan')->default(false);
-			$table->string('keterangan')->nullable();
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('detail_penjualan_sapis', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_penjualan_sapi')->unsigned();
+            $table->foreignId('id_sapi')->unsigned();
+            $table->unsignedInteger('bobot')->default(0);
+            $table->integer('harga')->default(0);
+            $table->boolean('kiloan')->default(false);
+            $table->string('keterangan')->nullable();
 
 
 
 
-			$table->timestamps();
-			$table->foreign('id_penjualan_sapi')->references('id')->on('penjualan_sapis');
-			$table->foreign('id_sapi')->references('id')->on('sapis');
-		});
-	}
+            $table->timestamps();
+            $table->foreign('id_penjualan_sapi')->references('id')->on('penjualan_sapis');
+            $table->foreign('id_sapi')->references('id')->on('sapis');
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 */
-	public function down(): void
-	{
-		Schema::dropIfExists('detail_penjualan_sapis');
-	}
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('detail_penjualan_sapis');
+    }
 };

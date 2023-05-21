@@ -1,4 +1,4 @@
-   <form action="/acc/hutang/detail" method="post" enctype="multipart/form-data" id="formPenentuanHarga">
+   <form action="/acc/piutang/detail" method="post" enctype="multipart/form-data" id="formPenentuanHarga">
        @csrf
        <input type="hidden" name="id_penjualan_sapi" value="{{ $penjualanSapi->id }}" class="form-control">
        <input type="hidden" name="id_sapi" class="form-control">
