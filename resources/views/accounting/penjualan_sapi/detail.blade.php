@@ -13,7 +13,9 @@
 
                 {{-- form penentuan harga --}}
                 <div class="p-3" style="width:30;">
-                    qwet
+                    <div id="formPenentuanHarga">
+
+                    </div>
                 </div>
             </div>
 

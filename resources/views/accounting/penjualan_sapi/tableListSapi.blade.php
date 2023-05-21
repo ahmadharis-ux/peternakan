@@ -48,19 +48,24 @@
             btnPilihSapi.text('Pilih')
         }
 
+        function pilihSapi(idSapi) {
+            sapiTerpilih = listSapi.find((sapi) => sapi.id == idSapi)
+
+            const btnLain = $('.btnPilihSapi').not(`[data-id-sapi=${idSapi}]`)
+            btnLain.attr('disabled', 'disabled')
+            btnLain.addClass('btn-secondary')
+            btnLain.text('...')
+        }
+
         function togglePilihSapi() {
             if (sapiTerpilih) {
                 return cancelPilihSapi();
             }
 
             const idSapiTerpilih = $(this).data('id-sapi')
-            sapiTerpilih = listSapi.find((sapi) => sapi.id == idSapiTerpilih)
-            $(this).text('Batal pilih')
+            pilihSapi(idSapiTerpilih)
 
-            const btnLain = $('.btnPilihSapi').not(`[data-id-sapi=${idSapiTerpilih}]`)
-            btnLain.attr('disabled', 'disabled')
-            btnLain.addClass('btn-secondary')
-            btnLain.text('...')
+            $(this).text('Batal pilih')
         }
 
 
