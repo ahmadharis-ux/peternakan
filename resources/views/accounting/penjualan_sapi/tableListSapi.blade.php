@@ -34,6 +34,16 @@
 
 <script>
     $(document).ready(function() {
+        // form element
+        const inputIdSapi = $("input[name=id_sapi]")
+        const inputJenisSapi = $("#iJenisSapi")
+        const inputJenisKelaminSapi = $("#iJenisKelaminSapi")
+        const inputEartag = $("#iEartag")
+        const inputBobotAwal = $("#iBobotAwal")
+        const inputHargaPokok = $("#iHargaPokok")
+        const inputKondisiAwal = $("#iKondisiAwal")
+        // =========================== form element
+
         const btnPilihSapi = $(".btnPilihSapi");
         const formHarga = $("#formPenentuanHarga")
 
@@ -41,13 +51,20 @@
         let sapiTerpilih
 
         function cancelInfoSapi() {
-            formHarga.find('input').val('')
-            formHarga.text('')
+            formHarga.find('input').not('[type=radio], [type=submit] ').val('');
+            // formHarga.text('')
 
         }
 
         function tampilInfoSapi(sapi) {
-            formHarga.text(sapi)
+            console.log(sapiTerpilih)
+            inputIdSapi.val(sapiTerpilih.id)
+            inputJenisSapi.val(sapiTerpilih.jenis_sapi.nama)
+            inputJenisKelaminSapi.val(sapiTerpilih.jenis_kelamin)
+            inputEartag.val(sapiTerpilih.eartag)
+            inputBobotAwal.val(sapiTerpilih.bobot)
+            inputKondisiAwal.val(sapiTerpilih.kondisi)
+            inputHargaPokok.val(sapiTerpilih.harga_pokok)
         }
 
         function cancelPilihSapi() {
@@ -57,18 +74,25 @@
             btnPilihSapi.removeClass('btn-secondary')
             btnPilihSapi.text('Pilih')
 
+            formHarga.find('input[type=submit]').attr('disabled', 'disabled')
+
+
             cancelInfoSapi()
         }
 
         function pilihSapi(idSapi) {
             sapiTerpilih = listSapi.find((sapi) => sapi.id == idSapi)
-            tampilInfoSapi(JSON.stringify(sapiTerpilih))
+            // tampilInfoSapi(JSON.stringify(sapiTerpilih))
+            tampilInfoSapi(sapiTerpilih)
 
 
             const btnLain = $('.btnPilihSapi').not(`[data-id-sapi=${idSapi}]`)
             btnLain.attr('disabled', 'disabled')
             btnLain.addClass('btn-secondary')
             btnLain.text('...')
+
+            formHarga.find('input[type=submit]').removeAttr('disabled')
+
         }
 
         function togglePilihSapi() {
@@ -79,12 +103,9 @@
             const idSapiTerpilih = $(this).data('id-sapi')
             pilihSapi(idSapiTerpilih)
 
-            $(this).text('Batal pilih')
+            $(this).text('Batal')
 
         }
-
-
-
 
         btnPilihSapi.click(togglePilihSapi)
     })

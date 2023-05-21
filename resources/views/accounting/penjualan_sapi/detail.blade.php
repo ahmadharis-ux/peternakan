@@ -12,12 +12,11 @@
                 </div>
 
                 {{-- form penentuan harga --}}
-                <div class="p-3" style="width:30;">
-                    <div id="formPenentuanHarga">
-
-                    </div>
+                <div class="border rounded p-3" style="width:30;">
+                    @include('accounting.penjualan_sapi.formPenentuanHargaSapi')
                 </div>
             </div>
+
 
         </div>
         {{-- ======================== COBA ======================== --}}

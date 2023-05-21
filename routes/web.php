@@ -84,11 +84,12 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::get('/{id}', [PenjualanSapiController::class, 'show']);
             Route::post('/storesapi', [PenjualanSapiController::class, 'storeDetail']);
 
-            Route::post('/', [PenjualanSapiController::class, 'store']);
+            Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
+            Route::post('/operasional', [PenjualanSapiController::class, 'storeOperasional']);
+            Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
         });
 
         //Kode Jurnal
-
         Route::prefix('kodejurnal')->group(function () {
             Route::get('/', [KodeJurnalController::class, 'index']);
             Route::post('/', [KodeJurnalController::class, 'store']);
