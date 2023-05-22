@@ -138,35 +138,18 @@ class PenjualanSapiController extends Controller
         return view('accounting.penjualan_sapi.detail', $pageData);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PenjualanSapi  $penjualanSapi
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(PenjualanSapi $penjualanSapi)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PenjualanSapi  $penjualanSapi
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, PenjualanSapi $penjualanSapi)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PenjualanSapi  $penjualanSapi
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(PenjualanSapi $penjualanSapi)
     {
         //

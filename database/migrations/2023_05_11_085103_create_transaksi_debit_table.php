@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('id_debit')->unsigned();
             $table->foreignId('id_rekening')->unsigned();
             $table->unsignedInteger('nominal')->default(0);
+            $table->string('keterangan')->nullable();
 
             // $table->unsignedInteger('adm')->default(0)->nullable();
 
