@@ -9,6 +9,7 @@ use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
+use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
@@ -114,6 +115,17 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/', [JurnalController::class, 'store']);
             Route::put('/{id}', [JurnalController::class, 'update']);
             Route::delete('/{id}', [JurnalController::class, 'destroy']);
+        });
+
+
+        // sapi
+        Route::prefix('sapi')->group(function () {
+            Route::get('/', [SapiController::class, 'index']);
+            Route::get('/{id}', [SapiController::class, 'show']);
+
+            // Route::post('/', [SapiController::class, 'store']);
+            Route::put('/{id}', [SapiController::class, 'update']);
+            // Route::delete('/{id}', [SapiController::class, 'destroy']);
         });
 
         // USER
