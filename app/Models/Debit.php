@@ -23,6 +23,10 @@ class Debit extends Model
     ];
 
 
+    public function kas()
+    {
+        return $this->belongsTo(Kas::class, 'id_kas');
+    }
 
     public function user()
     {
@@ -38,6 +42,8 @@ class Debit extends Model
     {
         return $this->belongsTo(Jurnal::class, 'id_jurnal');
     }
+
+
 
     public function penjualanSapi()
     {

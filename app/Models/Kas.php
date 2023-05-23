@@ -10,6 +10,17 @@ class Kas extends Model
 {
     use HasFactory;
 
+
+    public function kredit()
+    {
+        return $this->hasMany(Kredit::class);
+    }
+
+    public function debit()
+    {
+        return $this->hasMany(Debit::class);
+    }
+
     public static function getAll()
     {
         $kolomDipilih = [
@@ -24,7 +35,6 @@ class Kas extends Model
         ];
 
         $kredit = DB::table('kredits')->select($kolomDipilih);
-
         $debit = DB::table('debits')->select($kolomDipilih);
 
         return $kredit->union($debit)->orderBy('created_at')->get();

@@ -23,6 +23,11 @@ class Kredit extends Model
         'transaksiKredit'
     ];
 
+    public function kas()
+    {
+        return $this->belongsTo(Kas::class, 'id_kas');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'id_author');
