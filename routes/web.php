@@ -121,7 +121,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         // sapi
         Route::prefix('sapi')->group(function () {
             Route::get('/', [SapiController::class, 'index']);
-            Route::get('/{id}', [SapiController::class, 'show']);
+            Route::get('/{sapi}', [SapiController::class, 'show']);
 
             // Route::post('/', [SapiController::class, 'store']);
             Route::put('/{id}', [SapiController::class, 'update']);

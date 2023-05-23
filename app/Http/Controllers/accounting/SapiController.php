@@ -73,7 +73,14 @@ class SapiController extends Controller
     }
     public function show(Sapi $sapi)
     {
-        //
+        $pageData = [
+            'title' => "Detail sapi",
+            'heading' => "Sapi " . $sapi->eartag,
+            'active' => "dashboard",
+            'sapi' => $sapi,
+        ];
+
+        return view('accounting.stok_sapi.detail', $pageData);
     }
     public function edit(Sapi $sapi)
     {
