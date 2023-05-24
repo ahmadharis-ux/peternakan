@@ -152,7 +152,7 @@ class DatabaseSeeder extends Seeder
         $data = [
             ["nama" => "Hutang", "id_kode_jurnal" => mt_rand(1, 3), "id_author" => mt_rand(1, 3)],
             ["nama" => "Piutang", "id_kode_jurnal" => mt_rand(1, 3), "id_author" => mt_rand(1, 3)],
-            ["nama" => "Pakans", "id_kode_jurnal" => mt_rand(1, 3), "id_author" => mt_rand(1, 3)],
+            ["nama" => "Pakan", "id_kode_jurnal" => mt_rand(1, 3), "id_author" => mt_rand(1, 3)],
             ["nama" => "Gaji", "id_kode_jurnal" => mt_rand(1, 3), "id_author" => mt_rand(1, 3)],
             ["nama" => "Tabungan", "id_kode_jurnal" => mt_rand(1, 3), "id_author" => mt_rand(1, 3)],
             ["nama" => "Prive", "id_kode_jurnal" => mt_rand(1, 3), "id_author" => mt_rand(1, 3)],
