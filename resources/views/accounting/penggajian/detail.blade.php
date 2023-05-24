@@ -19,7 +19,7 @@
             <div class="card-body">
                 <h5 class="card-title">Transaksi penggajian</h5>
 
-                @if ($kreditPenggajian == null)
+                @if ($belumInputGaji)
                     <div class="p-3">
                         <span class="d-block text-center mb-3 fw-bold">
                             Gaji bulan ini belum diinput!

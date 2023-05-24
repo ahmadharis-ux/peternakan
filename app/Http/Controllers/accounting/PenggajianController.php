@@ -80,7 +80,7 @@ class PenggajianController extends Controller
     {
         $filterBulan = request('bulan');
         $filterTahun = request('tahun');
-        $filtered = $filterBulan || $filterTahun;
+        // $filtered = $filterBulan || $filterTahun;
 
         $pekerja = User::find($id);
         $pekerja->fullname = "$pekerja->nama_depan $pekerja->nama_belakang";
@@ -89,31 +89,28 @@ class PenggajianController extends Controller
 
         $kreditPenggajian = Kredit::where('id_jurnal', $idJurnalGaji)->where('id_pihak_kedua', $pekerja->id);
 
+        $kreditPenggajian = $kreditPenggajian
+            ->whereMonth('created_at', $filterBulan ?? Carbon::now()->month)
+            ->whereYear('created_at', $filterTahun ?? Carbon::now()->year)
+            ->get();
 
-        if ($filtered) {
-            if ($filterBulan) {
-                $kreditPenggajian->whereMonth('created_at', $filterBulan);
-            }
+        // if ($filtered) {
 
-            if ($filterTahun) {
-                $kreditPenggajian->whereYear('created_at', $filterTahun);
-            }
-            $kreditPenggajian = $kreditPenggajian->get();
+        // } else {
+        //     $kreditPenggajian = $kreditPenggajian
+        //         ->whereMonth('created_at', Carbon::now()->month)
+        //         ->whereYear('created_at', Carbon::now()->year)
+        //         ->get();
+        // }
+
+
+        if (sizeof($kreditPenggajian) > 0) {
+            $kreditPenggajian = $kreditPenggajian[0];
         } else {
-            $kreditPenggajian
-                ->whereMonth('created_at', Carbon::now()->month)
-                ->whereYear('created_at', Carbon::now()->year);
-            dd($kreditPenggajian);
-
-
-            $kreditPenggajian = $kreditPenggajian->get();
+            $kreditPenggajian = null;
         }
 
-
-
         // $listRiwayatTransaksi = TransaksiKredit::where('id_kredit', $kreditPenggajian?->id)->get() ?? null;
-
-        // dd($kreditPenggajian->get());
 
 
         $pageData = [
