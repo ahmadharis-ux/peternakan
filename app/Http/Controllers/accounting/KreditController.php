@@ -55,6 +55,7 @@ class KreditController extends Controller
             "id_author" => auth()->user()->id,
             "id_rekening" => $idRekening,
             "nominal" => $nominalBayar,
+            "keterangan" => $request->keterangan,
             "adm" => $adm,
             "created_at" => carbonToday(),
         ];

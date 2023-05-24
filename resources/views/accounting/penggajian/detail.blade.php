@@ -59,7 +59,7 @@
                         </div>
 
                         {{-- table hitungan --}}
-                        <div class="w-100 me-3">
+                        <div class="col-3 me-3">
                             @include('accounting.penggajian.tableHitungan')
                         </div>
 

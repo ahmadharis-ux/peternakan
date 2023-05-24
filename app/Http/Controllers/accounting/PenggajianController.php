@@ -112,6 +112,7 @@ class PenggajianController extends Controller
 
         // $listRiwayatTransaksi = TransaksiKredit::where('id_kredit', $kreditPenggajian?->id)->get() ?? null;
 
+        // return $kreditPenggajian;
 
         $pageData = [
             'title' => "Buku - Gaji - $pekerja->fullname",
@@ -119,6 +120,7 @@ class PenggajianController extends Controller
             'active' => "buku",
             'pekerja' => $pekerja,
             'kreditPenggajian' => $kreditPenggajian,
+            'listRiwayatTransaksi' => $kreditPenggajian?->transaksiKredit,
             'listRekening' => Rekening::all(),
         ];
 

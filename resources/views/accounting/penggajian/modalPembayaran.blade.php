@@ -3,8 +3,7 @@
     $totalKredit = $kreditPenggajian->nominal;
 
     // pembayaran
-    // $totalBayar = $listRiwayatTransaksi->sum('nominal') ?? 0;
-    $totalBayar = 0;
+    $totalBayar = $listRiwayatTransaksi->sum('nominal');
     $sisaPembayaran = $totalKredit - $totalBayar;
 @endphp
 

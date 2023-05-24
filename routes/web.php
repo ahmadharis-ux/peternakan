@@ -100,6 +100,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             // Route::post('/storesapi', [GajiController::class, 'storeDetail']);
 
             Route::post('/pekerja/{id}', [PenggajianController::class, 'store']);
+            Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
             // Route::post('/', [GajiController::class, 'store']);
             // Route::post('/detail', [GajiController::class, 'storeDetail']);
             // Route::post('/operasional', [GajiController::class, 'storeOperasional']);
