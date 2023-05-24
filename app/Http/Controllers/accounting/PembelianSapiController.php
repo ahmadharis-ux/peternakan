@@ -42,7 +42,7 @@ class PembelianSapiController extends Controller
 
         Kas::kreditBaru();
         $dataKreditBaru = [
-            "id_kas" => Kas::idTerakhir(),
+            "id_kas" => Kas::idTerakhir(), 
             "id_author" => auth()->user()->id,
             "id_pihak_kedua" => $request->id_pihak_kedua,
             "id_jurnal" => $idJurnalHutang,
