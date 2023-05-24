@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\accounting;
 
+use App\Models\Kas;
+use App\Models\Sapi;
 use App\Models\User;
+use App\Models\Jurnal;
 use App\Models\Kredit;
+use App\Models\Rekening;
+use App\Models\JenisSapi;
 use Illuminate\Http\Request;
 use App\Models\PembelianSapi;
-use App\Http\Controllers\Controller;
-use App\Models\DetailPembelianSapi;
-use App\Models\JenisSapi;
-use App\Models\Jurnal;
-use App\Models\OperasionalPembelianSapi;
-use App\Models\Rekening;
-use App\Models\Sapi;
-use App\Models\TransaksiKredit;
 use Illuminate\Support\Carbon;
+use App\Models\TransaksiKredit;
+use App\Models\DetailPembelianSapi;
+use App\Http\Controllers\Controller;
+use App\Models\OperasionalPembelianSapi;
 
 class PembelianSapiController extends Controller
 {
@@ -37,22 +38,24 @@ class PembelianSapiController extends Controller
     public function store(Request $request)
     {
         $idJurnalHutang = 1;
+        $today = carbonToday();
 
+        Kas::kreditBaru();
         $dataKreditBaru = [
+            "id_kas" => Kas::idTerakhir(),
             "id_author" => auth()->user()->id,
             "id_pihak_kedua" => $request->id_pihak_kedua,
             "id_jurnal" => $idJurnalHutang,
             "keterangan" => $request->keterangan,
-            "created_at" => carbonToday(),
+            "created_at" => $today,
         ];
 
         Kredit::insert($dataKreditBaru);
 
-        $idKreditTerbaru = Kredit::latest()->limit(1)->get()[0]->id;
         $dataPembelianSapiBaru = [
             "id_author" => auth()->user()->id,
-            "id_kredit" => $idKreditTerbaru,
-            "created_at" => carbonToday(),
+            "id_kredit" => Kredit::idTerakhir(),
+            "created_at" => $today,
         ];
 
         PembelianSapi::insert($dataPembelianSapiBaru);

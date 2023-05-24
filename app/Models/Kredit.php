@@ -64,6 +64,13 @@ class Kredit extends Model
         return $this->hasMany(PembelianPakan::class, 'id_kredit');
     }
 
+
+    public static function idTerakhir()
+    {
+        return Kredit::latest()->get()[0]->id;
+    }
+
+
     public static function getTotalNominal()
     {
         return Kredit::all()->sum('nominal');

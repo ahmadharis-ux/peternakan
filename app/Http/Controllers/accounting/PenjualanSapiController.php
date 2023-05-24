@@ -5,6 +5,7 @@ namespace App\Http\Controllers\accounting;
 use App\Http\Controllers\Controller;
 use App\Models\Debit;
 use App\Models\DetailPenjualanSapi;
+use App\Models\Kas;
 use App\Models\OperasionalPenjualanSapi;
 use App\Models\PenjualanSapi;
 use App\Models\Rekening;
@@ -33,24 +34,24 @@ class PenjualanSapiController extends Controller
     public function store(Request $request)
     {
         $id_jurnal_piutang = 2;
+        $today = carbonToday();
+
+        Kas::debitBaru();
 
         $dataDebitBaru = [
+            "id_kas" => Kas::idTerakhir(),
             "id_author" => auth()->user()->id,
             "id_pihak_kedua" => $request->id_pihak_kedua,
             "id_jurnal" => $id_jurnal_piutang,
             "keterangan" => $request->keterangan,
-            "created_at" => carbonToday(),
+            "created_at" => $today,
         ];
-
         Debit::insert($dataDebitBaru);
 
-
-
-        $idDebitTerbaru = Debit::latest()->limit(1)->get()[0]->id;
         $dataPenjualanSapiBaru = [
             "id_author" => auth()->user()->id,
-            "id_debit" => $idDebitTerbaru,
-            "created_at" => carbonToday(),
+            "id_debit" => Debit::idTerakhir(),
+            "created_at" => $today,
         ];
         PenjualanSapi::insert($dataPenjualanSapiBaru);
 
@@ -59,7 +60,6 @@ class PenjualanSapiController extends Controller
 
     public function storeDetail(Request $request)
     {
-        // return $request;
         $idPenjualanSapi = $request->id_penjualan_sapi;
         $kiloan = $request->opsi_beli == 'kiloan';
         $idSapi = $request->id_sapi;
@@ -79,7 +79,6 @@ class PenjualanSapiController extends Controller
 
         DetailPenjualanSapi::insert($detailPenjualanSapi);
         $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
-
 
         Debit::tambahNominal($idDebit, $hargaSapi);
         Debit::updateStatusLunas($idDebit);
