@@ -9,18 +9,20 @@ use PDO;
 
 class KodeJurnalController extends Controller
 {
-    function index(){
+    function index()
+    {
         $pageData = [
-            'title' => "Buku - Kode Jurnal",
+            'title' => "Kode Jurnal",
             'heading' => "Buku - Kode Jurnal",
-            'active' => "kodejurnal",
+            'active' => "opsi",
             'listKodeJurnal' => KodeJurnal::all(),
         ];
 
         return view('accounting.kode_jurnal.index', $pageData);
     }
 
-    function store(Request $request){
+    function store(Request $request)
+    {
         $storeKodeJurnal = [
             "kode" => $request->kode,
             "id_author" => auth()->user()->id,
@@ -30,20 +32,21 @@ class KodeJurnalController extends Controller
         KodeJurnal::insert($storeKodeJurnal);
         return redirect()->back();
     }
-    function edit(Request $request){
+    function edit(Request $request)
+    {
         $id = $request['id'];
         $validateData = $request->validate([
             'kode' => 'required',
             'keterangan' => 'required',
         ]);
-        KodeJurnal::where('id',$id)->update($validateData);
+        KodeJurnal::where('id', $id)->update($validateData);
         return redirect()->back()->with('succes', 'Berhasil di Update');
     }
-    function destroy($id){
+    function destroy($id)
+    {
 
         KodeJurnal::destroy($id);
 
         return redirect('acc/kodejurnal');
-
     }
 }

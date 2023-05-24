@@ -8,6 +8,7 @@ use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
 use App\Http\Controllers\accounting\PembelianSapiController;
+use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
@@ -25,6 +26,7 @@ use App\Models\Pembayaran;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
 use App\Models\Rekening;
+use App\Models\User;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use GuzzleHttp\Middleware;
@@ -66,10 +68,10 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
         Route::get('/', [AccountingController::class, 'index']);
 
-        // PEMBUKUAN
+        // Kas
         Route::get('/kas', [AccountingController::class, 'kas']);
 
-        // hutang = pembelian sapi
+        // Hutang
         Route::prefix('hutang')->group(function () {
             Route::get('/', [PembelianSapiController::class, 'index']);
             Route::get('/{id}', [PembelianSapiController::class, 'show']);
@@ -80,17 +82,40 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
         });
 
-        //piutang = penjualan sapi
+        // Piutang
         Route::prefix('piutang')->group(function () {
             Route::get('/', [PenjualanSapiController::class, 'index']);
             Route::get('/{id}', [PenjualanSapiController::class, 'show']);
-            Route::post('/storesapi', [PenjualanSapiController::class, 'storeDetail']);
+            Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
 
             Route::post('/', [PenjualanSapiController::class, 'store']);
             Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
             Route::post('/operasional', [PenjualanSapiController::class, 'storeOperasional']);
             Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
         });
+
+        // Gaji
+        Route::prefix('gaji')->group(function () {
+            Route::get('/', [PenggajianController::class, 'index']);
+            Route::get('/pekerja/{id}', [PenggajianController::class, 'show']);
+            // Route::post('/storesapi', [GajiController::class, 'storeDetail']);
+
+            Route::post('/pekerja/{id}', [PenggajianController::class, 'store']);
+            // Route::post('/', [GajiController::class, 'store']);
+            // Route::post('/detail', [GajiController::class, 'storeDetail']);
+            // Route::post('/operasional', [GajiController::class, 'storeOperasional']);
+            // Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
+        });
+
+
+
+
+
+
+        Route::get('/pakan', [PakanController::class, 'index']);
+        // Route::get('/gaji');
+        Route::get('/prive');
+        Route::get('/servis_mobil');
 
         //Kode Jurnal
         Route::prefix('kodejurnal')->group(function () {
@@ -100,15 +125,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::delete('/delete/{id}', [KodeJurnalController::class, 'destroy']);
         });
 
-
-
-
-        Route::get('/pakan', [PakanController::class, 'index']);
-        Route::get('/gaji');
-        Route::get('/prive');
-        Route::get('/servis_mobil');
-
-        // jurnal
+        // Jurnal
         Route::prefix('jurnal')->group(function () {
             Route::get('/', [JurnalController::class, 'index']);
             Route::get('/{id}', [JurnalController::class, 'show']);
@@ -119,7 +136,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         });
 
 
-        // sapi
+        // Sapi
         Route::prefix('sapi')->group(function () {
             Route::get('/', [SapiController::class, 'index']);
             Route::get('/{sapi}', [SapiController::class, 'show']);
@@ -139,6 +156,10 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::get('/user/{role}', [UserController::class, 'index']);
     });
 
+
+    Route::get('test', function () {
+        return Carbon::now()->year;
+    });
 
 
 
