@@ -1,13 +1,12 @@
 @php
-    $sumNominal = $listRiwayatTransaksi->sum('nominal');
-    $sumAdm = $listRiwayatTransaksi->sum('adm');
+    // $sumNominal = $listRiwayatTransaksi->sum('nominal');
+    // $sumAdm = $listRiwayatTransaksi->sum('adm');
 
-    $totalBayar = number_format($sumNominal);
-    $totalIncludeAdm = number_format($sumNominal + $sumAdm);
+    // $totalBayar = number_format($sumNominal);
+    // $totalIncludeAdm = number_format($sumNominal + $sumAdm);
 @endphp
 
-
-<table class="table">
+<table class="display" id="example" style="width:100%">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -18,7 +17,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($listRiwayatTransaksi as $item)
+        {{-- @foreach ($listRiwayatTransaksi as $item)
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
@@ -26,8 +25,8 @@
                 <td class="text-end">{{ number_format($item->nominal) }}</td>
 
             </tr>
-        @endforeach
-        <tr>
+        @endforeach --}}
+        {{-- <tr>
             <th colspan="2">Total</th>
             <td class="text-secondary fw-bold text-end">Rp {{ number_format($sumAdm) }}</td>
             <td class="fw-bold text-end">Rp {{ $totalBayar }}</td>
@@ -35,7 +34,7 @@
         <tr class="text-secondary">
             <td colspan="3">Include adm</td>
             <td class="text-end">Rp {{ $totalIncludeAdm }}</td>
-        </tr>
+        </tr> --}}
 
-    </div>
+        </div>
 </table>

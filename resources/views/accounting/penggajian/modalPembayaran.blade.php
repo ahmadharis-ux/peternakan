@@ -1,33 +1,31 @@
 @php
     // kredit
-    $totalKreditSapi = $listDetailPembelian->sum('harga');
-    $totalOperasional = $listOperasionalPembelian->sum('harga');
-    $totalKredit = $totalKreditSapi + $totalOperasional;
+    $totalKredit = $kreditPenggajian->nominal;
 
     // pembayaran
-    $totalBayar = $listRiwayatTransaksi->sum('nominal');
+    // $totalBayar = $listRiwayatTransaksi->sum('nominal') ?? 0;
+    $totalBayar = 0;
     $sisaPembayaran = $totalKredit - $totalBayar;
 @endphp
 
-<div class="modal fade" id="modalPembayaran" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="modalPembayaranGaji" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <form action="/acc/hutang/transaksi" method="post" enctype="multipart/form-data">
+            <form action="/acc/gaji/transaksi" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" readonly class="form-control" value="{{ $pembelianSapi->kredit->id }}"
+
+                <input type="hidden" readonly class="form-control" value="{{ $kreditPenggajian->id }}"
                     name="id_kredit">
+
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Pembayaran Kredit</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Pembayaran Gaji {{ $pekerja->fullname }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row mt-2 px-5">
 
-                        {{-- <div class="col-sm-12 mb-3">
-                             <label for="">Keterangan</label>
-                             <input type="text" class="form-control" name="keterangan" required>
-                         </div> --}}
+
 
                         <div class="col">
                             <div class="col-sm-12 mb-3">
@@ -60,6 +58,11 @@
                             <div class="col-sm-6 mb-3">
                                 <label for="">Biaya admin</label>
                                 <input type="number" min="0" class="form-control" name="adm">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput" class="form-label">Keterangan</label>
+                                <textarea class="form-control" name="keterangan"cols="30" rows="5"></textarea>
                             </div>
                         </div>
 

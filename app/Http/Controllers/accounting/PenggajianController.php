@@ -8,6 +8,8 @@ use App\Models\Kredit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Rekening;
+use App\Models\TransaksiKredit;
 
 class PenggajianController extends Controller
 {
@@ -52,7 +54,6 @@ class PenggajianController extends Controller
     public function store(Request $request)
     {
         $idJurnalGaji = 4;
-        $today = carbonToday();
 
         Kas::kreditBaru();
         $dataKreditBaru = [
@@ -62,7 +63,7 @@ class PenggajianController extends Controller
             "id_jurnal" => $idJurnalGaji,
             "nominal" => $request->nominal_gaji,
             "keterangan" => $request->keterangan ?? 'gaji pekerja $pekerja->id',
-            "created_at" => $today,
+            "created_at" => carbonToday(),
         ];
 
         Kredit::insert($dataKreditBaru);
@@ -88,6 +89,7 @@ class PenggajianController extends Controller
 
         $kreditPenggajian = Kredit::where('id_jurnal', $idJurnalGaji)->where('id_pihak_kedua', $pekerja->id);
 
+
         if ($filtered) {
             if ($filterBulan) {
                 $kreditPenggajian->whereMonth('created_at', $filterBulan);
@@ -96,14 +98,23 @@ class PenggajianController extends Controller
             if ($filterTahun) {
                 $kreditPenggajian->whereYear('created_at', $filterTahun);
             }
+            $kreditPenggajian = $kreditPenggajian->get();
         } else {
             $kreditPenggajian
                 ->whereMonth('created_at', Carbon::now()->month)
                 ->whereYear('created_at', Carbon::now()->year);
+            dd($kreditPenggajian);
+
+
+            $kreditPenggajian = $kreditPenggajian->get();
         }
 
-        $kreditPenggajian = $kreditPenggajian->get();
-        // $listTransaksiKredit =
+
+
+        // $listRiwayatTransaksi = TransaksiKredit::where('id_kredit', $kreditPenggajian?->id)->get() ?? null;
+
+        // dd($kreditPenggajian->get());
+
 
         $pageData = [
             'title' => "Buku - Gaji - $pekerja->fullname",
@@ -111,9 +122,8 @@ class PenggajianController extends Controller
             'active' => "buku",
             'pekerja' => $pekerja,
             'kreditPenggajian' => $kreditPenggajian,
-            // 'listRiwayatTransaksi' => ,
+            'listRekening' => Rekening::all(),
         ];
-
 
         return view('accounting.penggajian.detail', $pageData);
     }

@@ -1,15 +1,14 @@
 @php
 
     // kredit
-    $totalKreditSapi = $listDetailPembelian->sum('harga');
-    $totalOperasional = $listOperasionalPembelian->sum('harga');
-    $totalKredit = $totalKreditSapi + $totalOperasional;
+    // $totalKreditSapi = $listDetailPembelian->sum('harga');
+    // $totalOperasional = $listOperasionalPembelian->sum('harga');
+    // $totalKredit = $totalKreditSapi + $totalOperasional;
 
-    // pembayaran
-    $totalBayar = $listRiwayatTransaksi->sum('nominal');
-    $sisaPembayaran = $totalKredit - $totalBayar;
-    $statusKredit = $kredit->lunas ? 'LUNAS' : 'BELUM LUNAS';
-
+    // // pembayaran
+    // $totalBayar = $listRiwayatTransaksi->sum('nominal');
+    // $sisaPembayaran = $totalKredit - $totalBayar;
+    // $statusKredit = $kredit->lunas ? 'LUNAS' : 'BELUM LUNAS';
 @endphp
 
 
@@ -18,7 +17,7 @@
     <div class="col-sm d-flex justify-content-between">
         <span class="text-secondary">Rp</span>
         <span>
-            {{ number_format($totalKreditSapi) }}
+            {{-- {{ number_format($totalKreditSapi) }} --}}
         </span>
     </div>
 </div>
@@ -29,13 +28,15 @@
     <div class="col-sm d-flex justify-content-between">
         <span class="text-secondary">Rp</span>
         <span>
-            {{ number_format($totalOperasional) }}
+            {{-- {{ number_format($totalOperasional) }} --}}
         </span>
     </div>
 </div>
 
 <div class="row">
-    <div class="col"><hr></div>
+    <div class="col">
+        <hr>
+    </div>
     <div class="col-1">+</div>
 </div>
 
@@ -44,7 +45,7 @@
     <div class="col-sm d-flex justify-content-between">
         <span class="text-secondary">Rp</span>
         <span class="">
-            {{ number_format($totalKredit) }}
+            {{-- {{ number_format($totalKredit) }} --}}
         </span>
     </div>
 </div>
@@ -54,7 +55,7 @@
     <div class="col-sm d-flex justify-content-between">
         <span class="text-secondary">Rp</span>
         <span>
-            -{{ number_format($totalBayar) }}
+            {{-- -{{ number_format($totalBayar) }} --}}
         </span>
     </div>
 </div>
@@ -64,7 +65,7 @@
     <div class="col-sm d-flex justify-content-between">
         <span class="text-secondary">Rp</span>
         <span>
-            {{ number_format($sisaPembayaran) }}
+            {{-- {{ number_format($sisaPembayaran) }} --}}
         </span>
     </div>
 </div>
@@ -74,7 +75,7 @@
     <div class="col-sm">Status</div>
     <div class="col-sm d-flex justify-content-center">
         <span class="fw-bold">
-            {{ $statusKredit }}
+            {{-- {{ $statusKredit }} --}}
         </span>
     </div>
 </div>
