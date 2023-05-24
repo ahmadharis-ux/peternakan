@@ -15,7 +15,7 @@ class JurnalController extends Controller
         $pageData = [
             'title' => "Jurnal",
             'heading' => "Jurnal",
-            'active' => "buku",
+            'active' => "opsi",
             'listJurnal' => Jurnal::orderBy('created_at', 'DESC')->get(),
             'listKodeJurnal' => KodeJurnal::all(),
         ];
