@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('kas', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_kredit')->default(true);
+            // field lain ke dipikiran
+
             $table->timestamps();
         });
     }
