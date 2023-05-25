@@ -3,10 +3,8 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
-            <form action="/acc/hutang/detail" method="post" enctype="multipart/form-data">
+            <form action="/acc/gaji" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="id_kredit" value="{{ $pembelianSapi->id }}" class="form-control">
-
 
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Input nominal gaji</h1>
@@ -107,49 +105,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        const radioOpsiBeli = $("input[name=opsi_beli]")
-        const inputTotalHarga = $("input[name=total_harga]")
-        const inputHargaKiloan = $("input[name=kiloan]")
-        const inputBobot = $("input[name=bobot]")
-
-        let opsiBeli = 'ekoran';
-
-        function beliKiloan() {
-            opsiBeli = 'kiloan'
-            inputTotalHarga.attr('readonly', 'readonly')
-            inputHargaKiloan.removeAttr('disabled')
-
-            inputTotalHarga.val(inputBobot.val() * inputHargaKiloan.val())
-        }
-
-        function beliEkoran() {
-            opsiBeli = 'ekoran';
-            inputHargaKiloan.val('')
-            inputHargaKiloan.attr('disabled', 'disabled')
-
-            inputTotalHarga.removeAttr('readonly')
-            inputTotalHarga.val()
-        }
-
-        radioOpsiBeli.click(function() {
-            const value = $(this).val()
-
-            if (value === 'kiloan') {
-                beliKiloan();
-            } else {
-                beliEkoran();
-            }
-        })
-
-        function updateHargaTotal() {
-            const totalHarga = inputHargaKiloan.val() * inputBobot.val()
-            inputTotalHarga.val(totalHarga)
-        }
-
-        inputHargaKiloan.keyup(updateHargaTotal)
-        inputBobot.keyup(updateHargaTotal)
-    })
-</script>
