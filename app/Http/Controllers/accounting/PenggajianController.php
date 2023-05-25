@@ -13,16 +13,8 @@ use App\Models\TransaksiKredit;
 
 class PenggajianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-
-
-
         $pageData = [
             'title' => "Buku - Gaji",
             'heading' => "Buku - Gaji",
@@ -31,26 +23,15 @@ class PenggajianController extends Controller
 
         ];
 
-
         return view('accounting.penggajian.index', $pageData);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $idJurnalGaji = 4;
@@ -70,44 +51,50 @@ class PenggajianController extends Controller
         return redirect()->back();;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function showPenggajianPekerja($id)
     {
-        $filterBulan = request('bulan');
-        $filterTahun = request('tahun');
-        // $filtered = $filterBulan || $filterTahun;
+        $idJurnalGaji = 4;
 
         $pekerja = User::find($id);
         $pekerja->fullname = "$pekerja->nama_depan $pekerja->nama_belakang";
 
-        $idJurnalGaji = 4;
+        $listKreditPenggajian = Kredit::where('id_pihak_kedua',         $pekerja->id)
+            ->where('id_jurnal', $idJurnalGaji);
 
-        $kreditPenggajian = Kredit::where('id_jurnal', $idJurnalGaji)->where('id_pihak_kedua', $pekerja->id);
-
-        $kreditPenggajian = $kreditPenggajian
-            ->whereMonth('created_at', $filterBulan ?? Carbon::now()->month)
-            ->whereYear('created_at', $filterTahun ?? Carbon::now()->year)
-            ->get();
-
-        if (sizeof($kreditPenggajian) > 0) {
-            $kreditPenggajian = $kreditPenggajian[0];
-        } else {
-            $kreditPenggajian = null;
-        }
+        $penggajianBulanIni = $listKreditPenggajian
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->whereYear('created_at', Carbon::now()->year)->get();
 
         $pageData = [
             'title' => "Buku - Gaji",
             'heading' => "Buku - Gaji",
             'active' => "buku",
             'pekerja' => $pekerja,
+            'listKreditPenggajian' => $listKreditPenggajian->get(),
+            'penggajianBulanIni' => $penggajianBulanIni,
+        ];
+
+        return view('accounting.penggajian.indexPenggajianPekerja', $pageData);
+    }
+
+    public function show($id)
+    {
+        $kreditPenggajian = Kredit::find($id);
+        $created = $kreditPenggajian->created_at;
+
+        $tahun = substr($created, 0, 4);
+        $bulan = substr($created, 5, 2);
+        $waktuKredit = "Tahun $tahun, bulan $bulan";
+
+        $pageData = [
+            'title' => "Buku - Gaji",
+            'heading' => "Buku - Gaji",
+            'active' => "buku",
+            'pekerja' => $kreditPenggajian->pihakKedua,
             'kreditPenggajian' => $kreditPenggajian,
-            'listRiwayatTransaksi' => $kreditPenggajian?->transaksiKredit,
+            'listRiwayatTransaksi' => $kreditPenggajian->transaksiKredit,
             'listRekening' => Rekening::all(),
+            'waktuKredit' => $waktuKredit,
         ];
 
         return view('accounting.penggajian.detail', $pageData);

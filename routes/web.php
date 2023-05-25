@@ -96,7 +96,10 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         // Gaji
         Route::prefix('gaji')->group(function () {
             Route::get('/', [PenggajianController::class, 'index']);
-            Route::get('/pekerja/{id}', [PenggajianController::class, 'show']);
+            Route::get('/pekerja/{id}', [
+                PenggajianController::class, 'showPenggajianPekerja'
+            ]);
+            Route::get('/{id}', [PenggajianController::class, 'show']);
             // Route::post('/storesapi', [GajiController::class, 'storeDetail']);
 
             Route::post('/pekerja/{id}', [PenggajianController::class, 'store']);
