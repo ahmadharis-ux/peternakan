@@ -70,7 +70,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/gaji" class="">
+                         <a href="/acc/tabungan" class="">
                              <i class="bi bi-circle"></i><span>Tabungan</span>
                          </a>
                      </li>
