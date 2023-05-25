@@ -23,6 +23,7 @@ use App\Http\Controllers\accounting\PriveController;
 use App\Http\Controllers\accounting\TabunganController;
 use App\Http\Controllers\SupSapiController;
 use App\Models\Kas;
+use App\Models\Pakan;
 use App\Models\Pembayaran;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
@@ -144,6 +145,16 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::prefix('prive')->group(function () {
             Route::get('/', [PriveController::class, 'index']);
             Route::post('/', [PriveController::class, 'store']);
+        });
+        // Pakan
+        Route::prefix('pakan')->group(function () {
+            Route::get('/', [PakanController::class, 'index']);
+            Route::post('/', [PakanController::class, 'store']);
+
+            Route::get('/{id}', [PakanController::class, 'showDetail']);
+            Route::post('/detail',[PakanController::class, 'storeDetailPembelianPakan']);
+            Route::post('/satuan', [PakanController::class, 'storeSatuan']);
+            Route::post('/pembelian', [PakanController::class, 'storePembelianPakan']);
         });
 
         // USER
