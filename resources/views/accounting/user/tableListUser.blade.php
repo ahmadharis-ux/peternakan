@@ -4,10 +4,10 @@
             <th scope="col">#</th>
             <th scope="col" class="col-3">Nama</th>
             <th scope="col">Role</th>
-            <th scope="col">Email</th>
+            <th scope="col" class="col-2">Email</th>
             <th scope="col">Telepon</th>
             <th scope="col">Alamat</th>
-            <th scope="col"></th>
+            <th scope="col" class="col-4"></th>
         </tr>
     </thead>
     <tbody>

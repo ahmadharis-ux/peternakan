@@ -19,9 +19,9 @@ class PriveController extends Controller
             'title' => 'Buku - Prive',
             'heading' => 'Buku - Prive',
             'active' => 'buku',
-            'ListPrive' => Kredit::where('id_jurnal', 6)->get(),
-            'ListOwner' => User::getOwner(),
-            'ListRek' => Rekening::all(),
+            'listPrive' => Kredit::where('id_jurnal', 6)->get(),
+            'listOwner' => User::getOwner(),
+            'listRekening' => Rekening::all(),
         ];
 
         return view('accounting.prive.index', $pageData);
