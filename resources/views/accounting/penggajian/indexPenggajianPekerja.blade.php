@@ -16,7 +16,8 @@
 
                 @if ($belumInputGajiBulanIni)
                     <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
-                        data-bs-target="#modalInputNominalGaji">Tambah kredit gaji bulan ini</button>
+                        data-bs-target="#modalInputNominalGaji">Input gaji bulan ini</button>
+                    @include('accounting.penggajian.modalInputNominalGaji')
                 @endif
 
 
@@ -27,8 +28,4 @@
             </div>
         </div>
     </section>
-
-
-    {{-- modals --}}
-    {{-- @include('accounting.pembelian_sapi.modalTambahSapi') --}}
 @endsection

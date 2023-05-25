@@ -40,9 +40,9 @@ class PenggajianController extends Controller
         $dataKreditBaru = [
             "id_kas" => Kas::idTerakhir(),
             "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $request->id_pekerja,
+            "id_pihak_kedua" => $request->id_pihak_kedua,
             "id_jurnal" => $idJurnalGaji,
-            "nominal" => $request->nominal_gaji,
+            "nominal" => $request->nominal,
             "keterangan" => $request->keterangan ?? 'gaji pekerja $pekerja->id',
             "created_at" => carbonToday(),
         ];
