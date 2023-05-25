@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\accounting;
 
+use App\Models\Kas;
+use App\Models\Sapi;
+use App\Models\User;
 use App\Models\Debit;
+use App\Models\Pakan;
 use App\Models\Kredit;
+use App\Models\Rekening;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
-use App\Models\Kas;
-use App\Models\Rekening;
-use App\Models\Sapi;
-use App\Models\User;
 
 class AccountingController extends Controller
 {
@@ -32,23 +33,22 @@ class AccountingController extends Controller
 
     function kas()
     {
-        /**
-         *  Halaman kas isina kumpulan
-         *  uang masuk (debit) dan uang keluar (kredit)
-         *  Bisa pilih kateogri buku.
-         *  Jadi teu kudu nyieun controller lain.
-         */
+        // return Kas::getView();
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
             'heading' => 'Accounting',
             'active' => 'dashboard',
             'date' => Carbon::now()->format('d-m-Y'),
-            'listKas' => Kas::getAll(),
+            'listKas' => Kas::getView(),
             'listRekening' => Rekening::all(),
             'listSupplierSapi' => User::getSupplierSapi(),
             'listSupplierPakan' => User::getSupplierPakan(),
+            'listPekerja' => User::getPekerja(),
+            'listCustomer' => User::getCustomer(),
+            'listPakan' => Pakan::all(),
         ];
+
         return view('accounting.kas.index', $pageData);
     }
 }

@@ -20,12 +20,12 @@ class PenjualanSapi extends Model
 
     public function detailPenjualanSapi()
     {
-        return $this->hasMany(DetailPenjualanSapi::class);
+        return $this->hasMany(DetailPenjualanSapi::class, 'id_penjualan_sapi');
     }
 
     public function operasionalPenjualanSapi()
     {
-        return $this->hasMany(OperasionalPenjualanSapi::class);
+        return $this->hasMany(OperasionalPenjualanSapi::class, 'id_penjualan_sapi');
     }
 
 

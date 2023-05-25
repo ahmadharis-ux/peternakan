@@ -25,7 +25,7 @@
                                     data-bs-target="#modalCreatePembelianPakan">Pakan</button>
 
                                 {{-- Gaji --}}
-                                <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                {{-- <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
                                     data-bs-target="#gaji">Gaji</button>
                                 <div class="modal fade" id="gaji" data-bs-backdrop="static" data-bs-keyboard="false"
                                     tabindex="-1">
@@ -67,7 +67,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -82,7 +82,7 @@
                     <hr>
 
                     {{-- table list kas --}}
-                    @include('acc.kas.tableListKas')
+                    @include('accounting.kas.tableListKas')
 
                 </div>
 
@@ -94,6 +94,6 @@
     @include('accounting.pembelian_sapi.modalCreate')
     @include('accounting.penjualan_sapi.modalCreate')
 
-    @include('accounting.pembelian_pakan.modalCreate')
+    {{-- @include('accounting.pembelian_pakan.modalCreate') --}}
     {{-- @include('accounting.pemakaian_pakan.modalCreate') --}}
 @endsection

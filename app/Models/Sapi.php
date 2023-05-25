@@ -13,6 +13,9 @@ class Sapi extends Model
 
     use HasFactory;
 
+    protected $with = [
+        'jenisSapi'
+    ];
 
     public function jenisSapi()
     {
@@ -27,5 +30,13 @@ class Sapi extends Model
     public function detailPenjualanSapi()
     {
         return $this->hasOne(DetailPenjualanSapi::class, 'id_sapi');
+    }
+
+
+    public static function terjual($idSapi)
+    {
+        $sapi = Sapi::find($idSapi);
+        $sapi->status = "DIBELI";
+        $sapi->save();
     }
 }

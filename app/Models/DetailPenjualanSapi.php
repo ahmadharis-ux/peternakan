@@ -12,13 +12,15 @@ class DetailPenjualanSapi extends Model
 
     use HasFactory;
 
+    protected $with = ['sapi'];
+
     public function sapi()
     {
-        return $this->hasOne(Sapi::class,'id');
+        return $this->hasOne(Sapi::class, 'id');
     }
 
     public function penjualanSapi()
     {
-        return $this->belongsTo(PenjualanSapi::class,'id_sapi');
+        return $this->belongsTo(PenjualanSapi::class, 'id_penjualan_sapi');
     }
 }

@@ -127,6 +127,32 @@
                      </li>
                  </ul>
              </li>
+
+             {{-- OPSI --}}
+             <li class="nav-item">
+                 <a class="nav-link {{ $active != 'Opsi' ? 'collapsed' : '' }}" data-bs-target="#menuOpsi"
+                     data-bs-toggle="collapse" href="#">
+                     <i class="bi bi-gear"></i><span>Opsi</span><i class="bi bi-chevron-down ms-auto"></i>
+                 </a>
+                 <ul id="menuOpsi"
+                     class="nav-content  {{ $active != 'opsi' ? 'collapse' : '' }} {{ $active == 'opsi' ? 'show' : '' }}"
+                     data-bs-parent="#sidebar-nav">
+
+
+                     <li>
+                         <a href="/acc/kodejurnal" class="{{ $title == 'Kode Jurnal' ? 'active' : '' }}">
+                             <i class="bi bi-circle"></i><span>Kode Jurnal</span>
+                         </a>
+                     </li>
+
+                     <li>
+                         <a href="/acc/jurnal" class="{{ $title == 'Jurnal' ? 'active' : '' }}">
+                             <i class="bi bi-circle"></i><span>Jurnal</span>
+                         </a>
+                     </li>
+
+                 </ul>
+             </li>
          @endif
 
          @if (auth()->user()->role->name == 'Admin')
@@ -149,45 +175,13 @@
                      class="nav-content  {{ $active != 'buku' ? 'collapse' : '' }} {{ $active == 'buku' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
-                         <a href="/admin/kas" class="{{ $title == 'Buku - Kas' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Kas</span>
+                         <a href="/acc/jurnal" class="{{ $title == 'Jurnal' ? 'active' : '' }}">
+                             <i class="bi bi-circle"></i><span>Jurnal</span>
                          </a>
                      </li>
-                     <li>
-                         <a href="/admin/hutang" class="{{ $title == 'Buku - Hutang' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Hutang</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="/admin/piutang" class="{{ $title == 'Buku - Piutang' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Piutang</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="/admin/pakan" class="{{ $title == 'Buku - Pakan' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Pakan</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="/admin/prive" class="{{ $title == 'Buku - Prive' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Prive</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="/admin/gaji" class="">
-                             <i class="bi bi-circle"></i><span>Tabungan</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="/admin/gaji" class="{{ $title == 'Buku - Gaji' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Gaji</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="/admin/servis_mobil">
-                             <i class="bi bi-circle"></i><span>Servis Mobil</span>
-                         </a>
-                     </li>
+
+
+
                  </ul>
              </li>
 

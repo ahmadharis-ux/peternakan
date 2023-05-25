@@ -160,4 +160,19 @@ class User extends Authenticatable
 
         return  $listSupplierPakan;
     }
+
+    public static function getCustomer()
+    {
+        $listCustomer = User::where('role_id', '6')->get();
+        $listCustomer = withFullname($listCustomer);
+
+        return  $listCustomer;
+    }
+    public static function getOwner()
+    {
+        $listOwner = User::where('role_id', '1')->get();
+        $listOwner = withFullname($listOwner);
+
+        return  $listOwner;
+    }
 }

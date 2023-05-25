@@ -2,83 +2,74 @@
 
 namespace App\Http\Controllers\accounting;
 
-use App\Http\Controllers\Controller;
 use App\Models\Debit;
+use App\Models\Rekening;
 use Illuminate\Http\Request;
+use App\Models\TransaksiDebit;
+use App\Http\Controllers\Controller;
 
 class DebitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Debit  $debit
-     * @return \Illuminate\Http\Response
-     */
+    public function storeTransaksi(Request $request)
+    {
+        // $that = Debit::getSisaPembayaran(1);
+        // return $that;
+
+        $idDebit = $request->id_debit;
+        $idRekening = $request->id_rekening;
+        $sisaDebit = Debit::getSisaPembayaran($idDebit);
+        $nominalBayar = $request->nominal;
+
+
+        if ($nominalBayar > $sisaDebit) {
+            return redirect()->back()->withErrors('Nominal pembayaran melebihi sisa debit!');
+        }
+
+        // return $request;
+
+        $transaksiDebit = [
+            "id_debit" => $idDebit,
+            "id_author" => auth()->user()->id,
+            "id_rekening" => $idRekening,
+            "nominal" => $nominalBayar,
+            "created_at" => carbonToday(),
+        ];
+
+        TransaksiDebit::insert($transaksiDebit);
+        Debit::updateStatusLunas($idDebit);
+        Rekening::pemasukan($idRekening, $nominalBayar);
+
+        return redirect()->back();
+    }
+
+
     public function show(Debit $debit)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Debit  $debit
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Debit $debit)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Debit  $debit
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Debit $debit)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Debit  $debit
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Debit $debit)
     {
         //

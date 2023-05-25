@@ -13,18 +13,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($kas as $item)
+        @foreach ($listKas as $kas)
+            @php
+            @endphp
+
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
-                <td>{{ date('d/m/Y', strtotime($item->tanggal)) }}</td>
-                <td><a href="#" class="text-primary">{{ $item->user->name }}</a></td>
-                <td>{{ $item->keterangan }}</td>
-                <td>Rp. {{ number_format($item->pembayaran->sum('debits')) }}</td>
-                <td>Rp. {{ number_format($item->pembayaran->sum('kredits')) }}</td>
-                <td>Rp. </td>
-                <td><a href="#" class="text-primary">{{ $item->jurnal->name }}</a></td>
-                <td><a href="/detail/kas/{{ $item->jurnal->id }}/{{ $item->id }}"
-                        class="btn btn-sm text-primary">Lihat</a></td>
+                <td>{{ date('d/m/Y', strtotime($kas->created_at)) }}</td>
+                <td>{{ $kas->pihakKedua }}</td>
+                <td>{{ $kas->keterangan }}</td>
+                <td>Rp {{ number_format($kas->is_kredit ? 0 : $kas->nominal) }}</td>
+                <td>Rp {{ number_format($kas->is_kredit ? $kas->nominal : 0) }}</td>
+                <td>???</td>
+                <td>{{ $kas->jurnal }}</td>
+                <td>
+                    <a href="{{ $kas->linkDetail }}" class="btn btn-sm btn-primary"><span><i
+                                class="bi-eye-fill"></i></span></a>
+                </td>
             </tr>
         @endforeach
     </tbody>

@@ -8,7 +8,9 @@ use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
 use App\Http\Controllers\accounting\PembelianSapiController;
+use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
+use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CustomerController;
@@ -17,12 +19,14 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PekerjaController;
+use App\Http\Controllers\accounting\PriveController;
 use App\Http\Controllers\SupSapiController;
 use App\Models\Kas;
 use App\Models\Pembayaran;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
 use App\Models\Rekening;
+use App\Models\User;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use GuzzleHttp\Middleware;
@@ -39,6 +43,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// REDIRECT HOME KE DASHBOARD ACCOUNTING
+Route::get("/home", function () {
+    return redirect('/acc/');
+});
 
 
 // ================================ OWNER
@@ -59,10 +68,10 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
         Route::get('/', [AccountingController::class, 'index']);
 
-        // PEMBUKUAN
+        // Kas
         Route::get('/kas', [AccountingController::class, 'kas']);
 
-        // hutang = pembelian sapi
+        // Hutang
         Route::prefix('hutang')->group(function () {
             Route::get('/', [PembelianSapiController::class, 'index']);
             Route::get('/{id}', [PembelianSapiController::class, 'show']);
@@ -73,34 +82,50 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
         });
 
-        //piutang = penjualan sapi
+        // Piutang
         Route::prefix('piutang')->group(function () {
             Route::get('/', [PenjualanSapiController::class, 'index']);
             Route::get('/{id}', [PenjualanSapiController::class, 'show']);
-            Route::post('/storesapi', [PenjualanSapiController::class, 'storeDetail']);
+            Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
 
             Route::post('/', [PenjualanSapiController::class, 'store']);
+            Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
+            Route::post('/operasional', [PenjualanSapiController::class, 'storeOperasional']);
+            Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
         });
 
-        //Kode Jurnal
+        // Gaji
+        Route::prefix('gaji')->group(function () {
+            Route::get('/', [PenggajianController::class, 'index']);
+            Route::get('/pekerja/{id}', [PenggajianController::class, 'show']);
+            // Route::post('/storesapi', [GajiController::class, 'storeDetail']);
 
-        Route::prefix('kodejurnal')->group(function(){
-            Route::get('/', [KodeJurnalController::class,'index']);
-            Route::post('/',[KodeJurnalController::class,'store']);
-            Route::put('/{id}',[KodeJurnalController::class,'edit']);
-            Route::delete('/delete/{id}',[KodeJurnalController::class,'destroy']);
-
+            Route::post('/pekerja/{id}', [PenggajianController::class, 'store']);
+            // Route::post('/', [GajiController::class, 'store']);
+            // Route::post('/detail', [GajiController::class, 'storeDetail']);
+            // Route::post('/operasional', [GajiController::class, 'storeOperasional']);
+            // Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
         });
-        
+
+
+
 
 
 
         Route::get('/pakan', [PakanController::class, 'index']);
-        Route::get('/gaji');
+        // Route::get('/gaji');
         Route::get('/prive');
         Route::get('/servis_mobil');
 
-        // jurnal
+        //Kode Jurnal
+        Route::prefix('kodejurnal')->group(function () {
+            Route::get('/', [KodeJurnalController::class, 'index']);
+            Route::post('/', [KodeJurnalController::class, 'store']);
+            Route::put('/{id}', [KodeJurnalController::class, 'edit']);
+            Route::delete('/delete/{id}', [KodeJurnalController::class, 'destroy']);
+        });
+
+        // Jurnal
         Route::prefix('jurnal')->group(function () {
             Route::get('/', [JurnalController::class, 'index']);
             Route::get('/{id}', [JurnalController::class, 'show']);
@@ -110,10 +135,31 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::delete('/{id}', [JurnalController::class, 'destroy']);
         });
 
+
+        // Sapi
+        Route::prefix('sapi')->group(function () {
+            Route::get('/', [SapiController::class, 'index']);
+            Route::get('/{sapi}', [SapiController::class, 'show']);
+
+            // Route::post('/', [SapiController::class, 'store']);
+            Route::put('/{id}', [SapiController::class, 'update']);
+            // Route::delete('/{id}', [SapiController::class, 'destroy']);
+        });
+
+        // prive
+        Route::prefix('prive')->group(function(){
+            Route::get('/',[PriveController::class,'index']);
+            Route::post('/',[PriveController::class,'store']);
+        });
+
         // USER
         Route::get('/user/{role}', [UserController::class, 'index']);
     });
 
+
+    Route::get('test', function () {
+        return Carbon::now()->year;
+    });
 
 
 

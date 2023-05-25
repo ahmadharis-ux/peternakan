@@ -14,7 +14,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Kredit extends Model
 {
     use HasFactory;
-    protected $with = ['jurnal', 'user', 'pihakKedua', 'pembelianSapi', 'pembelianPakan', 'transaksiKredit'];
+    protected $with = [
+        'jurnal',
+        'user',
+        'pihakKedua',
+        'pembelianSapi',
+        'pembelianPakan',
+        'transaksiKredit'
+    ];
+
+    public function kas()
+    {
+        return $this->belongsTo(Kas::class, 'id_kas');
+    }
 
     public function user()
     {
@@ -47,15 +59,17 @@ class Kredit extends Model
         return $this->hasOne(PembelianSapi::class, 'id_kredit');
     }
 
-    public function penjualanSapi()
-    {
-        return $this->hasMany(PenjualanSapi::class, 'id_kredit');
-    }
-
     public function pembelianPakan()
     {
         return $this->hasMany(PembelianPakan::class, 'id_kredit');
     }
+
+
+    public static function idTerakhir()
+    {
+        return Kredit::latest()->get()[0]->id;
+    }
+
 
     public static function getTotalNominal()
     {

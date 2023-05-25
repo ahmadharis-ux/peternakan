@@ -11,6 +11,35 @@ class LoginController extends Controller
 {
     function index()
     {
+        // AUTO LOGIN SEMENTARA =======================
+
+        $credentials = [
+            "email" => "accounting@gmail.com",
+            "password" => "password"
+        ];
+
+        $loginAttempt =  (Auth::attempt($credentials));
+
+        if (!$loginAttempt) {
+            return redirect()->back();
+        }
+        $user = Auth::user();
+
+
+
+        if ($user->role_id === 2) {
+            return redirect()->intended('/admin');
+        } elseif ($user->role_id === 3) {
+            return redirect()->intended('/acc');
+        } elseif ($user->role_id === 1) {
+            return redirect()->intended('/owner');
+        }
+
+        return 'gagal auto login';
+
+        // =======================
+
+
         return view('login');
     }
     function login(Request $request)

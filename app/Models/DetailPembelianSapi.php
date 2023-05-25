@@ -15,11 +15,11 @@ class DetailPembelianSapi extends Model
 
     public function pembelianSapi()
     {
-        return $this->belongsTo(PembelianSapi::class);
+        return $this->belongsTo(PembelianSapi::class, 'id_pembelian_sapi');
     }
 
     public function jenisSapi()
     {
-        return $this->belongsTo(JenisSapi::class);
+        return $this->belongsTo(JenisSapi::class, 'id_jenis_sapi');
     }
 }

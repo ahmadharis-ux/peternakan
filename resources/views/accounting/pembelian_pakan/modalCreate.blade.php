@@ -15,17 +15,17 @@
                                  <input type="hidden" name="jurnal_id" value="{{ 3 }}" required>
                                  <input type="hidden" name="author" value="{{ auth()->user()->name }}" required>
                                  <select name="user_id" id="" class="form-select">
-                                     @foreach ($suppakan as $pakan)
-                                         <option value="{{ $pakan->id }}">{{ $pakan->name }}
+                                     @foreach ($listSupplierPakan as $supplierPakan)
+                                         <option value="{{ $supplierPakan->id }}">{{ $supplierPakan->name }}
                                          </option>
                                      @endforeach
                                  </select>
                              </div>
                              <div class="col-sm-12">
                                  <select name="pakan_id" id="" class="form-select">
-                                     @foreach ($datapakan as $item)
-                                         <option value="{{ $item->id }}">{{ $item->name }} -
-                                             {{ $item->user->name }}</option>
+                                     @foreach ($listPakan as $pakan)
+                                         <option value="{{ $pakan->id }}">{{ $pakan->name }} -
+                                             {{ $pakan->user->name }}</option>
                                      @endforeach
                                  </select>
                              </div>

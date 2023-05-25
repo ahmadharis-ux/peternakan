@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('bobot');
             $table->unsignedInteger('harga_kiloan')->nullable();
             $table->unsignedInteger('harga_ekor')->nullable();
-            $table->string('kondisi');
-            $table->enum('status', ['ADA', 'DIBELI', 'SOLD']);
+            $table->string('kondisi')->nullable();
+            $table->enum('status', ['ADA', 'DIBELI', 'SOLD'])->default('ADA');
             // $table->foreignId('id_author')->unsigned();
             $table->string('keterangan')->nullable();
             $table->enum('jenis_kelamin', ['jantan', 'betina']);

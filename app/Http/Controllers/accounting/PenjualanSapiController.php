@@ -5,8 +5,10 @@ namespace App\Http\Controllers\accounting;
 use App\Http\Controllers\Controller;
 use App\Models\Debit;
 use App\Models\DetailPenjualanSapi;
-use App\Models\JenisSapi;
+use App\Models\Kas;
+use App\Models\OperasionalPenjualanSapi;
 use App\Models\PenjualanSapi;
+use App\Models\Rekening;
 use App\Models\Sapi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,145 +17,138 @@ class PenjualanSapiController extends Controller
 {
     public function index()
     {
-        $listCustomer = User::where('role_id', '6')->get();
-        $listCustomer = withFullname($listCustomer);
-        $id_jurnal = 2;
-
+        $id_jurnal_piutang = 2;
 
         $pageData = [
             'title' => "Buku - Piutang",
             'heading' => "Buku - Piutang",
             'active' => "buku",
-            'listPenjualanSapi' => PenjualanSapi::all(),
-            'listDebitSapi' => Debit::where('id_jurnal', $id_jurnal)->get(),
-            'listCustomer' => $listCustomer,
-
+            'listDebitSapi' => Debit::where('id_jurnal', $id_jurnal_piutang)->get(),
+            'listCustomer' => User::getCustomer(),
         ];
 
         return view('accounting.penjualan_sapi.index', $pageData);
     }
 
 
-    public function create()
-    {
-        $listCustomer = User::where('role_id', '6')->get();
-        $listCustomer = withFullname($listCustomer);
-
-
-        $pageData = [
-            'title' => "Buku - Piutang",
-            'heading' => "Piutang baru",
-            'active' => "buku",
-            'listCustomer' => $listCustomer,
-        ];
-
-        return view('accounting.penjualan_sapi.index', $pageData);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        $dataKreditBaru = [
+        $id_jurnal_piutang = 2;
+        $today = carbonToday();
+
+        Kas::debitBaru();
+
+        $dataDebitBaru = [
+            "id_kas" => Kas::idTerakhir(),
             "id_author" => auth()->user()->id,
             "id_pihak_kedua" => $request->id_pihak_kedua,
-            "id_jurnal" => 2, // id jurnal Hutang
+            "id_jurnal" => $id_jurnal_piutang,
             "keterangan" => $request->keterangan,
-            "created_at" => carbonToday(),
+            "created_at" => $today,
         ];
+        Debit::insert($dataDebitBaru);
 
-        $insertBerhasil = Debit::insert($dataKreditBaru);
-
-        if (!$insertBerhasil) {
-            return redirect('/acc/piutang')->withErrors('insert debit gagal');
-        }
-
-        $idDebitTerbaru = Debit::latest()->limit(1)->get()[0]->id;
-
-        $dataPenjuaalanSapiBaru = [
+        $dataPenjualanSapiBaru = [
             "id_author" => auth()->user()->id,
-            "id_debit" => $idDebitTerbaru,
-            "created_at" => carbonToday(),
+            "id_debit" => Debit::idTerakhir(),
+            "created_at" => $today,
         ];
-        PenjualanSapi::insert($dataPenjuaalanSapiBaru);
+        PenjualanSapi::insert($dataPenjualanSapiBaru);
 
         return redirect('/acc/piutang');
     }
-    
+
     public function storeDetail(Request $request)
     {
+        $idPenjualanSapi = $request->id_penjualan_sapi;
         $kiloan = $request->opsi_beli == 'kiloan';
+        $idSapi = $request->id_sapi;
+        $hargaSapi = $request->total_harga;
 
         $detailPenjualanSapi = [
             "id_penjualan_sapi" => $request->id_penjualan_sapi,
-            "id_sapi" => $request->id_sapi,
+            "id_sapi" => $idSapi,
+            // "eartag" => $request->eartag,
             "bobot" => $request->bobot,
             "kiloan" => $kiloan,
-            "harga" => $request->total_harga,
+            "harga" => $hargaSapi,
             // "kondisi" => $request->kondisi,
             "keterangan" => $request->keterangan,
             "created_at" => carbonToday(),
         ];
 
         DetailPenjualanSapi::insert($detailPenjualanSapi);
+        $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
+
+        Debit::tambahNominal($idDebit, $hargaSapi);
+        Debit::updateStatusLunas($idDebit);
+        Sapi::terjual($idSapi);
+
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PenjualanSapi  $penjualanSapi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PenjualanSapi $penjualanSapi, $id)
+    public function storeOperasional(Request $request)
     {
+        $idPenjualanSapi = $request->id_penjualan_sapi;
+        $hargaOperasional = $request->harga;
+
+        $operasionalPenjualanSapiBaru = [
+            'id_penjualan_sapi' => $idPenjualanSapi,
+            'harga' => $hargaOperasional,
+            'keterangan' => $request->keterangan,
+            'created_at' => carbonToday(),
+        ];
+
+        OperasionalPenjualanSapi::insert($operasionalPenjualanSapiBaru);
+
+        $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
+
+        Debit::tambahNominal($idDebit, $hargaOperasional);
+        Debit::updateStatusLunas($idDebit);
+
+        return redirect()->back();
+    }
+
+
+    public function show($id)
+    {
+        // return Debit::getSisaPembayaran(1);
+
         $debit = Debit::find($id);
+        $penjualanSapi = $debit->penjualanSapi;
+        $listDetailPenjualan = $penjualanSapi->detailPenjualanSapi;
+        $listOperasionalPenjualan = $penjualanSapi->operasionalpenjualanSapi;
+        $listRiwayatTransaksi = $debit->transaksiDebit;
+
+
         $pageData = [
             'title' => "Buku - Piutang",
             'heading' => "Piutang baru",
             'active' => "buku",
-            'listSapi' => Sapi::where('status','ADA')->get(),
-            'listPenjualanSapi' => PenjualanSapi::where('id_debit', 3)->first(),
-            'listSapiDijual' => DetailPenjualanSapi::with('sapi')->get(),
-
+            'debit' => $debit,
+            'penjualanSapi' => $penjualanSapi,
+            'listSapi' => Sapi::where('status', 'ADA')->get(),
+            'listDetailPenjualan' => $listDetailPenjualan,
+            'listOperasionalPenjualan' => $listOperasionalPenjualan,
+            'listRiwayatTransaksi' => $listRiwayatTransaksi,
+            'listRekening' => Rekening::all(),
         ];
 
         return view('accounting.penjualan_sapi.detail', $pageData);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PenjualanSapi  $penjualanSapi
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(PenjualanSapi $penjualanSapi)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PenjualanSapi  $penjualanSapi
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, PenjualanSapi $penjualanSapi)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PenjualanSapi  $penjualanSapi
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(PenjualanSapi $penjualanSapi)
     {
         //

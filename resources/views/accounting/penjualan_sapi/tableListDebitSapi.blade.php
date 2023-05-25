@@ -5,7 +5,7 @@
             <th scope="col">Tanggal</th>
             <th scope="col">Pihak kedua</th>
             <th scope="col">Keterangan</th>
-            <th scope="col">Kredit</th>
+            <th scope="col">Debit</th>
             {{-- <th scope="col">Saldo</th> --}}
             <th scope="col">Jurnal</th>
             <th scope="col">Detail</th>

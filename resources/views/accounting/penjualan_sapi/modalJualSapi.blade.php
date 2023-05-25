@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
-            <form action="/acc/piutang/storesapi" method="post" enctype="multipart/form-data">
+            <form action="/acc/piutang/detail" method="post" enctype="multipart/form-data">
                 @csrf
                 {{-- <input type="hidden" name="kas_id" value="" class="form-control"> --}}
 
@@ -21,7 +21,7 @@
                             <label for="">Eartag Sapi</label>
                             <select name="id_sapi" class="form-select">
                                 @foreach ($listSapi as $sapi)
-                                    <option value="{{$sapi->id}}">{{$sapi->eartag}}</option>
+                                    <option value="{{ $sapi->id }}">{{ $sapi->eartag }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -30,8 +30,8 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="">Bobot (kg)</label>
-                            <input type="hidden" name="id_penjualan_sapi" value="{{$listPenjualanSapi->id}}" class="form-control number-only"
-                                required>
+                            <input type="hidden" name="id_penjualan_sapi" value="{{ $listPenjualanSapi->id }}"
+                                class="form-control number-only" required>
                             <input type="number" name="bobot" value="100" class="form-control number-only"
                                 required>
                         </div>
