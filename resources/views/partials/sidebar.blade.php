@@ -40,16 +40,6 @@
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/kodejurnal" class="{{ $title == 'Buku - Kode Jurnal' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Kode Jurnal</span>
-                         </a>
-                     </li>
-                     <li>
-                         <a href="/acc/jurnal" class="{{ $title == 'Jurnal' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Jurnal</span>
-                         </a>
-                     </li>
-                     <li>
                          <a href="/acc/hutang" class="{{ $title == 'Buku - Hutang' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Hutang</span>
                          </a>
