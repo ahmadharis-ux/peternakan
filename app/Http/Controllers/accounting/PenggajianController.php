@@ -65,6 +65,7 @@ class PenggajianController extends Controller
             ->whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)->get();
 
+
         $pageData = [
             'title' => "Buku - Gaji",
             'heading' => "Buku - Gaji",

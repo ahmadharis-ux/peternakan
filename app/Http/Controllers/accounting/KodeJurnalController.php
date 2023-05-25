@@ -14,7 +14,9 @@ class KodeJurnalController extends Controller
         $pageData = [
             'title' => "Kode Jurnal",
             'heading' => "Buku - Kode Jurnal",
+
             'active' => "opsi",
+
             'listKodeJurnal' => KodeJurnal::all(),
         ];
 

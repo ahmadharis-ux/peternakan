@@ -168,4 +168,11 @@ class User extends Authenticatable
 
         return  $listCustomer;
     }
+    public static function getOwner()
+    {
+        $listOwner = User::where('role_id', '1')->get();
+        $listOwner = withFullname($listOwner);
+
+        return  $listOwner;
+    }
 }

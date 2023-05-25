@@ -19,6 +19,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PekerjaController;
+use App\Http\Controllers\accounting\PriveController;
 use App\Http\Controllers\SupSapiController;
 use App\Models\Kas;
 use App\Models\Pembayaran;
@@ -147,6 +148,12 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             // Route::post('/', [SapiController::class, 'store']);
             Route::put('/{id}', [SapiController::class, 'update']);
             // Route::delete('/{id}', [SapiController::class, 'destroy']);
+        });
+
+        // prive
+        Route::prefix('prive')->group(function(){
+            Route::get('/',[PriveController::class,'index']);
+            Route::post('/',[PriveController::class,'store']);
         });
 
         // USER
