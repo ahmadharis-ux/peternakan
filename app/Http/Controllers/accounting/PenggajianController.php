@@ -90,7 +90,7 @@ class PenggajianController extends Controller
 
         if ($filtered) {
             if ($filterBulan) {
-                $kreditPenggajian->whereMonth('created_at', $filterBulan);
+                $kreditPenggajian->whereMonth('created_at', $filterBulan); 
             }
 
             if ($filterTahun) {
