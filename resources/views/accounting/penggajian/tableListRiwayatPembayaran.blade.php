@@ -6,7 +6,8 @@
     // $totalIncludeAdm = number_format($sumNominal + $sumAdm);
 @endphp
 
-<table class="display" id="example" style="width:100%">
+{{-- <table class="display" id="example" style="width:100%"> --}}
+<table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -22,8 +23,8 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $transaksi->created_at }}</td>
                 <td>{{ $transaksi->keterangan }}</td>
-                <td>{{ $transaksi->adm }}</td>
-                <td>{{ $transaksi->nominal }}</td>
+                <td class="text-end">Rp {{ number_format($transaksi->adm) }}</td>
+                <td class="text-end">Rp {{ number_format($transaksi->nominal) }}</td>
             </tr>
         @endforeach
     </tbody>

@@ -7,6 +7,8 @@
 @section('container')
     <section class="section dashboard">
 
+        <p>{{ $pekerja->fullname }}</p>
+
         {{-- card filter bulan dan tahun --}}
         <div class="card recent-sales overflow-auto">
             <div class="card-body">

@@ -94,28 +94,14 @@ class PenggajianController extends Controller
             ->whereYear('created_at', $filterTahun ?? Carbon::now()->year)
             ->get();
 
-        // if ($filtered) {
-
-        // } else {
-        //     $kreditPenggajian = $kreditPenggajian
-        //         ->whereMonth('created_at', Carbon::now()->month)
-        //         ->whereYear('created_at', Carbon::now()->year)
-        //         ->get();
-        // }
-
-
         if (sizeof($kreditPenggajian) > 0) {
             $kreditPenggajian = $kreditPenggajian[0];
         } else {
             $kreditPenggajian = null;
         }
 
-        // $listRiwayatTransaksi = TransaksiKredit::where('id_kredit', $kreditPenggajian?->id)->get() ?? null;
-
-        // return $kreditPenggajian;
-
         $pageData = [
-            'title' => "Buku - Gaji - $pekerja->fullname",
+            'title' => "Buku - Gaji",
             'heading' => "Buku - Gaji",
             'active' => "buku",
             'pekerja' => $pekerja,

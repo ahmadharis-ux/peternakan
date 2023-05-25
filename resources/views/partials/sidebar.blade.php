@@ -30,6 +30,7 @@
                      <i class="bi bi-menu-button-wide"></i><span>Pembukuan</span><i
                          class="bi bi-chevron-down ms-auto"></i>
                  </a>
+
                  <ul id="menuPembukuan"
                      class="nav-content  {{ $active != 'buku' ? 'collapse' : '' }} {{ $active == 'buku' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
