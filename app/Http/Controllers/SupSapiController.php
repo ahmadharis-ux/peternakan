@@ -13,7 +13,7 @@ class SupSapiController extends Controller
 			'title' => 'Supplier sapis',
 			'heading' => 'Accounting',
 			'active' => 'users',
-			'customer' => User::where('role_id', '5')->get(),
+			'customer' => User::where('id_role', '5')->get(),
 		]);
 	}
 }

@@ -48,6 +48,7 @@ class TabunganController extends Controller
             "nominal" => $request->nominal,
             "keterangan" => $request->keterangan,
             "adm" => $request->adm,
+            "lunas" => true,
             "created_at" => $today,
         ];
 

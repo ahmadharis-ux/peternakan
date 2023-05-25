@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\accounting;
+
 use App\Http\Controllers\Controller;
 use App\Models\Kas;
 use App\Models\Kredit;
@@ -12,7 +13,8 @@ use Illuminate\Http\Request;
 
 class PriveController extends Controller
 {
-    function index(){
+    function index()
+    {
         $pageData = [
             'title' => 'Buku - Prive',
             'heading' => 'Buku - Prive',
@@ -24,7 +26,8 @@ class PriveController extends Controller
 
         return view('accounting.prive.index', $pageData);
     }
-    function store(Request $request){
+    function store(Request $request)
+    {
         $idJurnalPrive = 6;
         Kas::kreditBaru();
         $today = carbonToday();
@@ -38,9 +41,10 @@ class PriveController extends Controller
             "keterangan" => $request->keterangan,
             "adm" => $request->adm,
             "tenggat" => $request->tenggat,
+            "lunas" => true,
             "created_at" => $today,
         ];
-        
+
         Kredit::insert($dataKreditPrive);
         $idRekening = $request->id_rekening;
         $nominalBayar = $request->nominal;
@@ -48,7 +52,7 @@ class PriveController extends Controller
         $dataTransaksiKredit = [
             "id_author" => auth()->user()->id,
             "id_kredit" => Kredit::idTerakhir(),
-            "id_rekening" => $idRekening, 
+            "id_rekening" => $idRekening,
             "nominal" => $nominalBayar,
             "keterangan" => $request->keterangan,
             "adm" => $adm,

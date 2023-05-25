@@ -14,7 +14,7 @@
      <ul class="sidebar-nav" id="sidebar-nav">
 
 
-         @if (auth()->user()->role->name == 'Accounting')
+         @if (auth()->user()->role->nama == 'Accounting')
              {{-- DASHBOARD --}}
              <li class="nav-item">
                  <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/acc">
@@ -87,6 +87,11 @@
                      class="nav-content   {{ $active != 'users' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
+                         <a href="/acc/user/all" class="{{ $title == 'User' ? 'active' : '' }}">
+                             <i class="bi bi-circle"></i><span>All user</span>
+                         </a>
+
+                     <li>
                          <a href="/acc/user/customer" class="{{ $title == 'Customer' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Customer</span>
                          </a>
@@ -146,7 +151,7 @@
              </li>
          @endif
 
-         @if (auth()->user()->role->name == 'Admin')
+         @if (auth()->user()->role->nama == 'Admin')
              {{-- DASHBOARD --}}
              <li class="nav-item">
                  <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/admin">
@@ -219,7 +224,7 @@
              </li>
          @endif
 
-         @if (auth()->user()->role->name == 'Owner')
+         @if (auth()->user()->role->nama == 'Owner')
              {{-- DASHBOARD --}}
              <li class="nav-item">
                  <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/owner">
@@ -324,7 +329,7 @@
              </li>
          @endif
 
-         {{-- @if (auth()->user()->role->name == 'Admin')
+         {{-- @if (auth()->user()->role->nama == 'Admin')
              <li class="nav-item">
                  <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/admin">
                      <i class="bi bi-grid"></i>
@@ -341,7 +346,7 @@
              </li><!-- End Profile Page Nav -->
          @endif
 
-         @if (auth()->user()->role->name == 'Owner')
+         @if (auth()->user()->role->nama == 'Owner')
              <li class="nav-item">
                  <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/owner">
                      <i class="bi bi-grid"></i>

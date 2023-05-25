@@ -111,7 +111,6 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/', [TabunganController::class, 'store']);
         });
 
-
         //Kode Jurnal
         Route::prefix('kodejurnal')->group(function () {
             Route::get('/', [KodeJurnalController::class, 'index']);
@@ -148,7 +147,12 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         });
 
         // USER
-        Route::get('/user/{role}', [UserController::class, 'index']);
+        Route::prefix('user')->group(function () {
+            Route::get('/{role}', [UserController::class, 'index']);
+            Route::get('/{id}', [UserController::class, 'show']);
+
+            Route::post('/', [UserController::class, 'store']);
+        });
     });
 
 

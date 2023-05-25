@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_depan');
             $table->string('nama_belakang')->nullable();
-            $table->foreignId('role_id')->unsigned()->default('8');
+            $table->foreignId('id_role')->unsigned()->default('8');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('alamat')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('id_role')->references('id')->on('roles');
         });
     }
 

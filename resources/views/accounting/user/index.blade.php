@@ -7,11 +7,11 @@
                     <h5 class="card-title">{{ $heading }} </h5>
                     <div class="container mb-3">
                         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalKodeJurnalBaru">Kode Jurnal Baru</button>
+                            data-bs-target="#modalUserBaru">User baru</button>
                     </div>
                     <hr>
                     {{-- table --}}
-                    @include('accounting.kode_jurnal.tableListKodeJurnal')
+                    @include('accounting.user.tableListUser')
                 </div>
 
             </div>
@@ -19,6 +19,5 @@
     </section>
 
     {{-- modal --}}
-    @include('accounting.kode_jurnal.modalCreate')
-    
+    @include('accounting.user.modalCreate')
 @endsection

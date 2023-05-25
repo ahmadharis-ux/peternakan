@@ -25,18 +25,18 @@ class DatabaseSeeder extends Seeder
     {
         // ================================ ROLE dan USER
         $data = [
-            ["name" => "Owner"],
-            ["name" => "Admin"],
-            ["name" => "Accounting"],
-            ["name" => "Supplier pakan"],
-            ["name" => "Supplier sapi"],
-            ["name" => "Customer"],
-            ["name" => "Pekerja"],
-            ["name" => "User"],
+            ["nama" => "Owner"],
+            ["nama" => "Admin"],
+            ["nama" => "Accounting"],
+            ["nama" => "Supplier pakan"],
+            ["nama" => "Supplier sapi"],
+            ["nama" => "Customer"],
+            ["nama" => "Pekerja"],
+            ["nama" => "User"],
         ];
         foreach ($data as $val) {
             Role::insert([
-                "name" => $val["name"],
+                "nama" => $val["nama"],
                 "created_at" => Carbon::now(), "updated_at" => Carbon::now(),
             ]);
         }
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             [
                 "nama_depan" => "test",
                 "nama_belakang" => "admin",
-                "role_id" => 2,
+                "id_role" => 2,
                 "email" => "admin@gmail.com",
                 "email_verified_at" => now(),
                 "password" => Hash::make("password"),
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             [
                 "nama_depan" => "test",
                 "nama_belakang" => "owner",
-                "role_id" => 1,
+                "id_role" => 1,
                 "email" => "owner@gmail.com",
                 "email_verified_at" => now(),
                 "password" => Hash::make("password"),
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             [
                 "nama_depan" => "test",
                 "nama_belakang" => "accounting",
-                "role_id" => 3,
+                "id_role" => 3,
                 "email" => "accounting@gmail.com",
                 "email_verified_at" => now(),
                 "password" => Hash::make("password"),
@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
                 [
                     "nama_depan" => "test",
                     "nama_belakang" => "customer " . $i + 1,
-                    "role_id" => 6,
+                    "id_role" => 6,
                     "email" => "customer" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
                     "password" => Hash::make("password"),
@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
                 [
                     "nama_depan" => "test",
                     "nama_belakang" => "supplier sapi " . $i + 1,
-                    "role_id" => 5,
+                    "id_role" => 5,
                     "email" => "supplier_sapi" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
                     "password" => Hash::make("password"),
