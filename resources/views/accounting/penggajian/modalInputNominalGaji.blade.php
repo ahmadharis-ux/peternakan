@@ -1,15 +1,15 @@
-<div class="modal fade" id="modalTambahSapi" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="modalInputNominalGaji" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
             <form action="/acc/hutang/detail" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="id_pembelian_sapi" value="{{ $pembelianSapi->id }}" class="form-control">
+                <input type="hidden" name="id_kredit" value="{{ $pembelianSapi->id }}" class="form-control">
 
 
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Tambah sapi</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Input nominal gaji</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
