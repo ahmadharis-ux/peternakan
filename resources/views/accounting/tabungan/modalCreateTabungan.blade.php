@@ -4,8 +4,7 @@
         <div class="modal-content">
             <form action="/acc/tabungan" method="post" enctype="multipart/form-data">
                 @csrf
-                {{-- <input type="hidden" readonly class="form-control" value="{{ $pembelianSapi->kredit->id }}"
-                    name="id_kredit"> --}}
+
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Tabungan</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
