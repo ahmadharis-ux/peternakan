@@ -23,6 +23,8 @@
         </div>
     </section>
 
+
+
     {{-- modal --}}
     @include('accounting.user.modalCreate')
 @endsection

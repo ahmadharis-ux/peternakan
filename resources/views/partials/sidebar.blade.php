@@ -87,7 +87,7 @@
                      class="nav-content   {{ $active != 'user' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
-                         <a href="/acc/user/all" class="{{ $title == 'User - All' ? 'active' : '' }}">
+                         <a href="/acc/user/all" class="{{ $title == 'User - User' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>All user</span>
                          </a>
 
