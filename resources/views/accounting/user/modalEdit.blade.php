@@ -1,11 +1,13 @@
-  <div class="modal fade" id="modalUserBaru" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="modalEditUser-{{ $user->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-              <form action="/acc/user" method="post" enctype="multipart/form-data">
+              <form action="/acc/user/{{ $user->id }}" method="post" enctype="multipart/form-data">
                   @csrf
+                  @method('put')
                   <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $namaRoleDipilih }} baru</h1>
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit data {{ $namaRoleDipilih }}:
+                          {{ $user->fullname }}</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
 
@@ -13,17 +15,20 @@
 
                       <div class="col-sm-12 mb-2">
                           <label for="">Nama depan</label>
-                          <input type="text" name="nama_depan" class="form-control" required>
+                          <input type="text" name="nama_depan" class="form-control" value="{{ $user->nama_depan }}"
+                              required>
                       </div>
 
                       <div class="col-sm-12 mb-2">
                           <label for="">Nama belakang</label>
-                          <input type="text" name="nama_belakang" class="form-control" required>
+                          <input type="text" name="nama_belakang" class="form-control"
+                              value="{{ $user->nama_belakang }}" required>
                       </div>
 
                       <div class="col-sm-12 mb-2">
                           <label for="">Email</label>
-                          <input type="email" name="email" class="form-control" required>
+                          <input type="email" name="email" class="form-control" value="{{ $user->email }}"
+                              required>
                       </div>
 
                       @if ($idRoleDipilih == 'all')
@@ -43,18 +48,21 @@
 
                       <div class="col-sm-12 mb-2">
                           <label for="">Telepon</label>
-                          <input type="tel" name="telepon" class="form-control" required>
+                          <input type="tel" name="telepon" class="form-control" value="{{ $user->telepon }}"
+                              required>
                       </div>
 
-                      <div class="col-sm-12 mb-2">
+                      {{-- <div class="col-sm-12 mb-2">
                           <label for="">Password</label>
-                          <input type="password" name="password" class="form-control" required>
+                          <input type="password" name="password" class="form-control" value="{{ $user->nama_depan }}"
+                              required>
                       </div>
 
                       <div class="col-sm-12 mb-2">
                           <label for="">Konfirmasi password</label>
-                          <input type="password" name="konfirmasi_password" required class="form-control">
-                      </div>
+                          <input type="password" name=" value="{{ $user->nama_depan }}"konfirmasi_password" required
+                              class="form-control">
+                      </div> --}}
 
 
                   </div>
@@ -66,9 +74,3 @@
           </div>
       </div>
   </div>
-
-  <script>
-      $(document).ready(function() {
-
-      })
-  </script>

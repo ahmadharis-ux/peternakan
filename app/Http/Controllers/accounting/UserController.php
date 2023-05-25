@@ -67,6 +67,19 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->nama_depan = $request->nama_depan;
+        $user->nama_belakang = $request->nama_belakang;
+        $user->email = $request->email;
+        $user->id_role = $request->id_role;
+        $user->telepon = $request->telepon;
+        $user->save();
+
+        return redirect()->back();
+    }
+
     public function destroy($id)
     {
         $user = User::find($id);
