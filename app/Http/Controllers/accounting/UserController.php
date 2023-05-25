@@ -23,21 +23,29 @@ class UserController extends Controller
     function index($namaRole)
     {
         $listUser = null;
-
+        $idRole = null;
+        $role = null;
         if ($namaRole === 'all') {
             $listUser = User::all();
+            $role = 'User';
+            $idRole = 'all';
         } else {
-            $listUser = User::where('id_role', $this->roleLookoup[$namaRole])->get();
+            $idRole = $this->roleLookoup[$namaRole];
+            $listUser = User::where('id_role', $idRole)->get();
+            $role = Role::find($idRole)->nama;
+            $role = ucfirst($role);
         }
 
         $listUser = withFullname($listUser);
 
         $pageData = [
-            'title' => 'User',
-            'heading' => 'User',
+            'title' => 'User - ' . $role,
+            'heading' => 'List - ' . $role,
             'active' => 'user',
             'listUser' => $listUser,
             'listRole' => Role::all(),
+            'idRoleDipilih' => $idRole,
+            'namaRoleDipilih' => $role,
         ];
 
         return view('accounting.user.index', $pageData);
@@ -45,5 +53,17 @@ class UserController extends Controller
 
     function store(Request $request)
     {
+        $dataUserBaru = $request->only([
+            'nama_depan',
+            'nama_belakang',
+            'email',
+            'id_role',
+            'telepon',
+            'password',
+        ]);
+
+        User::insert($dataUserBaru);
+
+        return redirect()->back();
     }
 }

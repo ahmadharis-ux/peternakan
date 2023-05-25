@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nama</th>
+            <th scope="col" class="col-3">Nama</th>
             <th scope="col">Role</th>
             <th scope="col">Email</th>
             <th scope="col">Telepon</th>
