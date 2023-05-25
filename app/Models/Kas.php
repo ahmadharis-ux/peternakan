@@ -95,6 +95,7 @@ class Kas extends Model
             $kas->jurnal = $kas[$category]->jurnal->nama;
             $kas->keterangan = $kas[$category]->keterangan;
             $kas->nominal = $kas[$category]->nominal;
+
             $kas->linkDetail = '/acc/' . strtolower($kas->jurnal) . '/' . $kas[$category]->id;
 
 
