@@ -9,6 +9,7 @@ use App\Models\Kredit;
 use App\Models\Pakan;
 use App\Models\PembelianPakan;
 use App\Models\SatuanPakan;
+use App\Models\StockPakan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
@@ -96,6 +97,7 @@ class PakanController extends Controller
     }
     function storeDetailPembelianPakan(Request $request)
     {
+        $idpembelianPakan = $request->id_pembelian_pakan; 
         $idpakan = $request->id_pakan;
         $id_satuan_pakan = $request->id_satuan_pakan;
         $harga_satuan = $request->harga;
@@ -104,7 +106,7 @@ class PakanController extends Controller
         $subtotal = $harga_satuan * $qty;
 
         $detailPembelianPakan = [
-            // "id_pembelian_pakan" => $id_pembelian_pakan,
+            "id_pembelian_pakan" => $idpembelianPakan,
             "id_pakan" => $idpakan,
             "id_satuan_pakan" => $id_satuan_pakan,
             "harga" => $harga_satuan,
@@ -113,35 +115,38 @@ class PakanController extends Controller
             "subtotal" => $subtotal,
             "created_at" => carbonToday(),
         ];
-        dd($detailPembelianPakan);
+        // dd($detailPembelianPakan);
 
-        // DetailPembelianPakan::insert($detailPembelianPakan);
+        DetailPembelianPakan::insert($detailPembelianPakan);
 
-        // $idKredit = PembelianPakan::find($idPembelianSapi)->kredit->id;
+        $idKredit = PembelianPakan::find($idpembelianPakan)->kredit->id;
 
-        // Kredit::tambahNominal($idKredit, $hargaSapi);
-        // Kredit::updateStatusLunas($idKredit);
+        Kredit::tambahNominal($idKredit, $subtotal);
+        Kredit::updateStatusLunas($idKredit);
 
-        // $pakan = [
-        //     "id_jenis_sapi" => $idJenisSapi,
-        //     "eartag" => $eartag,
-        //     "harga_pokok" => $hargaSapi,
-        //     "bobot" => $bobot,
-        //     "jenis_kelamin" => $jenisKelamin,
-        // ];
+        $stokpakan = [
+            "id_pakan" => $idpakan,
+            "id_satuan_pakan" => $id_satuan_pakan,
+            "harga" => $harga_satuan,
+            "stok" => $qty,
+        ];
 
-        // Sapi::insert($sapi);
+        StockPakan::insert($stokpakan);
 
         return redirect()->back();
     }
+
     public function showDetail($id)
     {
+        $kredit = Kredit::find($id);
+        $pembelianPakan = $kredit->pembelianPakan;
         $data = [
             'title' => 'Buku - Pakan',
             'heading' => 'Buku - Pakan',
             'active' => 'buku',
             'ListPakan' => Pakan::all(),
-            'ListSatuan' => SatuanPakan::all()
+            'pembelianPakan' => $pembelianPakan,
+            'ListSatuan' => SatuanPakan::all(),
         ];
         return view('accounting.pakan.detail', $data);
     }

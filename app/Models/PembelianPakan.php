@@ -18,4 +18,8 @@ class PembelianPakan extends Model
 	{
 		return $this->hasMany(DetailPembelianPakan::class, 'id_pembelian_pakan');
 	}
+	public function kredit()
+    {
+        return $this->belongsTo(Kredit::class, 'id_kredit');
+    }
 }

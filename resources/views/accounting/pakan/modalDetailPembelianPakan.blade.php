@@ -11,6 +11,7 @@
             <div class="modal-body">
                 <div class="mb-2">
                     <label for="">Nama Pakan</label>
+                <input type="hidden" name="id_pembelian_pakan" value="{{ $pembelianPakan->id }}" class="form-control">
                     <select name="id_pakan" id="" class="form-select">
                         <option value="">-- Pilih Pakan --</option>
                         @foreach ($ListPakan as $pakan)

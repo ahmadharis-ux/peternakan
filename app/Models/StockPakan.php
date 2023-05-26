@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class StockPakan extends Model
 {
 	use HasFactory;
+	protected $guarded = ['id'];
 
 	function pakan()
 	{
