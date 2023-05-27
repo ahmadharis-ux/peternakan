@@ -20,7 +20,7 @@
                                     @foreach ($listRekening as $rekening)
                                         <option value="{{ $rekening->id }}">
                                             <span>{{ $rekening->bank }}</span>
-                                            <span>a.n</span>
+                                            <span>&nbsp</span>
                                             <span>{{ $rekening->atas_nama }}</span>
                                             <span>{{ $rekening->nomor_rekening }}</span>
 

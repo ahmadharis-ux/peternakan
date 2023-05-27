@@ -19,7 +19,7 @@
             <div class="mb-3 me-3 col-3">
                 <label class="form-label">Jenis</label>
                 <select name="jenis" class="form-select">
-                    <option value="0" disabled {{ !request('jenis') ? 'selected' : '' }}>-- Pilih status --</option>
+                    <option value="0" disabled {{ !request('jenis') ? 'selected' : '' }}>-- Pilih jenis --</option>
                     @foreach ($listJenisSapi as $jenisSapi)
                         <option value="{{ $jenisSapi->id }}" {{ $jenisSapi == request('jenis') ? 'selected' : '' }}>
                             {{ $jenisSapi->nama }}</option>

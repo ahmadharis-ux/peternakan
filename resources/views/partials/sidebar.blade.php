@@ -119,7 +119,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/user/owner" class="{{ $title == 'User - Admin' ? 'active' : '' }}">
+                         <a href="/acc/user/owner" class="{{ $title == 'User - Owner' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Owner</span>
                          </a>
                      </li>

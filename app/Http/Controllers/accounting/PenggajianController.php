@@ -58,7 +58,7 @@ class PenggajianController extends Controller
         $pekerja = User::find($id);
         $pekerja->fullname = "$pekerja->nama_depan $pekerja->nama_belakang";
 
-        $listKreditPenggajian = Kredit::where('id_pihak_kedua',         $pekerja->id)
+        $listKreditPenggajian = Kredit::where('id_pihak_kedua', $pekerja->id)
             ->where('id_jurnal', $idJurnalGaji);
 
         $penggajianBulanIni = $listKreditPenggajian

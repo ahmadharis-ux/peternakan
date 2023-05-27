@@ -18,7 +18,7 @@
                     name="id_kredit">
 
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Pembayaran Gaji {{ $pekerja->fullname }}</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Pembayaran gaji {{ $pekerja->fullname }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -33,7 +33,7 @@
                                     @foreach ($listRekening as $rekening)
                                         <option value="{{ $rekening->id }}">
                                             <span>{{ $rekening->bank }}</span>
-                                            <span>a.n</span>
+                                            <span>&nbsp</span>
                                             <span>{{ $rekening->atas_nama }}</span>
                                             <span>{{ $rekening->nomor_rekening }}</span>
 
