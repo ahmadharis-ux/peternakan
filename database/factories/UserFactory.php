@@ -21,9 +21,10 @@ class UserFactory extends Factory
         return [
             'nama_depan' => fake()->firstName(),
             'nama_belakang' => fake()->lastName(),
-            'role_id' => mt_rand(1, 8),
+            'id_role' => mt_rand(1, 8),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'telepon' => fake()->phoneNumber(),
             "password" => Hash::make("password"),
             'remember_token' => Str::random(10),
         ];

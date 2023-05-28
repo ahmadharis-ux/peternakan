@@ -27,7 +27,7 @@ class Pakan extends Model
 	}
 	function stockPakan()
 	{
-		return $this->hasMany(StockPakan::class, 'id_pakan');
+		return $this->hasMany(StokPakan::class, 'id_pakan');
 	}
 
 	function user()

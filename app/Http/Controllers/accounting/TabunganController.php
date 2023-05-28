@@ -2,53 +2,64 @@
 
 namespace App\Http\Controllers\accounting;
 
-use App\Http\Controllers\Controller;
 use App\Models\Kas;
-use App\Models\Kredit;
-use App\Models\Prive;
-use App\Models\Rekening;
-use App\Models\TransaksiKredit;
 use App\Models\User;
+use App\Models\Kredit;
+use App\Models\Rekening;
 use Illuminate\Http\Request;
+use App\Models\TransaksiKredit;
+use App\Http\Controllers\Controller;
 
-class PriveController extends Controller
+class TabunganController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     function index()
     {
+        $idJurnalTabungan = 5;
+
         $pageData = [
-            'title' => 'Buku - Prive',
-            'heading' => 'Buku - Prive',
+            'title' => 'Buku - Tabungan',
+            'heading' => 'Buku - Tabungan',
             'active' => 'buku',
-            'ListPrive' => Kredit::where('id_jurnal', 6)->get(),
-            'ListOwner' => User::getOwner(),
-            'ListRek' => Rekening::all(),
+            'listTabungan' => Kredit::where('id_jurnal', $idJurnalTabungan)->get(),
+            'listOwner' => User::getOwner(),
+            'listRekening' => Rekening::all(),
         ];
 
-        return view('accounting.prive.index', $pageData);
+        return view('accounting.tabungan.index', $pageData);
     }
     function store(Request $request)
     {
-        $idJurnalPrive = 6;
+
+        $idJurnalTabungan = 5;
+        $idOwner = User::find(1);
         Kas::kreditBaru();
         $today = carbonToday();
 
-        $dataKreditPrive = [
+        $dataKreditTabungan = [
             "id_kas" => Kas::idTerakhir(),
-            "id_jurnal" => $idJurnalPrive,
+            "id_jurnal" => $idJurnalTabungan,
             "id_author" => auth()->user()->id,
             "id_pihak_kedua" => $request->id_pihak_kedua,
             "nominal" => $request->nominal,
             "keterangan" => $request->keterangan,
             "adm" => $request->adm,
-            "tenggat" => $request->tenggat,
             "lunas" => true,
             "created_at" => $today,
         ];
 
-        Kredit::insert($dataKreditPrive);
+        // return $dataKreditTabungan;
+
+
+        Kredit::insert($dataKreditTabungan);
         $idRekening = $request->id_rekening;
         $nominalBayar = $request->nominal;
         $adm = $request->adm;
+
         $dataTransaksiKredit = [
             "id_author" => auth()->user()->id,
             "id_kredit" => Kredit::idTerakhir(),
@@ -58,6 +69,7 @@ class PriveController extends Controller
             "adm" => $adm,
             "created_at" => $today,
         ];
+
         TransaksiKredit::insert($dataTransaksiKredit);
         Rekening::pengeluaran($idRekening, $nominalBayar + $adm);
         return redirect()->back();

@@ -14,14 +14,14 @@ class DetailPembelianPakan extends Model
 
     function pakan()
     {
-        return $this->belongsTo(Pakan::class);
+        return $this->belongsTo(Pakan::class, 'id_pakan');
     }
     function satuanPakan()
     {
-        return $this->belongsTo(SatuanPakan::class);
+        return $this->belongsTo(SatuanPakan::class, 'id_satuan_pakan');
     }
     function pembelianPakan()
     {
-        return $this->belongsTo(PembelianPakan::class);
+        return $this->belongsTo(PembelianPakan::class, 'id_pembelian_pakan');
     }
 }

@@ -20,8 +20,10 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PekerjaController;
 use App\Http\Controllers\accounting\PriveController;
+use App\Http\Controllers\accounting\TabunganController;
 use App\Http\Controllers\SupSapiController;
 use App\Models\Kas;
+use App\Models\Pakan;
 use App\Models\Pembayaran;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
@@ -97,29 +99,18 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         // Gaji
         Route::prefix('gaji')->group(function () {
             Route::get('/', [PenggajianController::class, 'index']);
-            Route::get('/pekerja/{id}', [
-                PenggajianController::class, 'showPenggajianPekerja'
-            ]);
+            Route::get('/pekerja/{id}', [PenggajianController::class, 'showPenggajianPekerja']);
             Route::get('/{id}', [PenggajianController::class, 'show']);
-            // Route::post('/storesapi', [GajiController::class, 'storeDetail']);
 
-            Route::post('/pekerja/{id}', [PenggajianController::class, 'store']);
+            Route::post('/', [PenggajianController::class, 'store']);
             Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
-            // Route::post('/', [GajiController::class, 'store']);
-            // Route::post('/detail', [GajiController::class, 'storeDetail']);
-            // Route::post('/operasional', [GajiController::class, 'storeOperasional']);
-            // Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
         });
 
-
-
-
-
-
-        Route::get('/pakan', [PakanController::class, 'index']);
-        // Route::get('/gaji');
-        Route::get('/prive');
-        Route::get('/servis_mobil');
+        // Tabungan
+        Route::prefix('tabungan')->group(function () {
+            Route::get('/', [TabunganController::class, 'index']);
+            Route::post('/', [TabunganController::class, 'store']);
+        });
 
         //Kode Jurnal
         Route::prefix('kodejurnal')->group(function () {
@@ -151,13 +142,30 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         });
 
         // prive
-        Route::prefix('prive')->group(function(){
-            Route::get('/',[PriveController::class,'index']);
-            Route::post('/',[PriveController::class,'store']);
+        Route::prefix('prive')->group(function () {
+            Route::get('/', [PriveController::class, 'index']);
+            Route::post('/', [PriveController::class, 'store']);
+        });
+        // Pakan
+        Route::prefix('pakan')->group(function () {
+            Route::get('/', [PakanController::class, 'index']);
+            Route::post('/', [PakanController::class, 'store']);
+
+            Route::get('/{id}', [PakanController::class, 'showDetail']);
+            Route::post('/detail',[PakanController::class, 'storeDetailPembelianPakan']);
+            Route::post('/satuan', [PakanController::class, 'storeSatuan']);
+            Route::post('/pembelian', [PakanController::class, 'storePembelianPakan']);
+            Route::post('/operasional', [PakanController::class, 'storeOperasional']);
+
         });
 
         // USER
-        Route::get('/user/{role}', [UserController::class, 'index']);
+        Route::prefix('user')->group(function () {
+            Route::get('/{role}', [UserController::class, 'index']);
+            Route::get('/{id}', [UserController::class, 'show']);
+
+            Route::post('/', [UserController::class, 'store']);
+        });
     });
 
 

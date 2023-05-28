@@ -15,7 +15,9 @@
                 <h5 class="card-title">List penggajian perbulan</h5>
 
                 @if ($belumInputGajiBulanIni)
-                    belum input gaji bulan ini
+                    <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
+                        data-bs-target="#modalInputNominalGaji">Input gaji bulan ini</button>
+                    @include('accounting.penggajian.modalInputNominalGaji')
                 @endif
 
 
@@ -26,8 +28,4 @@
             </div>
         </div>
     </section>
-
-
-    {{-- modals --}}
-    {{-- @include('accounting.pembelian_sapi.modalTambahSapi') --}}
 @endsection

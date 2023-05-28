@@ -40,9 +40,9 @@ class PenggajianController extends Controller
         $dataKreditBaru = [
             "id_kas" => Kas::idTerakhir(),
             "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $request->id_pekerja,
+            "id_pihak_kedua" => $request->id_pihak_kedua,
             "id_jurnal" => $idJurnalGaji,
-            "nominal" => $request->nominal_gaji,
+            "nominal" => $request->nominal,
             "keterangan" => $request->keterangan ?? 'gaji pekerja $pekerja->id',
             "created_at" => carbonToday(),
         ];
@@ -101,35 +101,19 @@ class PenggajianController extends Controller
         return view('accounting.penggajian.detail', $pageData);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

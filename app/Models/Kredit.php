@@ -61,7 +61,7 @@ class Kredit extends Model
 
     public function pembelianPakan()
     {
-        return $this->hasMany(PembelianPakan::class, 'id_kredit');
+        return $this->hasOne(PembelianPakan::class, 'id_kredit');
     }
 
 

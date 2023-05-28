@@ -9,80 +9,80 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    function index()
-    {
-        // AUTO LOGIN SEMENTARA =======================
+	function index()
+	{
+		// AUTO LOGIN SEMENTARA =======================
 
-        $credentials = [
-            "email" => "accounting@gmail.com",
-            "password" => "password"
-        ];
+		$credentials = [
+			"email" => "accounting@gmail.com",
+			"password" => "password"
+		];
 
-        $loginAttempt =  (Auth::attempt($credentials));
+		$loginAttempt =  (Auth::attempt($credentials));
 
-        if (!$loginAttempt) {
-            return redirect()->back();
-        }
-        $user = Auth::user();
-
-
-
-        if ($user->role_id === 2) {
-            return redirect()->intended('/admin');
-        } elseif ($user->role_id === 3) {
-            return redirect()->intended('/acc');
-        } elseif ($user->role_id === 1) {
-            return redirect()->intended('/owner');
-        }
-
-        return 'gagal auto login';
-
-        // =======================
+		if (!$loginAttempt) {
+			return redirect()->back();
+		}
+		$user = Auth::user();
 
 
-        return view('login');
-    }
-    function login(Request $request)
-    {
 
-        $credentials = $request->only('email', 'password');
-        $loginAttempt =  (Auth::attempt($credentials));
+		if ($user->id_role === 2) {
+			return redirect()->intended('/admin');
+		} elseif ($user->id_role === 3) {
+			return redirect()->intended('/acc');
+		} elseif ($user->id_role === 1) {
+			return redirect()->intended('/owner');
+		}
 
-        if (!$loginAttempt) {
-            return redirect()->back();
-        }
-        $user = Auth::user();
+		return 'gagal auto login';
 
-        if ($user->role_id === 2) {
-            return redirect()->intended('/admin');
-        } elseif ($user->role_id === 3) {
-            return redirect()->intended('/acc');
-        } elseif ($user->role_id === 1) {
-            return redirect()->intended('/owner');
-        }
-        return redirect('/blank');
-    }
-    function logout(Request $request)
-    {
-        Auth::logout();
+		// =======================
 
-        $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+		return view('login');
+	}
+	function login(Request $request)
+	{
 
-        return redirect('/');
-    }
-    function changePassword(Request $request)
-    {
-        $request->validate([
-            'oldpassword' => 'required|current_password',
-            'newpassword' => 'required|confirmed',
-            'renewpassword' => 'required|same:newpassword',
-        ]);
-        $user = User::find(Auth::id());
-        $user->password = Hash::make($request->newpassword);
-        $user->save();
-        $request->session()->regenerate();
-        return back()->with('success', 'Password Berhasil Di ubah');
-    }
+		$credentials = $request->only('email', 'password');
+		$loginAttempt =  (Auth::attempt($credentials));
+
+		if (!$loginAttempt) {
+			return redirect()->back();
+		}
+		$user = Auth::user();
+
+		if ($user->id_role === 2) {
+			return redirect()->intended('/admin');
+		} elseif ($user->id_role === 3) {
+			return redirect()->intended('/acc');
+		} elseif ($user->id_role === 1) {
+			return redirect()->intended('/owner');
+		}
+		return redirect('/blank');
+	}
+	function logout(Request $request)
+	{
+		Auth::logout();
+
+		$request->session()->invalidate();
+
+		$request->session()->regenerateToken();
+
+		return redirect('/');
+	}
+	function changePassword(Request $request)
+	{
+		$request->validate([
+			'oldpassword' => 'required|current_password',
+			'newpassword' => 'required|confirmed',
+			'renewpassword' => 'required|same:newpassword',
+		]);
+		$user = User::find(Auth::id());
+		$user->password = Hash::make($request->newpassword);
+		$user->save();
+		$request->session()->regenerate();
+		return back()->with('success', 'Password Berhasil Di ubah');
+	}
 }
