@@ -84,40 +84,42 @@
                      <i class="bi bi-people"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="menuUser"
-                     class="nav-content   {{ $active != 'users' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
+                     class="nav-content   {{ $active != 'user' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
-                         <a href="/acc/user/all" class="{{ $title == 'User' ? 'active' : '' }}">
+                         <a href="/acc/user/all" class="{{ $title == 'User - User' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>All user</span>
                          </a>
 
                      <li>
-                         <a href="/acc/user/customer" class="{{ $title == 'Customer' ? 'active' : '' }}">
+                         <a href="/acc/user/customer" class="{{ $title == 'User - Customer' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Customer</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/user/supplier_sapi" class="{{ $title == 'Supplier Sapi' ? 'active' : '' }}">
+                         <a href="/acc/user/supplier_sapi"
+                             class="{{ $title == 'User - Supplier sapi' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Supplier Sapi</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/user/supplier_pakan">
+                         <a href="/acc/user/supplier_pakan"
+                             class="{{ $title == 'User - Supplier pakan' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Supplier Pakan</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/user/akuntan">
+                         <a href="/acc/user/accounting" class="{{ $title == 'User - Accounting' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Akuntan</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/user/admin">
+                         <a href="/acc/user/admin" class="{{ $title == 'User - Admin' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Admin</span>
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/user/owner" class="">
+                         <a href="/acc/user/owner" class="{{ $title == 'User - Owner' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Owner</span>
                          </a>
                      </li>

@@ -3,7 +3,7 @@
         <tr>
             <th scope="col" class="col-1">#</th>
             <th scope="col">Tanggal</th>
-            <th scope="col">Pihak kedua</th>
+            <th scope="col">Pekerja</th>
             <th scope="col">Keterangan</th>
             <th scope="col">Nominal</th>
             <th scope="col">Tunai</th>

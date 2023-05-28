@@ -36,9 +36,9 @@ class AccountingController extends Controller
         // return Kas::getView();
 
         $pageData = [
-            'title' => 'Dashboard - Accounting',
+            'title' => 'Buku - Kas',
             'heading' => 'Accounting',
-            'active' => 'dashboard',
+            'active' => 'buku',
             'date' => Carbon::now()->format('d-m-Y'),
             'listKas' => Kas::getView(),
             'listRekening' => Rekening::all(),

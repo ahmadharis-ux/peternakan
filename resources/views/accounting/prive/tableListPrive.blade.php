@@ -1,4 +1,3 @@
-
 <table id="example" class="display " style="width:100%">
     <thead>
         <tr>
@@ -12,13 +11,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($ListPrive as $prive)
+        @foreach ($listPrive as $prive)
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $prive->created_at }}</td>
                 <td>{{ $prive->keterangan }}</td>
                 <td>{{ $prive->pihakKedua->nama_depan }}</td>
-                <td><span class="text-secondary text-end">Rp</span> {{number_format($prive->nominal)}}</td>
+                <td><span class="text-secondary text-end">Rp</span> {{ number_format($prive->nominal) }}</td>
 
             </tr>
         @endforeach
