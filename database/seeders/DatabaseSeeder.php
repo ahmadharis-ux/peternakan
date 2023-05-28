@@ -14,6 +14,7 @@ use App\Models\Jurnal;
 use App\Models\Rekening;
 use App\Models\KodeJurnal;
 use App\Models\SatuanPakan;
+use App\Models\StokPakan;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -217,6 +218,19 @@ class DatabaseSeeder extends Seeder
         Sapi::factory(20)->create();
     }
 
+    function seedStokPakan()
+    {
+
+        for ($i = 0; $i < 10; $i++) {
+            StokPakan::insert([
+                "id_pakan" => mt_rand(0, 2),
+                "id_satuan_pakan" => 1,
+                "harga" => mt_rand(2999, 10000),
+                "stok" => mt_rand(10, 100),
+            ]);
+        }
+    }
+
     public function run()
     {
         $this->seedRoleAndUser();
@@ -224,5 +238,6 @@ class DatabaseSeeder extends Seeder
         $this->seedKodeJurnalAndJurnal();
         $this->seedSatuanPakanAndPakan();
         $this->seedJenisSapiAndSapi();
+        // $this->seedStokPakan();
     }
 }

@@ -7,7 +7,7 @@
                     <h5 class="card-title">{{ $heading }} </h5>
                     <div class="container mb-3">
                         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalPilihPakan">Pemakaian pakan</button>
+                            data-bs-target="#modalCreatePemakaianPakan">Pemakaian pakan baru</button>
                     </div>
                     <hr>
 
@@ -20,6 +20,7 @@
     </section>
 
     {{-- modal --}}
-    {{-- @include('accounting.pemakaian_pakan.modalPilihPakan')
-    @include('accounting.pemakaian_pakan.modalPilihSapi') --}}
+    @include('accounting.pemakaian_pakan.modalCreate')
+    {{-- @include('accounting.pemakaian_pakan.modalPilihPakan') --}}
+    {{-- @include('accounting.pemakaian_pakan.modalPilihSapi') --}}
 @endsection
