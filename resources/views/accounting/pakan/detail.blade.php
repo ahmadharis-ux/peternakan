@@ -5,7 +5,7 @@
         {{--  ========== PEMBELIAN =========== --}}
         <div class="row">
 
-            {{-- LIST SAPI DIBELI --}}
+            {{-- LIST PAKAN DIBELI --}}
             <div class="col">
                 <div class="card">
                     <div class="card-header">
@@ -17,8 +17,8 @@
                     </div>
                     <div class="card-body">
                         <div class="section">
-                            {{-- table list sapi dibeli --}}
-                            {{-- @include('accounting.pembelian_sapi.tableListSapiDibeli') --}}
+                            {{-- table list pakan dibeli --}}
+                            @include('accounting.pakan.tableListPakanDibeli')
                         </div>
                     </div>
                 </div>
@@ -32,11 +32,11 @@
                     </div>
                     <div class="card-body">
                         {{-- form tambah operasional --}}
-                        {{-- @include('accounting.pembelian_sapi.formTambahOperasional') --}}
+                        @include('accounting.pakan.formTambahOperasional')
                         <hr>
                         <div class="section">
                             {{-- table list operasional --}}
-                            {{-- @include('accounting.pembelian_sapi.tableListOperasional') --}}
+                            @include('accounting.pakan.tableListOperasional')
                         </div>
                     </div>
                 </div>
@@ -54,10 +54,10 @@
                         <h5>
                             <span>Riwayat Pembayaran</span>
 
-                            {{-- @if($kredit->lunas == false)
+                            @if($kredit->lunas == false)
                                 <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
                                     data-bs-target="#modalPembayaran">Tambah</button>
-                            @endif --}}
+                            @endif
 
                         </h5>
                     </div>
@@ -69,13 +69,13 @@
                             <div class="col-sm-6">
                                 <div class="section">
                                     {{-- table list riwayat pembayaran --}}
-                                    {{-- @include('accounting.pembelian_sapi.tableListRiwayatPembayaran') --}}
+                                    @include('accounting.pakan.tableListRiwayatPembayaran')
                                 </div>
                             </div>
 
                             {{-- table hitungan --}}
                             <div class="col-sm">
-                                {{-- @include('accounting.pembelian_sapi.tableHitungan') --}}
+                                @include('accounting.pakan.tableHitungan')
                             </div>
                         </div>
 
@@ -90,5 +90,5 @@
 
     {{-- modals --}}
     @include('accounting.pakan.modalDetailPembelianPakan')
-    {{-- @include('accounting.pembelian_sapi.modalPembayaran') --}}
+    @include('accounting.pakan.modalPembayaran')
 @endsection

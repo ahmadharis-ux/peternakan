@@ -155,6 +155,8 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/detail',[PakanController::class, 'storeDetailPembelianPakan']);
             Route::post('/satuan', [PakanController::class, 'storeSatuan']);
             Route::post('/pembelian', [PakanController::class, 'storePembelianPakan']);
+            Route::post('/operasional', [PakanController::class, 'storeOperasional']);
+
         });
 
         // USER

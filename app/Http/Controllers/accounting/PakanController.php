@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\DetailPembelianPakan;
 use App\Models\Kas;
 use App\Models\Kredit;
+use App\Models\OperasionalPembelianPakan;
 use App\Models\Pakan;
 use App\Models\PembelianPakan;
+use App\Models\Rekening;
 use App\Models\SatuanPakan;
 use App\Models\StockPakan;
+use App\Models\StokPakan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
@@ -30,6 +33,7 @@ class PakanController extends Controller
             'active' => 'buku',
             'ListSatuan' => SatuanPakan::all(),
             'ListPakan' => Pakan::all(),
+            'ListStokPakan' => StokPakan::all(),
             'ListSupplierPakan' => User::getSupplierPakan(),
             'listKreditPakan' => Kredit::where('id_jurnal', $idJurnalPakan)->get(),
         ];
@@ -131,7 +135,7 @@ class PakanController extends Controller
             "stok" => $qty,
         ];
 
-        StockPakan::insert($stokpakan);
+        StokPakan::insert($stokpakan);
 
         return redirect()->back();
     }
@@ -140,15 +144,46 @@ class PakanController extends Controller
     {
         $kredit = Kredit::find($id);
         $pembelianPakan = $kredit->pembelianPakan;
+        $listDetailPembelian = $pembelianPakan->detailPembelianPakan;
+        $pembelianPakan = $kredit->pembelianPakan;
+        $listOperasionalPembelian = $pembelianPakan->operasionalPembelianPakan;
+        $listRiwayatTransaksi = $kredit->transaksiKredit;
         $data = [
             'title' => 'Buku - Pakan',
             'heading' => 'Buku - Pakan',
             'active' => 'buku',
+            'kredit' => $kredit,
             'ListPakan' => Pakan::all(),
             'pembelianPakan' => $pembelianPakan,
+            'listDetailPembelian' => $listDetailPembelian,
             'ListSatuan' => SatuanPakan::all(),
+            'listOperasionalPembelian' => $listOperasionalPembelian,
+            'listRekening' => Rekening::all(),
+            'listRiwayatTransaksi' => $listRiwayatTransaksi,
         ];
         return view('accounting.pakan.detail', $data);
+    }
+    
+    public function storeOperasional(Request $request)
+    {
+        $idPembelianPakan = $request->id_pembelian_pakan;
+        $hargaOperasional = $request->harga;
+
+        $operasionalPembelianPakanBaru = [
+            'id_pembelian_pakan' => $idPembelianPakan,
+            'harga' => $hargaOperasional,
+            'keterangan' => $request->keterangan,
+            'created_at' => carbonToday(),
+        ];
+
+        OperasionalPembelianPakan::insert($operasionalPembelianPakanBaru);
+
+        $idKredit = PembelianPakan::find($idPembelianPakan)->kredit->id;
+
+        Kredit::tambahNominal($idKredit, $hargaOperasional);
+        Kredit::updateStatusLunas($idKredit);
+
+        return redirect()->back();
     }
 
     /**
