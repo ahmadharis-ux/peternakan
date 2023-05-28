@@ -170,30 +170,6 @@
                      </li>
                  </ul>
              </li>
-
-
-             {{-- OPERASIONAL KANDANG --}}
-             {{-- <li class="nav-item">
-                 <a class="nav-link {{ $active != 'operasional kandang' ? 'collapsed' : '' }}"
-                     data-bs-target="#menuOperasionalKandang" data-bs-toggle="collapse" href="#">
-                     <i class="bi bi-building-gear"></i><span>Operasional Kandang</span><i
-                         class="bi bi-chevron-down ms-auto"></i>
-                 </a>
-
-                 <ul id="menuOperasionalKandang"
-                     class="nav-content  {{ $active != 'operasional kandang' ? 'collapse' : '' }} {{ $active == 'opsi' ? 'show' : '' }}"
-                     data-bs-parent="#sidebar-nav">
-
-
-                     <li>
-                         <a href="/acc/pemakaian_pakan" class="{{ $title == 'Pemakaian pakan' ? 'active' : '' }}">
-                             <i class="bi bi-circle"></i><span>Pemakaian pakan</span>
-                         </a>
-                     </li>
-
-
-                 </ul>
-             </li> --}}
          @endif
 
          @if (auth()->user()->role->nama == 'Admin')

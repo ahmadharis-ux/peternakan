@@ -15,6 +15,7 @@ class PemakaianPakanController extends Controller
             'title' => "Pemakaian pakan",
             'heading' => "Pemakaian pakan",
             'active' => "operasional kandang",
+            'listPemakaianPakan' => PemakaianPakan::all(),
         ];
         return view('accounting.pemakaian_pakan.index', $pageData);
     }

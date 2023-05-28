@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-05-28T12:10:55.219Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="KM3VxGC1wvJZs4C8qdMf" version="21.2.8" type="device">
+<mxfile host="Electron" modified="2023-05-28T15:00:25.245Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="Wtx4lbZvP7OMEq7SPKl_" version="21.2.8" type="device">
   <diagram name="Halaman-1" id="BvxV7-awmouPTDxM876I">
-    <mxGraphModel dx="1424" dy="2614" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2149" dy="2646" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -229,7 +229,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="2AS_-TMgv7fAdJ2bClLm-62" value="pemakaian_pakan" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#97D077;" parent="1" vertex="1">
-          <mxGeometry x="990" y="-770" width="198" height="180" as="geometry" />
+          <mxGeometry x="990" y="-770" width="198" height="150" as="geometry" />
         </mxCell>
         <mxCell id="2AS_-TMgv7fAdJ2bClLm-63" value="id" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="2AS_-TMgv7fAdJ2bClLm-62" vertex="1">
           <mxGeometry y="30" width="198" height="30" as="geometry" />
@@ -240,11 +240,8 @@
         <mxCell id="0ovkkbI_wrgNX8tIHzGf-78" value="id_pekerja" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="2AS_-TMgv7fAdJ2bClLm-62" vertex="1">
           <mxGeometry y="90" width="198" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="2AS_-TMgv7fAdJ2bClLm-68" value="total_nominal_pengeluaran_pakan" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="2AS_-TMgv7fAdJ2bClLm-62" vertex="1">
-          <mxGeometry y="120" width="198" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="2AS_-TMgv7fAdJ2bClLm-44" value="keterangan" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="2AS_-TMgv7fAdJ2bClLm-62" vertex="1">
-          <mxGeometry y="150" width="198" height="30" as="geometry" />
+          <mxGeometry y="120" width="198" height="30" as="geometry" />
         </mxCell>
         <mxCell id="2AS_-TMgv7fAdJ2bClLm-70" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERoneToMany;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="dUojbGR3nf-XID8RkP2a-32" edge="1">
           <mxGeometry width="100" height="100" relative="1" as="geometry">
@@ -990,7 +987,7 @@
         <mxCell id="0ovkkbI_wrgNX8tIHzGf-116" value="id_sapi" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="0ovkkbI_wrgNX8tIHzGf-107" vertex="1">
           <mxGeometry y="90" width="205.5" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="LqyCIVlN2gSWtIGAYOCl-1" value="markup_asli" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="0ovkkbI_wrgNX8tIHzGf-107" vertex="1">
+        <mxCell id="LqyCIVlN2gSWtIGAYOCl-1" value="markup" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="0ovkkbI_wrgNX8tIHzGf-107" vertex="1">
           <mxGeometry y="120" width="205.5" height="30" as="geometry" />
         </mxCell>
         <mxCell id="mGLHEYFfUcq1BJrx5WJN-17" value="markup_pembulatan" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="0ovkkbI_wrgNX8tIHzGf-107">
@@ -1006,7 +1003,7 @@
               <mxPoint x="461" y="552" />
               <mxPoint x="461" y="891" />
               <mxPoint x="1765" y="891" />
-              <mxPoint x="1765" y="-792" />
+              <mxPoint x="1765" y="-821" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -1107,6 +1104,13 @@
         </mxCell>
         <mxCell id="mGLHEYFfUcq1BJrx5WJN-15" value="&lt;h1 style=&quot;font-size: 100px;&quot;&gt;Class diagram peternakan Diva&#39;s Cow&lt;/h1&gt;" style="text;html=1;spacing=5;spacingTop=-20;overflow=hidden;rounded=1;fontSize=100;fontFamily=Architects Daughter;fillColor=#fa6800;strokeColor=none;dashed=1;dashPattern=12 12;fontColor=#000000;strokeWidth=1;perimeterSpacing=0;align=center;whiteSpace=wrap;glass=0;sketch=1;curveFitting=1;jiggle=2;shadow=1;" vertex="1" parent="1">
           <mxGeometry x="-328" y="-1670" width="1823" height="217" as="geometry" />
+        </mxCell>
+        <mxCell id="mGLHEYFfUcq1BJrx5WJN-18" style="edgeStyle=none;curved=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.007;entryY=0.132;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=16;startSize=8;endSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="mGLHEYFfUcq1BJrx5WJN-5" target="2AS_-TMgv7fAdJ2bClLm-74">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="909" y="-459" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

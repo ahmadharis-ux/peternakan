@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use App\Models\Sapi;
-use App\Models\PemakaianPakan;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class DetailPemakaianPakan extends Model
+class MarkupSapi extends Model
 {
     use HasFactory;
+
+
     function pemakaianPakan()
     {
         return $this->belongsTo(PemakaianPakan::class, 'id_pemakaian_pakan');
     }
 
-    function stokPakan()
+
+    function sapi()
     {
-        return $this->belongsTo(StokPakan::class, 'id_pemakaian_pakan');
+        return $this->belongsTo(Sapi::class, 'id_sapi');
     }
 }

@@ -11,6 +11,8 @@
                     </div>
                     <hr>
 
+                    @include('accounting.pemakaian_pakan.tableListPemakaianPakan')
+
                 </div>
 
             </div>
