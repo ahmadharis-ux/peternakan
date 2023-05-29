@@ -21,9 +21,7 @@
                             </div>
                         </div>
                         <div class="col">
-                            <label for="">Stok Pakan <button type="button" class="btn btn-sm btn-success"
-                                    data-bs-toggle="modal" data-bs-target="#modalPakaiPakan">Pakai Pakan <i
-                                        class="bi bi-cart-plus-fill"></i></button></label>
+                            <label for="">Stok Pakan</label>
 
 
                             <a href="/acc/pemakaian_pakan" class="btn btn-sm btn-primary">Pakai Pakan <i
@@ -44,67 +42,11 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $pakan->pakan->nama }}</td>
-                                            <td>{{ $pakan->stok }} {{ $pakan->satuanPakan->nama }}</td>
+                                            <td>{{ $pakan->stok -  $pakan->detailPemakaianPakan->sum('qty')}} {{ $pakan->satuanPakan->nama }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{-- Modal Pemakaian Pakan --}}
-                            <!-- Modal -->
-                            <div class="modal fade" id="modalPakaiPakan" data-bs-backdrop="static" data-bs-keyboard="false"
-                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Pemakaian Pakan</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <td>Nama Pakan</td>
-                                                        <td>Sisa Pakan</td>
-                                                        <td>Satuan Pakan</td>
-                                                        <td>Jumlah Pemakaian</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($ListStokPakan as $Stokpakan)
-                                                        <tr>
-                                                            <td>
-                                                                <div class="form-check col">
-                                                                    <input class="form-check-input" name="id_pakan[]"
-                                                                        type="checkbox" value="{{ $pakan->id }}"
-                                                                        id="flexCheckChecked">
-                                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                                        {{ $Stokpakan->pakan->nama }}
-                                                                    </label>
-                                                                </div>
-                                                            </td>
-                                                            <td>{{ $Stokpakan->stok }}</td>
-                                                            <td>
-                                                                <input type="text" class="form-control border-0"
-                                                                    name="id_satuan_pakan"
-                                                                    value="{{ $Stokpakan->satuanPakan->nama }}">
-                                                            </td>
-                                                            <td>
-                                                                <input type="number" class="form-control" name="qty">
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@
                 </td>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $stokPakan->pakan->nama }}</td>
-                <td>{{ $stokPakan->stok }}</td>
+                <td>{{ $stokPakan->stok -  $stokPakan->detailPemakaianPakan->sum('qty') }}</td>
                 <td class="text-end">Rp {{ number_format($stokPakan->harga) }}</td>
                 <td>
                     <input type="number" class="form-control inputSetQty" style="width:6rem" min="0"

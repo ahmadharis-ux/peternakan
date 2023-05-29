@@ -23,6 +23,6 @@ class StokPakan extends Model
 
     function detailPemakaianPakan()
     {
-        return $this->hasMany(DetailPemakaianPakan::class);
+        return $this->hasMany(DetailPemakaianPakan::class, 'id_stok_pakan');
     }
 }
