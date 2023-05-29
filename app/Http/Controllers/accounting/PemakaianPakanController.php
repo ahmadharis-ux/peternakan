@@ -48,7 +48,7 @@ class PemakaianPakanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**

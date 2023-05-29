@@ -21,31 +21,3 @@
         @endforeach
     </tbody>
 </table>
-
-<div id="terpilih"></div>
-
-<script>
-    $(document).ready(function() {
-        const listSapi = {!! $listSapi !!}
-        const cbSapi = $(".cbSapi")
-        let sapiDipilih = []
-
-        function handleToggleSapi(evt) {
-            const isChecked = this.checked
-            const idSapi = $(this).data('id-sapi')
-            const sapi = listSapi.find((s) => s.id == idSapi)
-
-
-            if (isChecked) {
-                sapiDipilih.push(sapi)
-
-            } else {
-                sapiDipilih = sapiDipilih.filter((sapi) => sapi.id !== idSapi)
-            }
-
-            $("#totalSapi").text(sapiDipilih.length)
-        }
-
-        $(cbSapi).change(handleToggleSapi)
-    })
-</script>
