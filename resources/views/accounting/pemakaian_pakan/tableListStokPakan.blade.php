@@ -23,12 +23,13 @@
                 </td>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $stokPakan->pakan->nama }}</td>
-                <td>{{ $stokPakan->stok -  $stokPakan->detailPemakaianPakan->sum('qty') }}</td>
+                <td>{{ $stokPakan->stok - $stokPakan->detailPemakaianPakan->sum('qty') }}</td>
                 <td class="text-end">Rp {{ number_format($stokPakan->harga) }}</td>
                 <td>
                     <input type="number" class="form-control inputSetQty" style="width:6rem" min="0"
-                        max="{{ $stokPakan->stok }}" data-id-stok="{{ $stokPakan->id }}" name="qty_pakan[]"
-                        id="inputQty-{{ $stokPakan->id }}" disabled>
+                        max="{{ $stokPakan->stok - $stokPakan->detailPemakaianPakan->sum('qty') }}"
+                        data-id-stok="{{ $stokPakan->id }}" name="qty_pakan[]" id="inputQty-{{ $stokPakan->id }}"
+                        disabled>
 
                     <input type="hidden" id="input-nominal-pakan-{{ $stokPakan->id }}" name="subtotal_pakan[]" disabled
                         min="0">

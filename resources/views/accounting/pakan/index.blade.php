@@ -42,7 +42,8 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $pakan->pakan->nama }}</td>
-                                            <td>{{ $pakan->stok -  $pakan->detailPemakaianPakan->sum('qty')}} {{ $pakan->satuanPakan->nama }}</td>
+                                            <td>{{ $pakan->stok - $pakan->detailPemakaianPakan->sum('qty') }}
+                                                {{ $pakan->satuanPakan->nama }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

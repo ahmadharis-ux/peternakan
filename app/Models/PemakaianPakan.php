@@ -34,7 +34,9 @@ class PemakaianPakan extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
-    function Markup(){
+
+    function markup()
+    {
         return $this->hasMany(MarkupSapi::class, 'id_pemakaian_pakan');
     }
 
