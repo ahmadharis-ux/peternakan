@@ -43,7 +43,8 @@ class PemakaianPakanController extends Controller
 
     public function store(Request $request)
     {
-        $today = Carbon::today();
+        $today = carbonNow();
+
         $pemakaianPakan = [
             "id_author" => auth()->user()->id,
             "id_pekerja" => $request->id_pekerja,

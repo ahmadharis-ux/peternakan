@@ -57,7 +57,7 @@ class KreditController extends Controller
 			"nominal" => $nominalBayar,
 			"keterangan" => $request->keterangan,
 			"adm" => $adm,
-			"created_at" => carbonToday(),
+			"created_at" => carbonNow(),
 		];
 
 		TransaksiKredit::insert($transaksiKredit);

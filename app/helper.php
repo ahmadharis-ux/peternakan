@@ -15,7 +15,7 @@ function withFullname($userList)
     return $userList;
 }
 
-function carbonToday()
+function carbonNow()
 {
     return Carbon::now();
 }

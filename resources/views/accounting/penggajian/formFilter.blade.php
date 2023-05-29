@@ -1,7 +1,7 @@
 @php
     $listBulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
-    $unixTime = strtotime(carbonToday());
+    $unixTime = strtotime(carbonNow());
     $numBulanSekarang = getDate($unixTime)['mon'];
 @endphp
 

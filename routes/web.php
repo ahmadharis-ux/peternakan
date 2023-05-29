@@ -25,6 +25,7 @@ use App\Http\Controllers\accounting\TabunganController;
 use App\Http\Controllers\SupSapiController;
 use App\Models\Kas;
 use App\Models\Pakan;
+use App\Models\PemakaianPakan;
 use App\Models\Pembayaran;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
@@ -185,7 +186,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
 
     Route::get('test', function () {
-        return Carbon::now()->year;
+        return PemakaianPakan::getIdTerakhir();
     });
 
 
