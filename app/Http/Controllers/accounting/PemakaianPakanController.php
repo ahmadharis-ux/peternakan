@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\accounting;
 
-use App\Http\Controllers\Controller;
-use App\Models\PemakaianPakan;
+use App\Models\Sapi;
+use App\Models\StokPakan;
 use Illuminate\Http\Request;
+use App\Models\PemakaianPakan;
+use App\Http\Controllers\Controller;
 
 class PemakaianPakanController extends Controller
 {
@@ -27,7 +29,15 @@ class PemakaianPakanController extends Controller
      */
     public function create()
     {
-        //
+        $pageData = [
+            'title' => "Pemakaian pakan",
+            'heading' => "Pemakaian pakan baru",
+            'active' => "operasional kandang",
+            'listPemakaianPakan' => PemakaianPakan::all(),
+            'listStokPakan' => StokPakan::all(),
+            'listSapi' => Sapi::getSapiTersedia(),
+        ];
+        return view('accounting.pemakaian_pakan.create', $pageData);
     }
 
     /**

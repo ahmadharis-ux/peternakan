@@ -32,6 +32,11 @@ class Sapi extends Model
         return $this->hasOne(DetailPenjualanSapi::class, 'id_sapi');
     }
 
+    public static function getSapiTersedia()
+    {
+        return Sapi::where('status', 'ADA')->get();
+    }
+
 
     public static function terjual($idSapi)
     {

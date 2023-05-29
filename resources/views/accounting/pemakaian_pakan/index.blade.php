@@ -6,8 +6,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $heading }} </h5>
                     <div class="container mb-3">
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalCreatePemakaianPakan">Pemakaian pakan baru</button>
+                        <a class="btn btn-primary btn-sm" href="/acc/pemakaian_pakan/create">Pemakaian pakan baru</a>
                     </div>
                     <hr>
 
