@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\accounting;
 
 use App\Models\Sapi;
+use App\Models\User;
 use App\Models\StokPakan;
 use Illuminate\Http\Request;
 use App\Models\PemakaianPakan;
@@ -36,6 +37,7 @@ class PemakaianPakanController extends Controller
             'listPemakaianPakan' => PemakaianPakan::all(),
             'listStokPakan' => StokPakan::all(),
             'listSapi' => Sapi::getSapiTersedia(),
+            'listPekerja' => User::getPekerja(),
         ];
         return view('accounting.pemakaian_pakan.create', $pageData);
     }
@@ -48,7 +50,7 @@ class PemakaianPakanController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        return $request->input();
     }
 
     /**

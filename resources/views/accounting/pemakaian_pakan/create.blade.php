@@ -30,7 +30,7 @@
                     <input type="hidden" name="markup_bulat">
 
                     <div class="d-flex justify-content-end">
-                        <input class="btn btn-primary mt-3" type="submit" value="Simpan">
+                        <input class="btn btn-primary mt-3" type="submit" value="Simpan" disabled>
                     </div>
 
                 </div>
@@ -162,9 +162,33 @@
 
             // ================================================================
 
+
+            $("select[name=id_pekerja]").change(function() {
+                validate()
+            })
+
+            // =====================
             function bulat(number) {
                 return number;
             }
+
+            function validate() {
+                const markup = $("input[name=markup]").val()
+
+                const pekerja = $("select[name=id_pekerja]").val()
+                console.log(pekerja)
+
+                const valid = markup > 0 && pekerja != null
+
+                if (valid) {
+                    $("input[type=submit]").removeAttr('disabled')
+                } else {
+                    $("input[type=submit]").attr('disabled', 'disabled')
+
+                }
+            }
+
+
 
             function updateMarkup() {
                 let markup
@@ -181,6 +205,9 @@
 
                 $("input[name=markup]").val(markup)
                 $("input[name=markup_bulat]").val(markupPembulatan)
+
+                validate()
+
             }
         })
     </script>
