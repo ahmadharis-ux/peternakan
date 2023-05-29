@@ -205,7 +205,7 @@
                 }
 
                 $("#markupPerSapi").text(number_format(markup))
-                const markupPembulatan = bulat(markup)
+                const markupPembulatan = Math.ceil(markup / 1000) * 1000
                 $("#markupPembulatan").text(number_format(markupPembulatan))
 
                 $("input[name=markup]").val(markup)
