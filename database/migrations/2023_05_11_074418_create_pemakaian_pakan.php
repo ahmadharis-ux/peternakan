@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_author')->unsigned();
             $table->foreignId('id_pekerja')->unsigned();
-            $table->string('keterangan');
+            $table->unsignedInteger('total_pengeluaran');
+            $table->string('keterangan')->nullable();
 
 
             $table->timestamps();

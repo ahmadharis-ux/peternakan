@@ -26,6 +26,7 @@
                         @include('accounting.pemakaian_pakan.tableInfoPemakaianPakan')
                     </div>
 
+                    <input type="hidden" name="total_pengeluaran">
                     <input type="hidden" name="markup">
                     <input type="hidden" name="markup_bulat">
 
@@ -78,7 +79,6 @@
                 let stok = listStokPakan.find((stok) => stok.id == idStok)
 
                 if (isChecked) {
-                    console.log(stok)
                     $(`#inputQty-${idStok}`).removeAttr('disabled')
                     $(`#nominalStokPakan-${idStok}`).text('0')
                     stok.qty = 0;
@@ -86,10 +86,11 @@
 
                     stokDipilih.push(stok)
                 } else {
-                    console.log('tidak checked')
                     $(`#inputQty-${idStok}`).attr('disabled', 'disabled')
                     $(`#inputQty-${idStok}`).val('')
                     $(`#nominalStokPakan-${idStok}`).text('-')
+                    $(`#input-nominal-pakan-${idStok}`).attr('disabled', 'disabled')
+
 
                     stokDipilih = stokDipilih.filter((stok) => stok.id !== idStok)
                 }
@@ -113,6 +114,10 @@
                 }
 
                 nominal = input * stok.harga
+                $(`#input-nominal-pakan-${idStok}`).removeAttr('disabled')
+                $(`#input-nominal-pakan-${idStok}`).val(nominal)
+
+
                 stokDipilih[indexStok].nominal = nominal;
 
                 const formattedNumber = nominal.toLocaleString('id-ID', formatNumberOption);
@@ -121,6 +126,8 @@
 
                 const formatTotal = getSumNominal().toLocaleString('id-ID', formatNumberOption)
                 $("#totalNilaiPakan").text(formatTotal)
+                $("input[name=total_pengeluaran]").val(getSumNominal())
+
 
                 updateMarkup()
             }
@@ -187,8 +194,6 @@
 
                 }
             }
-
-
 
             function updateMarkup() {
                 let markup

@@ -8,6 +8,8 @@ use App\Models\StokPakan;
 use Illuminate\Http\Request;
 use App\Models\PemakaianPakan;
 use App\Http\Controllers\Controller;
+use App\Models\DetailPemakaianPakan;
+use App\Models\MarkupSapi;
 
 class PemakaianPakanController extends Controller
 {
@@ -50,7 +52,45 @@ class PemakaianPakanController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->input();
+        // return $request;
+
+        $pemakaianPakan = [
+            "id_author" => auth()->user()->id,
+            "id_pekerja" => $request->id_pekerja,
+            "total_pengeluaran" => $request->total_pengeluaran,
+            "keterangan" => $request->keterangan,
+        ];
+
+        PemakaianPakan::insert($pemakaianPakan);
+        $idPemakaianPakanTerakhir = PemakaianPakan::getIdTerakhir();
+
+        $listIdStokPakanDipakai = $request->stok_dipilih;
+
+        for ($i = 0; $i < sizeof($listIdStokPakanDipakai); $i++) {
+            $detailPemakaianPakan = [
+                "id_pemakaian_pakan" => $idPemakaianPakanTerakhir,
+                "id_stok_pakan" => $listIdStokPakanDipakai[$i],
+                "subtotal" =>  $request->subtotal_pakan[$i],
+                "qty" => $request->qty_pakan[$i],
+                // "keterangan" => $request->keterangan,
+            ];
+
+            DetailPemakaianPakan::insert($detailPemakaianPakan);
+        }
+
+        $listIdSapiDipakan = $request->sapi_terpilih;
+        for ($i = 0; $i < sizeof($listIdSapiDipakan); $i++) {
+            $markupSapi = [
+                "id_pemakaian_pakan" => $idPemakaianPakanTerakhir,
+                "id_sapi" => $listIdSapiDipakan[$i],
+                "markup" => $request->markup,
+                "markup_pembulatan" => $request->markup_bulat,
+            ];
+
+            MarkupSapi::insert($markupSapi);
+        }
+
+        return redirect('/acc/pemakaian_pakan');
     }
 
     /**
