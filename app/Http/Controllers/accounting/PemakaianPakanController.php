@@ -10,6 +10,7 @@ use App\Models\PemakaianPakan;
 use App\Http\Controllers\Controller;
 use App\Models\DetailPemakaianPakan;
 use App\Models\MarkupSapi;
+use Carbon\Carbon;
 
 class PemakaianPakanController extends Controller
 {
@@ -22,6 +23,7 @@ class PemakaianPakanController extends Controller
             'active' => "operasional kandang",
             'listPemakaianPakan' => PemakaianPakan::all(),
         ];
+        // dd($pageData);
         return view('accounting.pemakaian_pakan.index', $pageData);
     }
 
@@ -53,12 +55,13 @@ class PemakaianPakanController extends Controller
     public function store(Request $request)
     {
         // return $request;
-
+        $today = Carbon::today();
         $pemakaianPakan = [
             "id_author" => auth()->user()->id,
             "id_pekerja" => $request->id_pekerja,
             "total_pengeluaran" => $request->total_pengeluaran,
             "keterangan" => $request->keterangan,
+            "created_at" => $today,
         ];
 
         PemakaianPakan::insert($pemakaianPakan);

@@ -17,8 +17,8 @@
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $pemakaianPakan->created_at }}</td>
                 <td>{{ $pemakaianPakan->keterangan }}</td>
-                <td>{{ $pemakaianPakan->keterangan }}</td>
-                <td>[count(pemakaianpakan->sapi)]</td>
+                <td>Rp {{ number_format($pemakaianPakan->total_pengeluaran) }}</td>
+                <td>{{$pemakaianPakan->Markup->count('id_pemakaian_pakan')}}</td>
                 <td>
                     <a href="/acc/pemakaian_pakan/{{ $pemakaianPakan->id }}" class="btn btn-primary">
                         <div class="icon">
