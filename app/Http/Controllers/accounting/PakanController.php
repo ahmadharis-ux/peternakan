@@ -11,7 +11,6 @@ use App\Models\Pakan;
 use App\Models\PembelianPakan;
 use App\Models\Rekening;
 use App\Models\SatuanPakan;
-use App\Models\StockPakan;
 use App\Models\StokPakan;
 use App\Models\User;
 use Illuminate\Http\Request;
