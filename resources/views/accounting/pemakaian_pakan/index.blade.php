@@ -19,7 +19,7 @@
     </section>
 
     {{-- modal --}}
-    @include('accounting.pemakaian_pakan.modalCreate')
+    {{-- @include('accounting.pemakaian_pakan.modalCreate') --}}
     {{-- @include('accounting.pemakaian_pakan.modalPilihPakan') --}}
     {{-- @include('accounting.pemakaian_pakan.modalPilihSapi') --}}
 @endsection
