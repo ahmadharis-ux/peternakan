@@ -14,7 +14,7 @@
                         <div class="sticky-top">
                             @include('accounting.penjualan_sapi.tableListSapi')
                         </div>
-                    </div>
+                    </div> 
 
                     {{-- form penentuan harga --}}
                     <div class="border rounded p-3" style="width:30;">

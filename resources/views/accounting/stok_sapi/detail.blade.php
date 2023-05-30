@@ -18,7 +18,24 @@
                 <div class="card-body">
                     <h5 class="card-title">Riwayat pemberian pakan</h5>
                     <div class="container mb-3">
-                        {{ $sapi }}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Tanggal</td>
+                                    <td>Nominal Pakan</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($sapi->markup as $riwayatpemberianpakan)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$riwayatpemberianpakan->created_at}}</td>
+                                        <td>Rp {{number_format($riwayatpemberianpakan->markup_pembulatan)}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

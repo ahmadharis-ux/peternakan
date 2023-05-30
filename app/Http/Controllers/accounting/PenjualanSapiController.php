@@ -112,8 +112,7 @@ class PenjualanSapiController extends Controller
 
     public function show($id)
     {
-        // return Debit::getSisaPembayaran(1);
-
+  
         $debit = Debit::find($id);
         $penjualanSapi = $debit->penjualanSapi;
         $listDetailPenjualan = $penjualanSapi->detailPenjualanSapi;
