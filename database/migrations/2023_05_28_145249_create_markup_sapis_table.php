@@ -8,29 +8,32 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('detail_pemakaian_pakans', function (Blueprint $table) {
+        Schema::create('markup_sapis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pemakaian_pakan')->unsigned();
-            $table->foreignId('id_stok_pakan')->unsigned();
-            $table->unsignedInteger('subtotal');
-            $table->unsignedInteger('qty');
-            $table->string('keterangan')->nullable();
+            $table->foreignId('id_sapi')->unsigned();
+            $table->unsignedInteger('markup');
+            $table->unsignedInteger('markup_pembulatan');
 
             $table->timestamps();
 
             $table->foreign('id_pemakaian_pakan')->references('id')->on('pemakaian_pakans');
-            $table->foreign('id_stok_pakan')->references('id')->on('stok_pakans');
+            $table->foreign('id_sapi')->references('id')->on('sapis');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('detail_pemakaian_pakans');
+        Schema::dropIfExists('markup_sapis');
     }
 };

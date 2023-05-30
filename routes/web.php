@@ -7,6 +7,7 @@ use App\Http\Controllers\accounting\DebitController;
 use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\PakanController;
+use App\Http\Controllers\accounting\PemakaianPakanController;
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\accounting\TabunganController;
 use App\Http\Controllers\SupSapiController;
 use App\Models\Kas;
 use App\Models\Pakan;
+use App\Models\PemakaianPakan;
 use App\Models\Pembayaran;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
@@ -146,18 +148,20 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::get('/', [PriveController::class, 'index']);
             Route::post('/', [PriveController::class, 'store']);
         });
+
         // Pakan
         Route::prefix('pakan')->group(function () {
             Route::get('/', [PakanController::class, 'index']);
             Route::post('/', [PakanController::class, 'store']);
 
             Route::get('/{id}', [PakanController::class, 'showDetail']);
-            Route::post('/detail',[PakanController::class, 'storeDetailPembelianPakan']);
+            Route::post('/detail', [PakanController::class, 'storeDetailPembelianPakan']);
             Route::post('/satuan', [PakanController::class, 'storeSatuan']);
             Route::post('/pembelian', [PakanController::class, 'storePembelianPakan']);
             Route::post('/operasional', [PakanController::class, 'storeOperasional']);
-
         });
+
+
 
         // USER
         Route::prefix('user')->group(function () {
@@ -168,11 +172,21 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::put('/{id}', [UserController::class, 'update']);
             Route::delete('/{id}', [UserController::class, 'destroy']);
         });
+
+
+
+        // Pemakaian pakan
+        Route::prefix('pemakaian_pakan')->group(function () {
+            Route::get('/', [PemakaianPakanController::class, 'index']);
+            Route::get('/create', [PemakaianPakanController::class, 'create']);
+
+            Route::post('/', [PemakaianPakanController::class, 'store']);
+        });
     });
 
 
     Route::get('test', function () {
-        return Carbon::now()->year;
+        return PemakaianPakan::getIdTerakhir();
     });
 
 
