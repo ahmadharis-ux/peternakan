@@ -92,10 +92,10 @@ class SapiController extends Controller
         //
     }
 
-    public function setAmbilSapi($idSapi)
+    public function setAmbilSapi($id)
     {
-        $sapi = Sapi::find($idSapi);
-        $sapi->status = "diambil";
+        $sapi = Sapi::find($id);
+        $sapi->status = "SOLD";
         $sapi->save();
         return redirect()->back();
     }

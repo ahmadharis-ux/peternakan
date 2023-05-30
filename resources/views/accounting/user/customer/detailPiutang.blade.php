@@ -37,9 +37,8 @@
                         @foreach ($listDetailPenjualan as $item)
                             @php
                                 $sapiDiambil = $item->sapi->status == 'SOLD';
+
                             @endphp
-
-
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
