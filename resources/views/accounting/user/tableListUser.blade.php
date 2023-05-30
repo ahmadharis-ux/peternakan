@@ -22,7 +22,7 @@
                 <td>
 
                     {{-- btn lihat detail --}}
-                    <a href="/acc/user/{{ $user->id }}" class="btn btn-primary btn-sm mx-1">
+                    <a href="/acc/user/{{ $user->id }}/detail" class="btn btn-primary btn-sm mx-1">
                         <div class="icon">
                             <i class="bi bi-eye-fill"></i>
                         </div>

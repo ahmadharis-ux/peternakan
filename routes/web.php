@@ -139,8 +139,10 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::get('/{sapi}', [SapiController::class, 'show']);
 
             // Route::post('/', [SapiController::class, 'store']);
+            Route::put('/{id}/ambil', [SapiController::class, 'setAmbilSapi']);
             Route::put('/{id}', [SapiController::class, 'update']);
             // Route::delete('/{id}', [SapiController::class, 'destroy']);
+
         });
 
         // prive
@@ -166,7 +168,10 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         // USER
         Route::prefix('user')->group(function () {
             Route::get('/{role}', [UserController::class, 'index']);
-            Route::get('/{id}', [UserController::class, 'show']);
+            Route::get('/{id}/detail', [UserController::class, 'show']);
+
+            // customer
+            Route::get('/{idUser}/piutang/{idDebit}', [UserController::class, 'showPiutang']);
 
             Route::post('/', [UserController::class, 'store']);
             Route::put('/{id}', [UserController::class, 'update']);
