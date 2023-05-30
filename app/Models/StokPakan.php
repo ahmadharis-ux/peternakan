@@ -25,4 +25,9 @@ class StokPakan extends Model
     {
         return $this->hasMany(DetailPemakaianPakan::class, 'id_stok_pakan');
     }
+
+    function getSisaPakan(){
+        return StokPakan::all()->sum('stok');
+    }
+    
 }
