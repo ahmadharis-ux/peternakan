@@ -7,24 +7,25 @@
             <th scope="col">Bobot</th>
             <th scope="col">Jenis kelamin</th>
             <th scope="col">Harga Pokok</th>
-            <th scope="col">Kondisi</th>
             <th scope="col"></th>
 
         </tr>
     </thead>
     <tbody>
         @foreach ($listSapi as $sapi)
+            @php
+                $markupPembulatan = $sapi->markupSapi->sum('markup_pembulatan');
+            @endphp
+
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $sapi->eartag }}</td>
                 <td>{{ $sapi->jenisSapi->nama }}</td>
                 <td>{{ $sapi->bobot }} kg</td>
                 <td>{{ $sapi->jenis_kelamin }}</td>
-                <td>Rp {{number_format($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan')) }}</td>
-                <td>{{ $sapi->kondisi }}</td>
+                <td>Rp {{ number_format($sapi->harga_pokok + $markupPembulatan) }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary btnPilihSapi"
-                        data-id-sapi="{{ $sapi->id }}">Pilih</button>
+                    <button class="btn btn-sm btn-primary btnPilihSapi" data-id-sapi="{{ $sapi->id }}">Pilih</button>
                 </td>
             </tr>
         @endforeach
@@ -57,6 +58,16 @@
         }
 
         function tampilInfoSapi(sapi) {
+            let hargaPokok = sapiTerpilih.harga_pokok;
+            let listMarkupSapi = sapiTerpilih.markup_sapi;
+            let sumMarkup = 0;
+
+            listMarkupSapi.forEach(markup => {
+                sumMarkup += markup.markup_pembulatan;
+            });
+
+            sapiTerpilih.hargaAkhir = hargaPokok + sumMarkup;
+
             console.log(sapiTerpilih)
             inputIdSapi.val(sapiTerpilih.id)
             inputJenisSapi.val(sapiTerpilih.jenis_sapi.nama)
@@ -64,7 +75,7 @@
             inputEartag.val(sapiTerpilih.eartag)
             inputBobotAwal.val(sapiTerpilih.bobot)
             inputKondisiAwal.val(sapiTerpilih.kondisi)
-            inputHargaPokok.val(sapiTerpilih.harga_pokok)
+            inputHargaPokok.val(sapiTerpilih.hargaAkhir)
         }
 
         function cancelPilihSapi() {
@@ -75,7 +86,6 @@
             btnPilihSapi.text('Pilih')
 
             formHarga.find('input[type=submit]').attr('disabled', 'disabled')
-
 
             cancelInfoSapi()
         }
