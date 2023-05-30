@@ -56,7 +56,7 @@ class PenjualanSapiController extends Controller
 		PenjualanSapi::insert($dataPenjualanSapiBaru);
 
 		return redirect('/acc/piutang');
-	}
+	} 
 
 	public function storeDetail(Request $request)
 	{

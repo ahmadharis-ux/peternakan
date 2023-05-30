@@ -114,7 +114,7 @@
 
            function beliEkoran() {
                opsiBeli = 'ekoran';
-               inputHargaKiloan.val('')
+               inputHargaKiloan.val('') 
                inputHargaKiloan.attr('disabled', 'disabled')
 
                inputTotalHarga.removeAttr('readonly')

@@ -21,7 +21,7 @@
                 <td>{{ $sapi->jenisSapi->nama }}</td>
                 <td>{{ $sapi->bobot }} kg</td>
                 <td>{{ $sapi->jenis_kelamin }}</td>
-                <td>{{ $sapi->harga_pokok }}</td>
+                <td>Rp {{number_format($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan')) }}</td>
                 <td>{{ $sapi->kondisi }}</td>
                 <td>{{ $sapi->status }}</td>
                 <td>
