@@ -77,6 +77,7 @@ class PemakaianPakanController extends Controller
                 "id_sapi" => $listIdSapiDipakan[$i],
                 "markup" => $request->markup,
                 "markup_pembulatan" => $request->markup_bulat,
+                "created_at" => carbonNow(),
             ];
 
             MarkupSapi::insert($markupSapi);
