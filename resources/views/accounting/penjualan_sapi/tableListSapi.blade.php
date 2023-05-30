@@ -7,7 +7,6 @@
             <th scope="col">Bobot</th>
             <th scope="col">Jenis kelamin</th>
             <th scope="col">Harga Pokok</th>
-            <th scope="col">Markup (bulat)</th>
             <th scope="col"></th>
 
         </tr>
@@ -24,11 +23,9 @@
                 <td>{{ $sapi->jenisSapi->nama }}</td>
                 <td>{{ $sapi->bobot }} kg</td>
                 <td>{{ $sapi->jenis_kelamin }}</td>
-                <td>Rp {{ number_format($sapi->harga_pokok) }}</td>
-                <td>Rp {{ number_format($markupPembulatan) }}</td>
+                <td>Rp {{ number_format($sapi->harga_pokok + $markupPembulatan) }}</td>
                 <td>
-                    <button class="btn btn-sm btn-primary btnPilihSapi"
-                        data-id-sapi="{{ $sapi->id }}">Pilih</button>
+                    <button class="btn btn-sm btn-primary btnPilihSapi" data-id-sapi="{{ $sapi->id }}">Pilih</button>
                 </td>
             </tr>
         @endforeach
@@ -89,7 +86,6 @@
             btnPilihSapi.text('Pilih')
 
             formHarga.find('input[type=submit]').attr('disabled', 'disabled')
-
 
             cancelInfoSapi()
         }
