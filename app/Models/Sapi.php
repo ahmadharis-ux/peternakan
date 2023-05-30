@@ -14,12 +14,18 @@ class Sapi extends Model
     use HasFactory;
 
     protected $with = [
-        'jenisSapi'
+        'jenisSapi',
+        'markupSapi'
     ];
 
     public function jenisSapi()
     {
         return $this->belongsTo(JenisSapi::class, 'id_jenis_sapi');
+    }
+
+    public function markupSapi()
+    {
+        return $this->hasMany(MarkupSapi::class, 'id_sapi');
     }
 
     public function riwayatBobotSapi()
