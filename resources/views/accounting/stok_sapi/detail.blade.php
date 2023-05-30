@@ -1,5 +1,15 @@
 @extends('layouts.main')
 @section('container')
+
+@php
+    // dd(getDetailPenjualanSapibyId(3));
+    // echo carbonNow();
+    $penjualanSapi = getDetailPenjualanSapibyId($sapi->id);
+    $riwayatPemberianPakan = $sapi->markup()
+    ->whereDate('created_at', '>', $penjualanSapi->created_at->addDay())
+    ->sum('markup_pembulatan');
+
+@endphp
     <section class="section dashboard">
         <div class="col-12">
 
@@ -45,7 +55,32 @@
                 <div class="card-body">
                     <h5 class="card-title">Pembelian / penjualan</h5>
                     <div class="container mb-3">
-                        {{ $sapi }}
+                        <div class="row">
+                            <div class="col">
+                                <label for="">Penjualan  {{getDetailPenjualanSapibyId($sapi->id)->created_at}}</label><br>
+                                @if ($sapi->status == "DIBELI")
+                                    <label for="">Harga Jual : </label> Rp {{ number_format($sapi->detailPenjualanSapi->sum('harga')) }}
+                                    <br>
+                                    <label for="">Harga Pokok : </label> Rp {{ number_format($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan')) }}
+                                    <br>
+                                    <label for="">Laba : </label> Rp {{ number_format($sapi->detailPenjualanSapi->sum('harga') - ($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan'))) }}
+                                    <br>
+                                        @if ($riwayatpemberianpakan->created_at > getDetailPenjualanSapibyId($sapi->id)->created_at )
+                                            <label for="">Biaya Pakan Sebelum Di Ambil : {{$riwayatPemberianPakan}} </label>
+                                        @else
+                                          
+                                        @endif
+                                    <br>
+                                @else
+                                    <label for="">Belum Terjual</label>
+                                @endif
+                            </div>
+                            <div class="col">
+                                <label for="">Pembelian</label><br>
+                            </div>
+                        </div>
+                        {{-- {{ $sapi }} --}}
+                       
                     </div>
                 </div>
             </div>
