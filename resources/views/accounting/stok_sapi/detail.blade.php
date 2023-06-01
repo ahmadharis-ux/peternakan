@@ -5,9 +5,6 @@
     // dd(getDetailPenjualanSapibyId(3));
     // echo carbonNow();
     $penjualanSapi = getDetailPenjualanSapibyId($sapi->id);
-    $riwayatPemberianPakan = $sapi->markup()
-    ->whereDate('created_at', '>', $penjualanSapi->created_at->addDay())
-    ->sum('markup_pembulatan');
 
 @endphp
     <section class="section dashboard">
@@ -57,19 +54,30 @@
                     <div class="container mb-3">
                         <div class="row">
                             <div class="col">
-                                <label for="">Penjualan  {{getDetailPenjualanSapibyId($sapi->id)->created_at}}</label><br>
                                 @if ($sapi->status == "DIBELI")
-                                    <label for="">Harga Jual : </label> Rp {{ number_format($sapi->detailPenjualanSapi->sum('harga')) }}
+                                    <?php 
+                                        $hargajual = $sapi->detailPenjualanSapi->sum('harga');
+                                        $hargapokok = $sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan');
+                                        $labakotor = $sapi->detailPenjualanSapi->sum('harga') - ($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan'));
+                                        $biayapakansebelumdiambil = $sapi->markupSapi()
+                                                ->whereDate('created_at', '>', $penjualanSapi->created_at)
+                                                ->sum('markup_pembulatan');
+                                        $lababersih = $labakotor - $biayapakansebelumdiambil;
+                                    ?>
+                                <label for="">Penjualan  {{getDetailPenjualanSapibyId($sapi->id)->created_at}}</label><br>
+                                    <label for="">Harga Jual : </label> Rp {{ number_format($hargajual) }}
                                     <br>
-                                    <label for="">Harga Pokok : </label> Rp {{ number_format($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan')) }}
+                                    <label for="">Harga Pokok : </label> Rp {{ number_format( $hargapokok) }}
                                     <br>
-                                    <label for="">Laba : </label> Rp {{ number_format($sapi->detailPenjualanSapi->sum('harga') - ($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan'))) }}
+                                    <label for="">Laba Kotor: </label> Rp {{ number_format(  $labakotor) }}
                                     <br>
                                         @if ($riwayatpemberianpakan->created_at > getDetailPenjualanSapibyId($sapi->id)->created_at )
-                                            <label for="">Biaya Pakan Sebelum Di Ambil : {{$riwayatPemberianPakan}} </label>
+                                            <label for="">Biaya Pakan Sebelum Di Ambil : Rp {{number_format($biayapakansebelumdiambil)}} </label>
                                         @else
                                           
                                         @endif
+                                    <br>
+                                    <label for="">Laba Bersih: </label> Rp {{ number_format($lababersih) }}
                                     <br>
                                 @else
                                     <label for="">Belum Terjual</label>
