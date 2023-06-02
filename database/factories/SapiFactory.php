@@ -30,8 +30,8 @@ class SapiFactory extends Factory
             "harga_pokok" => mt_rand(1000, 5000),
             "bobot" => mt_rand(299, 400),
             "kondisi" => $kondisiSapi[mt_rand(0, 3)],
-            // "status" => $statusSapi[mt_rand(0, 2)],
-            "status" => 'ADA',
+            "status" => $statusSapi[0],
+
             "jenis_kelamin" => $jenisKelamin[mt_rand(0, 1)],
         ];
     }
