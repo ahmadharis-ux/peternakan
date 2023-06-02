@@ -19,4 +19,7 @@ class DetailPemakaianPakan extends Model
     {
         return $this->belongsTo(StokPakan::class, 'id_pemakaian_pakan');
     }
+    function jumlahNilaiPemakaianPakan(){
+        return DetailPemakaianPakan::all()->sum('subtotal');
+    }
 }

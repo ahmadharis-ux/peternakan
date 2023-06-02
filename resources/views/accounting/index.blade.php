@@ -9,7 +9,7 @@
 
                     <!-- Hutang Card -->
                     <div class="col-xxl-8 col-md-6">
-                        <a href="/total_hutang">
+                        <a href="/acc/rincian_hutang">
                             <div class="card info-card sales-card">
                                 <div class="card-body">
                                     <h5 class="card-title">Hutang</h5>
@@ -39,19 +39,20 @@
                     </div>
 
                     <!-- Saldo Card -->
-                    <div class="col-xxl-8 col-xl-12">
-                        <div class="card info-card customers-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Saldo</h5>
-                                <div class="d-flex align-items-center">
-                                    <div class="ps-3">
-                                        <h6>Rp {{ number_format($totalSaldo) }}</h6>
+                    <a href="acc/total_saldo">
+                        <div class="col-xxl-8 col-xl-12">
+                            <div class="card info-card customers-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Saldo</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="ps-3">
+                                            <h6>Rp {{ number_format($totalSaldo + $jumlahNilaiPembelianPakan - $jumlahNilaiPemakaianPakan) }}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
+                    </a>
                     <hr>
 
                     <!-- Total Pakan Card -->

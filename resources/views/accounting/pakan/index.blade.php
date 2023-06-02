@@ -35,6 +35,7 @@
                                         <td>#</td>
                                         <td>Nama Pakan</td>
                                         <td>Stok</td>
+                                        <td>Nilai Aset</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,7 +45,8 @@
                                             <td>{{ $pakan->pakan->nama }}</td>
                                             <td>{{ $pakan->stok - $pakan->detailPemakaianPakan->sum('qty') }}
                                                 {{ $pakan->satuanPakan->nama }}</td>
-                                        </tr>
+                                            <td>Rp . [TOtal Nilai]</td>
+                                        </tr>  
                                     @endforeach
                                 </tbody>
                             </table>

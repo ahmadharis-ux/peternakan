@@ -9,6 +9,7 @@ class StokPakan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $fillable = ['harga', 'qty'];
 
     protected $with = ['pakan', 'satuanPakan'];
 
