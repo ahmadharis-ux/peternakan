@@ -1,7 +1,6 @@
 @extends('layouts.main')
 @section('container')
-<section class="section dashboard">
-    <h5>Detail Hutang</h5>
+<section class="section dashboard"> 
     <div class="row">
          <!-- Hutang Sapi Card -->
          <div class="col-xxl-4 col-md-4">
@@ -12,8 +11,7 @@
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
-                      <h6>{{number_format($allsapi)}}</h6>
-                      <h6></h6>
+                      <label>Rp </label>
                     </div>
                   </div>
                 </div>
@@ -29,9 +27,8 @@
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
-                      <h6>{{number_format($allpakan)}}</h6>
-                      <h6></h6>
-                    </div>
+                      <label for="">Kredit Rp{{number_format($hutangPakan)}}</label><br>
+                      <label for="">Transaksi Kredit Rp</label> </div>
                   </div>
                 </div>
 
@@ -46,8 +43,8 @@
 
                   <div class="d-flex align-items-center">
                     <div class="ps-3">
-                      <h6>{{number_format(0,2)}}</h6>
-                      <h6></h6>
+                      <label for="">Kredit Rp{{number_format($hutangGaji)}}</label><br>
+                      <label for="">Transaksi Kredit Rp</label>
                     </div>
                   </div>
                 </div>

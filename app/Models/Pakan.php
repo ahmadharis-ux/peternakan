@@ -15,7 +15,7 @@ class Pakan extends Model
 
 	function detailPembelianPakan()
 	{
-		return $this->hasMany(DetailPemakaianPakan::class, 'id_pakan');
+		return $this->hasMany(DetailPembelianPakan::class, 'id_pakan');
 	}
 	function detailPemakaianPakan()
 	{

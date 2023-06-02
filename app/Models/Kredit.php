@@ -112,4 +112,11 @@ class Kredit extends Model
         $kredit->lunas = true;
         $kredit->save();
     }
+
+    function getHutangPakan(){
+        return Kredit::where('id_jurnal', 3)->sum('nominal');
+    }
+    function getHutangGaji(){
+        return Kredit::where('id_jurnal', 4)->sum('nominal');
+    }
 }

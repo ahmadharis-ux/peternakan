@@ -1,5 +1,9 @@
-{{ $listPemakaianPakan }}
 
+<?php 
+    $subtotal = 0;
+    $subtotal = $listPemakaianPakan->sum('total_pengeluaran');
+?>
+<h5>Total {{number_format($subtotal)}}</h5>
 <table id="example" class="display " style="width:100%">
     <thead>
         <tr>

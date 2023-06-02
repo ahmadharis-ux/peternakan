@@ -72,6 +72,12 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
         Route::get('/', [AccountingController::class, 'index']);
 
+        //detail total saldo dan aset
+        Route::get('/total_saldo',[AccountingController::class,'detailSaldoDanAset']);
+
+        //detail hutang
+        Route::get('/rincian_hutang',[AccountingController::class,'RincianHutangPerusahaan']);
+
         // Kas
         Route::get('/kas', [AccountingController::class, 'kas']);
 
