@@ -112,7 +112,7 @@ class PenjualanSapiController extends Controller
 
     public function show($id)
     {
-  
+
         $debit = Debit::find($id);
         $penjualanSapi = $debit->penjualanSapi;
         $listDetailPenjualan = $penjualanSapi->detailPenjualanSapi;

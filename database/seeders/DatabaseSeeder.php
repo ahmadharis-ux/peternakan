@@ -203,9 +203,9 @@ class DatabaseSeeder extends Seeder
     private function seedJenisSapiAndSapi()
     {
         $data = [
-            ["nama" => "Sapi hitam", "id_author" => mt_rand(1, 3)],
-            ["nama" => "Sapi perah", "id_author" => mt_rand(1, 3)],
-            ["nama" => "Sapi jadi-jadian", "id_author" => mt_rand(1, 3)],
+            ["nama" => "Limosin", "id_author" => mt_rand(1, 3)],
+            ["nama" => "Madura", "id_author" => mt_rand(1, 3)],
+            ["nama" => "dermen", "id_author" => mt_rand(1, 3)],
 
         ];
         foreach ($data as $val) {

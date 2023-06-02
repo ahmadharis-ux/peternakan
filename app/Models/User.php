@@ -44,7 +44,8 @@ class User extends Authenticatable
 
 
     protected $with = [
-        'role'
+        'role',
+        // 'debit',
     ];
 
     public function role()
@@ -117,7 +118,7 @@ class User extends Authenticatable
     // ================================== perdebitan
     public function debit()
     {
-        return $this->hasMany(Debit::class);
+        return $this->hasMany(Debit::class, 'id_pihak_kedua');
     }
 
     public function transaksiDebit()
@@ -178,5 +179,11 @@ class User extends Authenticatable
         $listOwner = withFullname($listOwner);
 
         return  $listOwner;
+    }
+
+    public static function getFullname($user)
+    {
+        $fullName = $user->nama_depan . " " . $user->nama_belakang;
+        $user->fullname = $fullName;
     }
 }
