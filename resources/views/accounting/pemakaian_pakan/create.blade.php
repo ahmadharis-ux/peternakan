@@ -5,36 +5,76 @@
         <form action="/acc/pemakaian_pakan" method="post">
             @csrf
 
-            {{-- table pakan --}}
             <div class="card recent-sales overflow-auto">
                 <div class="card-body p-3">
 
                     <div class="d-flex flex-row">
-                        <div class="d-flex flex-column" style="width: 70%">
+                        <div class="d-flex flex-column" style="width:100%">
                             {{-- Pilih pakan --}}
                             @include('accounting.pemakaian_pakan.tableListStokPakan')
-
-                            <div class="my-5">
-                                <hr>
-                            </div>
-
-                            {{-- table pilih sapi --}}
-                            @include('accounting.pemakaian_pakan.tablePilihSapi')
-
                         </div>
 
-                        @include('accounting.pemakaian_pakan.tableInfoPemakaianPakan')
+
                     </div>
-
-                    <input type="hidden" name="total_pengeluaran">
-                    <input type="hidden" name="markup">
-                    <input type="hidden" name="markup_bulat">
-
-                    <div class="d-flex justify-content-end">
-                        <input class="btn btn-primary mt-3" type="submit" value="Simpan" disabled>
-                    </div>
-
                 </div>
+            </div>
+
+            </div>
+
+            <div class="d-flex flex-row justify-content-between">
+
+                {{-- table pilih sapi --}}
+                <div class="card  recent-sales overflow-auto">
+                    <div class="card-body p-3">
+                        @include('accounting.pemakaian_pakan.tablePilihSapi')
+                    </div>
+                </div>
+
+                <div style="width: 50%" class="d-flex flex-column">
+                    <div>
+
+                    </div>
+
+                    <div class="card recent-sales overflow-auto">
+                        <div class="card-body p-3">
+                            <h5>Pilih pekerja</h5>
+
+                            <div style="background: transparent" class="mb-3">
+                                <select name="id_pekerja" class="form-select" required value>
+                                    <option disabled selected>-- Pilih pekerja --</option>
+                                    @foreach ($listPekerja as $pekerja)
+                                        <option value="{{ $pekerja->id }}">{{ $pekerja->fullname }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card recent-sales overflow-auto">
+                        <div class="card-body p-3">
+                            <h5>Ringkasan</h5>
+                            @include('accounting.pemakaian_pakan.tableInfoPemakaianPakan')
+
+                            <input type="hidden" name="total_pengeluaran">
+                            <input type="hidden" name="markup">
+                            <input type="hidden" name="markup_bulat">
+
+                            <div class="d-flex justify-content-end">
+                                <input class="btn btn-primary mt-3" type="submit" value="Simpan" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+
+            </div>
 
             </div>
 
