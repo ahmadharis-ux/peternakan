@@ -1,7 +1,10 @@
    <form action="/acc/piutang/detail" method="post" enctype="multipart/form-data" id="formPenentuanHarga">
        @csrf
        <input type="hidden" name="id_penjualan_sapi" value="{{ $penjualanSapi->id }}" class="form-control">
-       <input type="hidden" name="id_sapi" class="form-control">
+       {{-- <input type="hidden" name="id_sapi" class="form-control"> --}}
+
+       <label for="id`">id_sapi</label>
+       <input type="text" name="id_sapi" class="form-control">
 
        <p class="mb-3 fw-bold">Informasi sapi</p>
 
@@ -114,7 +117,7 @@
 
            function beliEkoran() {
                opsiBeli = 'ekoran';
-               inputHargaKiloan.val('') 
+               inputHargaKiloan.val('')
                inputHargaKiloan.attr('disabled', 'disabled')
 
                inputTotalHarga.removeAttr('readonly')

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\accounting;
 
+use App\Models\Role;
 use App\Models\User;
+use App\Models\Debit;
+use App\Models\Kredit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -86,5 +88,44 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->back();
+    }
+
+    public function show($idUser)
+    {
+        $user = User::find($idUser);
+        User::getFullname($user);
+
+        $role = $user->role->nama;
+
+        $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
+        $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
+
+        $pageData = [
+            'title' => 'User - ' . $role,
+            'heading' => $user->fullname,
+            'active' => 'user',
+            'user' => $user,
+            'listKredit' => $listKredit,
+            'listDebit' => $listDebit,
+        ];
+
+        return view('accounting.user.detail', $pageData);
+    }
+
+    public function showPiutang($idUser, $idDebit)
+    {
+        $user = User::find($idUser);
+        User::getFullname($user);
+        $role = $user->role->nama;
+
+        $pageData = [
+            'title' => 'User - ' . $role,
+            'heading' => $user->fullname . ' - Piutang',
+            'active' => 'user',
+            'user' => $user,
+            'debit' => Debit::find($idDebit),
+        ];
+
+        return view('accounting.user.customer.detailPiutang', $pageData);
     }
 }

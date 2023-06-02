@@ -49,6 +49,7 @@
         const formHarga = $("#formPenentuanHarga")
 
         const listSapi = {!! $listSapi !!};
+        console.log(listSapi)
         let sapiTerpilih
 
         function cancelInfoSapi() {
@@ -67,7 +68,7 @@
             });
 
             sapiTerpilih.hargaAkhir = hargaPokok + sumMarkup;
-
+            console.clear();
             console.log(sapiTerpilih)
             inputIdSapi.val(sapiTerpilih.id)
             inputJenisSapi.val(sapiTerpilih.jenis_sapi.nama)
