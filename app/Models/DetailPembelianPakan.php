@@ -24,7 +24,9 @@ class DetailPembelianPakan extends Model
     {
         return $this->belongsTo(PembelianPakan::class, 'id_pembelian_pakan');
     }
-    function jumlahNilaiPembelianPakan(){
+
+    public static function jumlahNilaiPembelianPakan()
+    {
         return DetailPembelianPakan::all()->sum('subtotal');
     }
 }

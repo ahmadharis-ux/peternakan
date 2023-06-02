@@ -14,12 +14,13 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\DetailPemakaianPakan;
 use App\Models\DetailPembelianPakan;
+use App\Models\PembelianPakan;
 use App\Models\StokPakan;
 use App\Models\TransaksiKredit;
 
 class AccountingController extends Controller
 {
-    function index() 
+    function index()
     {
         $aa = new DetailPembelianPakan();
         $a = $aa->jumlahNilaiPembelianPakan();
@@ -62,37 +63,74 @@ class AccountingController extends Controller
 
         return view('accounting.kas.index', $pageData);
     }
-    function detailSaldoDanAset(){
-        $aa = new DetailPembelianPakan();
-        $a = $aa->jumlahNilaiPembelianPakan();
-        $bb = new DetailPemakaianPakan();
-        $b = $bb->jumlahNilaiPemakaianPakan();
+    function detailSaldoDanAset()
+    {
+        $jumlahNilaiPembelianPakan = DetailPembelianPakan::jumlahNilaiPembelianPakan();
+        $jumlahNilaiPemakaianPakan = DetailPemakaianPakan::jumlahNilaiPemakaianPakan();
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
             'heading' => 'Accounting',
-            'jumlahNilaiPembelianPakan' => $a,
-            'jumlahNilaiPemakaianPakan' => $b,
+            'jumlahNilaiPembelianPakan' => $jumlahNilaiPembelianPakan,
+            'jumlahNilaiPemakaianPakan' =>  $jumlahNilaiPemakaianPakan,
             'totalSaldo' => Rekening::getTotalSaldo(),
             'active' => 'dashboard',
         ];
-        return view ('accounting.total_saldo_aset.index',$pageData);
+        return view('accounting.total_saldo_aset.index', $pageData);
     }
-    function RincianHutangPerusahaan(){
-        //hutangpakan
-        $kredit = new Kredit();
-        $hutangPakan = $kredit->getHutangPakan();
+    function RincianHutangPerusahaan()
+    {
+        // hutang sapi
+        $hutangSapi = Kredit::getHutangSapi();
 
+        //hutangpakan
+        $hutangPakan = Kredit::getHutangPakan();
 
         //hutangPekerja
-        $hutangGaji = $kredit->getHutangGaji();
+        $hutangGaji = Kredit::getHutangGaji();
+
+
+
         $pageData = [
             'title' => 'Dashboard - Accounting',
             'heading' => 'Accounting',
             'active' => 'dashboard',
-            'hutangPakan' => $hutangPakan,
-            'hutangGaji' => $hutangGaji,
+            'hutangSapi' => $hutangSapi->sum('nominal'),
+            'totalTransaksiHutangSapi' => Kredit::getTotalTransaksi($hutangSapi),
+            'hutangPakan' => $hutangPakan->sum('nominal'),
+            'totalTransaksiHutangPakan' => Kredit::getTotalTransaksi($hutangPakan),
+            'hutangGaji' => $hutangGaji->sum('nominal'),
+            'totalTransaksiHutangGaji' => Kredit::getTotalTransaksi($hutangGaji),
         ];
-        return view ('accounting.total_hutang.index',$pageData);
+
+        return view('accounting.total_hutang.index', $pageData);
+    }
+
+    function RincianPiutangPerusahaan()
+    {
+        // piutang sapi
+        $piutangSapi = Debit::getPiutangSapi();
+
+        //piutangpakan
+        $piutangPakan = Debit::getPiutangPakan();
+
+        //piutangPekerja
+        $piutangGaji = Debit::getPiutangGaji();
+
+
+
+        $pageData = [
+            'title' => 'Dashboard - Accounting',
+            'heading' => 'Accounting',
+            'active' => 'dashboard',
+            'piutangSapi' => $piutangSapi->sum('nominal'),
+            'totalTransaksiPiutangSapi' => Debit::getTotalTransaksi($piutangSapi),
+            'piutangPakan' => $piutangPakan->sum('nominal'),
+            'totalTransaksiPiutangPakan' => Debit::getTotalTransaksi($piutangPakan),
+            'piutangGaji' => $piutangGaji->sum('nominal'),
+            'totalTransaksiPiutangGaji' => Debit::getTotalTransaksi($piutangGaji),
+        ];
+
+        return view('accounting.total_piutang.index', $pageData);
     }
 }
