@@ -15,6 +15,7 @@ return new class extends Migration
 			$table->id();
 			$table->foreignId('id_pembelian_pakan')->unsigned();
 			$table->foreignId('id_pakan')->unsigned();
+			$table->foreignId('id_author')->nullable();
 			$table->foreignId('id_satuan_pakan')->unsigned();
 			$table->unsignedInteger('harga')->default(0);
 			$table->unsignedInteger('qty')->default(0);
@@ -25,6 +26,7 @@ return new class extends Migration
 
 			$table->foreign('id_pembelian_pakan')->references('id')->on('pembelian_pakans');
 			$table->foreign('id_pakan')->references('id')->on('pakans');
+			$table->foreign('id_author')->references('id')->on('users');
 			$table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakans');
 		});
 	}

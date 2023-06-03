@@ -14,12 +14,14 @@ return new class extends Migration
 		Schema::create('operasional_pembelian_pakans', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('id_pembelian_pakan')->unsigned();
+			$table->foreignId('id_author')->nullable();
 			$table->integer('harga');
 			$table->string('keterangan');
 
 			$table->timestamps();
 
 			$table->foreign('id_pembelian_pakan')->references('id')->on('pembelian_pakans');
+			$table->foreign('id_author')->references('id')->on('users');
 		});
 	}
 

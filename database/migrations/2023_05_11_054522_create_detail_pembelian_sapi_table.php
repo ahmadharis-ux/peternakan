@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_pembelian_sapi')->unsigned();
             $table->foreignId('id_jenis_sapi')->unsigned();
+            $table->foreignId('id_author')->nullable();
             $table->string('eartag');
             $table->enum('jenis_kelamin', ['jantan', 'betina']);
             $table->unsignedInteger('bobot')->default(0);
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('id_pembelian_sapi')->references('id')->on('pembelian_sapis');
             $table->foreign('id_jenis_sapi')->references('id')->on('jenis_sapis');
+            $table->foreign('id_author')->references('id')->on('users');
         });
     }
 

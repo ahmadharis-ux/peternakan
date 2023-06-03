@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sapis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_jenis_sapi')->unsigned();
+            $table->foreignId('id_author')->nullable();
             $table->string('eartag');
             $table->unsignedInteger('harga_pokok');
             $table->unsignedSmallInteger('bobot');
@@ -28,6 +29,7 @@ return new class extends Migration
 
             // $table->foreign('id_author')->references('id')->on('users');
             $table->foreign('id_jenis_sapi')->references('id')->on('jenis_sapis');
+            $table->foreign('id_author')->references('id')->on('users');
         });
     }
 

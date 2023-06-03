@@ -17,12 +17,14 @@ return new class extends Migration
             $table->id();
 			$table->foreignId('id_pakan')->unsigned();
 			$table->foreignId('id_satuan_pakan')->unsigned();
+			$table->foreignId('id_author')->nullable();
 			$table->unsignedInteger('harga');
             $table->integer('stok');
 
 			$table->timestamps();
 			$table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakans');
 			$table->foreign('id_pakan')->references('id')->on('pakans');
+			$table->foreign('id_author')->references('id')->on('users');
         });
     }
 

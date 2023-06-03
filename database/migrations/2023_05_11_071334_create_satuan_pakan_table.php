@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('satuan_pakans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->foreignId('id_author')->nullable();
 
             $table->timestamps();
+            $table->foreign('id_author')->references('id')->on('users');
         });
     }
 
