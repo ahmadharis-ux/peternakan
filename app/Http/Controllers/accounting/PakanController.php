@@ -13,6 +13,7 @@ use App\Models\Rekening;
 use App\Models\SatuanPakan;
 use App\Models\StokPakan;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
 
@@ -59,6 +60,7 @@ class PakanController extends Controller
 	{
 		$validasi = [
 			'nama' => $request->nama,
+            "created_at" => Carbon::now(),
 			'id_author' => auth()->user()->id,
 		];
 		Pakan::insert($validasi);
