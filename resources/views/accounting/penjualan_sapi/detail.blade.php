@@ -79,6 +79,13 @@
                                 @include('accounting.penjualan_sapi.tableHitungan')
                             </div>
 
+                            {{-- btn cetak faktur --}}
+                            <div class="d-flex justify-content-end mt-3">
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalCetakFaktur">Cetak
+                                    faktur</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -92,4 +99,5 @@
     {{-- modals --}}
     @include('accounting.penjualan_sapi.modalPilihSapi')
     @include('accounting.penjualan_sapi.modalPembayaran')
+    @include('accounting.penjualan_sapi.modalCetakFaktur')
 @endsection

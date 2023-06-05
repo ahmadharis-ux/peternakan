@@ -54,7 +54,7 @@
                         <h5>
                             <span>Riwayat Pembayaran</span>
 
-                            @if($kredit->lunas == false)
+                            @if ($kredit->lunas == false)
                                 <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
                                     data-bs-target="#modalPembayaran">Tambah</button>
                             @endif
@@ -79,6 +79,12 @@
                             </div>
                         </div>
 
+                        {{-- btn cetak faktur --}}
+                        <div class="d-flex justify-content-end mt-3">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCetakFaktur">Cetak
+                                faktur</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -91,4 +97,5 @@
     {{-- modals --}}
     @include('accounting.pakan.modalDetailPembelianPakan')
     @include('accounting.pakan.modalPembayaran')
+    @include('accounting.pakan.modalCetakFaktur')
 @endsection

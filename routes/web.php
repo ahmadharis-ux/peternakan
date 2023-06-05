@@ -205,12 +205,11 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
 
     Route::get('test', function () {
-        return view('test', [
-            'title' => "testPage",
-            'active' => "operasional kandang",
-            'listTransaksiKredit' => TransaksiKredit::whereMonth('created_at', now()->month)->get(),
-            'listTransaksiDebit' => TransaksiDebit::whereMonth('created_at', now()->month)->get(),
-        ]);
+        return view('test_faktur');
+    });
+
+    Route::post('test', function () {
+        return view('test_faktur');
     });
 
 
