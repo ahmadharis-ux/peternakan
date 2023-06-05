@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Debit;
+use App\Models\DetailPemakaianPakan;
+use App\Models\DetailPembelianPakan;
 use App\Models\Hutang;
 use App\Models\Kas;
+use App\Models\Kredit;
 use App\Models\PemakaianPakan;
 use App\Models\Pembayaran;
 use App\Models\PembelianPakan;
 use App\Models\Piutang;
+use App\Models\Rekening;
+use App\Models\Sapi;
+use App\Models\TransaksiKredit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,11 +23,21 @@ class OwnerController extends Controller
 {
     function index()
     {
+        $aa = new DetailPembelianPakan();
+        $a = $aa->jumlahNilaiPembelianPakan();
+        $bb = new DetailPemakaianPakan();
+        $b = $bb->jumlahNilaiPemakaianPakan();
         $pageData = [
             'title' => 'Dashboard - Owner',
             'heading' => 'owner',
             'active' => 'dashboard',
-            'date' =>  Carbon::now()->format('d-m-Y')
+            'date' =>  Carbon::now()->format('d-m-Y'),
+            'jumlahNilaiPembelianPakan' => $a,
+            'jumlahNilaiPemakaianPakan' => $b,
+            'totalHutang' => Kredit::getTotalNominal() - TransaksiKredit::getTotalNominal(),
+            'totalPiutang' => Debit::getTotalNominal(),
+            'stokSapi' => Sapi::where('status', 'ADA')->get()->count(),
+            'totalSaldo' => Rekening::getTotalSaldo(),
         ];
 
         return view('owner.index', $pageData);
