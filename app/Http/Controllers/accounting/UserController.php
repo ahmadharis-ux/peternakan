@@ -48,6 +48,7 @@ class UserController extends Controller
             'listRole' => Role::all(),
             'idRoleDipilih' => $idRole,
             'namaRoleDipilih' => $role,
+
         ];
 
         return view('accounting.user.index', $pageData);
@@ -96,6 +97,8 @@ class UserController extends Controller
         User::getFullname($user);
 
         $role = $user->role->nama;
+        $roleSlug = str_replace(' ', '_', $role);
+        $roleSlug = strtolower($roleSlug);
 
         $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
         $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
@@ -107,6 +110,7 @@ class UserController extends Controller
             'user' => $user,
             'listKredit' => $listKredit,
             'listDebit' => $listDebit,
+            'roleSlug' => $roleSlug,
         ];
 
         return view('accounting.user.detail', $pageData);
