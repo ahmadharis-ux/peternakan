@@ -12,7 +12,7 @@ class TransaksiDebit extends Model
 
     public function debit()
     {
-        return $this->belongsTo(Debit::class);
+        return $this->belongsTo(Debit::class,'id_debit');
     }
 
     public function rekening()

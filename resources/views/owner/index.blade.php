@@ -12,22 +12,25 @@
                         <h5 class="card-title">Aktifitas Hari ini</h5>
 
                         <div class="activity">
-                            {{-- kas --}}
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">Pengeluaran Hari ini </div>
-                                <i class='bi bi-circle-fill  activity-badge text-danger align-self-start'></i>
-                                <div class="activity-content">
-                                    <a href="#" class="fw-bold text-dark">Rp [sum_kredit]</a>
-                                </div>
-                            </div><!-- End activity item-->
-                            {{-- kas --}}
-                            <div class="activity-item d-flex">
-                                <div class="activite-label">Pemasukan Hari ini </div>
-                                <i class='bi bi-circle-fill  activity-badge text-success align-self-start'></i>
-                                <div class="activity-content">
-                                    <a href="#" class="fw-bold text-dark">Rp [sum_debit]</a>
-                                </div>
-                            </div><!-- End activity item-->
+                            @foreach ($transaksi as $transaksiItem)
+                                @if ($transaksiItem instanceof App\Models\TransaksiDebit)
+                                    <div class="activity-item d-flex">
+                                        <div class="activite-label">Pemasukan {{$transaksiItem->debit->keterangan}} </div>
+                                        <i class="bi bi-circle-fill activity-badge text-success align-self-start"></i>
+                                        <div class="activity-content">
+                                            <a href="#" class="fw-bold text-dark">Rp {{ number_format($transaksiItem->nominal) }}</a>
+                                        </div>
+                                    </div><!-- End activity item-->
+                                @elseif ($transaksiItem instanceof App\Models\TransaksiKredit)
+                                    <div class="activity-item d-flex">
+                                        <div class="activite-label">Pengeluaran {{ $transaksiItem->kredit->keterangan }}</div>
+                                        <i class="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
+                                        <div class="activity-content">
+                                            <a href="#" class="fw-bold text-dark">Rp {{ number_format($transaksiItem->nominal) }}</a>
+                                        </div>
+                                    </div><!-- End activity item-->
+                                @endif
+                            @endforeach
 
                         </div>
 

@@ -180,6 +180,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::prefix('user')->group(function () {
             Route::get('/{role}', [UserController::class, 'index']);
             Route::get('/{id}/detail', [UserController::class, 'show']);
+            Route::get('/{id}/detail/akuntan', [UserController::class, 'showLogActivity']);
 
             // customer
             Route::get('/{idUser}/piutang/{idDebit}', [UserController::class, 'showPiutang']);

@@ -8,6 +8,7 @@ use App\Models\Debit;
 use App\Models\Kredit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\TransaksiDebit;
 
 class UserController extends Controller
 {
@@ -99,7 +100,6 @@ class UserController extends Controller
 
         $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
         $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
-        $listAktivitas = User::where('id',$idUser)->with('pembelianSapi')->get();
 
         $pageData = [
             'title' => 'User - ' . $role,
@@ -108,7 +108,6 @@ class UserController extends Controller
             'user' => $user,
             'listKredit' => $listKredit,
             'listDebit' => $listDebit,
-            'listAktivitas' =>  $listAktivitas,
         ];
 
         return view('accounting.user.detail', $pageData);
@@ -129,5 +128,28 @@ class UserController extends Controller
         ];
 
         return view('accounting.user.customer.detailPiutang', $pageData);
+    }
+
+    function showLogActivity($idUser){
+        $user = User::find($idUser);
+        User::getFullname($user);
+        $role = $user->role->nama;
+
+        //
+        $debits = Debit::where('id_author', $idUser)->get();
+        $transaksi_debit = TransaksiDebit::where('id_author',$idUser)->get();
+        $kredits = Kredit::where('id_author', $idUser)->get();
+
+        $listAktivitas = $debits->concat($kredits)->concat($transaksi_debit)->where('id_author',$idUser)->all();
+        dd($listAktivitas);
+        $pageData = [
+            'title' => 'User - ' . $role,
+            'heading' => $user->fullname . ' - Piutang',
+            'active' => 'user',
+            'user' => $user,
+            'listAktivitas' => $listAktivitas,
+        ];
+       
+        return view('accounting.user.accounting.tableListAktivitas',$pageData);
     }
 }
