@@ -17,8 +17,6 @@
             <!-- Left side columns -->
             <div class="col-lg-8">
                 <div class="row">
-
-
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
@@ -41,21 +39,31 @@
 
 
 <script>
+    const listTransaksiKredit = {!! $listTransaksiKredit !!}
+
+    const listTransaksiDebit = {!! $listTransaksiDebit !!}
+
+    const listNominalTrxKredit = listTransaksiKredit.map((trx) => trx.nominal)
+
+    const listNominalTrxDebit = listTransaksiDebit.map((trx) => trx.nominal)
+
+    console.log(listNominalTrxDebit)
+    console.log(listNominalTrxKredit)
+
+
+
     document.addEventListener("DOMContentLoaded", () => {
         new ApexCharts(document.querySelector("#reportsChart"), {
             series: [{
-                name: 'Sales',
-                data: [31, 40, 28, 51, 42, 82, 56],
+                name: 'Kredit',
+                data: listNominalTrxKredit,
             }, {
-                name: 'Revenue',
-                data: [11, 32, 45, 32, 34, 52, 41]
-            }, {
-                name: 'Customers',
-                data: [15, 11, 32, 18, 9, 24, 11]
-            }],
+                name: 'Debit',
+                data: listNominalTrxDebit,
+            }, ],
             chart: {
                 height: 200,
-                type: 'bar',
+                type: 'area',
                 toolbar: {
                     show: false
                 },
@@ -65,11 +73,11 @@
             },
             colors: ['#4154f1', '#2eca6a', '#ff771d'],
             fill: {
-                type: "solid",
+                type: "fill",
                 gradient: {
                     shadeIntensity: 1,
-                    opacityFrom: 1,
-                    opacityTo: 1,
+                    opacityFrom: 0.3,
+                    opacityTo: 2,
                     stops: [0, 90, 100]
                 }
             },
