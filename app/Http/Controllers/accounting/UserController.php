@@ -151,8 +151,10 @@ class UserController extends Controller
             'listRiwayatTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
         ];
 
-        // return TransaksiKredit::where('id_kredit', $idKredit)->get();
+        $roleSlug = str_replace(' ', '_', $role);
+        $roleSlug = strtolower($roleSlug);
 
-        return view('accounting.user.supplier_sapi.detailHutang', $pageData);
+
+        return view('accounting.user.' . $roleSlug . '.detailHutang', $pageData);
     }
 }
