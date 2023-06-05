@@ -184,6 +184,9 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             // customer
             Route::get('/{idUser}/piutang/{idDebit}', [UserController::class, 'showPiutang']);
 
+            // supplier sapi
+            Route::get('/{idUser}/hutang/{idKredit}', [UserController::class, 'showHutang']);
+
             Route::post('/', [UserController::class, 'store']);
             Route::put('/{id}', [UserController::class, 'update']);
             Route::delete('/{id}', [UserController::class, 'destroy']);

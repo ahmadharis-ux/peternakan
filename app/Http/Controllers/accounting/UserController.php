@@ -8,6 +8,7 @@ use App\Models\Debit;
 use App\Models\Kredit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\TransaksiKredit;
 
 class UserController extends Controller
 {
@@ -131,5 +132,27 @@ class UserController extends Controller
         ];
 
         return view('accounting.user.customer.detailPiutang', $pageData);
+    }
+
+    public function showHutang($idUser, $idKredit)
+    {
+        $user = User::find($idUser);
+        User::getFullname($user);
+        $role = $user->role->nama;
+
+        // return Kredit::find($idKredit);
+
+        $pageData = [
+            'title' => 'User - ' . $role,
+            'heading' => $user->fullname . ' - Piutang',
+            'active' => 'user',
+            'user' => $user,
+            'kredit' => Kredit::find($idKredit),
+            'listRiwayatTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
+        ];
+
+        // return TransaksiKredit::where('id_kredit', $idKredit)->get();
+
+        return view('accounting.user.supplier_sapi.detailHutang', $pageData);
     }
 }
