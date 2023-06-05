@@ -1,41 +1,43 @@
 <?php
 
-use App\Http\Controllers\AccController;
-use App\Http\Controllers\accounting\AccountingController;
-use App\Http\Controllers\accounting\KodeJurnalController;
-use App\Http\Controllers\accounting\DebitController;
-use App\Http\Controllers\accounting\JurnalController;
-use App\Http\Controllers\accounting\KreditController;
-use App\Http\Controllers\accounting\PakanController;
-use App\Http\Controllers\accounting\PemakaianPakanController;
-use App\Http\Controllers\accounting\PembelianSapiController;
-use App\Http\Controllers\accounting\PenggajianController;
-use App\Http\Controllers\accounting\PenjualanSapiController;
-use App\Http\Controllers\accounting\SapiController;
-use App\Http\Controllers\accounting\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\DaftarController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OwnerController;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\PekerjaController;
-use App\Http\Controllers\accounting\PriveController;
-use App\Http\Controllers\accounting\TabunganController;
-use App\Http\Controllers\SupSapiController;
+use Carbon\Carbon;
 use App\Models\Kas;
+use App\Models\User;
 use App\Models\Pakan;
-use App\Models\PemakaianPakan;
+use App\Models\Rekening;
+use Barryvdh\DomPDF\PDF;
 use App\Models\Pembayaran;
+use GuzzleHttp\Middleware;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
-use App\Models\Rekening;
-use App\Models\User;
-use Barryvdh\DomPDF\PDF;
-use Carbon\Carbon;
-use GuzzleHttp\Middleware;
+use App\Models\PemakaianPakan;
+use App\Models\TransaksiDebit;
+use App\Models\TransaksiKredit;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\DaftarController;
+use App\Http\Controllers\PekerjaController;
+use App\Http\Controllers\SupSapiController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\accounting\SapiController;
+use App\Http\Controllers\accounting\UserController;
+use App\Http\Controllers\accounting\DebitController;
+use App\Http\Controllers\accounting\PakanController;
+use App\Http\Controllers\accounting\PriveController;
+use App\Http\Controllers\accounting\JurnalController;
+use App\Http\Controllers\accounting\KreditController;
+use App\Http\Controllers\accounting\TabunganController;
+use App\Http\Controllers\accounting\AccountingController;
+use App\Http\Controllers\accounting\KodeJurnalController;
+use App\Http\Controllers\accounting\PenggajianController;
+use App\Http\Controllers\accounting\PembelianSapiController;
+use App\Http\Controllers\accounting\PenjualanSapiController;
+use App\Http\Controllers\accounting\PemakaianPakanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -187,8 +189,6 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::delete('/{id}', [UserController::class, 'destroy']);
         });
 
-
-
         // Pemakaian pakan
         Route::prefix('pemakaian_pakan')->group(function () {
             Route::get('/', [PemakaianPakanController::class, 'index']);
@@ -201,7 +201,12 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
 
     Route::get('test', function () {
-        return PemakaianPakan::getIdTerakhir();
+        return view('test', [
+            'title' => "testPage",
+            'active' => "operasional kandang",
+            'listTransaksiKredit' => TransaksiKredit::whereMonth('created_at', now()->month)->get(),
+            'listTransaksiDebit' => TransaksiDebit::whereMonth('created_at', now()->month)->get(),
+        ]);
     });
 
 
