@@ -89,7 +89,12 @@ class PemakaianPakanController extends Controller
     public function show(PemakaianPakan $pemakaianPakan)
     {
         // return $pemakaianPakan;
+        $pekerja = User::find($pemakaianPakan->id_pekerja);
+        $markup = $pemakaianPakan->markup[0]->markup;
+        $markupPembulatan = $pemakaianPakan->markup[0]->markup_pembulatan;
 
+        $pemakaianPakan->markupPerSapi = $markup;
+        $pemakaianPakan->markupPembulatan = $markupPembulatan;
 
         $pageData = [
             'title' => "Pemakaian pakan",
@@ -98,6 +103,7 @@ class PemakaianPakanController extends Controller
             'pemakaianPakan' => $pemakaianPakan,
             'listDetailPemakaianPakan' => $pemakaianPakan->detailPemakaianPakan,
             'listMarkup' => $pemakaianPakan->markup,
+            'pekerja' => $pekerja,
         ];
 
         return view('accounting.pemakaian_pakan.detail', $pageData);

@@ -1,4 +1,4 @@
-<h5>Pakan digunakan</h5>
+<h5>Pakan digunakan ({{ sizeof($listDetailPemakaianPakan) }})</h5>
 
 <table id="example" class="display " style="width:100%">
     <thead>
