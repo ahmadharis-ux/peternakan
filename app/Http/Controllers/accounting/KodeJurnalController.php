@@ -4,6 +4,7 @@ namespace App\Http\Controllers\accounting;
 
 use App\Http\Controllers\Controller;
 use App\Models\KodeJurnal;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PDO;
 
@@ -29,6 +30,7 @@ class KodeJurnalController extends Controller
             "kode" => $request->kode,
             "id_author" => auth()->user()->id,
             "keterangan" => $request->keterangan,
+            "created_at" => Carbon::now(),
         ];
         // dd($storeKodeJurnal);
         KodeJurnal::insert($storeKodeJurnal);

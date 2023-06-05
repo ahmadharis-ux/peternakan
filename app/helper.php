@@ -24,3 +24,4 @@ function carbonNow()
 function getDetailPenjualanSapibyId($idSapi){
     return DetailPenjualanSapi::where('id_sapi', $idSapi)->first();
 }
+

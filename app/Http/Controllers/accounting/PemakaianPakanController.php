@@ -64,6 +64,7 @@ class PemakaianPakanController extends Controller
                 "id_stok_pakan" => $listIdStokPakanDipakai[$i],
                 "subtotal" =>  $request->subtotal_pakan[$i],
                 "qty" => $request->qty_pakan[$i],
+                "created_at" => Carbon::now(),
                 // "keterangan" => $request->keterangan,
             ];
 

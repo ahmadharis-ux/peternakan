@@ -5,6 +5,7 @@ namespace App\Http\Controllers\accounting;
 use App\Http\Controllers\Controller;
 use App\Models\Jurnal;
 use App\Models\KodeJurnal;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class JurnalController extends Controller
@@ -34,7 +35,8 @@ class JurnalController extends Controller
         $dataJurnalBaru = [
             'nama' => $request->nama_jurnal,
             'id_kode_jurnal' => $request->id_kode_jurnal,
-            'id_author' => auth()->user()->id
+            'id_author' => auth()->user()->id,
+            'created_at' => Carbon::now(),
         ];
 
 

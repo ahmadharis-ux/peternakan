@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_pemakaian_pakan')->unsigned();
             $table->foreignId('id_stok_pakan')->unsigned();
+            $table->foreignId('id_author')->nullable();
             $table->unsignedInteger('subtotal');
             $table->unsignedInteger('qty');
             $table->string('keterangan')->nullable();
@@ -23,6 +24,7 @@ return new class extends Migration
 
             $table->foreign('id_pemakaian_pakan')->references('id')->on('pemakaian_pakans');
             $table->foreign('id_stok_pakan')->references('id')->on('stok_pakans');
+            $table->foreign('id_author')->references('id')->on('users');
         });
     }
 
