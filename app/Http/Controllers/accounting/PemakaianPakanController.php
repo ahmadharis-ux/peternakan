@@ -88,7 +88,19 @@ class PemakaianPakanController extends Controller
 
     public function show(PemakaianPakan $pemakaianPakan)
     {
-        //
+        // return $pemakaianPakan;
+
+
+        $pageData = [
+            'title' => "Pemakaian pakan",
+            'heading' => "Detail pemakaian pakan: " . $pemakaianPakan->id,
+            'active' => "operasional kandang",
+            'pemakaianPakan' => $pemakaianPakan,
+            'listDetailPemakaianPakan' => $pemakaianPakan->detailPemakaianPakan,
+            'listMarkup' => $pemakaianPakan->markup,
+        ];
+
+        return view('accounting.pemakaian_pakan.detail', $pageData);
     }
 
 

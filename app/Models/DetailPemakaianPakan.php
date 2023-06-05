@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DetailPemakaianPakan extends Model
 {
+    protected $with = ['stokPakan'];
+
+
+
+
     use HasFactory;
     function pemakaianPakan()
     {

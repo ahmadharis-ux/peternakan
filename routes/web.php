@@ -193,6 +193,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::prefix('pemakaian_pakan')->group(function () {
             Route::get('/', [PemakaianPakanController::class, 'index']);
             Route::get('/create', [PemakaianPakanController::class, 'create']);
+            Route::get('/{pemakaianPakan}', [PemakaianPakanController::class, 'show']);
 
             Route::post('/', [PemakaianPakanController::class, 'store']);
         });
