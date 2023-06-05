@@ -8,7 +8,7 @@
                     <h5 class="card-title">{{ $heading }} </h5>
                     <div class="container mb-3">
                         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#modalUserBaru">{{ $namaRoleDipilih }} baru</button>
+                            data-bs-target="#modalUserBaru">{{}} baru</button>
                     </div>
                     <hr>
                     {{-- table --}}
