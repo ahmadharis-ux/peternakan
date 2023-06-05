@@ -99,6 +99,7 @@ class UserController extends Controller
 
         $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
         $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
+        $listAktivitas = User::where('id',$idUser)->with('pembelianSapi')->get();
 
         $pageData = [
             'title' => 'User - ' . $role,
@@ -107,6 +108,7 @@ class UserController extends Controller
             'user' => $user,
             'listKredit' => $listKredit,
             'listDebit' => $listDebit,
+            'listAktivitas' =>  $listAktivitas,
         ];
 
         return view('accounting.user.detail', $pageData);
