@@ -27,7 +27,6 @@
                             <a href="/acc/pemakaian_pakan" class="btn btn-sm btn-primary">Pakai Pakan <i
                                     class="bi bi-cart-plus-fill"></i></a>
 
-
                             {{-- table Stok Pakan --}}
                             <table class="table mt-2">
                                 <thead>
@@ -40,13 +39,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($ListStokPakan as $pakan)
+                                        @php
+                                            $nilaiAset = $pakan->harga * $pakan->stok;
+                                            $sisaStok = $pakan->stok - $pakan->detailPemakaianPakan->sum('qty');
+                                        @endphp
+
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $pakan->pakan->nama }}</td>
-                                            <td>{{ $pakan->stok - $pakan->detailPemakaianPakan->sum('qty') }}
-                                                {{ $pakan->satuanPakan->nama }}</td>
-                                            <td>Rp . [TOtal Nilai]</td>
-                                        </tr>  
+                                            <td>{{ $sisaStok }} {{ $pakan->satuanPakan->nama }}</td>
+                                            <td>Rp {{ number_format($nilaiAset) }}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

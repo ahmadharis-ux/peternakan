@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DetailPemakaianPakan extends Model
 {
+    protected $with = ['stokPakan'];
+
+
+
+
     use HasFactory;
     function pemakaianPakan()
     {
@@ -19,7 +24,8 @@ class DetailPemakaianPakan extends Model
     {
         return $this->belongsTo(StokPakan::class, 'id_pemakaian_pakan');
     }
-    function jumlahNilaiPemakaianPakan(){
+    public static function jumlahNilaiPemakaianPakan()
+    {
         return DetailPemakaianPakan::all()->sum('subtotal');
     }
 }

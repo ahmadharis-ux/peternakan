@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
                 [
                     "nama_depan" => "test",
                     "nama_belakang" => "customer " . $i + 1,
-                    "id_role" => 6,
+                    "id_role" => 4,
                     "email" => "customer" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
                     "password" => Hash::make("password"),
@@ -97,7 +97,6 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-
         for ($i = 0; $i < 5; $i++) {
             User::create(
                 [
@@ -105,6 +104,21 @@ class DatabaseSeeder extends Seeder
                     "nama_belakang" => "supplier sapi " . $i + 1,
                     "id_role" => 5,
                     "email" => "supplier_sapi" . $i + 1 . "@gmail.com",
+                    "email_verified_at" => now(),
+                    "password" => Hash::make("password"),
+                    "remember_token" => Str::random(10),
+                ],
+
+            );
+        }
+
+        for ($i = 0; $i < 5; $i++) {
+            User::create(
+                [
+                    "nama_depan" => "test",
+                    "nama_belakang" => "supplier pakan " . $i + 1,
+                    "id_role" => 5,
+                    "email" => "supplier_pakan" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
                     "password" => Hash::make("password"),
                     "remember_token" => Str::random(10),

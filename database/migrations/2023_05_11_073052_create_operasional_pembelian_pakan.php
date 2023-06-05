@@ -14,7 +14,7 @@ return new class extends Migration
 		Schema::create('operasional_pembelian_pakans', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('id_pembelian_pakan')->unsigned();
-			$table->integer('harga');
+			$table->unsignedBigInteger('harga');
 			$table->string('keterangan');
 
 			$table->timestamps();

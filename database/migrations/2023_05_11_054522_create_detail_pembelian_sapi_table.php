@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('eartag');
             $table->enum('jenis_kelamin', ['jantan', 'betina']);
             $table->unsignedInteger('bobot')->default(0);
-            $table->unsignedInteger('harga')->default(0);
+            $table->unsignedBigInteger('harga')->default(0);
             $table->boolean('kiloan')->default(false);
             $table->string('keterangan')->nullable();
 

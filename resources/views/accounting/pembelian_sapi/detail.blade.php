@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div class="section">
                             {{-- table list sapi dibeli --}}
-                            @include('accounting.pemakaian_pakan.tableListSapiDibeli')
+                            @include('accounting.pembelian_sapi.tableListSapiDibeli')
                         </div>
                     </div>
                 </div>
@@ -32,11 +32,11 @@
                     </div>
                     <div class="card-body">
                         {{-- form tambah operasional --}}
-                        @include('accounting.pemakaian_pakan.formTambahOperasional')
+                        @include('accounting.pembelian_sapi.formTambahOperasional')
                         <hr>
                         <div class="section">
                             {{-- table list operasional --}}
-                            @include('accounting.pemakaian_pakan.tableListOperasional')
+                            @include('accounting.pembelian_sapi.tableListOperasional')
                         </div>
                     </div>
                 </div>
@@ -69,13 +69,13 @@
                             <div class="col-sm-6">
                                 <div class="section">
                                     {{-- table list riwayat pembayaran --}}
-                                    @include('accounting.pemakaian_pakan.tableListRiwayatPembayaran')
+                                    @include('accounting.pembelian_sapi.tableListRiwayatPembayaran')
                                 </div>
                             </div>
 
                             {{-- table hitungan --}}
                             <div class="col-sm">
-                                @include('accounting.pemakaian_pakan.tableHitungan')
+                                @include('accounting.pembelian_sapi.tableHitungan')
                             </div>
                         </div>
 
@@ -89,6 +89,6 @@
 
 
     {{-- modals --}}
-    @include('accounting.pemakaian_pakan.modalTambahSapi')
-    @include('accounting.pemakaian_pakan.modalPembayaran')
+    @include('accounting.pembelian_sapi.modalTambahSapi')
+    @include('accounting.pembelian_sapi.modalPembayaran')
 @endsection

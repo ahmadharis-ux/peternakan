@@ -1,25 +1,24 @@
 <div class="d-flex flex-column justify-content-center" style="width: 100%;" id="info">
     <div class="d-flex justify-content-between px-3 py-1">
         <span class="fw-bold">Total nilai pakan</span>
-        <span id="totalNilaiPakan">0</span>
+        <span>{{ $pemakaianPakan->total_pengeluaran }}</span>
     </div>
 
     <div class="d-flex justify-content-between px-3 py-1">
         <span class="fw-bold">Total sapi</span>
-        <span id="totalSapi">0</span>
+        <span>{{ sizeof($pemakaianPakan->markup) }}</span>
     </div>
 
     <div class="d-flex justify-content-between px-3 py-1">
         <span class="fw-bold">Markup per sapi</span>
-        <span id="markupPerSapi">0</span>
+        <span>Rp {{ number_format($pemakaianPakan->markupPerSapi) }}</span>
 
     </div>
 
     <div class="d-flex justify-content-between px-3 py-1">
         <span class="fw-bold">Markup pembulatan</span>
-        <span id="markupPembulatan">0</span>
+        <span>Rp {{ number_format($pemakaianPakan->markupPembulatan) }}</span>
     </div>
-
 </div>
 
 <style>

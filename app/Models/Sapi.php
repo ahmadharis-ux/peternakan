@@ -15,7 +15,7 @@ class Sapi extends Model
 
     protected $with = [
         'jenisSapi',
-        'markupSapi'
+        // 'markupSapi'
     ];
 
     public function jenisSapi()

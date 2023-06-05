@@ -18,216 +18,218 @@ use Spatie\FlareClient\View;
 
 class PakanController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index()
-	{
-		$idJurnalPakan = 3;
-		$pageData = [
-			'title' => 'Buku - Pakan',
-			'heading' => 'Buku - Pakan',
-			'active' => 'buku',
-			'ListSatuan' => SatuanPakan::all(),
-			'ListPakan' => Pakan::all(),
-			'ListStokPakan' => StokPakan::all(),
-			'ListSupplierPakan' => User::getSupplierPakan(),
-			'listKreditPakan' => Kredit::where('id_jurnal', $idJurnalPakan)->get(),
-		];
-		return view('accounting.pakan.index', $pageData);
-	}
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $idJurnalPakan = 3;
+        $pageData = [
+            'title' => 'Buku - Pakan',
+            'heading' => 'Buku - Pakan',
+            'active' => 'buku',
+            'ListSatuan' => SatuanPakan::all(),
+            'ListPakan' => Pakan::all(),
+            'ListStokPakan' => StokPakan::all(),
+            'ListSupplierPakan' => User::getSupplierPakan(),
+            'listKreditPakan' => Kredit::where('id_jurnal', $idJurnalPakan)->get(),
+        ];
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
-		//
-	}
+        // return  StokPakan::all();
+        return view('accounting.pakan.index', $pageData);
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
-	{
-		$validasi = [
-			'nama' => $request->nama,
-			'id_author' => auth()->user()->id,
-		];
-		Pakan::insert($validasi);
-		return redirect()->back();
-	}
-	public function storeSatuan(Request $request)
-	{
-		$validasi = [
-			'nama' => $request->nama,
-			// 'id_author' => auth()->user()->id,
-		];
-		SatuanPakan::insert($validasi);
-		return redirect()->back();
-	}
-	function storePembelianPakan(Request $request)
-	{
-		$idJurnalPakan = 3;
-		$today = carbonNow();
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
-		Kas::kreditBaru();
-		$dataKreditBaru = [
-			"id_kas" => Kas::idTerakhir(),
-			"id_author" => auth()->user()->id,
-			"id_pihak_kedua" => $request->id_pihak_kedua,
-			"id_jurnal" => $idJurnalPakan,
-			"keterangan" => $request->keterangan,
-			"created_at" => $today,
-		];
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validasi = [
+            'nama' => $request->nama,
+            'id_author' => auth()->user()->id,
+        ];
+        Pakan::insert($validasi);
+        return redirect()->back();
+    }
+    public function storeSatuan(Request $request)
+    {
+        $validasi = [
+            'nama' => $request->nama,
+            // 'id_author' => auth()->user()->id,
+        ];
+        SatuanPakan::insert($validasi);
+        return redirect()->back();
+    }
+    function storePembelianPakan(Request $request)
+    {
+        $idJurnalPakan = 3;
+        $today = carbonNow();
 
-		Kredit::insert($dataKreditBaru);
+        Kas::kreditBaru();
+        $dataKreditBaru = [
+            "id_kas" => Kas::idTerakhir(),
+            "id_author" => auth()->user()->id,
+            "id_pihak_kedua" => $request->id_pihak_kedua,
+            "id_jurnal" => $idJurnalPakan,
+            "keterangan" => $request->keterangan,
+            "created_at" => $today,
+        ];
 
-		$dataPembelianPakanBaru = [
-			"id_author" => auth()->user()->id,
-			"id_kredit" => Kredit::idTerakhir(),
-			"created_at" => $today,
-		];
+        Kredit::insert($dataKreditBaru);
 
-		PembelianPakan::insert($dataPembelianPakanBaru);
-		return redirect()->back();;
-	}
-	function storeDetailPembelianPakan(Request $request)
-	{
-		$idpembelianPakan = $request->id_pembelian_pakan;
-		$idpakan = $request->id_pakan;
-		$id_satuan_pakan = $request->id_satuan_pakan;
-		$harga_satuan = $request->harga;
-		$qty = $request->qty;
-		$keterangan = $request->keterangan;
-		$subtotal = $harga_satuan * $qty;
+        $dataPembelianPakanBaru = [
+            "id_author" => auth()->user()->id,
+            "id_kredit" => Kredit::idTerakhir(),
+            "created_at" => $today,
+        ];
 
-		$detailPembelianPakan = [
-			"id_pembelian_pakan" => $idpembelianPakan,
-			"id_pakan" => $idpakan,
-			"id_satuan_pakan" => $id_satuan_pakan,
-			"harga" => $harga_satuan,
-			"qty" => $qty,
-			"keterangan" => $keterangan,
-			"subtotal" => $subtotal,
-			"created_at" => carbonNow(),
-		];
-		// dd($detailPembelianPakan);
+        PembelianPakan::insert($dataPembelianPakanBaru);
+        return redirect()->back();;
+    }
+    function storeDetailPembelianPakan(Request $request)
+    {
+        $idpembelianPakan = $request->id_pembelian_pakan;
+        $idpakan = $request->id_pakan;
+        $id_satuan_pakan = $request->id_satuan_pakan;
+        $harga_satuan = $request->harga;
+        $qty = $request->qty;
+        $keterangan = $request->keterangan;
+        $subtotal = $harga_satuan * $qty;
 
-		DetailPembelianPakan::insert($detailPembelianPakan);
+        $detailPembelianPakan = [
+            "id_pembelian_pakan" => $idpembelianPakan,
+            "id_pakan" => $idpakan,
+            "id_satuan_pakan" => $id_satuan_pakan,
+            "harga" => $harga_satuan,
+            "qty" => $qty,
+            "keterangan" => $keterangan,
+            "subtotal" => $subtotal,
+            "created_at" => carbonNow(),
+        ];
+        // dd($detailPembelianPakan);
 
-		$idKredit = PembelianPakan::find($idpembelianPakan)->kredit->id;
+        DetailPembelianPakan::insert($detailPembelianPakan);
 
-		Kredit::tambahNominal($idKredit, $subtotal);
-		Kredit::updateStatusLunas($idKredit);
+        $idKredit = PembelianPakan::find($idpembelianPakan)->kredit->id;
 
-		$stokpakan = [
-			"id_pakan" => $idpakan,
-			"id_satuan_pakan" => $id_satuan_pakan,
-			"harga" => $harga_satuan,
-			"stok" => $qty,
-		];
+        Kredit::tambahNominal($idKredit, $subtotal);
+        Kredit::updateStatusLunas($idKredit);
 
-		StokPakan::insert($stokpakan);
+        $stokpakan = [
+            "id_pakan" => $idpakan,
+            "id_satuan_pakan" => $id_satuan_pakan,
+            "harga" => $harga_satuan,
+            "stok" => $qty,
+        ];
 
-		return redirect()->back();
-	}
+        StokPakan::insert($stokpakan);
 
-	public function showDetail($id)
-	{
-		$kredit = Kredit::find($id);
-		$pembelianPakan = $kredit->pembelianPakan;
-		$listDetailPembelian = $pembelianPakan->detailPembelianPakan;
-		$pembelianPakan = $kredit->pembelianPakan;
-		$listOperasionalPembelian = $pembelianPakan->operasionalPembelianPakan;
-		$listRiwayatTransaksi = $kredit->transaksiKredit;
-		$data = [
-			'title' => 'Buku - Pakan',
-			'heading' => 'Buku - Pakan',
-			'active' => 'buku',
-			'kredit' => $kredit,
-			'ListPakan' => Pakan::all(),
-			'pembelianPakan' => $pembelianPakan,
-			'listDetailPembelian' => $listDetailPembelian,
-			'ListSatuan' => SatuanPakan::all(),
-			'listOperasionalPembelian' => $listOperasionalPembelian,
-			'listRekening' => Rekening::all(),
-			'listRiwayatTransaksi' => $listRiwayatTransaksi,
-		];
-		return view('accounting.pakan.detail', $data);
-	}
+        return redirect()->back();
+    }
 
-	public function storeOperasional(Request $request)
-	{
-		$idPembelianPakan = $request->id_pembelian_pakan;
-		$hargaOperasional = $request->harga;
+    public function showDetail($id)
+    {
+        $kredit = Kredit::find($id);
+        $pembelianPakan = $kredit->pembelianPakan;
+        $listDetailPembelian = $pembelianPakan->detailPembelianPakan;
+        $pembelianPakan = $kredit->pembelianPakan;
+        $listOperasionalPembelian = $pembelianPakan->operasionalPembelianPakan;
+        $listRiwayatTransaksi = $kredit->transaksiKredit;
+        $data = [
+            'title' => 'Buku - Pakan',
+            'heading' => 'Buku - Pakan',
+            'active' => 'buku',
+            'kredit' => $kredit,
+            'ListPakan' => Pakan::all(),
+            'pembelianPakan' => $pembelianPakan,
+            'listDetailPembelian' => $listDetailPembelian,
+            'ListSatuan' => SatuanPakan::all(),
+            'listOperasionalPembelian' => $listOperasionalPembelian,
+            'listRekening' => Rekening::all(),
+            'listRiwayatTransaksi' => $listRiwayatTransaksi,
+        ];
+        return view('accounting.pakan.detail', $data);
+    }
 
-		$operasionalPembelianPakanBaru = [
-			'id_pembelian_pakan' => $idPembelianPakan,
-			'harga' => $hargaOperasional,
-			'keterangan' => $request->keterangan,
-			'created_at' => carbonNow(),
-		];
+    public function storeOperasional(Request $request)
+    {
+        $idPembelianPakan = $request->id_pembelian_pakan;
+        $hargaOperasional = $request->harga;
 
-		OperasionalPembelianPakan::insert($operasionalPembelianPakanBaru);
+        $operasionalPembelianPakanBaru = [
+            'id_pembelian_pakan' => $idPembelianPakan,
+            'harga' => $hargaOperasional,
+            'keterangan' => $request->keterangan,
+            'created_at' => carbonNow(),
+        ];
 
-		$idKredit = PembelianPakan::find($idPembelianPakan)->kredit->id;
+        OperasionalPembelianPakan::insert($operasionalPembelianPakanBaru);
 
-		Kredit::tambahNominal($idKredit, $hargaOperasional);
-		Kredit::updateStatusLunas($idKredit);
+        $idKredit = PembelianPakan::find($idPembelianPakan)->kredit->id;
 
-		return redirect()->back();
-	}
+        Kredit::tambahNominal($idKredit, $hargaOperasional);
+        Kredit::updateStatusLunas($idKredit);
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  \App\Models\Pakan  $pakan
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show(Pakan $pakan)
-	{
-		//
-	}
+        return redirect()->back();
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\Models\Pakan  $pakan
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit(Pakan $pakan)
-	{
-		//
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Pakan  $pakan
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Pakan $pakan)
+    {
+        //
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \App\Models\Pakan  $pakan
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, Pakan $pakan)
-	{
-		//
-	}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Pakan  $pakan
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Pakan $pakan)
+    {
+        //
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  \App\Models\Pakan  $pakan
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy(Pakan $pakan)
-	{
-		//
-	}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Pakan  $pakan
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Pakan $pakan)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Pakan  $pakan
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Pakan $pakan)
+    {
+        //
+    }
 }

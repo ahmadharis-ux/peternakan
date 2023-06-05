@@ -16,7 +16,7 @@ class DetailPenjualanSapi extends Model
 
     public function sapi()
     {
-        return $this->hasOne(Sapi::class, 'id');
+        return $this->belongsTo(Sapi::class, 'id_sapi');
     }
 
     public function penjualanSapi()
