@@ -1,66 +1,66 @@
 @extends('layouts.main')
 @section('container')
     <section class="section dashboard">
-        <h5>Rincian hutang</h5>
+        <h5>Rincian piutang</h5>
 
         <div class="row">
-            <!-- Hutang Sapi Card -->
+            <!-- Piutang Sapi Card -->
             <div class="col-xxl-4 col-md-4">
                 <div class="card info-card sales-card">
                     <div class="card-body">
-                        <h5 class="card-title">Hutang Sapi</h5>
+                        <h5 class="card-title">Piutang Sapi</h5>
 
                         <div class="d-flex flex-column">
                             <label class="d-flex justify-content-between">
-                                <span class="fw-bold">Kredit</span>
-                                <span>Rp {{ number_format($hutangSapi) }}</span>
+                                <span class="fw-bold">Debit</span>
+                                <span>Rp {{ number_format($piutangSapi) }}</span>
                             </label>
 
                             <label class="d-flex justify-content-between">
                                 <span class="fw-bold">Transaksi</span>
-                                <span>Rp {{ number_format($totalTransaksiHutangSapi) }}</span>
+                                <span>Rp {{ number_format($totalTransaksiPiutangSapi) }}</span>
                             </label>
                         </div>
                     </div>
                 </div>
             </div><!-- End Sales Card -->
 
-            <!-- Hutang Pakan Card -->
+            <!-- Piutang Pakan Card -->
             <div class="col-xxl-4 col-md-4">
                 <div class="card info-card sales-card">
                     <div class="card-body">
-                        <h5 class="card-title">Hutang Pakan</h5>
+                        <h5 class="card-title">Piutang Pakan</h5>
 
                         <div class="d-flex flex-column">
                             <label class="d-flex justify-content-between">
-                                <span class="fw-bold">Kredit</span>
-                                <span>Rp {{ number_format($hutangPakan) }}</span>
+                                <span class="fw-bold">Debit</span>
+                                <span>Rp {{ number_format($piutangPakan) }}</span>
                             </label>
 
                             <label class="d-flex justify-content-between">
                                 <span class="fw-bold">Transaksi</span>
-                                <span>Rp {{ number_format($totalTransaksiHutangPakan) }}</span>
+                                <span>Rp {{ number_format($totalTransaksiPiutangPakan) }}</span>
                             </label>
                         </div>
                     </div>
                 </div>
             </div><!-- End Sales Card -->
 
-            <!-- Hutang Pakan Card -->
+            <!-- Piutang Pakan Card -->
             <div class="col-xxl-4 col-md-4">
                 <div class="card info-card sales-card">
                     <div class="card-body">
-                        <h5 class="card-title">Hutang Gaji Pekerja</h5>
+                        <h5 class="card-title">Piutang Gaji Pekerja</h5>
 
                         <div class="d-flex flex-column">
                             <label class="d-flex justify-content-between">
-                                <span class="fw-bold">Kredit</span>
-                                <span>Rp {{ number_format($hutangGaji) }}</span>
+                                <span class="fw-bold">Debit</span>
+                                <span>Rp {{ number_format($piutangGaji) }}</span>
                             </label>
 
                             <label class="d-flex justify-content-between">
                                 <span class="fw-bold">Transaksi</span>
-                                <span>Rp {{ number_format($totalTransaksiHutangGaji) }}</span>
+                                <span>Rp {{ number_format($totalTransaksiPiutangGaji) }}</span>
                             </label>
                         </div>
                     </div>

@@ -113,10 +113,32 @@ class Kredit extends Model
         $kredit->save();
     }
 
-    function getHutangPakan(){
-        return Kredit::where('id_jurnal', 3)->sum('nominal');
+    public static function getHutangPakan()
+    {
+        return Kredit::where('id_jurnal', 3)->get();
     }
-    function getHutangGaji(){
-        return Kredit::where('id_jurnal', 4)->sum('nominal');
+    public static function getHutangGaji()
+    {
+        return Kredit::where('id_jurnal', 4)->get();
+    }
+
+    public static function getHutangSapi()
+    {
+        return Kredit::where('id_jurnal', 1)->get();
+    }
+
+    public static function getTotalTransaksi($listKredit)
+    {
+        $totalTransaksi = 0;
+
+        foreach ($listKredit as $kredit) {
+            $listTransaksi = $kredit->transaksiKredit;
+
+            foreach ($listTransaksi as $transaksi) {
+                $totalTransaksi += $transaksi->nominal;
+            }
+        }
+
+        return $totalTransaksi;
     }
 }

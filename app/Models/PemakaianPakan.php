@@ -11,6 +11,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PemakaianPakan extends Model
 {
+    protected $with = [
+        'detailPemakaianPakan',
+        'markup'
+    ];
+
+
     use HasFactory;
     function pakan()
     {

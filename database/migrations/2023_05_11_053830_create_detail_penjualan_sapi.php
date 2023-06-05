@@ -17,12 +17,9 @@ return new class extends Migration
             $table->foreignId('id_sapi')->unsigned();
             $table->foreignId('id_author')->nullable();
             $table->unsignedInteger('bobot')->default(0);
-            $table->integer('harga')->default(0);
+            $table->unsignedBigInteger('harga')->default(0);
             $table->boolean('kiloan')->default(false);
             $table->string('keterangan')->nullable();
-
-
-
 
             $table->timestamps();
             $table->foreign('id_penjualan_sapi')->references('id')->on('penjualan_sapis');

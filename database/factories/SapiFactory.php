@@ -31,6 +31,7 @@ class SapiFactory extends Factory
             "bobot" => mt_rand(299, 400),
             "kondisi" => $kondisiSapi[mt_rand(0, 3)],
             "status" => $statusSapi[0],
+
             "jenis_kelamin" => $jenisKelamin[mt_rand(0, 1)],
         ];
     }

@@ -26,16 +26,19 @@
 
                     <!-- Piutang Card -->
                     <div class="col-xxl-8 col-md-6">
-                        <div class="card info-card revenue-card">
-                            <div class="card-body">
-                                <h5 class="card-title">Piutang</h5>
-                                <div class="d-flex align-items-center">
-                                    <div class="ps-3">
-                                        <h6>Rp {{ number_format($totalPiutang) }}</h6>
+                        <a href="#">
+                            <div class="card info-card revenue-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piutang</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="ps-3">
+                                            <h6>Rp {{ number_format($totalPiutang) }}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+
                     </div>
 
                     <!-- Saldo Card -->
@@ -46,7 +49,9 @@
                                     <h5 class="card-title">Total Saldo</h5>
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>Rp {{ number_format($totalSaldo + $jumlahNilaiPembelianPakan - $jumlahNilaiPemakaianPakan) }}</h6>
+                                            <h6>Rp
+                                                {{ number_format($totalSaldo + $jumlahNilaiPembelianPakan - $jumlahNilaiPemakaianPakan) }}
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>

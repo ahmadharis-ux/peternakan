@@ -15,7 +15,7 @@ return new class extends Migration
 			$table->id();
 			$table->foreignId('id_pembelian_sapi')->unsigned();
 			$table->foreignId('id_author')->nullable();
-			$table->integer('harga');
+			$table->unsignedBigInteger('harga');
 			$table->string('keterangan');
 
 			$table->timestamps();

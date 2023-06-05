@@ -9,6 +9,7 @@ class MarkupSapi extends Model
 {
     use HasFactory;
 
+    protected $with = ['sapi'];
 
     function pemakaianPakan()
     {

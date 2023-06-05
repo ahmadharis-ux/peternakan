@@ -19,6 +19,7 @@ use Spatie\FlareClient\View;
 
 class PakanController extends Controller
 {
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -232,4 +233,5 @@ class PakanController extends Controller
 	{
 		//
 	}
+
 }
