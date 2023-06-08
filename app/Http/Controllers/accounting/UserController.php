@@ -7,8 +7,9 @@ use App\Models\User;
 use App\Models\Debit;
 use App\Models\Kredit;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -101,8 +102,10 @@ class UserController extends Controller
         $roleSlug = str_replace(' ', '_', $role);
         $roleSlug = strtolower($roleSlug);
 
+        $transaksi_debit = TransaksiDebit::where('id_author', $idUser)->get();
         $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
         $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
+        $listAktivitas = $listDebit->concat($listDebit)->concat($transaksi_debit)->where('id_author', $idUser)->all();
 
         $pageData = [
             'title' => 'User - ' . $role,
@@ -119,7 +122,7 @@ class UserController extends Controller
         return view('accounting.user.detail', $pageData);
     }
 
-        public function showPiutang($idUser, $idDebit)
+    public function showPiutang($idUser, $idDebit)
     {
         $user = User::find($idUser);
         User::getFullname($user);
@@ -136,17 +139,18 @@ class UserController extends Controller
         return view('accounting.user.customer.detailPiutang', $pageData);
     }
 
-    function showLogActivity($idUser){
+    function showLogActivity($idUser)
+    {
         $user = User::find($idUser);
         User::getFullname($user);
         $role = $user->role->nama;
 
         //
         $debits = Debit::where('id_author', $idUser)->get();
-        $transaksi_debit = TransaksiDebit::where('id_author',$idUser)->get();
+        $transaksi_debit = TransaksiDebit::where('id_author', $idUser)->get();
         $kredits = Kredit::where('id_author', $idUser)->get();
 
-        $listAktivitas = $debits->concat($kredits)->concat($transaksi_debit)->where('id_author',$idUser)->all();
+        $listAktivitas = $debits->concat($kredits)->concat($transaksi_debit)->where('id_author', $idUser)->all();
         dd($listAktivitas);
         $pageData = [
             'title' => 'User - ' . $role,
@@ -155,17 +159,17 @@ class UserController extends Controller
             'user' => $user,
             'listAktivitas' => $listAktivitas,
         ];
-       
-        return view('accounting.user.accounting.tableListAktivitas',$pageData);
+
+        return view('accounting.user.accounting.tableListAktivitas', $pageData);
     }
 
-   public function showHutang($idUser, $idKredit)
+    public function showHutang($idUser, $idKredit)
     {
         $user = User::find($idUser);
         User::getFullname($user);
         $role = $user->role->nama;
-  
-      $pageData = [
+
+        $pageData = [
             'title' => 'User - ' . $role,
             'heading' => $user->fullname . ' - Piutang',
             'active' => 'user',
