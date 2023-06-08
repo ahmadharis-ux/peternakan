@@ -24,4 +24,8 @@ class TransaksiDebit extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+    public static function getTotalNominal()
+    {
+        return TransaksiDebit::all()->sum('nominal');
+    }
 }
