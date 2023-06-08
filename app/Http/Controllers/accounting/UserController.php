@@ -103,7 +103,6 @@ class UserController extends Controller
 
         $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
         $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
-        $listAktivitas = User::where('id',$idUser)->with('pembelianSapi')->get();
 
         $pageData = [
             'title' => 'User - ' . $role,
@@ -114,12 +113,13 @@ class UserController extends Controller
             'listDebit' => $listDebit,
             'roleSlug' => $roleSlug,
             'listAktivitas' =>  $listAktivitas,
-];
+        ];
+
 
         return view('accounting.user.detail', $pageData);
     }
 
-    public function showPiutang($idUser, $idDebit)
+        public function showPiutang($idUser, $idDebit)
     {
         $user = User::find($idUser);
         User::getFullname($user);
@@ -136,15 +136,36 @@ class UserController extends Controller
         return view('accounting.user.customer.detailPiutang', $pageData);
     }
 
-    public function showHutang($idUser, $idKredit)
-    {
+    function showLogActivity($idUser){
         $user = User::find($idUser);
         User::getFullname($user);
         $role = $user->role->nama;
 
-        // return Kredit::find($idKredit);
+        //
+        $debits = Debit::where('id_author', $idUser)->get();
+        $transaksi_debit = TransaksiDebit::where('id_author',$idUser)->get();
+        $kredits = Kredit::where('id_author', $idUser)->get();
 
+        $listAktivitas = $debits->concat($kredits)->concat($transaksi_debit)->where('id_author',$idUser)->all();
+        dd($listAktivitas);
         $pageData = [
+            'title' => 'User - ' . $role,
+            'heading' => $user->fullname . ' - Piutang',
+            'active' => 'user',
+            'user' => $user,
+            'listAktivitas' => $listAktivitas,
+        ];
+       
+        return view('accounting.user.accounting.tableListAktivitas',$pageData);
+    }
+
+   public function showHutang($idUser, $idKredit)
+    {
+        $user = User::find($idUser);
+        User::getFullname($user);
+        $role = $user->role->nama;
+  
+      $pageData = [
             'title' => 'User - ' . $role,
             'heading' => $user->fullname . ' - Piutang',
             'active' => 'user',
