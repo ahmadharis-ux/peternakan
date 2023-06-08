@@ -21,10 +21,13 @@
                 <td>{{ $sapi->jenisSapi->nama }}</td>
                 <td>{{ $sapi->bobot }} kg</td>
                 <td>{{ $sapi->jenis_kelamin }}</td>
-                <td>Rp {{number_format($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan')) }}</td>
+                <td class="text-end">Rp
+                    {{ number_format($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan')) }}</td>
                 {{-- @dd($sapi) --}}
-                @if ($sapi->status == "DIBELI")
-                    <td>Rp {{ number_format($sapi->detailPenjualanSapi->sum('harga') - ($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan'))) }}</td>
+                @if ($sapi->status == 'DIBELI')
+                    <td class="text-end">Rp
+                        {{ number_format($sapi->detailPenjualanSapi->sum('harga') - ($sapi->harga_pokok + $sapi->markup->sum('markup_pembulatan'))) }}
+                    </td>
                 @else
                     <td>0</td>
                 @endif
