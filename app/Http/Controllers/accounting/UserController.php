@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
 use App\Http\Controllers\Controller;
+use App\Models\TransaksiDebit;
+
 
 class UserController extends Controller
 {
@@ -145,7 +147,7 @@ class UserController extends Controller
         User::getFullname($user);
         $role = $user->role->nama;
 
-        //
+ 
         $debits = Debit::where('id_author', $idUser)->get();
         $transaksi_debit = TransaksiDebit::where('id_author', $idUser)->get();
         $kredits = Kredit::where('id_author', $idUser)->get();
