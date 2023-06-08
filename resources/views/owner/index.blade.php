@@ -49,7 +49,7 @@
 
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>[sum_hutang]</h6>
+                                            <h6>Rp {{ number_format($totalHutang) }}</h6>
                                             <h6></h6>
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
 
                                 <div class="d-flex align-items-center">
                                     <div class="ps-3">
-                                        <h6>[sum_piutang]</h6>
+                                        <h6>Rp {{ number_format($totalPiutang) }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
 
                                 <div class="d-flex align-items-center">
                                     <div class="ps-3">
-                                        <h6>[total_saldo]</h6>
+                                        <h6>{{ number_format($totalSaldo + $jumlahNilaiPembelianPakan - $jumlahNilaiPemakaianPakan) }}</h6>
                                     </div>
                                 </div>
 
@@ -121,7 +121,7 @@
                                     <h5 class="card-title">Stok Sapi</h5>
                                     <div class="d-flex align-items-center">
                                         <div class="ps-3">
-                                            <h6>[stok_sapi]</h6>
+                                            <h6>{{ $stokSapi }}</h6>
                                         </div>
                                     </div>
 

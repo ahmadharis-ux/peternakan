@@ -57,84 +57,84 @@ class User extends Authenticatable
 
     public function rekening()
     {
-        return $this->hasMany(Rekening::class);
+        return $this->hasMany(Rekening::class,'id_author');
     }
 
     // ================================== per sapian
     public function pembelianSapi()
     {
-        return $this->hasMany(PembelianSapi::class);
+        return $this->hasMany(PembelianSapi::class,'id_author');
     }
 
     public function penjualanSapi()
     {
-        return $this->hasMany(PenjualanSapi::class);
+        return $this->hasMany(PenjualanSapi::class,'id_author');
     }
 
     public function riwayatBobotSapi()
     {
-        return $this->hasMany(RiwayatBobotSapi::class);
+        return $this->hasMany(RiwayatBobotSapi::class,'id_author');
     }
 
     public function jenisSapi()
     {
-        return $this->hasMany(JenisSapi::class);
+        return $this->hasMany(JenisSapi::class,'id_author');
     }
 
 
     // ================================== per pakanan
     public function pakan()
     {
-        return $this->hasMany(Pakan::class);
+        return $this->hasMany(Pakan::class, 'id_author');
     }
 
     public function pembelianPakan()
     {
-        return $this->hasMany(PembelianPakan::class);
+        return $this->hasMany(PembelianPakan::class,'id_author');
     }
 
     public function pemakaianPakan()
     {
-        return $this->hasMany(PemakaianPakan::class);
+        return $this->hasMany(PemakaianPakan::class,'id_author');
     }
 
 
     // ================================== per kreditan
     public function kredit()
     {
-        return $this->hasMany(Kredit::class);
+        return $this->hasMany(Kredit::class,'id_author');
     }
 
     public function transaksiKredit()
     {
-        return $this->hasMany(TransaksiKredit::class);
+        return $this->hasMany(TransaksiKredit::class,'id_author');
     }
 
     public function fakturKredit()
     {
-        return $this->hasMany(FakturKredit::class);
+        return $this->hasMany(FakturKredit::class,'id_author');
     }
 
     // ================================== perdebitan
     public function debit()
     {
-        return $this->hasMany(Debit::class, 'id_pihak_kedua');
+        return $this->hasMany(Debit::class, 'id_pihak_kedua','id_author');
     }
 
     public function transaksiDebit()
     {
-        return $this->hasMany(TransaksiDebit::class);
+        return $this->hasMany(TransaksiDebit::class,'id_author');
     }
 
     public function fakturDebit()
     {
-        return $this->hasMany(FakturDebit::class);
+        return $this->hasMany(FakturDebit::class,'id_author');
     }
 
     // ================================== per jurnalan
     public function kodeJurnal()
     {
-        return $this->hasMany(KodeJurnal::class);
+        return $this->hasMany(KodeJurnal::class,'id_author');
     }
 
     public function jurnal()

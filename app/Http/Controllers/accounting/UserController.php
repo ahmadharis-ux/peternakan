@@ -8,6 +8,7 @@ use App\Models\Debit;
 use App\Models\Kredit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\TransaksiKredit;
 
 class UserController extends Controller
 {
@@ -48,6 +49,7 @@ class UserController extends Controller
             'listRole' => Role::all(),
             'idRoleDipilih' => $idRole,
             'namaRoleDipilih' => $role,
+
         ];
 
         return view('accounting.user.index', $pageData);
@@ -96,9 +98,12 @@ class UserController extends Controller
         User::getFullname($user);
 
         $role = $user->role->nama;
+        $roleSlug = str_replace(' ', '_', $role);
+        $roleSlug = strtolower($roleSlug);
 
         $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
         $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
+        $listAktivitas = User::where('id',$idUser)->with('pembelianSapi')->get();
 
         $pageData = [
             'title' => 'User - ' . $role,
@@ -107,7 +112,9 @@ class UserController extends Controller
             'user' => $user,
             'listKredit' => $listKredit,
             'listDebit' => $listDebit,
-        ];
+            'roleSlug' => $roleSlug,
+            'listAktivitas' =>  $listAktivitas,
+];
 
         return view('accounting.user.detail', $pageData);
     }
@@ -127,5 +134,29 @@ class UserController extends Controller
         ];
 
         return view('accounting.user.customer.detailPiutang', $pageData);
+    }
+
+    public function showHutang($idUser, $idKredit)
+    {
+        $user = User::find($idUser);
+        User::getFullname($user);
+        $role = $user->role->nama;
+
+        // return Kredit::find($idKredit);
+
+        $pageData = [
+            'title' => 'User - ' . $role,
+            'heading' => $user->fullname . ' - Piutang',
+            'active' => 'user',
+            'user' => $user,
+            'kredit' => Kredit::find($idKredit),
+            'listRiwayatTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
+        ];
+
+        $roleSlug = str_replace(' ', '_', $role);
+        $roleSlug = strtolower($roleSlug);
+
+
+        return view('accounting.user.' . $roleSlug . '.detailHutang', $pageData);
     }
 }
