@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
 use App\Http\Controllers\Controller;
-use App\Models\TransaksiDebit;
 
 
 class UserController extends Controller
