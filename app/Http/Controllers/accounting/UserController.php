@@ -9,6 +9,7 @@ use App\Models\Kredit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\TransaksiKredit;
+use App\Models\TransaksiDebit;
 
 class UserController extends Controller
 {
@@ -103,6 +104,7 @@ class UserController extends Controller
 
         $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
         $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
+        $listAktivitas = User::where('id',$idUser)->with('pembelianSapi')->get();
 
         $pageData = [
             'title' => 'User - ' . $role,
