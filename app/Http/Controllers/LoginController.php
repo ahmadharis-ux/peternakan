@@ -70,6 +70,7 @@ class LoginController extends Controller
 
         return redirect('/');
     }
+    
     function changePassword(Request $request)
     {
         $request->validate([
