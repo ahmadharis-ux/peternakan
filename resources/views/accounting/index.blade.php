@@ -26,7 +26,7 @@
 
                     <!-- Piutang Card -->
                     <div class="col-xxl-8 col-md-6">
-                        <a href="#">
+                        <a href="/acc/rincian_piutang">
                             <div class="card info-card revenue-card">
                                 <div class="card-body">
                                     <h5 class="card-title">Piutang</h5>

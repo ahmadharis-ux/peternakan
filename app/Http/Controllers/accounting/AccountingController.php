@@ -16,6 +16,7 @@ use App\Models\DetailPemakaianPakan;
 use App\Models\DetailPembelianPakan;
 use App\Models\PembelianPakan;
 use App\Models\StokPakan;
+use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
 
 class AccountingController extends Controller
@@ -33,7 +34,7 @@ class AccountingController extends Controller
             'active' => 'dashboard',
             'date' => Carbon::now()->format('d-m-Y'),
             'totalHutang' => Kredit::getTotalNominal() - TransaksiKredit::getTotalNominal(),
-            'totalPiutang' => Debit::getTotalNominal(),
+            'totalPiutang' => Debit::getTotalNominal() - TransaksiDebit::getTotalNominal(),
             'stokSapi' => Sapi::where('status', 'ADA')->get()->count(),
             'totalSaldo' => Rekening::getTotalSaldo(),
             'jumlahNilaiPembelianPakan' => $a,
@@ -116,8 +117,6 @@ class AccountingController extends Controller
 
         //piutangPekerja
         $piutangGaji = Debit::getPiutangGaji();
-
-
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
