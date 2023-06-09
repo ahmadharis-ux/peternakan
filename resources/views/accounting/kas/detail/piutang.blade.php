@@ -93,7 +93,7 @@
                                     @endforeach
                                     <tr>
                                         <th colspan="4">Subtotal</th>
-                                        <td>Rp. {{ number_format($data->piutang->sum('total_harga')) }}</td>
+                                        <td>Rp {{ number_format($data->piutang->sum('total_harga')) }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -143,12 +143,12 @@
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                                             <td>{{ $item->keterangan }}</td>
-                                            <td>Rp. {{ number_format($item->nominal) }}</td>
+                                            <td>Rp {{ number_format($item->nominal) }}</td>
                                         </tr>
                                     @endforeach
                                     <tr>
                                         <th colspan="3">Subtotal</th>
-                                        <td>Rp. {{ number_format($data->operasional->sum('nominal')) }}</td>
+                                        <td>Rp {{ number_format($data->operasional->sum('nominal')) }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -230,13 +230,13 @@
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                                                     <td>{{ $item->ket }}</td>
-                                                    <td>Rp. {{ number_format($item->debit) }}</td>
+                                                    <td>Rp {{ number_format($item->debit) }}</td>
                                                     <td>{{ $item->rekening->name }} {{ $item->rekening->nomor }}</td>
                                                 </tr>
                                             @endforeach
                                             <tr>
                                                 <th colspan="3">Subtotal</th>
-                                                <td>Rp. {{ number_format($data->pembayaran->sum('debits')) }}</td>
+                                                <td>Rp {{ number_format($data->pembayaran->sum('debits')) }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -254,14 +254,14 @@
                                 <div class="row">
                                     <div class="col-sm">Tunai : </div>
                                     <div class="col-sm justify-content-end">
-                                        Rp. {{ number_format($data->pembayaran->sum('debits')) }}
+                                        Rp {{ number_format($data->pembayaran->sum('debits')) }}
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm">Sisa Pembayaran : </div>
                                     <div class="col-sm justify-content-end">
-                                        Rp.
+                                        Rp
                                         {{ number_format($data->piutang->sum('total_harga') + $data->operasional->sum('nominal') - $data->pembayaran->sum('debits')) }}
                                     </div>
                                 </div>

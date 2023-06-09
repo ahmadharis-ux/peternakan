@@ -206,7 +206,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
 
     Route::get('test', function () {
-        return view('test_faktur');
+        return view('accounting.invoice');
     });
 
     Route::post('test', function () {

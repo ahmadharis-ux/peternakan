@@ -29,15 +29,15 @@
                     </tr>
                     <tr>
                       <td>Total Harga</td>
-                      <td>Rp. {{number_format($data->bobot * $data->harga)}}</td>
+                      <td>Rp {{number_format($data->bobot * $data->harga)}}</td>
                     </tr>
                     <tr>
                       <td>Telah dibayar</td>
-                      <td>Rp. {{number_format($data->pembayaran->sum('debits'))}}</td>
+                      <td>Rp {{number_format($data->pembayaran->sum('debits'))}}</td>
                     </tr>
                     <tr>
                       <td>Sisa Pembayaran </td>
-                      <td>Rp. {{number_format(($data->bobot * $data->harga) - $data->pembayaran->sum('debits'))}}</td>
+                      <td>Rp {{number_format(($data->bobot * $data->harga) - $data->pembayaran->sum('debits'))}}</td>
                     </tr>
                     <tr>
                       <td>Status</td>
@@ -68,17 +68,17 @@
                     <tr>
                       <th>Total Harga</th>
                       <td></td>
-                      <td>Rp. {{number_format($data->bobot * $data->harga)}}</td>
+                      <td>Rp {{number_format($data->bobot * $data->harga)}}</td>
                     </tr>
                     <tr>
                       <th>Telah dibayar</th>
                       <td></td>
-                      <td>Rp. {{number_format($data->pembayaran->sum('kredits'))}}</td>
+                      <td>Rp {{number_format($data->pembayaran->sum('kredits'))}}</td>
                     </tr>
                     <tr>
                       <th>Sisa Pembayaran </th>
                       <td></td>
-                      <td>Rp. {{number_format(($data->bobot * $data->harga) - $data->pembayaran->sum('kredits'))}}</td>
+                      <td>Rp {{number_format(($data->bobot * $data->harga) - $data->pembayaran->sum('kredits'))}}</td>
                     </tr>
                     <tr>
                       <th>Status</th>
@@ -115,17 +115,17 @@
                     <tr>
                       <th>Total Harga</th>
                       <td></td>
-                      <td>Rp. {{number_format($data->qty * $data->harga)}}</td>
+                      <td>Rp {{number_format($data->qty * $data->harga)}}</td>
                     </tr>
                     <tr>
                       <th>Telah dibayar</th>
                       <td></td>
-                      <td>Rp. {{number_format($data->pembayaran->sum('kredits'))}}</td>
+                      <td>Rp {{number_format($data->pembayaran->sum('kredits'))}}</td>
                     </tr>
                     <tr>
                       <th>Sisa Pembayaran </th>
                       <td></td>
-                      <td>Rp. {{number_format(($data->qty * $data->harga) - $data->pembayaran->sum('kredits'))}}</td>
+                      <td>Rp {{number_format(($data->qty * $data->harga) - $data->pembayaran->sum('kredits'))}}</td>
                     </tr>
                     <tr>
                       <th>Status</th>
@@ -162,10 +162,10 @@
                             <td>{{date("d - F - Y", strtotime($item->tanggal))}}</td>
                             <td>{{$item->ket}}</td>
                             @if ($item->kas->jurnal->name == 'Piutang')
-                            <td>Rp. {{number_format($item->debit)}}</td>
+                            <td>Rp {{number_format($item->debit)}}</td>
                             <td>{{$item->rekening->name}} {{$item->rekening->norek}} {{$item->rekening->bank}}</td>
                             @else
-                            <td>Rp. {{number_format($item->kredit)}}</td>
+                            <td>Rp {{number_format($item->kredit)}}</td>
                             @endif
                         </tr>
                         @endforeach
@@ -247,8 +247,8 @@
                     <label for="">{{ $item->hutang->eartag }}</label>
                     <p style="font-size: 11px">{{ $item->bobot }} * {{ number_format($item->harga_kg) }}</p>
                 </td>
-                <td style="width:50mm">Rp. {{ number_format($item->total_harga) }}</td>
-                <td>Rp. {{ number_format($item->total_harga) }}</td>
+                <td style="width:50mm">Rp {{ number_format($item->total_harga) }}</td>
+                <td>Rp {{ number_format($item->total_harga) }}</td>
             </tr>
             <?php
             $piutang += $item->total_harga;
@@ -257,7 +257,7 @@
         <tr>
             <td rowspan="3" style="width:100mm">Subtotal</td>
             <td></td>
-            <td>Rp. {{ number_format($piutang) }}</td>
+            <td>Rp {{ number_format($piutang) }}</td>
         </tr>
     </table>
     <br>
@@ -274,7 +274,7 @@
                 <td style="width:100mm">
                     {{ $item->keterangan }}
                 </td>
-                <td style="width:50mm">Rp. {{ number_format($item->nominal) }}</td>
+                <td style="width:50mm">Rp {{ number_format($item->nominal) }}</td>
             </tr>
             <?php
             $opr += $item->nominal;
@@ -282,7 +282,7 @@
         @endforeach
         <tr>
             <td rowspan="2" style="">Subtotal</td>
-            <td>Rp. {{ number_format($opr) }}</td>
+            <td>Rp {{ number_format($opr) }}</td>
         </tr>
     </table>
     <br>
@@ -301,7 +301,7 @@
                 <td style="width:100mm">
                     {{ date('d-m-Y', strtotime($item->tanggal)) }}
                 </td>
-                <td style="width:50mm">Rp. {{ number_format($item->debit) }}</td>
+                <td style="width:50mm">Rp {{ number_format($item->debit) }}</td>
                 <td style="width:30mm">{{ $item->ket }}</td>
             </tr>
             <?php
@@ -310,7 +310,7 @@
         @endforeach
         <tr>
             <td rowspan="3" style="">Subtotal</td>
-            <td>Rp. {{ number_format($debit) }}</td>
+            <td>Rp {{ number_format($debit) }}</td>
         </tr>
     </table>
 

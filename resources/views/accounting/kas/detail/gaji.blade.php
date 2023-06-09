@@ -23,7 +23,7 @@
                 </div>
             @elseif($salary != null)
                 <div class="col-md-6 mx-3">
-                    <h5>Nominal Gaji Rp. {{ number_format($data->salary->sum('salary')) }}</h5>
+                    <h5>Nominal Gaji Rp {{ number_format($data->salary->sum('salary')) }}</h5>
                 </div>
                 <div class="row">
                     <div class="col-sm my-2 mx-2">
@@ -45,7 +45,7 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <label for="" class="mb-2">Sisa Gaji Yang Belum dibayar Rp.
+                                                <label for="" class="mb-2">Sisa Gaji Yang Belum dibayar Rp
                                                     {{ number_format($data->salary->sum('salary') - ($data->pembayaran->sum('kredits') + $data->kasbon->sum('nominal'))) }}</label>
                                                 <div class="col-sm-12">
                                                     <label for="">Nominal</label>
@@ -82,7 +82,7 @@
                                     @foreach ($data->pembayaran as $item)
                                         <tr>
                                             <th>{{ date('d/m/  Y', strtotime($item->created_at)) }}</th>
-                                            <td>Rp. {{ number_format($item->kredit) }}</td>
+                                            <td>Rp {{ number_format($item->kredit) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -143,7 +143,7 @@
                                     @foreach ($data->kasbon as $item)
                                         <tr>
                                             <th>{{ date('d-m-Y', strtotime($item->created_at)) }}</th>
-                                            <td>Rp. {{ number_format($item->nominal) }}</td>
+                                            <td>Rp {{ number_format($item->nominal) }}</td>
                                             <td>{{ $item->keterangan }}</td>
                                         </tr>
                                     @endforeach

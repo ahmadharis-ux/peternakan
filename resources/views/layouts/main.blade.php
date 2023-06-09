@@ -160,7 +160,9 @@
         $(document).ready(function() {
             $('#example').DataTable();
 
-            $('#example2').DataTable();
+            for (let i = 0; i < 20; i++) {
+                $(`#example${i}`).DataTable();
+            }
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>

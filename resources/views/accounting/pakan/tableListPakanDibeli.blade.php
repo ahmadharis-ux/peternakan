@@ -14,7 +14,7 @@
                  <th scope="row">{{ $loop->iteration }}</th>
                  <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
                  <td>{{ $item->pakan->nama }}</td>
-                 <td class="text-end">Rp. {{number_format( $item->harga )}}</td>
+                 <td class="text-end">Rp {{ number_format($item->harga) }}</td>
                  <td class="text-end">{{ $item->qty }} {{ $item->satuanPakan->nama }}</td>
              </tr>
          @endforeach

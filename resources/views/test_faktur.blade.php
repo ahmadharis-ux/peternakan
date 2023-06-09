@@ -33,14 +33,6 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
-
-
-    <!-- =======================================================
-  * Template Name: NiceAdmin - v2.5.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <div class="container py-3 mt-3">
@@ -103,7 +95,7 @@
         </div>
     </div>
 
-    {{-- list detail penjualan sapi --}}
+    {{-- list detail penjualan/pembelian --}}
     <div class="mt-5">
         <table class="table table-bordered border-grey">
             <thead class="table-dark">
@@ -184,7 +176,6 @@
                     <span class="fw-bold">[tanggal]</span>
                     <img src="{{ asset('logo.svg') }}" width="150px" class="my-3">
                     <span class="fw-bold">[penanggung jawab]</span>
-
 
                 </div>
             </div>
