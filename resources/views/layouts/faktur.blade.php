@@ -50,24 +50,22 @@
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Referensi</span>
-                        <span>
-                            @yield('refInvoice')
-                        </span>
+                        <span>INV/{{ getTimestamp() }}</span>
                     </div>
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Tanggal</span>
-                        <span>@yield('tanggalInvoice')</span>
+                        <span>{{ carbonToday() }}</span>
                     </div>
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Jatuh Tempo</span>
-                        <span>@yield('jatuhTempoInvoice')</span>
+                        <span> [jatuh tempo]</span>
                     </div>
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Subjek</span>
-                        <span>@yield('subjek')</span>
+                        <span>{{ $subjek }}</span>
                     </div>
                 </div>
             </div>
@@ -91,12 +89,22 @@
                 </div>
             </div>
 
+            @php
+                $isKredit = isset($kredit);
+            @endphp
+
             {{-- penerima/pengirim tagihan --}}
             <div class="d-flex flex-column" style="width:40%">
-                <span class="fw-bold">Tagihan Untuk</span>
+                <span class="fw-bold">Tagihan {{ $isKredit ? 'dari' : 'untuk' }}</span>
                 <hr>
                 <div class="d-flex flex-column">
-                    @yield('infoPenerimaTagihan')
+                    @php
+                        $pk = ($isKredit ? $kredit : $debit)->pihakKedua;
+                    @endphp
+                    <span class="fw-bold my-2">{{ getUserFullname($pk) }}</span>
+                    <span>{{ $pk->email }}</span>
+                    <span>{{ $pk->telepon }}</span>
+                    <span>{{ $pk->alamat }}</span>
                 </div>
             </div>
         </div>
@@ -171,11 +179,11 @@
                 {{-- tanda tangan --}}
                 <div class="col text-center">
                     <div class="d-flex flex-column  justify-content-start align-items-center">
-                        <span class="fw-bold">@yield('tanggalTtd')</span>
+                        <span class="fw-bold"> {{ tanggalSekarang() }}</span>
                         <div>
                             <img src="{{ asset('logo.svg') }}" width="150px" class="my-3">
                         </div>
-                        <span class="fw-bold">@yield('penanggungJawab')</span>
+                        <span class="fw-bold"> {{ getUserFullname($author) }}</span>
                     </div>
                 </div>
 
