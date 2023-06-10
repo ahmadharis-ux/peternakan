@@ -10,8 +10,11 @@
     $sisaPembayaran = $totalKredit - $totalBayar;
     $statusKredit = $kredit->lunas ? 'LUNAS' : 'BELUM LUNAS';
 
-@endphp
+    // pihak kedua
+    $pk = $kredit->pihakKedua;
+    $pihakKeduaFullname = "$pk->nama_depan $pk->nama_belakang";
 
+@endphp
 
 <div class="row mt-3">
     <div class="col-sm">Pembelian pakan</div>
@@ -22,7 +25,6 @@
         </span>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-sm">Operasional</div>
@@ -35,7 +37,9 @@
 </div>
 
 <div class="row">
-    <div class="col"><hr></div>
+    <div class="col">
+        <hr>
+    </div>
     <div class="col-1">+</div>
 </div>
 
@@ -72,9 +76,18 @@
 
 <div class="row">
     <div class="col-sm">Status</div>
-    <div class="col-sm d-flex justify-content-center">
+    <div class="col-sm d-flex justify-content-start">
         <span class="fw-bold">
             {{ $statusKredit }}
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm">Pihak kedua</div>
+    <div class="col-sm d-flex justify-content-start">
+        <span class="fw-bold">
+            {{ $pihakKeduaFullname }}
         </span>
     </div>
 </div>

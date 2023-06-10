@@ -38,6 +38,7 @@ use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
+use App\Models\Debit;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +108,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
             Route::post('/operasional', [PenjualanSapiController::class, 'storeOperasional']);
             Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
+            Route::post('/{penjualanSapi}/invoice', [PenjualanSapiController::class, 'invoice']);
         });
 
         // Gaji
@@ -206,7 +208,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
 
     Route::get('test', function () {
-        return view('accounting.invoice');
+        return view('test_faktur');
     });
 
     Route::post('test', function () {

@@ -11,7 +11,6 @@
     $statusKredit = $kreditPenggajian->lunas ? 'LUNAS' : 'BELUM LUNAS';
 @endphp
 
-
 <div class="row">
     <div class="col-sm">Gaji</div>
     <div class="col-sm d-flex justify-content-between">
@@ -45,7 +44,7 @@
 
 <div class="row">
     <div class="col-sm">Status</div>
-    <div class="col-sm d-flex justify-content-center">
+    <div class="col-sm d-flex justify-content-start">
         <span class="fw-bold">
             {{ $statusKredit }}
         </span>

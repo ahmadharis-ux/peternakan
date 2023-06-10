@@ -135,6 +135,21 @@ class PenjualanSapiController extends Controller
         return view('accounting.penjualan_sapi.detail', $pageData);
     }
 
+    public function invoice(PenjualanSapi $penjualanSapi, Request $request)
+    {
+        $debit = $penjualanSapi->debit()->first();
+        $pageData = [
+            "title" => "Invoice penjualan sapi $penjualanSapi->id",
+            "penjualanSapi" => $penjualanSapi,
+            "debit" => $debit,
+            "subjek" => $request->subjek,
+            "author" => auth()->user(),
+        ];
+
+        // return $pageData;
+
+        return view('accounting.penjualan_sapi.faktur', $pageData);
+    }
 
     public function edit(PenjualanSapi $penjualanSapi)
     {
