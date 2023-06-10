@@ -200,7 +200,9 @@ class PakanController extends Controller
             "author" => auth()->user(),
         ];
 
-        return view('accounting.pembelian_pakan.faktur', $pageData);
+        // return $pembelianPakan;
+
+        return view('accounting.pakan.faktur', $pageData);
     }
 
     /**

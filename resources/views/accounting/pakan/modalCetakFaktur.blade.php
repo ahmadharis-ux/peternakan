@@ -14,7 +14,7 @@
                 <div class="modal-body p-5">
                     <div>
                         <label for="">Subjek faktur</label>
-                        <input type="text" class="form-control" required>
+                        <input type="text" name="subjek" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">

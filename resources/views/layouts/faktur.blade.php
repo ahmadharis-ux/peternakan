@@ -41,7 +41,7 @@
         {{-- header --}}
         <div class="d-flex justify-content-between">
 
-            <img src="{{ asset('logo.svg') }}" class="mt-3" width="200px    " alt="">
+            <img src="{{ asset('logo.svg') }}" class="mt-3" width="200px" alt="">
 
             {{-- kpp surat --}}
             <div class="d-flex flex-column justify-content-start">

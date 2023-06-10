@@ -12,6 +12,11 @@ class DetailPembelianPakan extends Model
 {
     use HasFactory;
 
+    protected $with = [
+        "pakan",
+        "satuanPakan"
+    ];
+
     function pakan()
     {
         return $this->belongsTo(Pakan::class, 'id_pakan');
