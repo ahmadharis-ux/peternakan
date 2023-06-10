@@ -164,6 +164,8 @@ class PembelianSapiController extends Controller
             "author" => auth()->user(),
         ];
 
+        // return $pembelianSapi;
+
         return view('accounting.pembelian_sapi.faktur', $pageData);
     }
 

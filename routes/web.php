@@ -96,6 +96,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/detail', [PembelianSapiController::class, 'storeDetail']);
             Route::post('/operasional', [PembelianSapiController::class, 'storeOperasional']);
             Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
+            Route::post('/{pembelianSapi}/invoice', [PembelianSapiController::class, 'invoice']);
         });
 
         // Piutang
@@ -174,6 +175,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/satuan', [PakanController::class, 'storeSatuan']);
             Route::post('/pembelian', [PakanController::class, 'storePembelianPakan']);
             Route::post('/operasional', [PakanController::class, 'storeOperasional']);
+            Route::post('/{pembelianPakan}', [PakanController::class, 'invoice']);
         });
 
 

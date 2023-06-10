@@ -11,17 +11,18 @@
     Pajak
 --}}
 
+    @php
+        $iteration = 1;
+    @endphp
+
     {{-- detail penjualan --}}
-    @foreach ($penjualanSapi->detailPenjualanSapi as $item)
-        @php
-            $sapi = $item->sapi;
-        @endphp
+    @foreach ($pembelianSapi->detailPembelianSapi as $item)
         <tr>
             <th style="width: 50px">{{ $iteration++ }}</th>
             <td>
                 <div class="d-flex flex-column">
-                    <span class="fw-bold">{{ $sapi->eartag }}</span>
-                    <span>Sapi {{ $sapi->jenisSapi->nama }}</span>
+                    <span class="fw-bold">{{ $item->eartag }}</span>
+                    <span>Sapi {{ $item->jenisSapi()->first()->nama }}</span>
                 </div>
             </td>
             <td class="text-center">1</td>
@@ -34,7 +35,7 @@
     @endforeach
 
     {{-- operasional penjualan --}}
-    @foreach ($penjualanSapi->operasionalPenjualanSapi as $opr)
+    @foreach ($pembelianSapi->operasionalPembelianSapi as $opr)
         <tr>
             <th style="width: 50px">{{ $iteration++ }}</th>
             <td>
@@ -54,8 +55,8 @@
 
 @section('subtotal')
     @php
-        $subtotal = $penjualanSapi->detailPenjualanSapi->sum('harga');
-        $subtotal += $penjualanSapi->operasionalPenjualanSapi->sum('harga');
+        $subtotal = $pembelianSapi->detailPembelianSapi->sum('harga');
+        $subtotal += $pembelianSapi->operasionalPembelianSapi->sum('harga');
     @endphp
 
     {{ number_format($subtotal) }}
@@ -79,7 +80,7 @@
 
 @section('tunai')
     @php
-        $tunai = $debit->transaksiDebit->sum('nominal');
+        $tunai = $kredit->transaksiKredit->sum('nominal');
     @endphp
 
     {{ number_format($tunai) }}
@@ -90,5 +91,5 @@
 @endsection
 
 @section('keterangan')
-    <p>{{ $debit->keterangan }}</p>
+    <p>{{ $kredit->keterangan }}</p>
 @endsection

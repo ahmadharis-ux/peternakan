@@ -1,29 +1,5 @@
 @extends('layouts.faktur')
 
-@section('refInvoice')
-    INV/{{ getTimestamp() }}
-@endsection
-
-@section('tanggalInvoice')
-    {{ carbonToday() }}
-@endsection
-
-@section('jatuhTempoInvoice')
-    <div class="bg-danger text-light rounded p-1">
-        [jatuh tempo debit]
-    </div>
-@endsection
-
-@section('infoPenerimaTagihan')
-    @php
-        $pk = $debit->pihakKedua;
-    @endphp
-    <span class="fw-bold my-2">{{ getUserFullname($pk) }}</span>
-    <span>{{ $pk->email }}</span>
-    <span>{{ $pk->telepon }}</span>
-    <span>{{ $pk->alamat }}</span>
-@endsection
-
 @section('listItemTransaksi')
     {{--
  kolom:
@@ -120,17 +96,4 @@
 @section('keterangan')
     <p>{{ $subjek }}</p>
     <p>{{ $debit->keterangan }}</p>
-@endsection
-
-@section('tanggalTtd')
-    {{ tanggalSekarang() }}
-@endsection
-
-@section('ttd')
-    {{-- ganti ku svg tanda tangan user --}}
-    <img src="{{ asset('logo.svg') }}" width="150px" class="my-3">
-@endsection
-
-@section('penanggungJawab')
-    {{ getUserFullname($author) }}
 @endsection
