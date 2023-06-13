@@ -64,6 +64,7 @@ class AccountingController extends Controller
 
         return view('accounting.kas.index', $pageData);
     }
+
     function detailSaldoDanAset()
     {
         $jumlahNilaiPembelianPakan = DetailPembelianPakan::jumlahNilaiPembelianPakan();
@@ -90,8 +91,6 @@ class AccountingController extends Controller
         //hutangPekerja
         $hutangGaji = Kredit::getHutangGaji();
 
-
-
         $pageData = [
             'title' => 'Dashboard - Accounting',
             'heading' => 'Accounting',
@@ -110,13 +109,7 @@ class AccountingController extends Controller
     function RincianPiutangPerusahaan()
     {
         // piutang sapi
-        $piutangSapi = Debit::getPiutangSapi();
-
-        //piutangpakan
-        $piutangPakan = Debit::getPiutangPakan();
-
-        //piutangPekerja
-        $piutangGaji = Debit::getPiutangGaji();
+        $piutangSapi = Debit::getPiutangSapi();  
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
@@ -124,10 +117,6 @@ class AccountingController extends Controller
             'active' => 'dashboard',
             'piutangSapi' => $piutangSapi->sum('nominal'),
             'totalTransaksiPiutangSapi' => Debit::getTotalTransaksi($piutangSapi),
-            'piutangPakan' => $piutangPakan->sum('nominal'),
-            'totalTransaksiPiutangPakan' => Debit::getTotalTransaksi($piutangPakan),
-            'piutangGaji' => $piutangGaji->sum('nominal'),
-            'totalTransaksiPiutangGaji' => Debit::getTotalTransaksi($piutangGaji),
         ];
 
         return view('accounting.total_piutang.index', $pageData);
