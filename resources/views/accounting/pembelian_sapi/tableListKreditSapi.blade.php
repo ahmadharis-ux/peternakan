@@ -11,6 +11,7 @@
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Status</th>
             <th scope="col">Tanggal</th>
             <th scope="col">Pihak kedua</th>
             <th scope="col">Keterangan</th>
@@ -24,6 +25,11 @@
         @foreach ($listKreditSapi as $kreditSapi)
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
+                @if ($kreditSapi->lunas != 1)
+                <td>Belum Lunas</td>
+                @else
+                <td>Lunas</td>
+                @endif
                 <td>{{ $kreditSapi->created_at }}</td>
                 <td>{{ $kreditSapi->pihakKedua->nama_depan }}</td>
                 <td>{{ $kreditSapi->keterangan }}</td>
