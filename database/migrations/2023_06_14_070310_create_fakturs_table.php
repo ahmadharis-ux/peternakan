@@ -14,6 +14,7 @@ return new class extends Migration {
     {
         Schema::create('fakturs', function (Blueprint $table) {
             $table->id();
+            $table->string('nomor_faktur');
             $table->foreignId('id_author')->unsigned();
             $table->foreignId('id_pihak_kedua')->unsigned();
 
