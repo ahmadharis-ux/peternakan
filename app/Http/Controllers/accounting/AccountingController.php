@@ -46,20 +46,19 @@ class AccountingController extends Controller
 
     function kas()
     {
-        // return Kas::getView();
+        $historiKas = Kas::getHistoryTransaksi();
+        // return $historiKas;
+
 
         $pageData = [
             'title' => 'Buku - Kas',
             'heading' => 'Accounting',
             'active' => 'buku',
-            'date' => Carbon::now()->format('d-m-Y'),
-            'listKas' => Kas::getView(),
             'listRekening' => Rekening::all(),
+            'historiKas' => $historiKas,
             'listSupplierSapi' => User::getSupplierSapi(),
-            'listSupplierPakan' => User::getSupplierPakan(),
-            'listPekerja' => User::getPekerja(),
             'listCustomer' => User::getCustomer(),
-            'listPakan' => Pakan::all(),
+
         ];
 
         return view('accounting.kas.index', $pageData);
@@ -74,7 +73,7 @@ class AccountingController extends Controller
             'title' => 'Dashboard - Accounting',
             'heading' => 'Accounting',
             'jumlahNilaiPembelianPakan' => $jumlahNilaiPembelianPakan,
-            'jumlahNilaiPemakaianPakan' =>  $jumlahNilaiPemakaianPakan,
+            'jumlahNilaiPemakaianPakan' => $jumlahNilaiPemakaianPakan,
             'totalSaldo' => Rekening::getTotalSaldo(),
             'active' => 'dashboard',
         ];
@@ -109,7 +108,7 @@ class AccountingController extends Controller
     function RincianPiutangPerusahaan()
     {
         // piutang sapi
-        $piutangSapi = Debit::getPiutangSapi();  
+        $piutangSapi = Debit::getPiutangSapi();
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
