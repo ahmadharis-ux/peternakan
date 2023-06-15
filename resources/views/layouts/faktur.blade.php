@@ -111,7 +111,7 @@
 
         {{-- list detail penjualan/pembelian --}}
         <div class="mt-5">
-            <table class="table table-bordered border-grey">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
