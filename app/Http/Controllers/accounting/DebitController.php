@@ -43,6 +43,7 @@ class DebitController extends Controller
         $transaksiDebit = [
             "id_debit" => $idDebit,
             "id_author" => auth()->user()->id,
+            "id_pihak_kedua" => Debit::find($idDebit)->id_pihak_kedua,
             "id_rekening" => $idRekening,
             "nominal" => $nominalBayar,
             "created_at" => carbonNow(),
