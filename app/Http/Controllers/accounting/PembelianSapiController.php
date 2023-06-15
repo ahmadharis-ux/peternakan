@@ -162,6 +162,7 @@ class PembelianSapiController extends Controller
             "kredit" => $kredit,
             "subjek" => $request->subjek,
             "author" => auth()->user(),
+            "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 
         // return $pembelianSapi;

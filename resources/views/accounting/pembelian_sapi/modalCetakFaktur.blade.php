@@ -9,11 +9,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-5">
-                    <div>
+                    <div class="mb-3">
                         <label for="">Subjek faktur</label>
-                        <input name="subjek" type="text" class="form-control" required>
+                        <input type="text" name="subjek" value="contoh_subjek_faktur" class="form-control" required>
+                    </div>
+
+                    <div>
+                        <label for="">Jatuh tempo</label>
+                        <input type="date" value="today" name="jatuh_tempo" class="form-control" required>
                     </div>
                 </div>
+
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Cetak</button>

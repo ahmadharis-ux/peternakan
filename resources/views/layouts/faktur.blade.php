@@ -60,7 +60,7 @@
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Jatuh Tempo</span>
-                        <span> [jatuh tempo]</span>
+                        <span> {{ $jatuhTempo }}</span>
                     </div>
 
                     <div class="d-flex justify-content-between">

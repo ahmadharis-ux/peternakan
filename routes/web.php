@@ -176,6 +176,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/pembelian', [PakanController::class, 'storePembelianPakan']);
             Route::post('/operasional', [PakanController::class, 'storeOperasional']);
             Route::post('/{pembelianPakan}', [PakanController::class, 'invoice']);
+            Route::post('/{pembelianPakan}/invoice', [PakanController::class, 'invoice']);
         });
 
 

@@ -144,6 +144,7 @@ class PenjualanSapiController extends Controller
             "debit" => $debit,
             "subjek" => $request->subjek,
             "author" => auth()->user(),
+            "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 
         // return $pageData;

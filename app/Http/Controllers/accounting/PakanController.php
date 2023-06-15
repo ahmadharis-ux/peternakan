@@ -198,9 +198,10 @@ class PakanController extends Controller
             "kredit" => $kredit,
             "subjek" => $request->subjek,
             "author" => auth()->user(),
+            "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 
-        // return $pembelianPakan;
+        // return $pageData;
 
         return view('accounting.pakan.faktur', $pageData);
     }
