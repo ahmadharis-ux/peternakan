@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers\accounting;
 
-use App\Http\Controllers\Controller;
-use App\Models\Debit;
-use App\Models\DetailPenjualanSapi;
 use App\Models\Kas;
-use App\Models\OperasionalPenjualanSapi;
-use App\Models\PenjualanSapi;
-use App\Models\Rekening;
 use App\Models\Sapi;
 use App\Models\User;
+use App\Models\Debit;
+use App\Models\Faktur;
+use App\Models\Rekening;
 use Illuminate\Http\Request;
+use App\Models\PenjualanSapi;
+use App\Models\DetailPenjualanSapi;
+use App\Http\Controllers\Controller;
+use App\Models\OperasionalPenjualanSapi;
 
 class PenjualanSapiController extends Controller
 {
     public function index()
     {
         $id_jurnal_piutang = 2;
+        $listDebitSapi = Debit::where('id_jurnal', $id_jurnal_piutang)
+            ->where('id_author', auth()->user()->idate)
+            ->get();
+
 
         $pageData = [
             'title' => "Buku - Piutang",
             'heading' => "Buku - Piutang",
             'active' => "buku",
-            'listDebitSapi' => Debit::where('id_jurnal', $id_jurnal_piutang)->get(),
+            'listDebitSapi' => $listDebitSapi,
             'listCustomer' => User::getCustomer(),
         ];
 
@@ -138,12 +143,26 @@ class PenjualanSapiController extends Controller
     public function invoice(PenjualanSapi $penjualanSapi, Request $request)
     {
         $debit = $penjualanSapi->debit()->first();
+        $nomorFaktur = "INV/" . getTimestamp();
+
+
+        $fakturBaru = [
+            "nomor_faktur" => $nomorFaktur,
+            "id_author" => auth()->user()->id,
+            "id_pihak_kedua" => $debit->id_pihak_kedua,
+        ];
+
+        if (!Faktur::create($fakturBaru)) {
+            return back('/')->with('error', 'Gagal cetak faktur');
+        }
+
         $pageData = [
             "title" => "Invoice penjualan sapi $penjualanSapi->id",
             "penjualanSapi" => $penjualanSapi,
             "debit" => $debit,
             "subjek" => $request->subjek,
             "author" => auth()->user(),
+            "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 

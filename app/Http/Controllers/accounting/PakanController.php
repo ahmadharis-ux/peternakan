@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\accounting;
 
-use App\Http\Controllers\Controller;
-use App\Models\DetailPembelianPakan;
-use App\Models\Kas;
-use App\Models\Kredit;
-use App\Models\OperasionalPembelianPakan;
-use App\Models\Pakan;
-use App\Models\PembelianPakan;
-use App\Models\Rekening;
-use App\Models\SatuanPakan;
-use App\Models\StokPakan;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Kas;
+use App\Models\User;
+use App\Models\Pakan;
+use App\Models\Faktur;
+use App\Models\Kredit;
+use App\Models\Rekening;
+use App\Models\StokPakan;
+use App\Models\SatuanPakan;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
+use App\Models\PembelianPakan;
+use App\Http\Controllers\Controller;
+use App\Models\DetailPembelianPakan;
+use App\Models\OperasionalPembelianPakan;
 
 class PakanController extends Controller
 {
@@ -28,12 +29,14 @@ class PakanController extends Controller
     public function index()
     {
         $idJurnalPakan = 3;
+        $listPembelianPakan = Pakan::where('id_author', auth()->user()->idate)->get();
+
         $pageData = [
             'title' => 'Buku - Pakan',
             'heading' => 'Buku - Pakan',
             'active' => 'buku',
             'ListSatuan' => SatuanPakan::all(),
-            'ListPakan' => Pakan::all(),
+            'ListPakan' => $listPembelianPakan,
             'ListStokPakan' => StokPakan::all(),
             'ListSupplierPakan' => User::getSupplierPakan(),
             'listKreditPakan' => Kredit::where('id_jurnal', $idJurnalPakan)->get(),
@@ -192,12 +195,25 @@ class PakanController extends Controller
     public function invoice(PembelianPakan $pembelianPakan, Request $request)
     {
         $kredit = $pembelianPakan->kredit()->first();
+        $nomorFaktur = "INV/" . getTimestamp();
+
+
+        $fakturBaru = [
+            "nomor_faktur" => $nomorFaktur,
+            "id_author" => auth()->user()->id,
+            "id_pihak_kedua" => $kredit->id_pihak_kedua,
+        ];
+
+        if (!Faktur::create($fakturBaru)) {
+            return back('/')->with('error', 'Gagal cetak faktur');
+        }
         $pageData = [
             "title" => "Invoice pembelian pakan $pembelianPakan->id",
             "pembelianPakan" => $pembelianPakan,
             "kredit" => $kredit,
             "subjek" => $request->subjek,
             "author" => auth()->user(),
+            "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 

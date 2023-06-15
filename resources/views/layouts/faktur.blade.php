@@ -50,7 +50,7 @@
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Referensi</span>
-                        <span>INV/{{ getTimestamp() }}</span>
+                        <span>{{ $nomorFaktur }}</span>
                     </div>
 
                     <div class="d-flex justify-content-between">
@@ -84,8 +84,8 @@
                     <span>Kab. Bandung Barat,</span>
                     <span>Jawa Barat, 40391</span>
                     <span>INDONESIA</span>
-                    <span>Telp: 08979974550</span>
-                    <span>Email: divanurafifah111@gmail.com</span>
+                    <span>Telp: {{ $author->telepon }}</span>
+                    <span>Email: {{ $author->email }}</span>
                 </div>
             </div>
 

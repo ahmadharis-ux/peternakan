@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
 use App\Models\TransaksiKredit;
 use App\Models\DetailPembelianSapi;
 use App\Http\Controllers\Controller;
+use App\Models\Faktur;
 use App\Models\OperasionalPembelianSapi;
 
 class PembelianSapiController extends Controller
@@ -22,12 +23,17 @@ class PembelianSapiController extends Controller
     public function index()
     {
         $idJurnalHutang = 1;
+        $listKreditSapi = Kredit::where('id_jurnal', $idJurnalHutang)
+            ->where('id_author', auth()->user()->id)
+            ->get();
+
+
 
         $pageData = [
             'title' => "Buku - Hutang",
             'heading' => "Buku - Hutang",
             'active' => "buku",
-            'listKreditSapi' => Kredit::where('id_jurnal', $idJurnalHutang)->get(),
+            'listKreditSapi' => $listKreditSapi,
             'listSupplierSapi' => User::getSupplierSapi(),
         ];
 
@@ -156,16 +162,29 @@ class PembelianSapiController extends Controller
     public function invoice(PembelianSapi $pembelianSapi, Request $request)
     {
         $kredit = $pembelianSapi->kredit()->first();
+        $nomorFaktur = "INV/" . getTimestamp();
+
+
+        $fakturBaru = [
+            "nomor_faktur" => $nomorFaktur,
+            "id_author" => auth()->user()->id,
+            "id_pihak_kedua" => $kredit->id_pihak_kedua,
+        ];
+
+        if (!Faktur::create($fakturBaru)) {
+            return back('/')->with('error', 'Gagal cetak faktur');
+        }
+
         $pageData = [
             "title" => "Invoice pembelian sapi $pembelianSapi->id",
             "pembelianSapi" => $pembelianSapi,
             "kredit" => $kredit,
             "subjek" => $request->subjek,
             "author" => auth()->user(),
+            "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 
-        // return $pembelianSapi;
 
         return view('accounting.pembelian_sapi.faktur', $pageData);
     }
