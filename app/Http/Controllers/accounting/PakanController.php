@@ -200,6 +200,8 @@ class PakanController extends Controller
 
         $fakturBaru = [
             "nomor_faktur" => $nomorFaktur,
+            "subjek" => $request->subjek,
+            "id_kredit" => $request->id_kredit,
             "id_author" => auth()->user()->id,
             "id_pihak_kedua" => $kredit->id_pihak_kedua,
         ];

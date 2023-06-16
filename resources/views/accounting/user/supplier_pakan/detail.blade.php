@@ -4,3 +4,11 @@
         @include('accounting.user.supplier_pakan.tableListHutang')
     </div>
 </div>
+
+
+<div class="card recent-sales overflow-auto">
+    <div class="card-title px-3">List Faktur supplier pakan</div>
+    <div class="card-body">
+        @include('accounting.user.tableListFakturPihakKedua')
+    </div>
+</div>

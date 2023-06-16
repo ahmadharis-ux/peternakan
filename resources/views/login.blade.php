@@ -58,7 +58,8 @@
                                     </div>
 
                                     {{-- form utama --}}
-                                    <form class="row g-3 needs-validation" method="POST" action="/login" novalidate>
+                                    <form style="display: unset" class="row g-3 needs-validation" method="POST"
+                                        action="/login" novalidate>
                                         @csrf
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Email</label>

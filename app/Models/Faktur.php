@@ -11,6 +11,12 @@ class Faktur extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = [
+        'pihakKedua',
+        'kredit',
+        'debit',
+    ];
+
     public function debit()
     {
         return $this->belongsTo(Debit::class, 'id_debit');

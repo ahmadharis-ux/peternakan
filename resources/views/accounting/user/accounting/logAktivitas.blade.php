@@ -27,3 +27,8 @@
 <div class="col-md">
     @include('accounting.user.accounting.histori_aktivitas.pemakaianPakan')
 </div>
+
+{{-- histori faktur dicetak --}}
+<div class="col-md">
+    @include('accounting.user.accounting.histori_aktivitas.fakturDibuat')
+</div>
