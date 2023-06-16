@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\accounting;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailPenjualanSapi;
 use App\Models\JenisSapi;
 use App\Models\Sapi;
 use Illuminate\Http\Request;
@@ -92,11 +93,21 @@ class SapiController extends Controller
         //
     }
 
-    public function setAmbilSapi($id)
+    public function setAmbilSapi(Sapi $sapi)
     {
-        $sapi = Sapi::find($id);
-        $sapi->status = "SOLD";
-        $sapi->save();
+
+        DB::transaction(function () use ($sapi) {
+            $sapi->status = "SOLD";
+            $sapi->save();
+
+            $detailPenjualanSapi = $sapi->detailPenjualanSapi()->first();
+            $detailPenjualanSapi->tanggal_pengambilan = carbonNow();
+            $detailPenjualanSapi->save();
+        });
+
+
+
+
         return redirect()->back();
     }
 

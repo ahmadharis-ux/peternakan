@@ -30,7 +30,7 @@
                             <th scope="col">Eartag</th>
                             <th scope="col" class="text-end">Bobot</th>
                             <th scope="col" class="pe-5 text-end">Harga</th>
-                            <th scope="col" class="text-center">Aksi</th>
+                            <th scope="col" class="text-center">Diambil</th>
                         </tr>
                     </thead>
                     <tbody>

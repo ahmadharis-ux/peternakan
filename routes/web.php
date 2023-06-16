@@ -153,7 +153,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::get('/{sapi}', [SapiController::class, 'show']);
 
             // Route::post('/', [SapiController::class, 'store']);
-            Route::put('/{id}/ambil', [SapiController::class, 'setAmbilSapi']);
+            Route::put('/{sapi}/ambil', [SapiController::class, 'setAmbilSapi']);
             Route::put('/{id}', [SapiController::class, 'update']);
             // Route::delete('/{id}', [SapiController::class, 'destroy']);
 
