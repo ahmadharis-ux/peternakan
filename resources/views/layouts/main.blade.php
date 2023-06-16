@@ -160,7 +160,8 @@
         $(document).ready(function() {
             $('#example').DataTable();
 
-            for (let i = 0; i < 20; i++) {
+            // datatable sampe id: example19
+            for (let i = 0; i <= 20; i++) {
                 $(`#example${i}`).DataTable();
             }
         });

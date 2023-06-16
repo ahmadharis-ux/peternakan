@@ -192,6 +192,9 @@
 
     </div>
 
+    <script>
+        window.print();
+    </script>
 </body>
 
 <style>
