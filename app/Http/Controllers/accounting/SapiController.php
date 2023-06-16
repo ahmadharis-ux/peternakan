@@ -105,9 +105,6 @@ class SapiController extends Controller
             $detailPenjualanSapi->save();
         });
 
-
-
-
         return redirect()->back();
     }
 

@@ -48,14 +48,14 @@
                                 <td class="text-center">
 
                                     @if ($sapiDiambil)
-                                        <span>Sapi sudah diambil</span>
-                                        <i class="bi bi-check"></i>
+                                        {{ $item->tanggal_pengambilan }}
                                     @else
                                         <form action="/acc/sapi/{{ $item->id_sapi }}/ambil" method="post">
                                             @csrf
                                             @method('put')
 
-                                            <input type="submit" class="btn btn-sm btn-primary" value="Ambil sapi">
+                                            <input type="submit" class="btn btn-sm btn-primary btnAmbilSapi"
+                                                value="Ambil sapi">
                                         </form>
                                     @endif
 
@@ -111,4 +111,15 @@
             </div>
         </div>
     </section>
+
+
+    <script>
+        $(document).ready(function() {
+            $(".btnAmbilSapi").click(function(evt) {
+                if (!confirm('Anda yakin?')) {
+                    return evt.preventDefault();
+                }
+            });
+        });
+    </script>
 @endsection
