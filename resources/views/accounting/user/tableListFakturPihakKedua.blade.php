@@ -23,7 +23,7 @@
                     @endif
                 </td>
                 <td>
-                    <button class="btn btn-outline-primary btn-sm" onclick="alertPrint()">
+                    <button class="btn btn-outline-primary btn-sm" onclick="alertPrint('{{ $faktur->nomor_faktur }}')">
                         <i class="bi bi-printer-fill"></i>
                     </button>
                 </td>
@@ -33,7 +33,7 @@
 </table>
 
 <script>
-    function alertPrint() {
-        alert('faktur can disimpen di storage')
+    function alertPrint(nomorFaktur) {
+        alert(`print faktur ${nomorFaktur} dari storage`)
     }
 </script>
