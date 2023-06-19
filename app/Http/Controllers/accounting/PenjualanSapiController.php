@@ -143,7 +143,7 @@ class PenjualanSapiController extends Controller
 	public function invoice(PenjualanSapi $penjualanSapi, Request $request)
 	{
 		$debit = $penjualanSapi->debit()->first();
-		$nomorFaktur = "INV/" . getTimestamp();
+		$nomorFaktur = "INV_" . getTimestamp();
 
 		$fakturBaru = [
 			"nomor_faktur" => $nomorFaktur,

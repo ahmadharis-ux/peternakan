@@ -17,6 +17,8 @@ use App\Models\DetailPembelianSapi;
 use App\Http\Controllers\Controller;
 use App\Models\Faktur;
 use App\Models\OperasionalPembelianSapi;
+use App\Providers\PdfServiceProvider;
+use Illuminate\Support\Facades\Storage;
 
 class PembelianSapiController extends Controller
 {
@@ -162,7 +164,7 @@ class PembelianSapiController extends Controller
     public function invoice(PembelianSapi $pembelianSapi, Request $request)
     {
         $kredit = $pembelianSapi->kredit()->first();
-        $nomorFaktur = "INV/" . getTimestamp();
+        $nomorFaktur = "INV_" . getTimestamp();
 
 
         $fakturBaru = [
@@ -186,6 +188,11 @@ class PembelianSapiController extends Controller
             "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
+
+        $invoiceHtml = view('accounting.pembelian_sapi.faktur', $pageData);
+        $invoicePdf = PdfServiceProvider::generatePdf($invoiceHtml);
+        $storagePath = Storage::disk('local')->put("invoice/$nomorFaktur.pdf", $invoicePdf);
+
 
 
         return view('accounting.pembelian_sapi.faktur', $pageData);
