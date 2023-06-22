@@ -46,12 +46,12 @@
         }
     </style>
 
-
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
-    <div class="container py-3 mt-3">
+    <div class="container mt-3 py-3">
 
         {{-- header --}}
         <div class="d-flex justify-content-between">
@@ -61,7 +61,7 @@
             {{-- kpp surat --}}
             <div class="d-flex flex-column justify-content-start">
                 <h2 class="text-end" id="inv">Invoice</h2>
-                <div class="mt-3 d-flex flex-column" style="width: 400px">
+                <div class="d-flex flex-column mt-3" style="width: 400px">
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Referensi</span>
@@ -193,7 +193,7 @@
 
                 {{-- tanda tangan --}}
                 <div class="col text-center">
-                    <div class="d-flex flex-column  justify-content-start align-items-center">
+                    <div class="d-flex flex-column justify-content-start align-items-center">
                         <span class="fw-bold"> {{ tanggalSekarang() }}</span>
                         <div>
                             <img src="{{ asset('logo.svg') }}" width="150px" class="my-3" style="opacity: .2">
