@@ -43,6 +43,7 @@ class PakanController extends Controller
             'ListSupplierPakan' => User::getSupplierPakan(),
             'listKreditPakan' => Kredit::where('id_jurnal', $idJurnalPakan)->get(),
         ];
+
         return view('accounting.pakan.index', $pageData);
     }
 
@@ -199,18 +200,6 @@ class PakanController extends Controller
         $kredit = $pembelianPakan->kredit()->first();
         $nomorFaktur = "INV_" . getTimestamp();
 
-
-        $fakturBaru = [
-            "nomor_faktur" => $nomorFaktur,
-            "subjek" => $request->subjek,
-            "id_kredit" => $request->id_kredit,
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $kredit->id_pihak_kedua,
-        ];
-
-        if (!Faktur::create($fakturBaru)) {
-            return back('/')->with('error', 'Gagal cetak faktur');
-        }
         $pageData = [
             "title" => "Invoice pembelian pakan $pembelianPakan->id",
             "pembelianPakan" => $pembelianPakan,
@@ -221,10 +210,18 @@ class PakanController extends Controller
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 
-        $invoiceHtml = view('accounting.pembelian_sapi.faktur', $pageData);
-        $invoicePdf = PdfServiceProvider::generatePdf($invoiceHtml);
-        $storagePath = Storage::disk('local')->put("invoice/$nomorFaktur.pdf", $invoicePdf);
+        $fakturBaru = [
+            "nomor_faktur" => $nomorFaktur,
+            "subjek" => $request->subjek,
+            "id_kredit" => $request->id_kredit,
+            "id_author" => auth()->user()->id,
+            "id_pihak_kedua" => $kredit->id_pihak_kedua,
+            "page_data" => json_encode($pageData),
+        ];
 
+        if (!Faktur::create($fakturBaru)) {
+            return back('/')->with('error', 'Gagal cetak faktur');
+        }
 
         return view('accounting.pakan.faktur', $pageData);
     }

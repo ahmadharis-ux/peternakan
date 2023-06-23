@@ -117,7 +117,7 @@ class DatabaseSeeder extends Seeder
                 [
                     "nama_depan" => "spakan",
                     "nama_belakang" => $i + 1,
-                    "id_role" => 5,
+                    "id_role" => 4,
                     "email" => "supplier_pakan" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
                     "password" => Hash::make("password"),

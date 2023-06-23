@@ -147,18 +147,6 @@ class PenjualanSapiController extends Controller
         $debit = $penjualanSapi->debit()->first();
         $nomorFaktur = "INV_" . getTimestamp();
 
-        $fakturBaru = [
-            "nomor_faktur" => $nomorFaktur,
-            "subjek" => $request->subjek,
-            "id_debit" => $request->id_debit,
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $debit->id_pihak_kedua,
-        ];
-
-        if (!Faktur::create($fakturBaru)) {
-            return back('/')->with('error', 'Gagal cetak faktur');
-        }
-
         $pageData = [
             "title" => "Invoice penjualan sapi $penjualanSapi->id",
             "penjualanSapi" => $penjualanSapi,
@@ -169,10 +157,19 @@ class PenjualanSapiController extends Controller
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 
-        $invoiceHtml = view('accounting.penjualan_sapi.faktur', $pageData);
-        $invoicePdf = PdfServiceProvider::generatePdf($invoiceHtml);
-        $storagePath = Storage::disk('local')->put("invoice/$nomorFaktur.pdf", $invoicePdf);
+        $fakturBaru = [
+            "nomor_faktur" => $nomorFaktur,
+            "subjek" => $request->subjek,
+            "id_debit" => $request->id_debit,
+            "id_author" => auth()->user()->id,
+            "id_pihak_kedua" => $debit->id_pihak_kedua,
+            "page_data" => json_encode($pageData),
 
+        ];
+
+        if (!Faktur::create($fakturBaru)) {
+            return back('/')->with('error', 'Gagal cetak faktur');
+        }
 
         return view('accounting.penjualan_sapi.faktur', $pageData);
     }
