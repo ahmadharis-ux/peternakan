@@ -33,6 +33,7 @@ use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\TabunganController;
 use App\Http\Controllers\accounting\AccountingController;
+use App\Http\Controllers\accounting\InvoiceController;
 use App\Http\Controllers\accounting\KodeJurnalController;
 use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PembelianSapiController;
@@ -207,6 +208,9 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
             Route::post('/', [PemakaianPakanController::class, 'store']);
         });
+
+        // invoice
+        Route::post('invoice/print', [InvoiceController::class, 'show']);
     });
 
 

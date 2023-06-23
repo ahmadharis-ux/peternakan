@@ -1,4 +1,4 @@
-<table id="example20" class="display " style="width:100%">
+<table id="example20" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -23,9 +23,15 @@
                     @endif
                 </td>
                 <td>
-                    <button class="btn btn-outline-primary btn-sm" onclick="alertPrint('{{ $faktur->nomor_faktur }}')">
-                        <i class="bi bi-printer-fill"></i>
-                    </button>
+                    <form method="post" action="/acc/invoice/print">
+                        @csrf
+
+                        <input type="hidden" name="nomor_faktur" value="{{ $faktur->nomor_faktur }}">
+
+                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-printer-fill"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
         @endforeach
