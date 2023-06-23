@@ -169,7 +169,7 @@ class PenjualanSapiController extends Controller
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
         ];
 
-        $invoiceHtml = view('accounting.pembelian_sapi.faktur', $pageData);
+        $invoiceHtml = view('accounting.penjualan_sapi.faktur', $pageData);
         $invoicePdf = PdfServiceProvider::generatePdf($invoiceHtml);
         $storagePath = Storage::disk('local')->put("invoice/$nomorFaktur.pdf", $invoicePdf);
 
