@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreignId('id_pihak_kedua')->unsigned();
             $table->foreignId('id_kredit')->unsigned()->nullable();
             $table->foreignId('id_debit')->unsigned()->nullable();
-
             $table->string('subjek')->nullable();
+            $table->longText('page_data');
 
             $table->timestamps();
 
