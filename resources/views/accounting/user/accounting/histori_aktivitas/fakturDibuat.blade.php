@@ -1,7 +1,7 @@
 <div class="card recent-sales">
     <div class="card-title px-3">Histori faktur dibuat</div>
     <div class="card-body">
-        <table id="example20" class="display " style="width:100%">
+        <table id="example20" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -33,21 +33,20 @@
                         </td>
                         <td>{{ $namaJurnal }}</td>
                         <td>
-                            <button class="btn btn-outline-primary btn-sm"
-                                onclick="alertPrint('{{ $faktur->nomor_faktur }}')">
-                                <i class="bi bi-printer-fill"></i>
-                            </button>
+                            <form method="post" action="/acc/invoice/print">
+                                @csrf
+
+                                <input type="hidden" name="nomor_faktur" value="{{ $faktur->nomor_faktur }}">
+
+                                <button type="submit" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-printer-fill"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-
-        <script>
-            function alertPrint(nomorFaktur) {
-                alert(`print faktur ${nomorFaktur} dari storage`)
-            }
-        </script>
 
     </div>
 </div>

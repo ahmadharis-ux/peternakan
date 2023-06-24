@@ -210,7 +210,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         });
 
         // invoice
-        Route::post('invoice/print', [InvoiceController::class, 'show']);
+        Route::post('invoice/print', [InvoiceController::class, 'print']);
     });
 
 
