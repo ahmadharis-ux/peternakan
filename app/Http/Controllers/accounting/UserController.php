@@ -150,6 +150,7 @@ class UserController extends Controller
             'active' => 'user',
             'user' => $user,
             'debit' => Debit::find($idDebit),
+            'listRiwayatTransaksi' => TransaksiDebit::where('id_debit', $idDebit)->get(),
         ];
 
         return view('accounting.user.customer.detailPiutang', $pageData);
