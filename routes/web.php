@@ -38,6 +38,8 @@ use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
+use App\Http\Controllers\ProfileController;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -269,16 +271,10 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 // rute biasa==================================
 
 
-Route::get('/profile', function () {
-    $title = 'Profile';
-    $heading = 'Admin';
-    $active = 'profle';
-    return view('profile', [
-        'title' => $title,
-        'heading' => $heading,
-        'active' => $active,
-    ]);
-})->middleware('auth');
+
+Route::get('/profile',[ProfileController::class,'index'])->middleware('auth');
+Route::get('/editprofile',[ProfileController::class,'edit'])->middleware('auth');
+Route::put('/updateprofile',[ProfileController::class,'update'])->middleware('auth');
 
 Route::get('/', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');

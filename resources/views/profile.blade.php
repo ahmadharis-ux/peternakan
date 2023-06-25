@@ -39,22 +39,22 @@
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                <div class="col-lg-9 col-md-8">{{auth()->user()->name}}</div>
+                <div class="col-lg-9 col-md-8">{{auth()->user()->nama_depan}}</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Company</div>
-                <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                <div class="col-lg-9 col-md-8">Diva's Cow</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Job</div>
-                <div class="col-lg-9 col-md-8">{{auth()->user()->role->name}}</div>
+                <div class="col-lg-9 col-md-8">{{auth()->user()->role->nama}}</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Country</div>
-                <div class="col-lg-9 col-md-8">USA</div>
+                <div class="col-lg-9 col-md-8">INDONESIA</div>
               </div>
 
               <div class="row">
@@ -64,14 +64,24 @@
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Phone</div>
-                <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                <div class="col-lg-9 col-md-8">{{auth()->user()->telepon}}</div>
               </div>
 
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Email</div>
                 <div class="col-lg-9 col-md-8">{{auth()->user()->email}}</div>
               </div>
-
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label">Signature</div>
+                <div class="col-lg-9 col-md-8">
+                  <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" alt="">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label ms-auto">
+                  <a href="/editprofile" class="btn btn-sm btn-warning" style="color:white;">Edit Profile</a>
+                </div>
+              </div>
             </div>
 
             <div class="tab-pane fade pt-3" id="profile-change-password">
