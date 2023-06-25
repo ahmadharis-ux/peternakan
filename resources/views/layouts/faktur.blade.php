@@ -196,7 +196,7 @@
                     <div class="d-flex flex-column justify-content-start align-items-center">
                         <span class="fw-bold"> {{ tanggalSekarang() }}</span>
                         <div>
-                            <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" width="150px" class="my-3" style="opacity: .2">
+                            <img src="{{asset(Storage::url(auth()->user()->foto_ttd))}}" width="150px" class="my-3" style="opacity: .2">
                         </div>
                         <span class="fw-bold"> {{ getUserFullname($author) }}</span>
                     </div>

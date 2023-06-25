@@ -74,7 +74,7 @@
               <div class="row">
                 <div class="col-lg-3 col-md-4 label">Signature</div>
                 <div class="col-lg-9 col-md-8">
-                  <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" alt="">
+                  <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" alt="" width="150px" class="my-3" style="opacity: .2" >
                 </div>
               </div>
               <div class="row">
