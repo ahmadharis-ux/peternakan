@@ -60,7 +60,7 @@
                          </a>
                      </li>
                      <li>
-                         <a href="/acc/tabungan" class="">
+                         <a href="/acc/tabungan" class="{{ $title == 'Buku - Tabungan' ? 'active' : '' }}">
                              <i class="bi bi-circle"></i><span>Tabungan</span>
                          </a>
                      </li>
@@ -69,11 +69,11 @@
                              <i class="bi bi-circle"></i><span>Gaji</span>
                          </a>
                      </li>
-                     <li>
+                     {{-- <li>
                          <a href="/acc/servis_mobil">
                              <i class="bi bi-circle"></i><span>Servis Mobil</span>
                          </a>
-                     </li>
+                     </li> --}}
                  </ul>
              </li>
 

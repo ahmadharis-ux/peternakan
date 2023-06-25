@@ -1,3 +1,7 @@
+@php
+    $userIsAuthor = $kredit->id_author === myId();
+@endphp
+
 @extends('layouts.main')
 @section('container')
     <section class="section dashboard">
@@ -11,8 +15,11 @@
                     <div class="card-header">
                         <h5>
                             <span>Daftar Pakan</span>
-                            <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
-                                data-bs-target="#modalCreateDetailPembelianPakan">Tambah</button>
+
+                            @if ($userIsAuthor)
+                                <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
+                                    data-bs-target="#modalCreateDetailPembelianPakan">Tambah</button>
+                            @endif
                         </h5>
                     </div>
                     <div class="card-body">
@@ -32,7 +39,9 @@
                     </div>
                     <div class="card-body">
                         {{-- form tambah operasional --}}
-                        @include('accounting.pakan.formTambahOperasional')
+                        @if ($userIsAuthor)
+                            @include('accounting.pakan.formTambahOperasional')
+                        @endif
                         <hr>
                         <div class="section">
                             {{-- table list operasional --}}
@@ -54,7 +63,7 @@
                         <h5>
                             <span>Riwayat Pembayaran</span>
 
-                            @if ($kredit->lunas == false)
+                            @if ($kredit->lunas == false && $userIsAuthor)
                                 <button class="btn btn-sm btn-primary mx-3" data-bs-toggle="modal"
                                     data-bs-target="#modalPembayaran">Tambah</button>
                             @endif
@@ -81,8 +90,11 @@
 
                         {{-- btn cetak faktur --}}
                         <div class="d-flex justify-content-end mt-3">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCetakFaktur">Cetak
-                                faktur</button>
+                            @if ($userIsAuthor)
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalCetakFaktur">Cetak
+                                    faktur</button>
+                            @endif
                         </div>
 
                     </div>
@@ -95,7 +107,9 @@
 
 
     {{-- modals --}}
-    @include('accounting.pakan.modalDetailPembelianPakan')
-    @include('accounting.pakan.modalPembayaran')
-    @include('accounting.pakan.modalCetakFaktur')
+    @if ($userIsAuthor)
+        @include('accounting.pakan.modalDetailPembelianPakan')
+        @include('accounting.pakan.modalPembayaran')
+        @include('accounting.pakan.modalCetakFaktur')
+    @endif
 @endsection

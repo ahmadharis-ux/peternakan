@@ -85,9 +85,9 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             User::create(
                 [
-                    "nama_depan" => "test",
-                    "nama_belakang" => "customer " . $i + 1,
-                    "id_role" => 4,
+                    "nama_depan" => "customer",
+                    "nama_belakang" => $i + 1,
+                    "id_role" => 6,
                     "email" => "customer" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
                     "password" => Hash::make("password"),
@@ -100,8 +100,8 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
             User::create(
                 [
-                    "nama_depan" => "test",
-                    "nama_belakang" => "supplier sapi " . $i + 1,
+                    "nama_depan" => "ssapi",
+                    "nama_belakang" => $i + 1,
                     "id_role" => 5,
                     "email" => "supplier_sapi" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
@@ -115,9 +115,9 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
             User::create(
                 [
-                    "nama_depan" => "test",
-                    "nama_belakang" => "supplier pakan " . $i + 1,
-                    "id_role" => 5,
+                    "nama_depan" => "spakan",
+                    "nama_belakang" => $i + 1,
+                    "id_role" => 4,
                     "email" => "supplier_pakan" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
                     "password" => Hash::make("password"),

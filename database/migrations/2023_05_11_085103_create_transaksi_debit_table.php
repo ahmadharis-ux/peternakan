@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transaksi_debits', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_author')->unsigned();
+            $table->foreignId('id_pihak_kedua')->unsigned();
             $table->foreignId('id_debit')->unsigned();
             $table->foreignId('id_rekening')->unsigned();
             $table->unsignedInteger('nominal')->default(0);
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_author')->references('id')->on('users');
+            $table->foreign('id_pihak_kedua')->references('id')->on('users');
             $table->foreign('id_debit')->references('id')->on('debits');
             $table->foreign('id_rekening')->references('id')->on('rekenings');
         });

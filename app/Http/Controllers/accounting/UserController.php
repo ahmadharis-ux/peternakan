@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
 use App\Http\Controllers\Controller;
-
+use App\Models\Faktur;
+use App\Models\PemakaianPakan;
 
 class UserController extends Controller
 {
@@ -100,13 +101,21 @@ class UserController extends Controller
         User::getFullname($user);
 
         $role = $user->role->nama;
-        $roleSlug = str_replace(' ', '_', $role);
-        $roleSlug = strtolower($roleSlug);
+        $roleSlug = str_replace(' ', '_', strtolower($role));
 
-        $transaksi_debit = TransaksiDebit::where('id_author', $idUser)->get();
-        $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
         $listDebit = Debit::where('id_pihak_kedua', $idUser)->get();
-        $listAktivitas = $listDebit->concat($listDebit)->concat($transaksi_debit)->where('id_author', $idUser)->all();
+        $listKredit = Kredit::where('id_pihak_kedua', $idUser)->get();
+        $listFaktur = Faktur::where('id_pihak_kedua', $idUser)->get();
+
+        $listDebitDihandle = Debit::where('id_author', $idUser)->get();
+        $listKreditDihandle = Kredit::where('id_author', $idUser)->get();
+        $listPemakaianPakanDihandle = PemakaianPakan::where('id_author', $idUser)->get();
+        $listFakturDihandle = Faktur::where('id_author', $idUser)->get();
+
+        $listTransaksiDebitDihandle = TransaksiDebit::where('id_author', $idUser)->get();
+        $listTransaksiKreditDihandle = TransaksiKredit::where('id_author', $idUser)->get();
+
+        // return $listFakturDihandle;
 
         $pageData = [
             'title' => 'User - ' . $role,
@@ -115,8 +124,14 @@ class UserController extends Controller
             'user' => $user,
             'listKredit' => $listKredit,
             'listDebit' => $listDebit,
+            'listFaktur' => $listFaktur,
+            'listKreditDihandle' => $listKreditDihandle,
+            'listDebitDihandle' => $listDebitDihandle,
+            'listPemakaianPakanDihandle' => $listPemakaianPakanDihandle,
+            'listFakturDihandle' => $listFakturDihandle,
+            'listTransaksiDebitDihandle' => $listTransaksiDebitDihandle,
+            'listTransaksiKreditDihandle' => $listTransaksiKreditDihandle,
             'roleSlug' => $roleSlug,
-            'listAktivitas' =>  $listAktivitas,
         ];
 
 
@@ -135,6 +150,7 @@ class UserController extends Controller
             'active' => 'user',
             'user' => $user,
             'debit' => Debit::find($idDebit),
+            'listRiwayatTransaksi' => TransaksiDebit::where('id_debit', $idDebit)->get(),
         ];
 
         return view('accounting.user.customer.detailPiutang', $pageData);
@@ -146,7 +162,7 @@ class UserController extends Controller
         User::getFullname($user);
         $role = $user->role->nama;
 
- 
+
         $debits = Debit::where('id_author', $idUser)->get();
         $transaksi_debit = TransaksiDebit::where('id_author', $idUser)->get();
         $kredits = Kredit::where('id_author', $idUser)->get();

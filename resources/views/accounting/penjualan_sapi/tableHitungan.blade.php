@@ -10,8 +10,10 @@
     $sisaPembayaran = $totalDebit - $totalBayar;
     $statusDebit = $debit->lunas ? 'LUNAS' : 'BELUM LUNAS';
 
+    // pihak kedua
+    $pk = $debit->pihakKedua;
+    $pihakKeduaFullname = "$pk->nama_depan $pk->nama_belakang";
 @endphp
-
 
 <div class="row mt-3">
     <div class="col-sm">Penjualan sapi</div>
@@ -22,7 +24,6 @@
         </span>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-sm">Operasional</div>
@@ -74,9 +75,18 @@
 
 <div class="row">
     <div class="col-sm">Status</div>
-    <div class="col-sm d-flex justify-content-center">
+    <div class="col-sm d-flex justify-content-start">
         <span class="fw-bold">
             {{ $statusDebit }}
+        </span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm">Pihak kedua</div>
+    <div class="col-sm d-flex justify-content-start">
+        <span class="fw-bold">
+            {{ $pihakKeduaFullname }}
         </span>
     </div>
 </div>

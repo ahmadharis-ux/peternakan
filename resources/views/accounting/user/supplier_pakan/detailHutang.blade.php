@@ -45,7 +45,7 @@
                         @endforeach
                         <tr style="background-color: rgb(235, 235, 235)">
                             <th colspan="4">Total</th>
-                            <td class="text-end fw-bold">Rp {{ number_format($listDetailPembelian->sum('harga')) }}</td>
+                            <td class="fw-bold text-end">Rp {{ number_format($listDetailPembelian->sum('harga')) }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -59,7 +59,7 @@
         {{-- table operasional --}}
         <div class="card recent-sales">
             <div class="card-title px-3">List operasional</div>
-            <div class="card-body ">
+            <div class="card-body">
 
                 {{-- list operasional --}}
                 <table class="table">
@@ -94,12 +94,12 @@
 
         {{-- table transaksi --}}
         <div class="card recent-sales">
-            <div class="card-title px-3">List operasional</div>
-            <div class="card-body ">
+            <div class="card-title px-3">Riwayat transaksi</div>
+            <div class="card-body">
                 @php
                     $sumNominal = $listRiwayatTransaksi->sum('nominal');
                     $sumAdm = $listRiwayatTransaksi->sum('adm');
-
+                    
                     $totalBayar = number_format($sumNominal);
                     $totalIncludeAdm = number_format($sumNominal + $sumAdm);
                 @endphp
@@ -120,7 +120,7 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $trx->created_at }}</td>
-                                <td class="text-end text-secondary">{{ number_format($trx->adm) }}</td>
+                                <td class="text-secondary text-end">{{ number_format($trx->adm) }}</td>
                                 <td class="text-end">{{ number_format($trx->nominal) }}</td>
 
                             </tr>

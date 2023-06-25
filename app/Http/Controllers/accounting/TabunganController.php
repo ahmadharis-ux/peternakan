@@ -20,7 +20,7 @@ class TabunganController extends Controller
 	function index()
 	{
 		$idJurnalTabungan = 5;
-
+		
 		$pageData = [
 			'title' => 'Buku - Tabungan',
 			'heading' => 'Buku - Tabungan',

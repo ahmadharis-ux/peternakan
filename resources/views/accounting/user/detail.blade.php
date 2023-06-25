@@ -1,3 +1,9 @@
+@php
+    $fullname = "$user->nama_depan $user->nama_belakang";
+    $detailView = "accounting.user.$roleSlug.detail";
+@endphp
+
+
 @extends('layouts.main')
 @section('container')
     <section class="section dashboard">
@@ -5,44 +11,34 @@
             {{ $heading }}
         </h5>
 
-        <div class="d-flex">
-            <div class="card">
-                <div class="card-title px-3">Profile {{ $user->role->nama }}</div>
+        <div class="card col-md-8">
+            <div class="card-title px-3">Profile {{ $user->role->nama }}</div>
+            <div class="card-body">
                 <div class="container mb-2">
-                    <table>
+                    <table class="table table-striped ">
                         <tr>
-                            <th>Nama </th>
-                            <td> : </td>
-                            <td>{{ $user->nama_depan }}</td>
+
+
+                            <th class="col-4">Nama </th>
+                            <td>{{ $fullname }}</td>
                         </tr>
                         <tr>
-                            <th>Email</th>
-                            <td> : </td>
+                            <th class="col-4">Email</th>
                             <td>{{ $user->email }}</td>
                         </tr>
                         <tr>
-                            <th>Telepon</th>
-                            <td> : </td>
+                            <th class="col-4">Telepon</th>
                             <td>{{ $user->telepon }}</td>
                         </tr>
                         <tr>
-                            <th>Alamat</th>
-                            <td> : </td>
+                            <th class="col-4">Alamat</th>
                             <td>{{ $user->alamat }}</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
-
-
-
-
-        @php
-            $namaView = 'accounting.user.' . $roleSlug . '.detail';
-        @endphp
-
-        @include($namaView)
+        @include($detailView)
 
     </section>
 @endsection

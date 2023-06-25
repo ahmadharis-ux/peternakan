@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('detail_penjualan_sapis', function (Blueprint $table) {
@@ -19,6 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('bobot')->default(0);
             $table->unsignedBigInteger('harga')->default(0);
             $table->boolean('kiloan')->default(false);
+            $table->dateTime('tanggal_pengambilan')->nullable();
             $table->string('keterangan')->nullable();
 
             $table->timestamps();

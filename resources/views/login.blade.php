@@ -58,7 +58,8 @@
                                     </div>
 
                                     {{-- form utama --}}
-                                    {{-- <form class="row g-3 needs-validation" method="POST" action="/login" novalidate>
+                                    <form style="display: unset" class="row g-3 needs-validation" method="POST"
+                                        action="/login" novalidate>
                                         @csrf
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Email</label>
@@ -79,115 +80,121 @@
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
                                         <div class="col-12">
-                                            <p class="small mb-0">Don't have account? <a href="/daftar">Daftar Akun</a>
+                                            <p class="small mb-0">Belum punya akun? <a href="/daftar">Daftar Akun</a>
                                             </p>
                                         </div>
-                                    </form> --}}
+                                    </form>
 
-                                    {{-- login sebagai owner --}}
-                                    <form class="row my-1 g-3 needs-validation" method="POST" action="/login"
-                                        novalidate>
-                                        @csrf
 
-                                        <div class="d-none">
-                                            <div class="col-12">
-                                                <label for="yourUsername" class="form-label">Email</label>
-                                                <div class="input-group has-validation">
-                                                    <input type="text" name="email" class="form-control"
-                                                        value="owner@gmail.com" required>
-                                                    <div class="invalid-feedback">Please enter your username.</div>
+                                    {{-- TODO: delete form auto login --}}
+                                    {{-- form auto login --}}
+                                    <div style="display: none">
+                                        {{-- login sebagai owner --}}
+                                        <form class="row my-1 g-3 needs-validation" method="POST" action="/login"
+                                            novalidate>
+                                            @csrf
+
+                                            <div class="d-none">
+                                                <div class="col-12">
+                                                    <label for="yourUsername" class="form-label">Email</label>
+                                                    <div class="input-group has-validation">
+                                                        <input type="text" name="email" class="form-control"
+                                                            value="owner@gmail.com" required>
+                                                        <div class="invalid-feedback">Please enter your username.</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="yourPassword" class="form-label">Password</label>
+                                                    <input type="password" name="password" class="form-control"
+                                                        value="password" required>
+                                                    <div class="invalid-feedback">Please enter your password!</div>
+                                                </div>
+                                                <div class="col-12">
+
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
+                                                            Akun</a>
+                                                    </p>
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="yourPassword" class="form-label">Password</label>
-                                                <input type="password" name="password" class="form-control"
-                                                    value="password" required>
-                                                <div class="invalid-feedback">Please enter your password!</div>
-                                            </div>
-                                            <div class="col-12">
 
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
-                                                        Akun</a>
-                                                </p>
-                                            </div>
-                                        </div>
+                                            <button class="btn btn-primary w-100" type="submit">Owner</button>
+                                        </form>
 
+                                        {{-- login sebagai admin --}}
+                                        <form class="row my-1 g-3 needs-validation" method="POST" action="/login"
+                                            novalidate>
+                                            @csrf
 
-                                        <button class="btn btn-primary w-100" type="submit">Owner</button>
-                                    </form>
+                                            <div class="d-none">
+                                                <div class="col-12">
+                                                    <label for="yourUsername" class="form-label">Email</label>
+                                                    <div class="input-group has-validation">
+                                                        <input type="text" name="email" class="form-control"
+                                                            value="admin@gmail.com" required>
+                                                        <div class="invalid-feedback">Please enter your username.</div>
+                                                    </div>
+                                                </div>
 
-                                    {{-- login sebagai admin --}}
-                                    <form class="row my-1 g-3 needs-validation" method="POST" action="/login"
-                                        novalidate>
-                                        @csrf
+                                                <div class="col-12">
+                                                    <label for="yourPassword" class="form-label">Password</label>
+                                                    <input type="password" name="password" class="form-control"
+                                                        value="password" required>
+                                                    <div class="invalid-feedback">Please enter your password!</div>
+                                                </div>
+                                                <div class="col-12">
 
-                                        <div class="d-none">
-                                            <div class="col-12">
-                                                <label for="yourUsername" class="form-label">Email</label>
-                                                <div class="input-group has-validation">
-                                                    <input type="text" name="email" class="form-control"
-                                                        value="admin@gmail.com" required>
-                                                    <div class="invalid-feedback">Please enter your username.</div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
+                                                            Akun</a>
+                                                    </p>
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="yourPassword" class="form-label">Password</label>
-                                                <input type="password" name="password" class="form-control"
-                                                    value="password" required>
-                                                <div class="invalid-feedback">Please enter your password!</div>
-                                            </div>
-                                            <div class="col-12">
 
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
-                                                        Akun</a>
-                                                </p>
-                                            </div>
-                                        </div>
+                                            <button class="btn btn-primary w-100" type="submit">Admin</button>
+                                        </form>
 
+                                        {{-- login sebagai accounting --}}
+                                        <form class="row my-1 g-3 needs-validation" method="POST" action="/login"
+                                            novalidate>
+                                            @csrf
 
-                                        <button class="btn btn-primary w-100" type="submit">Admin</button>
-                                    </form>
+                                            <div class="d-none">
+                                                <div class="col-12">
+                                                    <label for="yourUsername" class="form-label">Email</label>
+                                                    <div class="input-group has-validation">
+                                                        <input type="text" name="email" class="form-control"
+                                                            value="accounting@gmail.com" required>
+                                                        <div class="invalid-feedback">Please enter your username.</div>
+                                                    </div>
+                                                </div>
 
-                                    {{-- login sebagai accounting --}}
-                                    <form class="row my-1 g-3 needs-validation" method="POST" action="/login"
-                                        novalidate>
-                                        @csrf
+                                                <div class="col-12">
+                                                    <label for="yourPassword" class="form-label">Password</label>
+                                                    <input type="password" name="password" class="form-control"
+                                                        value="password" required>
+                                                    <div class="invalid-feedback">Please enter your password!</div>
+                                                </div>
+                                                <div class="col-12">
 
-                                        <div class="d-none">
-                                            <div class="col-12">
-                                                <label for="yourUsername" class="form-label">Email</label>
-                                                <div class="input-group has-validation">
-                                                    <input type="text" name="email" class="form-control"
-                                                        value="accounting@gmail.com" required>
-                                                    <div class="invalid-feedback">Please enter your username.</div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
+                                                            Akun</a>
+                                                    </p>
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="yourPassword" class="form-label">Password</label>
-                                                <input type="password" name="password" class="form-control"
-                                                    value="password" required>
-                                                <div class="invalid-feedback">Please enter your password!</div>
-                                            </div>
-                                            <div class="col-12">
 
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
-                                                        Akun</a>
-                                                </p>
-                                            </div>
-                                        </div>
+                                            <button class="btn btn-primary w-100" type="submit">Accounting</button>
+                                        </form>
+                                    </div>
 
-
-                                        <button class="btn btn-primary w-100" type="submit">Accounting</button>
-                                    </form>
                                 </div>
                             </div>
 

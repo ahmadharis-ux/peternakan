@@ -46,24 +46,24 @@ class AccountingController extends Controller
 
     function kas()
     {
-        // return Kas::getView();
+        $historiKas = Kas::getHistoryTransaksi();
+        // return $historiKas;
+
 
         $pageData = [
             'title' => 'Buku - Kas',
             'heading' => 'Accounting',
             'active' => 'buku',
-            'date' => Carbon::now()->format('d-m-Y'),
-            'listKas' => Kas::getView(),
             'listRekening' => Rekening::all(),
+            'historiKas' => $historiKas,
             'listSupplierSapi' => User::getSupplierSapi(),
-            'listSupplierPakan' => User::getSupplierPakan(),
-            'listPekerja' => User::getPekerja(),
             'listCustomer' => User::getCustomer(),
-            'listPakan' => Pakan::all(),
+
         ];
 
         return view('accounting.kas.index', $pageData);
     }
+
     function detailSaldoDanAset()
     {
         $jumlahNilaiPembelianPakan = DetailPembelianPakan::jumlahNilaiPembelianPakan();
@@ -73,7 +73,7 @@ class AccountingController extends Controller
             'title' => 'Dashboard - Accounting',
             'heading' => 'Accounting',
             'jumlahNilaiPembelianPakan' => $jumlahNilaiPembelianPakan,
-            'jumlahNilaiPemakaianPakan' =>  $jumlahNilaiPemakaianPakan,
+            'jumlahNilaiPemakaianPakan' => $jumlahNilaiPemakaianPakan,
             'totalSaldo' => Rekening::getTotalSaldo(),
             'active' => 'dashboard',
         ];
@@ -89,8 +89,6 @@ class AccountingController extends Controller
 
         //hutangPekerja
         $hutangGaji = Kredit::getHutangGaji();
-
-
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
@@ -112,22 +110,12 @@ class AccountingController extends Controller
         // piutang sapi
         $piutangSapi = Debit::getPiutangSapi();
 
-        //piutangpakan
-        $piutangPakan = Debit::getPiutangPakan();
-
-        //piutangPekerja
-        $piutangGaji = Debit::getPiutangGaji();
-
         $pageData = [
             'title' => 'Dashboard - Accounting',
             'heading' => 'Accounting',
             'active' => 'dashboard',
             'piutangSapi' => $piutangSapi->sum('nominal'),
             'totalTransaksiPiutangSapi' => Debit::getTotalTransaksi($piutangSapi),
-            'piutangPakan' => $piutangPakan->sum('nominal'),
-            'totalTransaksiPiutangPakan' => Debit::getTotalTransaksi($piutangPakan),
-            'piutangGaji' => $piutangGaji->sum('nominal'),
-            'totalTransaksiPiutangGaji' => Debit::getTotalTransaksi($piutangGaji),
         ];
 
         return view('accounting.total_piutang.index', $pageData);

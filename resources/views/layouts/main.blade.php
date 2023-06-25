@@ -53,7 +53,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center">
                 <img src="{{ asset('sapi.png') }}" alt="">
                 <span class="d-none d-lg-block">Diva's Cow</span>
             </a>
@@ -160,7 +160,10 @@
         $(document).ready(function() {
             $('#example').DataTable();
 
-            $('#example2').DataTable();
+            // datatable sampe id: example19
+            for (let i = 0; i <= 20; i++) {
+                $(`#example${i}`).DataTable();
+            }
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>

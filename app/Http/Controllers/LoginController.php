@@ -9,9 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    function index()
+    private function autoLogin()
     {
-        // AUTO LOGIN SEMENTARA =======================
         $credentials = [
             "email" => "accounting@gmail.com",
             "password" => "password"
@@ -35,6 +34,12 @@ class LoginController extends Controller
         }
 
         return 'gagal auto login';
+    }
+
+    function index()
+    {
+        // AUTO LOGIN SEMENTARA =======================
+        return $this->autoLogin();
         // =======================
 
 
@@ -70,7 +75,7 @@ class LoginController extends Controller
 
         return redirect('/');
     }
-    
+
     function changePassword(Request $request)
     {
         $request->validate([

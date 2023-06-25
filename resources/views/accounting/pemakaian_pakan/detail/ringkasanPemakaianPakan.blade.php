@@ -1,7 +1,7 @@
 <div class="d-flex flex-column justify-content-center" style="width: 100%;" id="info">
     <div class="d-flex justify-content-between px-3 py-1">
         <span class="fw-bold">Total nilai pakan</span>
-        <span>{{ $pemakaianPakan->total_pengeluaran }}</span>
+        <span>Rp {{ number_format($pemakaianPakan->total_pengeluaran) }}</span>
     </div>
 
     <div class="d-flex justify-content-between px-3 py-1">

@@ -33,11 +33,13 @@ use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\TabunganController;
 use App\Http\Controllers\accounting\AccountingController;
+use App\Http\Controllers\accounting\InvoiceController;
 use App\Http\Controllers\accounting\KodeJurnalController;
 use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
+use App\Models\Debit;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +97,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/detail', [PembelianSapiController::class, 'storeDetail']);
             Route::post('/operasional', [PembelianSapiController::class, 'storeOperasional']);
             Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
+            Route::post('/{pembelianSapi}/invoice', [PembelianSapiController::class, 'invoice']);
         });
 
         // Piutang
@@ -107,6 +110,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
             Route::post('/operasional', [PenjualanSapiController::class, 'storeOperasional']);
             Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
+            Route::post('/{penjualanSapi}/invoice', [PenjualanSapiController::class, 'invoice']);
         });
 
         // Gaji
@@ -150,7 +154,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::get('/{sapi}', [SapiController::class, 'show']);
 
             // Route::post('/', [SapiController::class, 'store']);
-            Route::put('/{id}/ambil', [SapiController::class, 'setAmbilSapi']);
+            Route::put('/{sapi}/ambil', [SapiController::class, 'setAmbilSapi']);
             Route::put('/{id}', [SapiController::class, 'update']);
             // Route::delete('/{id}', [SapiController::class, 'destroy']);
 
@@ -172,6 +176,8 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
             Route::post('/satuan', [PakanController::class, 'storeSatuan']);
             Route::post('/pembelian', [PakanController::class, 'storePembelianPakan']);
             Route::post('/operasional', [PakanController::class, 'storeOperasional']);
+            Route::post('/{pembelianPakan}', [PakanController::class, 'invoice']);
+            Route::post('/{pembelianPakan}/invoice', [PakanController::class, 'invoice']);
         });
 
 
@@ -202,6 +208,9 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
             Route::post('/', [PemakaianPakanController::class, 'store']);
         });
+
+        // invoice
+        Route::post('invoice/print', [InvoiceController::class, 'print']);
     });
 
 
