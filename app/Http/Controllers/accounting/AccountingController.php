@@ -9,24 +9,74 @@ use App\Models\Debit;
 use App\Models\Pakan;
 use App\Models\Kredit;
 use App\Models\Rekening;
+use Carbon\CarbonPeriod;
+use App\Models\StokPakan;
 use Illuminate\Http\Request;
+use App\Models\PembelianPakan;
+use App\Models\TransaksiDebit;
 use Illuminate\Support\Carbon;
+use App\Models\TransaksiKredit;
 use App\Http\Controllers\Controller;
 use App\Models\DetailPemakaianPakan;
 use App\Models\DetailPembelianPakan;
-use App\Models\PembelianPakan;
-use App\Models\StokPakan;
-use App\Models\TransaksiDebit;
-use App\Models\TransaksiKredit;
 
 class AccountingController extends Controller
 {
-    function index()
+
+
+
+    function index(Request $request)
     {
         $aa = new DetailPembelianPakan();
         $a = $aa->jumlahNilaiPembelianPakan();
         $bb = new DetailPemakaianPakan();
         $b = $bb->jumlahNilaiPemakaianPakan();
+
+        // ========================================== GRAFIK TRANSAKSI
+        $dt = Carbon::now();
+        $awalBulan = $dt->startOfMonth()->toDateString();
+        $akhirBulan = $dt->endOfMonth()->toDateString();
+
+        $fromDate = $request->query('from_date') ?? $awalBulan;
+        $toDate = $request->query('to_date') ?? $akhirBulan;
+
+        $period = CarbonPeriod::create($fromDate, $toDate);
+        $dateList = [];
+        foreach ($period as $date) {
+            $dateList[] = $date->toDateString();
+        }
+
+        $listTransaksiDebit = TransaksiDebit::whereBetween('created_at', [$fromDate, $toDate])->get();
+        $listTransaksiKredit = TransaksiKredit::whereBetween('created_at', [$fromDate, $toDate])->get();
+
+        $listTransaksiDebit->each(function ($trx) {
+            $date = Carbon::create($trx->created_at)->toDateString();
+            $trx->createdDate = $date;
+        });
+
+        $listTransaksiKredit->each(function ($trx) {
+            $date = Carbon::create($trx->created_at)->toDateString();
+            $trx->createdDate = $date;
+        });
+
+        $trxByDate = $listTransaksiDebit->groupBy('createdDate');
+        $trxDebitByDate = $trxByDate->map(function ($trxList) {
+            return $trxList->sum('nominal');
+        });
+
+        $trxByDate = $listTransaksiKredit->groupBy('createdDate');
+        $trxKreditByDate = $trxByDate->map(function ($trxList) {
+            return $trxList->sum('nominal');
+        });
+
+        $listNominalTrxDebitByDate = [];
+        $listNominalTrxKreditByDate = [];
+
+        foreach ($dateList as $date) {
+            $listNominalTrxDebitByDate[] = $trxDebitByDate[$date] ?? 0;
+            $listNominalTrxKreditByDate[] = $trxKreditByDate[$date] ?? 0;
+        }
+        // ==================================================================
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
@@ -39,6 +89,12 @@ class AccountingController extends Controller
             'totalSaldo' => Rekening::getTotalSaldo(),
             'jumlahNilaiPembelianPakan' => $a,
             'jumlahNilaiPemakaianPakan' => $b,
+            'listNominalTrxKreditByDate' => collect($listNominalTrxKreditByDate),
+            'listNominalTrxDebitByDate' => collect($listNominalTrxDebitByDate),
+            'fromDate' => $fromDate,
+            'toDate' => $toDate,
+            'dateList' => json_encode($dateList),
+
         ];
 
         return view('accounting.index', $pageData);

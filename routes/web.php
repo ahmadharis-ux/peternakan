@@ -97,8 +97,6 @@ Route::get('/test', function (Request $request) {
         return $trxList->sum('nominal');
     });
 
-    // return $listNominalTrxKreditByDate;
-
     $listNominalTrxDebitByDate = [];
     $listNominalTrxKreditByDate = [];
 
@@ -106,17 +104,6 @@ Route::get('/test', function (Request $request) {
         $listNominalTrxDebitByDate[] = $trxDebitByDate[$date] ?? 0;
         $listNominalTrxKreditByDate[] = $trxKreditByDate[$date] ?? 0;
     }
-
-    // return [
-    //     "trxDebit" => $listTransaksiDebit,
-    //     "trxKredit" => $listTransaksiKredit
-    // ];
-
-
-    // return [
-    //     "trxDebit" => $listNominalTrxDebitByDate,
-    //     "trxKredit" => $listNominalTrxKreditByDate
-    // ];
 
 
     $pageData = [
