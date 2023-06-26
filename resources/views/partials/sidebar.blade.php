@@ -17,7 +17,7 @@
          @if (auth()->user()->role->nama == 'Accounting')
              {{-- DASHBOARD --}}
              <li class="nav-item">
-                 <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/acc">
+                 <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }}" href="/acc">
                      <i class="bi bi-grid"></i>
                      <span>Dashboard</span>
                  </a>
@@ -32,7 +32,7 @@
                  </a>
 
                  <ul id="menuPembukuan"
-                     class="nav-content  {{ $active != 'buku' ? 'collapse' : '' }} {{ $active == 'buku' ? 'show' : '' }}"
+                     class="nav-content {{ $active != 'buku' ? 'collapse' : '' }} {{ $active == 'buku' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
                          <a href="/acc/kas" class="{{ $title == 'Buku - Kas' ? 'active' : '' }}">
@@ -84,7 +84,7 @@
                      <i class="bi bi-people"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="menuUser"
-                     class="nav-content   {{ $active != 'user' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
+                     class="nav-content {{ $active != 'user' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
                          <a href="/acc/user/all" class="{{ $title == 'User - User' ? 'active' : '' }}">
@@ -133,7 +133,7 @@
                      <i class="bi bi-gear"></i><span>Opsi</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="menuOpsi"
-                     class="nav-content  {{ $active != 'opsi' ? 'collapse' : '' }} {{ $active == 'opsi' ? 'show' : '' }}"
+                     class="nav-content {{ $active != 'opsi' ? 'collapse' : '' }} {{ $active == 'opsi' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
 
 
@@ -160,7 +160,7 @@
                          class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="menuOperasionalKandang"
-                     class="nav-content  {{ $active != 'operasional kandang' ? 'collapse' : '' }} {{ $active == 'operasional kandang' ? 'show' : '' }}"
+                     class="nav-content {{ $active != 'operasional kandang' ? 'collapse' : '' }} {{ $active == 'operasional kandang' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
 
                      <li>
@@ -175,7 +175,7 @@
          @if (auth()->user()->role->nama == 'Admin')
              {{-- DASHBOARD --}}
              <li class="nav-item">
-                 <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/admin">
+                 <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }}" href="/admin">
                      <i class="bi bi-grid"></i>
                      <span>Dashboard</span>
                  </a>
@@ -189,7 +189,7 @@
                          class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="menuPembukuan"
-                     class="nav-content  {{ $active != 'buku' ? 'collapse' : '' }} {{ $active == 'buku' ? 'show' : '' }}"
+                     class="nav-content {{ $active != 'buku' ? 'collapse' : '' }} {{ $active == 'buku' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
                          <a href="/acc/jurnal" class="{{ $title == 'Jurnal' ? 'active' : '' }}">
@@ -209,7 +209,7 @@
                      <i class="bi bi-people"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="menuUser"
-                     class="nav-content   {{ $active != 'users' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
+                     class="nav-content {{ $active != 'users' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
                          <a href="/admin/customer" class="{{ $title == 'Customer' ? 'active' : '' }}">
@@ -248,7 +248,7 @@
          @if (auth()->user()->role->nama == 'Owner')
              {{-- DASHBOARD --}}
              <li class="nav-item">
-                 <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/owner">
+                 <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }}" href="/owner">
                      <i class="bi bi-grid"></i>
                      <span>Dashboard</span>
                  </a>
@@ -262,7 +262,7 @@
                          class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="menuPembukuan"
-                     class="nav-content  {{ $active != 'buku' ? 'collapse' : '' }} {{ $active == 'buku' ? 'show' : '' }}"
+                     class="nav-content {{ $active != 'buku' ? 'collapse' : '' }} {{ $active == 'buku' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
                          <a href="/owner/kas" class="{{ $title == 'Buku - Kas' ? 'active' : '' }}">
@@ -314,7 +314,7 @@
                      <i class="bi bi-people"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
                  </a>
                  <ul id="menuUser"
-                     class="nav-content   {{ $active != 'users' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
+                     class="nav-content {{ $active != 'users' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
                      data-bs-parent="#sidebar-nav">
                      <li>
                          <a href="/owner/customer" class="{{ $title == 'Customer' ? 'active' : '' }}">
@@ -350,7 +350,25 @@
              </li>
          @endif
 
-         {{-- @if (auth()->user()->role->nama == 'Admin')
+         <li class="nav-item">
+             <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }}" href="/test">
+                 <i class="bi bi-grid"></i>
+                 <span>Testpage</span>
+             </a>
+         </li>
+
+
+
+
+
+
+     </ul>
+
+ </aside>
+
+
+ <!-- End Sidebar-->
+ {{-- @if (auth()->user()->role->nama == 'Admin')
              <li class="nav-item">
                  <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }} " href="/admin">
                      <i class="bi bi-grid"></i>
@@ -375,6 +393,3 @@
                  </a>
              </li><!-- End Dashboard Nav -->
          @endif --}}
-     </ul>
-
- </aside><!-- End Sidebar-->

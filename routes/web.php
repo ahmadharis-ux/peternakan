@@ -40,6 +40,8 @@ use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
 use App\Models\Debit;
+use Carbon\CarbonPeriod;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +55,82 @@ use App\Models\Debit;
 */
 
 // REDIRECT HOME KE DASHBOARD ACCOUNTING
-Route::get("/home", function () {
-    return redirect('/acc/');
-});
+// Route::get("/home", function () {
+//     return redirect('/acc/');
+// });
 
+// testpage
+Route::get('/test', function (Request $request) {
+    $dt = Carbon::now();
+    $awalBulan = $dt->startOfMonth()->toDateString();
+    $akhirBulan = $dt->endOfMonth()->toDateString();
+
+    $fromDate = $request->query('from_date') ?? $awalBulan;
+    $toDate = $request->query('to_date') ?? $akhirBulan;
+
+    $period = CarbonPeriod::create($fromDate, $toDate);
+    $dateList = [];
+    foreach ($period as $date) {
+        $dateList[] = $date->toDateString();
+    }
+
+    $listTransaksiDebit = TransaksiDebit::whereBetween('created_at', [$fromDate, $toDate])->get();
+    $listTransaksiKredit = TransaksiKredit::whereBetween('created_at', [$fromDate, $toDate])->get();
+
+    $listTransaksiDebit->each(function ($trx) {
+        $date = Carbon::create($trx->created_at)->toDateString();
+        $trx->createdDate = $date;
+    });
+
+    $listTransaksiKredit->each(function ($trx) {
+        $date = Carbon::create($trx->created_at)->toDateString();
+        $trx->createdDate = $date;
+    });
+
+    $trxByDate = $listTransaksiDebit->groupBy('createdDate');
+    $trxDebitByDate = $trxByDate->map(function ($trxList) {
+        return $trxList->sum('nominal');
+    });
+
+    $trxByDate = $listTransaksiKredit->groupBy('createdDate');
+    $trxKreditByDate = $trxByDate->map(function ($trxList) {
+        return $trxList->sum('nominal');
+    });
+
+    // return $listNominalTrxKreditByDate;
+
+    $listNominalTrxDebitByDate = [];
+    $listNominalTrxKreditByDate = [];
+
+    foreach ($dateList as $date) {
+        $listNominalTrxDebitByDate[] = $trxDebitByDate[$date] ?? 0;
+        $listNominalTrxKreditByDate[] = $trxKreditByDate[$date] ?? 0;
+    }
+
+    // return [
+    //     "trxDebit" => $listTransaksiDebit,
+    //     "trxKredit" => $listTransaksiKredit
+    // ];
+
+
+    // return [
+    //     "trxDebit" => $listNominalTrxDebitByDate,
+    //     "trxKredit" => $listNominalTrxKreditByDate
+    // ];
+
+
+    $pageData = [
+        'title' => 'testGrafik',
+        "active" => 'asdf',
+        'listNominalTrxKreditByDate' => collect($listNominalTrxKreditByDate),
+        'listNominalTrxDebitByDate' => collect($listNominalTrxDebitByDate),
+        'fromDate' => $fromDate,
+        'toDate' => $toDate,
+        'dateList' => json_encode($dateList),
+    ];
+
+    return view('components.grafikTransaksi', $pageData);
+});
 
 // ================================ OWNER
 Route::middleware(['auth', 'role:Owner'])->group(function () {
@@ -214,9 +288,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
     });
 
 
-    Route::get('test', function () {
-        return view('test_faktur');
-    });
+
 
     Route::post('test', function () {
         return view('test_faktur');
