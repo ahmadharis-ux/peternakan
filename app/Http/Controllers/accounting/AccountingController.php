@@ -27,56 +27,6 @@ class AccountingController extends Controller
 
     function index(Request $request)
     {
-        $aa = new DetailPembelianPakan();
-        $a = $aa->jumlahNilaiPembelianPakan();
-        $bb = new DetailPemakaianPakan();
-        $b = $bb->jumlahNilaiPemakaianPakan();
-
-        // ========================================== GRAFIK TRANSAKSI
-        $dt = Carbon::now();
-        $awalBulan = $dt->startOfMonth()->toDateString();
-        $akhirBulan = $dt->endOfMonth()->toDateString();
-
-        $fromDate = $request->query('from_date') ?? $awalBulan;
-        $toDate = $request->query('to_date') ?? $akhirBulan;
-
-        $period = CarbonPeriod::create($fromDate, $toDate);
-        $dateList = [];
-        foreach ($period as $date) {
-            $dateList[] = $date->toDateString();
-        }
-
-        $listTransaksiDebit = TransaksiDebit::whereBetween('created_at', [$fromDate, $toDate])->get();
-        $listTransaksiKredit = TransaksiKredit::whereBetween('created_at', [$fromDate, $toDate])->get();
-
-        $listTransaksiDebit->each(function ($trx) {
-            $date = Carbon::create($trx->created_at)->toDateString();
-            $trx->createdDate = $date;
-        });
-
-        $listTransaksiKredit->each(function ($trx) {
-            $date = Carbon::create($trx->created_at)->toDateString();
-            $trx->createdDate = $date;
-        });
-
-        $trxByDate = $listTransaksiDebit->groupBy('createdDate');
-        $trxDebitByDate = $trxByDate->map(function ($trxList) {
-            return $trxList->sum('nominal');
-        });
-
-        $trxByDate = $listTransaksiKredit->groupBy('createdDate');
-        $trxKreditByDate = $trxByDate->map(function ($trxList) {
-            return $trxList->sum('nominal');
-        });
-
-        $listNominalTrxDebitByDate = [];
-        $listNominalTrxKreditByDate = [];
-
-        foreach ($dateList as $date) {
-            $listNominalTrxDebitByDate[] = $trxDebitByDate[$date] ?? 0;
-            $listNominalTrxKreditByDate[] = $trxKreditByDate[$date] ?? 0;
-        }
-        // ==================================================================
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
@@ -87,13 +37,9 @@ class AccountingController extends Controller
             'totalPiutang' => Debit::getTotalNominal() - TransaksiDebit::getTotalNominal(),
             'stokSapi' => Sapi::where('status', 'ADA')->get()->count(),
             'totalSaldo' => Rekening::getTotalSaldo(),
-            'jumlahNilaiPembelianPakan' => $a,
-            'jumlahNilaiPemakaianPakan' => $b,
-            'listNominalTrxKreditByDate' => collect($listNominalTrxKreditByDate),
-            'listNominalTrxDebitByDate' => collect($listNominalTrxDebitByDate),
-            'fromDate' => $fromDate,
-            'toDate' => $toDate,
-            'dateList' => json_encode($dateList),
+            'jumlahNilaiPembelianPakan' => DetailPembelianPakan::jumlahNilaiPembelianPakan(),
+            'jumlahNilaiPemakaianPakan' => DetailPemakaianPakan::jumlahNilaiPemakaianPakan(),
+            'dataGrafikTransaksi' => getDataGrafikTransaksi($request),
 
         ];
 
@@ -103,8 +49,6 @@ class AccountingController extends Controller
     function kas()
     {
         $historiKas = Kas::getHistoryTransaksi();
-        // return $historiKas;
-
 
         $pageData = [
             'title' => 'Buku - Kas',

@@ -8,12 +8,14 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label class="me-1 d-block">Dari tanggal</label>
-                            <input type="date" class="form-control" name="from_date" value="{{ $fromDate }}">
+                            <input type="date" class="form-control" name="from_date"
+                                value="{{ $dataGrafikTransaksi->fromDate }}">
                         </div>
 
                         <div class="col">
                             <label class="me-1 d-block">Ke tanggal</label>
-                            <input type="date" class="form-control" name="to_date" value="{{ $toDate }}">
+                            <input type="date" class="form-control" name="to_date"
+                                value="{{ $dataGrafikTransaksi->toDate }}">
                         </div>
 
 
@@ -31,9 +33,9 @@
 
 
     <script>
-        const listNominalTrxKreditByDate = {!! $listNominalTrxKreditByDate !!}
-        const listNominalTrxDebitByDate = {!! $listNominalTrxDebitByDate !!}
-        const dateList = {!! $dateList !!}
+        const listNominalTrxKreditByDate = {!! $dataGrafikTransaksi->trxKredit !!}
+        const listNominalTrxDebitByDate = {!! $dataGrafikTransaksi->trxDebit !!}
+        const dateList = {!! $dataGrafikTransaksi->dateList !!}
 
         console.log(listNominalTrxDebitByDate);
         console.log(listNominalTrxKreditByDate);
