@@ -25,6 +25,11 @@ function myId()
     return auth()->user()->id;
 }
 
+function userPunyaTtd()
+{
+    return auth()->user()->foto_ttd !== null;
+}
+
 function getUserFullname($user)
 {
     $fullName = "$user->nama_depan $user->nama_belakang";
