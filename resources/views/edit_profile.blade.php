@@ -61,20 +61,21 @@
 
                             {{-- foto --}}
                             <div class="row my-3">
+
                                 <div class="col d-flex flex-column align-items-center" style="width: max-content">
                                     <label>Foto profil</label>
-                                    {{-- <div class="gambar-ttd my-2">
-                                        <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" id="previewImage">
-                                    </div> --}}
-                                    {{-- <input name="foto_ttd" type="file" id="myFile" class="button-file" /> --}}
+                                    <div class="gambar-ttd my-2">
+                                        <img src="{{ Storage::url(auth()->user()->foto_profil) }}" id="previewImage">
+                                    </div>
+                                    <input name="foto_profil" type="file" id="myFile" class="button-file" />
                                 </div>
 
                                 <div class="col d-flex flex-column align-items-center" style="width: max-content">
                                     <label>Tanda Tangan</label>
                                     <div class="gambar-ttd my-2">
-                                        <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" id="previewImage">
+                                        <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" id="previewImage1">
                                     </div>
-                                    <input name="foto_ttd" type="file" id="myFile" class="button-file" />
+                                    <input name="foto_ttd" type="file" id="myFile1" class="button-file" />
                                 </div>
 
 
@@ -145,6 +146,19 @@
 
                 reader.onload = function(e) {
                     document.getElementById('previewImage').src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('myFile1').addEventListener('change', function() {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    document.getElementById('previewImage1').src = e.target.result;
                 };
 
                 reader.readAsDataURL(file);

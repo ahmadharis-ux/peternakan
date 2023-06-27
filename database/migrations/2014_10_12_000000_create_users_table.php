@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('telepon')->nullable();
             $table->string('foto_ttd')->nullable();
+            $table->string('foto_profil')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
