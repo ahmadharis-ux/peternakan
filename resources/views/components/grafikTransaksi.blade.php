@@ -37,10 +37,6 @@
         const listNominalTrxDebitByDate = {!! $dataGrafikTransaksi->trxDebit !!}
         const dateList = {!! $dataGrafikTransaksi->dateList !!}
 
-        console.log(listNominalTrxDebitByDate);
-        console.log(listNominalTrxKreditByDate);
-        console.log(dateList);
-
         document.addEventListener("DOMContentLoaded", () => {
             new ApexCharts(document.querySelector("#reportsChart"), {
                 series: [{

@@ -63,10 +63,10 @@
                             <div class="row my-3">
                                 <div class="col d-flex flex-column align-items-center" style="width: max-content">
                                     <label>Foto profil</label>
-                                    <div class="gambar-ttd my-2">
+                                    {{-- <div class="gambar-ttd my-2">
                                         <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" id="previewImage">
-                                    </div>
-                                    <input name="foto_ttd" type="file" id="myFile" class="button-file" />
+                                    </div> --}}
+                                    {{-- <input name="foto_ttd" type="file" id="myFile" class="button-file" /> --}}
                                 </div>
 
                                 <div class="col d-flex flex-column align-items-center" style="width: max-content">

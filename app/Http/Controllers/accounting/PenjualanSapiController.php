@@ -155,6 +155,7 @@ class PenjualanSapiController extends Controller
             "author" => auth()->user(),
             "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
+            "tanggalCetak" => tanggalSekarang(),
         ];
 
         $fakturBaru = [

@@ -151,7 +151,9 @@ class InvoiceController extends Controller
             "author" => User::find($faktur->id_author),
             "nomorFaktur" => $faktur->nomor_faktur,
             "jatuhTempo" => $fakturPageData->jatuhTempo,
+            "tanggalCetak" => $fakturPageData->tanggalCetak,
         ];
+
 
         // return ($fakturPageData->penjualanSapi);
 
