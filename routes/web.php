@@ -41,6 +41,8 @@ use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
 
 use App\Models\Debit;
+use Carbon\CarbonPeriod;
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\ProfileController;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -58,10 +60,14 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 */
 
 // REDIRECT HOME KE DASHBOARD ACCOUNTING
-Route::get("/home", function () {
-    return redirect('/acc/');
-});
+// Route::get("/home", function () {
+//     return redirect('/acc/');
+// });
 
+// testpage
+Route::get('/test', function (Request $request) {
+    return 'page for test';
+});
 
 // ================================ OWNER
 Route::middleware(['auth', 'role:Owner'])->group(function () {
@@ -219,9 +225,7 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
     });
 
 
-    Route::get('test', function () {
-        return view('test_faktur');
-    });
+
 
     Route::post('test', function () {
         return view('test_faktur');

@@ -9,24 +9,24 @@ use App\Models\Debit;
 use App\Models\Pakan;
 use App\Models\Kredit;
 use App\Models\Rekening;
+use Carbon\CarbonPeriod;
+use App\Models\StokPakan;
 use Illuminate\Http\Request;
+use App\Models\PembelianPakan;
+use App\Models\TransaksiDebit;
 use Illuminate\Support\Carbon;
+use App\Models\TransaksiKredit;
 use App\Http\Controllers\Controller;
 use App\Models\DetailPemakaianPakan;
 use App\Models\DetailPembelianPakan;
-use App\Models\PembelianPakan;
-use App\Models\StokPakan;
-use App\Models\TransaksiDebit;
-use App\Models\TransaksiKredit;
 
 class AccountingController extends Controller
 {
-    function index()
+
+
+
+    function index(Request $request)
     {
-        $aa = new DetailPembelianPakan();
-        $a = $aa->jumlahNilaiPembelianPakan();
-        $bb = new DetailPemakaianPakan();
-        $b = $bb->jumlahNilaiPemakaianPakan();
 
         $pageData = [
             'title' => 'Dashboard - Accounting',
@@ -37,8 +37,10 @@ class AccountingController extends Controller
             'totalPiutang' => Debit::getTotalNominal() - TransaksiDebit::getTotalNominal(),
             'stokSapi' => Sapi::where('status', 'ADA')->get()->count(),
             'totalSaldo' => Rekening::getTotalSaldo(),
-            'jumlahNilaiPembelianPakan' => $a,
-            'jumlahNilaiPemakaianPakan' => $b,
+            'jumlahNilaiPembelianPakan' => DetailPembelianPakan::jumlahNilaiPembelianPakan(),
+            'jumlahNilaiPemakaianPakan' => DetailPemakaianPakan::jumlahNilaiPemakaianPakan(),
+            'dataGrafikTransaksi' => getDataGrafikTransaksi($request),
+
         ];
 
         return view('accounting.index', $pageData);
@@ -47,8 +49,6 @@ class AccountingController extends Controller
     function kas()
     {
         $historiKas = Kas::getHistoryTransaksi();
-        // return $historiKas;
-
 
         $pageData = [
             'title' => 'Buku - Kas',

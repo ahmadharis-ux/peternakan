@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    private function autoLogin()
+    private function autoLogin($role = 'accounting')
     {
         $credentials = [
-            "email" => "accounting@gmail.com",
+            "email" => "$role@gmail.com",
             "password" => "password"
         ];
 
@@ -39,6 +39,7 @@ class LoginController extends Controller
     function index()
     {
         // AUTO LOGIN SEMENTARA =======================
+        // default role = accounting
         return $this->autoLogin();
         // =======================
 
