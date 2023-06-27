@@ -67,11 +67,13 @@ use App\Http\Controllers\accounting\PemakaianPakanController;
 
 // testpage
 Route::get('/test', function (Request $request) {
-    $link = Storage::url(auth()->user()->foto_ttd);
-    return view('test', ['link' => $link]);
+    // $link = Storage::url(auth()->user()->foto_ttd);
+    // return view('test', ['link' => $link]);
 
     return Storage::url(auth()->user()->foto_ttd);
 });
+
+
 
 // ================================ OWNER
 Route::middleware(['auth', 'role:Owner'])->group(function () {
@@ -227,69 +229,20 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         // invoice
         Route::post('invoice/print', [InvoiceController::class, 'print']);
     });
-
-
-
-
-    Route::post('test', function () {
-        return view('test_faktur');
-    });
-
-
-
-
-
-    // // Route::get('/acc/kas', [AccController::class, 'indexKas']);
-    // Route::post('/storekas', [AccController::class, 'storeKas']);
-    // Route::get('/detail/kas/{jurnal_id}/{id}', [AccController::class, 'detKas']);
-
-    // Route::post('/storesapis', [AccController::class, 'storesapis']);
-
-    // Route::post('/storeopr', [AccController::class, 'storeopr']);
-    // Route::post('/storetrans', [AccController::class, 'storetrans']);
-    // Route::post('/storepiutang', [AccController::class, 'storepiutang']);
-
-    // //stok sapi
-    // Route::get('/stoksapis', [AccController::class, 'stoksapis']);
-
-    // //update status sapi
-    // Route::put('/editstatus/{id}', [AccController::class, 'editstatus']);
-
-    // //total hutang
-    // Route::get('/total_hutang', [AccController::class, 'allhutang']);
-
-    // //pakan
-    // // Route::get('/acc/pakans', [AccController::class, 'indexpakans']);
-    // Route::post('/storepakans', [AccController::class, 'storepakans']);
-    // Route::post('/belipakans', [AccController::class, 'belipakans']);
-    // Route::post('/pemakaianpakans', [AccController::class, 'pemakaianpakans']);
-
-    // //hutang
-    // // Route::get('/acc/hutang', [AccController::class, 'indexhutang']);
-
-    // //piutang
-    // // Route::get('/acc/piutang', [AccController::class, 'indexpiutang']);
-
-    // //gaji
-    // Route::post('/inputsalary', [AccController::class, 'storesalary']);
-    // Route::post('/kasihkasbon', [AccController::class, 'storekashbon']);
-    // // Route::get('/acc/pekerja', [PekerjaController::class, 'index']);
-    // // Route::get('/acc/pekerja/{id}', [PekerjaController::class, 'detail_pekerja']);
-
-    // //customer
-    // // Route::get('/acc/customer', [CustomerController::class, 'index']);
-    // // Route::get('/acc/customer/{id}', [CustomerController::class, 'detail']);
-
-    // //suppliersapi
-    // // Route::get('/acc/supsapis', [SupSapiController::class, 'index']);
-
-    // //faktur
-    // Route::get('/faktur/{id}', [PDFController::class, 'fakturcust']);
 });
 
 
 // rute biasa==================================
 
+Route::middleware('auth')->group(function () {
+    Route::post('/changepass', [LoginController::class, 'changePassword']);
+    Route::post('/logout', [LoginController::class, 'logout']);
+
+
+    Route::post('test', function () {
+        return view('test_faktur');
+    });
+});
 
 
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
@@ -302,8 +255,7 @@ Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
 Route::get('/daftar', [DaftarController::class, 'index']);
 Route::post('/post_registration', [DaftarController::class, 'store']);
 
-Route::post('/changepass', [LoginController::class, 'changePassword']);
-Route::post('/logout', [LoginController::class, 'logout']);
+
 Route::get('/kabur', [LoginController::class, 'logout']);
 Route::get('/blank', function () {
     return view('blank');
