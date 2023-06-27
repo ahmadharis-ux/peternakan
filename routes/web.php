@@ -3,11 +3,14 @@
 use Carbon\Carbon;
 use App\Models\Kas;
 use App\Models\User;
+use App\Models\Debit;
 use App\Models\Pakan;
 use App\Models\Rekening;
 use Barryvdh\DomPDF\PDF;
+use Carbon\CarbonPeriod;
 use App\Models\Pembayaran;
 use GuzzleHttp\Middleware;
+use Illuminate\Http\Request;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
 use App\Models\PemakaianPakan;
@@ -17,13 +20,16 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccController;
 use App\Http\Controllers\PDFController;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\PekerjaController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupSapiController;
 use App\Http\Controllers\CustomerController;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\accounting\DebitController;
@@ -31,21 +37,16 @@ use App\Http\Controllers\accounting\PakanController;
 use App\Http\Controllers\accounting\PriveController;
 use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
-use App\Http\Controllers\accounting\TabunganController;
-use App\Http\Controllers\accounting\AccountingController;
 use App\Http\Controllers\accounting\InvoiceController;
+use App\Http\Controllers\accounting\TabunganController;
+
+use App\Http\Controllers\accounting\AccountingController;
 use App\Http\Controllers\accounting\KodeJurnalController;
 use App\Http\Controllers\accounting\PenggajianController;
+
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
-
-use App\Models\Debit;
-use Carbon\CarbonPeriod;
-use Illuminate\Http\Request;
-
-use App\Http\Controllers\ProfileController;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 
 /*
@@ -66,7 +67,10 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 
 // testpage
 Route::get('/test', function (Request $request) {
-    return 'page for test';
+    $link = Storage::url(auth()->user()->foto_ttd);
+    return view('test', ['link' => $link]);
+
+    return Storage::url(auth()->user()->foto_ttd);
 });
 
 // ================================ OWNER
@@ -288,9 +292,9 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
 
 
 
-Route::get('/profile',[ProfileController::class,'index'])->middleware('auth');
-Route::get('/editprofile',[ProfileController::class,'edit'])->middleware('auth');
-Route::put('/updateprofile',[ProfileController::class,'update'])->middleware('auth');
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
+Route::get('/editprofile', [ProfileController::class, 'edit'])->middleware('auth');
+Route::put('/updateprofile', [ProfileController::class, 'update'])->middleware('auth');
 
 Route::get('/', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
