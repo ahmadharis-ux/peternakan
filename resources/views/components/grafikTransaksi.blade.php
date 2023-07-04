@@ -20,8 +20,13 @@
 
 
                     </div>
-                    <button type="submit" class="btn btn-primary ms-auto" href="#" role="button">Terapkan
-                        filter tanggal</button>
+                    <div class="d-flex justify-content-end my-3">
+                        <button type="button" class="btn btn-secondary me-1" onclick="resetGrafik()">Reset
+                            filter</button>
+                        <button type="submit" class="btn btn-primary" role="button">Terapkan
+                            filter tanggal</button>
+
+                    </div>
                 </form>
             </div>
             <div id="reportsChart"></div>
@@ -33,13 +38,14 @@
 
 
     <script>
+        function resetGrafik() {
+            let path = window.location.href.split('?')[0]
+            window.location = path;
+        }
+
         const listNominalTrxKreditByDate = {!! $dataGrafikTransaksi->trxKredit !!}
         const listNominalTrxDebitByDate = {!! $dataGrafikTransaksi->trxDebit !!}
         const dateList = {!! $dataGrafikTransaksi->dateList !!}
-
-        console.log(listNominalTrxDebitByDate);
-        console.log(listNominalTrxKreditByDate);
-        console.log(dateList);
 
         document.addEventListener("DOMContentLoaded", () => {
             new ApexCharts(document.querySelector("#reportsChart"), {

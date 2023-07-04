@@ -40,7 +40,7 @@ class LoginController extends Controller
     {
         // AUTO LOGIN SEMENTARA =======================
         // default role = accounting
-        return $this->autoLogin();
+        // return $this->autoLogin('accounting');
         // =======================
 
 
@@ -69,11 +69,8 @@ class LoginController extends Controller
     function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 
