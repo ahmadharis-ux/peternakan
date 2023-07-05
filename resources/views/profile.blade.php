@@ -6,8 +6,8 @@
 
                 <div class="card">
                     <div class="card-body profile-card d-flex flex-column align-items-center pt-4">
-
-                        <img src="{{ Storage::url(auth()->user()->foto_profil) }}" width="150px" class="my-3">
+                        <img src="{{ Storage::url(auth()->user()->foto_profil) }}" width="100px" height="100px"
+                            class="img-cropped rounded-circle my-3">
                         <h2>{{ auth()->user()->name }}</h2>
                         <span>{{ auth()->user()->role->name }}</span>
                     </div>
