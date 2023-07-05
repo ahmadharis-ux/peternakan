@@ -18,3 +18,4 @@ yarn-error.log
 /.vscode
 /ignore-folder
 storage/clockwork/
+db-cred.txt
