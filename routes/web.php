@@ -65,9 +65,15 @@ Route::middleware(['auth', 'role:Owner'])->group(function () {
 
 // ================================ ADMIN
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index']);
-    Route::get('/users', [AdminController::class, 'users']);
-    Route::put('/editrole/{id}', [AdminController::class, 'editRole']);
+    Route::prefix('admin')->group(function () {
+
+        Route::get('/', [AdminController::class, 'index']);
+
+        Route::prefix('/users')->group(function () {
+            Route::get('/', [AdminController::class, 'users']);
+            Route::put('/editrole/{user}', [AdminController::class, 'editRole']);
+        });
+    });
 });
 
 // ================================ ACCOUNTING

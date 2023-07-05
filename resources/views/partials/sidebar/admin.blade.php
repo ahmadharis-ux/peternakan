@@ -7,7 +7,7 @@
 </li>
 
 {{-- PEMBUKUAN --}}
-<li class="nav-item">
+{{-- <li class="nav-item">
     <a class="nav-link {{ $active != 'buku' ? 'collapsed' : '' }}" data-bs-target="#menuPembukuan"
         data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Pembukuan</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -24,15 +24,14 @@
 
 
     </ul>
-</li>
+</li> --}}
 
 {{-- USER --}}
 <li class="nav-item">
-    <a class="nav-link {{ $active != 'users' ? 'collapsed' : '' }}" data-bs-target="#menuUser" data-bs-toggle="collapse"
-        href="#">
-        <i class="bi bi-people"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
+    <a class="nav-link {{ $active != 'users' ? 'collapsed' : '' }}" href="/admin/users">
+        <i class="bi bi-people"></i><span>User</span>
     </a>
-    <ul id="menuUser"
+    {{-- <ul id="menuUser"
         class="nav-content {{ $active != 'users' ? 'collapse' : '' }} {{ $active == 'users' ? 'show' : '' }}"
         data-bs-parent="#sidebar-nav">
         <li>
@@ -65,5 +64,5 @@
                 <i class="bi bi-circle"></i><span>Owner</span>
             </a>
         </li>
-    </ul>
+    </ul> --}}
 </li>

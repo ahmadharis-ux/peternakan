@@ -11,38 +11,55 @@ class AdminController extends Controller
 {
     function index()
     {
-        $title = 'Dashboard - Admin';
+
+
+
+        $title = 'Admin - Dashboard';
         $heading = 'Admin';
         $active = 'dashboard';
         return view('admin.index', [
             'title' => $title,
             'heading' => $heading,
-            'active' => $active
+            'active' => $active,
+            'listRole' => Role::all(),
+            'roleCount' => User::all()->groupBy('id_role'),
+
         ]);
     }
     function users()
     {
-        $title = 'Users - Admin';
+        $listUser = [];
+        $filterRole = request('role');
+
+        if ($filterRole) {
+            $listUser = User::where('id_role', $filterRole)->get();
+        } else {
+            $listUser = User::all();
+        }
+
+        $title = 'Admin - Users';
         $heading = 'Admin';
         $active = 'users';
-        $users = User::with(['role'])->get();
+        // $users = User::with(['role'])->get();
         $roles = Role::all();
-        return view('admin.users', [
+        return view('admin.user.users', [
             'title' => $title,
             'heading' => $heading,
-            'users' => $users,
+            'users' => $listUser,
             'active' => $active,
             'roles' => $roles
         ]);
     }
 
-    function editRole(Request $request)
+    function editRole(Request $request, User $user)
     {
-        $id = $request['id'];
         $validateData = $request->validate([
             'id_role' => 'required',
         ]);
-        User::where('id', $id)->update($validateData);
-        return redirect('/users')->with('success', 'Edit hak Akses Berhasil');
+
+        $user->id_role = $validateData['id_role'];
+        $user->save();
+
+        return redirect('/admin/users')->with('success', 'Edit hak Akses Berhasil');
     }
 }
