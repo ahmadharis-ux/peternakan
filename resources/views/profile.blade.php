@@ -6,8 +6,7 @@
 
                 <div class="card">
                     <div class="card-body profile-card d-flex flex-column align-items-center pt-4">
-                        <img src="{{ Storage::url(auth()->user()->foto_profil) }}" width="100px" height="100px"
-                            class="img-cropped rounded-circle my-3">
+                        <img src="{{ get_profil_pic() }}" width="100px" height="100px" class="img-cropped rounded-circle my-3">
                         <h2>{{ auth()->user()->name }}</h2>
                         <span>{{ auth()->user()->role->name }}</span>
                     </div>
@@ -40,32 +39,32 @@
                                 <h5 class="card-title">Profile Details</h5>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Full Name</div>
-                                    <div class="col-lg-9 col-md-8">{{ auth()->user()->nama_depan }}</div>
+                                    <div class="col-lg-3 col-md-4 label">Nama</div>
+                                    <div class="col-lg-9 col-md-8">{{ auth()->user()->fullname() }}</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Company</div>
+                                    <div class="col-lg-3 col-md-4 label">Perusahaan</div>
                                     <div class="col-lg-9 col-md-8">Diva's Cow</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Job</div>
+                                    <div class="col-lg-3 col-md-4 label">Role</div>
                                     <div class="col-lg-9 col-md-8">{{ auth()->user()->role->nama }}</div>
                                 </div>
-
+                                {{--
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Country</div>
+                                    <div class="col-lg-3 col-md-4 label">Negara</div>
                                     <div class="col-lg-9 col-md-8">INDONESIA</div>
-                                </div>
+                                </div> --}}
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Address</div>
+                                    <div class="col-lg-3 col-md-4 label">Alamat</div>
                                     <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Phone</div>
+                                    <div class="col-lg-3 col-md-4 label">Telepon</div>
                                     <div class="col-lg-9 col-md-8">{{ auth()->user()->telepon }}</div>
                                 </div>
 
@@ -74,16 +73,19 @@
                                     <div class="col-lg-9 col-md-8">{{ auth()->user()->email }}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label">Signature</div>
+                                    <div class="col-lg-3 col-md-4 label">Tanda tangan</div>
                                     <div class="col-lg-9 col-md-8">
-                                        <img src="{{ Storage::url(auth()->user()->foto_ttd) }}" width="150px"
-                                            class="my-3">
+                                        @if (get_ttd())
+                                            <img src="{{ get_ttd() }}" width="150px" class="my-3">
+                                        @else
+                                            <span class="text-muted">(Belum ada tanda tangan)</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label ms-auto">
                                         <a href="/editprofile" class="btn btn-warning text-white">Edit
-                                            Profile</a>
+                                            Profil</a>
                                     </div>
                                 </div>
                             </div>

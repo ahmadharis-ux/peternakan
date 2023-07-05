@@ -10,25 +10,26 @@ use Illuminate\Support\Facades\Hash;
 
 class DaftarController extends Controller
 {
-    function index (){
+    function index()
+    {
         return view('daftar');
     }
-    function store(Request $request){
-       $data = $request->all();
+    function store(Request $request)
+    {
+        $data = $request->all();
 
-       $user = new User();
-       $user->name = $data['name'];
-       $user->email = $data['email'];
-       $user->password = $data['password'];
-       $user->password_confirmation == $user->password;
-       $user->save();
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+        $user->password_confirmation == $user->password;
+        $user->save();
 
-       $detuser = new DetUser();
-       $detuser->user_id = $user->id;
-       $detuser->save();
-    //    dd($user,$detuser);
-    return redirect('/')->with('success','Berhasil Daftar Silahkan Login');
-
+        //    $detuser = new DetUser();
+        //    $detuser->user_id = $user->id;
+        //    $detuser->save();
+        //    dd($user,$detuser);
+        return redirect('/')->with('success', 'Berhasil Daftar Silahkan Login');
     }
     // function store(Request $request){
     //     $validateData = $request->validate([
@@ -44,6 +45,6 @@ class DaftarController extends Controller
     //     dd($validateData,$detuser_id);
     //     DetUser::create($user_id);
     //     // dd($validateData);
-        // return redirect('/')->with('success','Berhasil Daftar Silahkan Login');
+    // return redirect('/')->with('success','Berhasil Daftar Silahkan Login');
     // }
 }

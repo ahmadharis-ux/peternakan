@@ -1,15 +1,19 @@
 <?php
 
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Route;
-
-use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\ProfileController;
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+
+use App\Http\Controllers\admin\AdminController;
+
+use App\Http\Controllers\owner\OwnerController;
 
 use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
@@ -20,11 +24,9 @@ use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\InvoiceController;
 use App\Http\Controllers\accounting\TabunganController;
-
 use App\Http\Controllers\accounting\AccountingController;
 use App\Http\Controllers\accounting\KodeJurnalController;
 use App\Http\Controllers\accounting\PenggajianController;
-
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
@@ -43,11 +45,15 @@ use App\Http\Controllers\accounting\PemakaianPakanController;
 
 
 // testpage
-Route::get('/test', function (Request $request) {
+Route::get('/testa', function (Request $request) {
     // $link = Storage::url(auth()->user()->foto_ttd);
     // return view('test', ['link' => $link]);
 
-    return Storage::url(auth()->user()->foto_ttd);
+    // return Storage::url(auth()->user()->foto_ttd);
+
+    // return get_profil_pic();
+    $user = User::find(6);
+    return $user->fullname();
 });
 
 
@@ -207,7 +213,6 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::post('invoice/print', [InvoiceController::class, 'print']);
     });
 });
-
 
 // rute biasa==================================
 
