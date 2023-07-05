@@ -1,0 +1,3 @@
+database: diva7641_db1
+db_user: divascow
+db_pass: 43&t8jGLK0f0
