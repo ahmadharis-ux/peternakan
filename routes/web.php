@@ -1,35 +1,16 @@
 <?php
 
-use Carbon\Carbon;
-use App\Models\Kas;
-use App\Models\User;
-use App\Models\Debit;
-use App\Models\Pakan;
-use App\Models\Rekening;
-use Barryvdh\DomPDF\PDF;
-use Carbon\CarbonPeriod;
-use App\Models\Pembayaran;
-use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
-use App\Models\PembelianSapi;
-use App\Models\PenjualanSapi;
-use App\Models\PemakaianPakan;
-use App\Models\TransaksiDebit;
-use App\Models\TransaksiKredit;
-use Illuminate\Auth\Events\Login;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccController;
-use App\Http\Controllers\PDFController;
+
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\DaftarController;
-use App\Http\Controllers\PekerjaController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SupSapiController;
-use App\Http\Controllers\CustomerController;
-use Symfony\Component\HttpKernel\Profiler\Profile;
+
 use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\accounting\DebitController;
@@ -60,10 +41,6 @@ use App\Http\Controllers\accounting\PemakaianPakanController;
 |
 */
 
-// REDIRECT HOME KE DASHBOARD ACCOUNTING
-// Route::get("/home", function () {
-//     return redirect('/acc/');
-// });
 
 // testpage
 Route::get('/test', function (Request $request) {
