@@ -25,7 +25,7 @@
                     </div>
 
                     <!-- Piutang Card -->
-                    <div class="col-xxl-8 col-md-6">
+                    <div class="d-none col-xxl-8 col-md-6">
                         <a href="/acc/rincian_piutang">
                             <div class="card info-card revenue-card">
                                 <div class="card-body">

@@ -66,10 +66,12 @@
 
                     <div class="row justify-content-center">
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                            {{-- <img src="{{ asset('logo.svg') }}" alt="" width="100px"
+                                class="d-block mx-auto mb-5"> --}}
+
                             <div class="card mb-3">
-
                                 <div class="card-body">
-
                                     <div class="pt-4 pb-2">
                                         <h5 class="card-title fs-4 pb-0 text-center">Login</h5>
                                     </div>
