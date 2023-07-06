@@ -44,8 +44,8 @@ class DatabaseSeeder extends Seeder
 
         User::create(
             [
-                "nama_depan" => "test",
-                "nama_belakang" => "admin",
+                "nama_depan" => "Super",
+                "nama_belakang" => "Admin",
                 "id_role" => 2,
                 "email" => "admin@gmail.com",
                 "email_verified_at" => now(),
@@ -80,9 +80,9 @@ class DatabaseSeeder extends Seeder
         );
 
 
-        User::factory(20)->create();
+        // User::factory(20)->create();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             User::create(
                 [
                     "nama_depan" => "customer",
@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             User::create(
                 [
                     "nama_depan" => "ssapi",
@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             User::create(
                 [
                     "nama_depan" => "spakan",
@@ -229,7 +229,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Sapi::factory(20)->create();
+        Sapi::factory(5)->create();
     }
 
     function seedStokPakan()

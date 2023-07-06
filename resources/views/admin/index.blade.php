@@ -5,14 +5,10 @@
         {{-- cards role --}}
         <div class="d-flex justify-content-center flex-row flex-wrap">
             @foreach ($listRole as $role)
-                @php
-                    $jumlahUser = $roleCount[$role->id]->count();
-                @endphp
-
                 <a href="/admin/users?role={{ $role->id }}" class="cardRole card col-md-3 m-3 py-3 px-4"
                     style="color: rgb(71, 71, 71)">
                     <span class="fw-bold">{{ $role->nama }}</span>
-                    <span class="d-block display-3 text-end">{{ $jumlahUser }}</span>
+                    <span class="d-block display-3 text-end">{{ $role->count }}</span>
                 </a>
             @endforeach
         </div>

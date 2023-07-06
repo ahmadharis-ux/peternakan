@@ -12,6 +12,10 @@ class AdminController extends Controller
     function index()
     {
 
+        $listRole = Role::all();
+        $listRole->each(function ($role) {
+            $role->count = User::where('id_role', $role->id)->count();
+        });
 
 
         $title = 'Admin - Dashboard';
@@ -21,9 +25,7 @@ class AdminController extends Controller
             'title' => $title,
             'heading' => $heading,
             'active' => $active,
-            'listRole' => Role::all(),
-            'roleCount' => User::all()->groupBy('id_role'),
-
+            'listRole' => $listRole,
         ]);
     }
     function users()

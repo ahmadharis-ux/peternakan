@@ -1,20 +1,21 @@
 <?php
 
+use App\Models\Role;
+
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DaftarController;
-use App\Http\Controllers\ProfileController;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\admin\AdminController;
 
 use App\Http\Controllers\owner\OwnerController;
-
 use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\accounting\DebitController;
@@ -43,18 +44,24 @@ use App\Http\Controllers\accounting\PemakaianPakanController;
 |
 */
 
+Route::get('/home', function () {
+    if (auth()->user()->id_role === 2) {
+        return redirect()->intended('/admin');
+    }
+
+    if (auth()->user()->id_role === 3) {
+        return redirect()->intended('/acc');
+    }
+
+    if (auth()->user()->id_role === 1) {
+        return redirect()->intended('/owner');
+    }
+});
 
 // testpage
-Route::get('/testa', function (Request $request) {
-    // $link = Storage::url(auth()->user()->foto_ttd);
-    // return view('test', ['link' => $link]);
-
-    // return Storage::url(auth()->user()->foto_ttd);
-
-    // return get_profil_pic();
-    $user = User::find(6);
-    return $user->fullname();
-});
+// Route::get('/testa', function (Request $request) {
+//     return 'you found the testpage!';
+// });
 
 
 
