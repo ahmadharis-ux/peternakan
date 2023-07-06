@@ -1,35 +1,20 @@
 <?php
 
-use Carbon\Carbon;
-use App\Models\Kas;
 use App\Models\User;
-use App\Models\Debit;
-use App\Models\Pakan;
-use App\Models\Rekening;
-use Barryvdh\DomPDF\PDF;
-use Carbon\CarbonPeriod;
-use App\Models\Pembayaran;
-use GuzzleHttp\Middleware;
+
 use Illuminate\Http\Request;
-use App\Models\PembelianSapi;
-use App\Models\PenjualanSapi;
-use App\Models\PemakaianPakan;
-use App\Models\TransaksiDebit;
-use App\Models\TransaksiKredit;
-use Illuminate\Auth\Events\Login;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccController;
-use App\Http\Controllers\PDFController;
-use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\AdminController;
+
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\DaftarController;
-use App\Http\Controllers\PekerjaController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SupSapiController;
-use App\Http\Controllers\CustomerController;
-use Symfony\Component\HttpKernel\Profiler\Profile;
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+
+use App\Http\Controllers\admin\AdminController;
+
+use App\Http\Controllers\owner\OwnerController;
+
 use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\accounting\DebitController;
@@ -39,11 +24,9 @@ use App\Http\Controllers\accounting\JurnalController;
 use App\Http\Controllers\accounting\KreditController;
 use App\Http\Controllers\accounting\InvoiceController;
 use App\Http\Controllers\accounting\TabunganController;
-
 use App\Http\Controllers\accounting\AccountingController;
 use App\Http\Controllers\accounting\KodeJurnalController;
 use App\Http\Controllers\accounting\PenggajianController;
-
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
@@ -60,17 +43,17 @@ use App\Http\Controllers\accounting\PemakaianPakanController;
 |
 */
 
-// REDIRECT HOME KE DASHBOARD ACCOUNTING
-// Route::get("/home", function () {
-//     return redirect('/acc/');
-// });
 
 // testpage
-Route::get('/test', function (Request $request) {
+Route::get('/testa', function (Request $request) {
     // $link = Storage::url(auth()->user()->foto_ttd);
     // return view('test', ['link' => $link]);
 
-    return Storage::url(auth()->user()->foto_ttd);
+    // return Storage::url(auth()->user()->foto_ttd);
+
+    // return get_profil_pic();
+    $user = User::find(6);
+    return $user->fullname();
 });
 
 
@@ -82,9 +65,15 @@ Route::middleware(['auth', 'role:Owner'])->group(function () {
 
 // ================================ ADMIN
 Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index']);
-    Route::get('/users', [AdminController::class, 'users']);
-    Route::put('/editrole/{id}', [AdminController::class, 'editRole']);
+    Route::prefix('admin')->group(function () {
+
+        Route::get('/', [AdminController::class, 'index']);
+
+        Route::prefix('/users')->group(function () {
+            Route::get('/', [AdminController::class, 'users']);
+            Route::put('/editrole/{user}', [AdminController::class, 'editRole']);
+        });
+    });
 });
 
 // ================================ ACCOUNTING
@@ -230,7 +219,6 @@ Route::middleware(['auth', 'role:Accounting'])->group(function () {
         Route::post('invoice/print', [InvoiceController::class, 'print']);
     });
 });
-
 
 // rute biasa==================================
 

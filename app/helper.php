@@ -117,3 +117,27 @@ function getDataGrafikTransaksi(Request $request)
 
     return $graphData;
 }
+
+function get_profil_pic()
+{
+    $pic = Storage::url(auth()->user()->foto_profil);
+    $default = asset('assets/img/user-default.svg');
+
+    if ($pic == "/storage/") {
+        return $default;
+    }
+
+    return $pic;
+}
+
+function get_ttd()
+{
+    $pic = Storage::url(auth()->user()->foto_ttd);
+    // $default = asset('assets/img/no-signature.svg');
+
+    if ($pic == "/storage/") {
+        return false;
+    }
+
+    return $pic;
+}
