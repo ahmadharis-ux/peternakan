@@ -16,35 +16,25 @@ class DaftarController extends Controller
     }
     function store(Request $request)
     {
-        $data = $request->all();
 
-        $user = new User();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = $data['password'];
-        $user->password_confirmation == $user->password;
-        $user->save();
+        if ($request->password != $request->password_confirmation) {
+            return 'Password confirmation not match';
+        }
 
-        //    $detuser = new DetUser();
-        //    $detuser->user_id = $user->id;
-        //    $detuser->save();
-        //    dd($user,$detuser);
+        $request->validate([
+            'nama_depan' => "required",
+            'email' => "required",
+            'password' => "required|min:8",
+            'password_confirmation' => "required|same:password",
+        ]);
+
+        User::create([
+            "nama_depan" => $request->nama_depan,
+            "nama_belakang" => $request->nama_belakang,
+            "email" => $request->email,
+            "password" => Hash::make($request->password)
+        ]);
+
         return redirect('/')->with('success', 'Berhasil Daftar Silahkan Login');
     }
-    // function store(Request $request){
-    //     $validateData = $request->validate([
-    //         'name' => 'required',
-    //         'email' => 'required',
-    //         'password' => 'required',
-    //         'password_confirmation' => 'required|same:password',
-    //     ]);
-    //     $validateData['password'] = Hash::make($validateData['password']);
-    //     User::create($validateData);
-    //     $user_id = DB::table('users')->insertGetId($validateData);
-    //     $detuser_id = $user_id;
-    //     dd($validateData,$detuser_id);
-    //     DetUser::create($user_id);
-    //     // dd($validateData);
-    // return redirect('/')->with('success','Berhasil Daftar Silahkan Login');
-    // }
 }

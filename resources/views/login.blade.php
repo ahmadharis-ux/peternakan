@@ -44,9 +44,26 @@
     <main>
         <div class="container">
 
+
             <section
                 class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+
+
                 <div class="container">
+                    {{-- alerts --}}
+                    <div class="d-block col-lg-4 col-md-6 mx-auto">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success col" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @elseif(session()->has('error'))
+                            <div class="alert alert-danger col" role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                    </div>
+
+
                     <div class="row justify-content-center">
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
                             <div class="card mb-3">
@@ -63,19 +80,19 @@
                                         @csrf
                                         <div class="row g-3">
 
+                                            {{-- email --}}
                                             <div class="col-12">
                                                 <label for="yourUsername" class="form-label">Email</label>
                                                 <div class="input-group has-validation">
-                                                    <input type="text" name="email" class="form-control"
-                                                        value="@gmail.com" required>
+                                                    <input type="text" name="email" class="form-control" required>
                                                     <div class="invalid-feedback">Please enter your username.</div>
                                                 </div>
                                             </div>
 
+                                            {{-- password --}}
                                             <div class="col-12">
                                                 <label for="yourPassword" class="form-label">Password</label>
-                                                <input type="password" name="password" class="form-control"
-                                                    value="password" required>
+                                                <input type="password" name="password" class="form-control" required>
                                                 <div class="invalid-feedback">Please enter your password!</div>
                                             </div>
 
@@ -90,118 +107,9 @@
                                             </div>
 
                                         </div>
-
                                     </form>
 
 
-                                    {{-- TODO: delete form auto login --}}
-                                    {{-- form auto login --}}
-                                    <div style="display: none">
-                                        {{-- login sebagai owner --}}
-                                        <form class="row needs-validation my-1" method="POST" action="/login"
-                                            novalidate>
-                                            @csrf
-
-                                            <div class="d-none">
-                                                <div class="col-12">
-                                                    <label for="yourUsername" class="form-label">Email</label>
-                                                    <div class="input-group has-validation">
-                                                        <input type="text" name="email" class="form-control"
-                                                            value="owner@gmail.com" required>
-                                                        <div class="invalid-feedback">Please enter your username.</div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="yourPassword" class="form-label">Password</label>
-                                                    <input type="password" name="password" class="form-control"
-                                                        value="password" required>
-                                                    <div class="invalid-feedback">Please enter your password!</div>
-                                                </div>
-                                                <div class="col-12">
-
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
-                                                            Akun</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-
-                                            <button class="btn btn-primary w-100" type="submit">Owner</button>
-                                        </form>
-
-                                        {{-- login sebagai admin --}}
-                                        <form class="row g-3 needs-validation my-1" method="POST" action="/login"
-                                            novalidate>
-                                            @csrf
-
-                                            <div class="d-none">
-                                                <div class="col-12">
-                                                    <label for="yourUsername" class="form-label">Email</label>
-                                                    <div class="input-group has-validation">
-                                                        <input type="text" name="email" class="form-control"
-                                                            value="admin@gmail.com" required>
-                                                        <div class="invalid-feedback">Please enter your username.</div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="yourPassword" class="form-label">Password</label>
-                                                    <input type="password" name="password" class="form-control"
-                                                        value="password" required>
-                                                    <div class="invalid-feedback">Please enter your password!</div>
-                                                </div>
-                                                <div class="col-12">
-
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
-                                                            Akun</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-
-                                            <button class="btn btn-primary w-100" type="submit">Admin</button>
-                                        </form>
-
-                                        {{-- login sebagai accounting --}}
-                                        <form class="row g-3 needs-validation my-1" method="POST" action="/login"
-                                            novalidate>
-                                            @csrf
-
-                                            <div class="d-none">
-                                                <div class="col-12">
-                                                    <label for="yourUsername" class="form-label">Email</label>
-                                                    <div class="input-group has-validation">
-                                                        <input type="text" name="email" class="form-control"
-                                                            value="accounting@gmail.com" required>
-                                                        <div class="invalid-feedback">Please enter your username.</div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="yourPassword" class="form-label">Password</label>
-                                                    <input type="password" name="password" class="form-control"
-                                                        value="password" required>
-                                                    <div class="invalid-feedback">Please enter your password!</div>
-                                                </div>
-                                                <div class="col-12">
-
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="small mb-0">Don't have account? <a href="/daftar">Daftar
-                                                            Akun</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-
-                                            <button class="btn btn-primary w-100" type="submit">Accounting</button>
-                                        </form>
-                                    </div>
 
                                 </div>
                             </div>

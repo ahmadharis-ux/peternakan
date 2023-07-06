@@ -69,7 +69,7 @@ class UserController extends Controller
             'password',
         ]);
 
-        User::insert($dataUserBaru);
+        User::create($dataUserBaru);
 
         return redirect()->back();
     }
