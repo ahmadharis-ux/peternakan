@@ -19,3 +19,5 @@ yarn-error.log
 /ignore-folder
 storage/clockwork/
 db-cred.txt
+/staging
+
