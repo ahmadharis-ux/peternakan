@@ -7,7 +7,7 @@
 </li>
 
 {{-- PEMBUKUAN --}}
-<li class="nav-item">
+<li class="d-none nav-item">
     <a class="nav-link {{ $active != 'buku' ? 'collapsed' : '' }}" data-bs-target="#menuPembukuan"
         data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Pembukuan</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -59,7 +59,7 @@
 </li>
 
 {{-- USER --}}
-<li class="nav-item">
+<li class="d-none nav-item">
     <a class="nav-link {{ $active != 'users' ? 'collapsed' : '' }}" data-bs-target="#menuUser"
         data-bs-toggle="collapse" href="#">
         <i class="bi bi-people"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -97,5 +97,24 @@
                 <i class="bi bi-circle"></i><span>Owner</span>
             </a>
         </li>
+    </ul>
+</li>
+
+{{-- OPSI --}}
+<li class="nav-item">
+    <a class="nav-link {{ $active != 'opsi' ? 'collapsed' : '' }}" data-bs-target="#menuOpsi" data-bs-toggle="collapse"
+        href="#">
+        <i class="bi bi-gear"></i><span>Opsi</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="menuOpsi"
+        class="nav-content {{ $active != 'opsi' ? 'collapse' : '' }} {{ $active == 'opsi' ? 'show' : '' }}"
+        data-bs-parent="#sidebar-nav">
+
+        <li>
+            <a href="/owner/rekening" class="{{ $title == 'Rekening' ? 'active' : '' }}">
+                <i class="bi bi-circle"></i><span>Rekening</span>
+            </a>
+        </li>
+
     </ul>
 </li>

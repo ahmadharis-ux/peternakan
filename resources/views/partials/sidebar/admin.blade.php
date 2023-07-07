@@ -66,3 +66,22 @@
         </li>
     </ul> --}}
 </li>
+
+{{-- OPSI --}}
+{{-- <li class="nav-item">
+    <a class="nav-link {{ $active != 'opsi' ? 'collapsed' : '' }}" data-bs-target="#menuOpsi" data-bs-toggle="collapse"
+        href="#">
+        <i class="bi bi-gear"></i><span>Opsi</span><i class="bi bi-chevron-down ms-auto"></i>
+    </a>
+    <ul id="menuOpsi"
+        class="nav-content {{ $active != 'opsi' ? 'collapse' : '' }} {{ $active == 'opsi' ? 'show' : '' }}"
+        data-bs-parent="#sidebar-nav">
+
+        <li>
+            <a href="/admin/roles" class="{{ $title == 'Role' ? 'active' : '' }}">
+                <i class="bi bi-circle"></i><span>Role</span>
+            </a>
+        </li>
+
+    </ul>
+</li> --}}

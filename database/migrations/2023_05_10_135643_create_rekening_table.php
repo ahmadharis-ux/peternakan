@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rekenings', function (Blueprint $table) {
             $table->id();
             $table->string('nomor_rekening')->unique();
-            $table->foreignId('id_user')->unsigned();
+            // $table->foreignId('id_user')->unsigned();
             $table->foreignId('id_author')->nullable();
             $table->string('atas_nama');
             $table->string('bank');
@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users');
+            // $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_author')->references('id')->on('users');
         });
     }
