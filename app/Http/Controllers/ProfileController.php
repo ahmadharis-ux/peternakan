@@ -75,4 +75,33 @@ class ProfileController extends Controller
         User::where('id', $id)->update($validasiData);
         return redirect('/profile');
     }
+
+    function changePassword(Request $request)
+    {
+        $old = Hash::make($request->oldpassword);
+        $new = $request->newpassword;
+        $renew = $request->renewpassword;
+
+        if ($new !== $renew) {
+            return redirect()->back()->with('error', 'Konfirmasi password tidak sesuai');
+        }
+
+        $current = User::find(myId())->password;
+
+        return [
+            $old,
+            $current,
+            $old === $current
+        ];
+
+        if ($old !== $current) {
+            return redirect()->back()->with('error', 'Password salah!');
+        }
+
+        $user = User::find(myId());
+        $user->password = Hash::make($new);
+        $user->save();
+
+        return redirect('/profile')->with('success', 'Password berhasil diubah!');
+    }
 }

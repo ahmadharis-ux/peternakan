@@ -261,6 +261,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::get('/editprofile', [ProfileController::class, 'edit'])->middleware('auth');
 Route::put('/updateprofile', [ProfileController::class, 'update'])->middleware('auth');
+Route::put('/changepass', [ProfileController::class, 'changePassword'])->middleware('auth');
 
 Route::get('/', [LoginController::class, 'index'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest');

@@ -1,6 +1,11 @@
 @extends('layouts.main')
 @section('container')
+    @include('components.alert')
+
+
     <section class="section profile">
+
+
         <div class="row">
             <div class="col-xl-4">
 
@@ -94,6 +99,7 @@
                                 <!-- Change Password Form -->
                                 <form method="post" action="/changepass">
                                     @csrf
+                                    @method('put')
                                     <div class="row mb-3">
                                         <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
                                             Password</label>
@@ -119,17 +125,10 @@
                                                 id="renewPassword">
                                         </div>
                                     </div>
-                                    @if (session()->has('success'))
-                                        <div class="alert alert-success col-lg-10" role="alert">
-                                            {{ session('success') }}
-                                        </div>
-                                    @elseif(session()->has('error'))
-                                        <div class="alert alert-danger col-lg-10" role="alert">
-                                            {{ session('error') }}
-                                        </div>
-                                    @endif
+
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Change Password</button>
+                                        <button id="btnSubmit" type="submit" class="btn disabled btn-primary">Change
+                                            Password</button>
                                     </div>
                                 </form><!-- End Change Password Form -->
 
@@ -143,4 +142,27 @@
             </div>
         </div>
     </section>
+
+    <script>
+        $(document).ready(function() {
+            const oldPass = $("input[name=oldpassword]")
+            const newpassword = $("input[name=newpassword]")
+            const renewpassword = $("input[name=renewpassword]")
+
+            function validate() {
+                if (oldPass.val() == '') return false;
+                return newpassword.val() === renewpassword.val();
+            }
+
+            $("input").keyup(function() {
+                if (validate()) {
+                    $("#btnSubmit").removeClass('disabled')
+                    return
+                }
+
+                $("#btnSubmit").addClass('disabled')
+
+            })
+        })
+    </script>
 @endsection
