@@ -25,11 +25,11 @@ class LoginController extends Controller
 
 
 
-        if ($user->id_role === 2) {
+        if ($user->id_role == 2) {
             return redirect()->intended('/admin');
-        } elseif ($user->id_role === 3) {
+        } elseif ($user->id_role == 3) {
             return redirect()->intended('/acc');
-        } elseif ($user->id_role === 1) {
+        } elseif ($user->id_role == 1) {
             return redirect()->intended('/owner');
         }
 
@@ -58,11 +58,11 @@ class LoginController extends Controller
         }
         $user = Auth::user();
 
-        if ($user->id_role === 2) {
+        if ($user->id_role == 2) {
             return redirect()->intended('/admin');
-        } elseif ($user->id_role === 3) {
+        } elseif ($user->id_role == 3) {
             return redirect()->intended('/acc');
-        } elseif ($user->id_role === 1) {
+        } elseif ($user->id_role == 1) {
             return redirect()->intended('/owner');
         }
         return redirect('/blank');

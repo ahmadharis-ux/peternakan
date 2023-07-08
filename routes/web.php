@@ -46,15 +46,15 @@ use App\Http\Controllers\owner\RekeningController;
 */
 
 Route::get('/home', function () {
-    if (auth()->user()->id_role === 2) {
+    if (auth()->user()->id_role == 2) {
         return redirect()->intended('/admin');
     }
 
-    if (auth()->user()->id_role === 3) {
+    if (auth()->user()->id_role == 3) {
         return redirect()->intended('/acc');
     }
 
-    if (auth()->user()->id_role === 1) {
+    if (auth()->user()->id_role == 1) {
         return redirect()->intended('/owner');
     }
 });
