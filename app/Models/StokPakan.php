@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class StokPakan extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    protected $guarded = [
+        'id'
+    ];
     protected $fillable = ['harga', 'qty'];
 
     protected $with = ['pakan', 'satuanPakan'];
@@ -27,8 +29,8 @@ class StokPakan extends Model
         return $this->hasMany(DetailPemakaianPakan::class, 'id_stok_pakan');
     }
 
-    function getSisaPakan(){
+    function getSisaPakan()
+    {
         return StokPakan::all()->sum('stok');
     }
-    
 }

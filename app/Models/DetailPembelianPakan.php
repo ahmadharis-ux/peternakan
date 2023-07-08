@@ -17,6 +17,10 @@ class DetailPembelianPakan extends Model
         "satuanPakan"
     ];
 
+    protected $guarded = [
+        'id'
+    ];
+
     function pakan()
     {
         return $this->belongsTo(Pakan::class, 'id_pakan');

@@ -9,13 +9,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PembelianPakan extends Model
 {
-
+    use HasFactory;
     protected $with = [
         'detailPembelianPakan',
         'operasionalPembelianPakan'
     ];
 
-    use HasFactory;
+
+
+    protected $guarded = [
+        'id'
+    ];
     function operasionalPembelianPakan()
     {
         return $this->hasMany(OperasionalPembelianPakan::class, 'id_pembelian_pakan');

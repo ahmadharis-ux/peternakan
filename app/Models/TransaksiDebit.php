@@ -9,7 +9,9 @@ class TransaksiDebit extends Model
 {
     use HasFactory;
 
-
+    protected $guarded = [
+        'id'
+    ];
     public function debit()
     {
         return $this->belongsTo(Debit::class, 'id_debit');

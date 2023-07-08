@@ -10,9 +10,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class DetailPembelianSapi extends Model
 {
 
+
+
     use HasFactory;
 
-
+    protected $guarded = [
+        'id'
+    ];
     public function pembelianSapi()
     {
         return $this->belongsTo(PembelianSapi::class, 'id_pembelian_sapi');

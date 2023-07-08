@@ -11,6 +11,9 @@ class DetailPemakaianPakan extends Model
 {
     protected $with = ['stokPakan'];
 
+    protected $guarded = [
+        'id'
+    ];
 
 
 

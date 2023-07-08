@@ -12,7 +12,9 @@ class JenisSapi extends Model
 
     use HasFactory;
 
-
+    protected $guarded = [
+        'id'
+    ];
     public function sapi()
     {
         return $this->HasMany(Sapi::class);

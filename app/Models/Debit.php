@@ -13,6 +13,9 @@ class Debit extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
     // protected $with = ['jurnal', 'user', 'pihakKedua', 'penjualanSapi', 'transaksiDebit'];
     protected $with = [
         'jurnal',

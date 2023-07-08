@@ -13,7 +13,9 @@ class DetailPenjualanSapi extends Model
     use HasFactory;
 
     protected $with = ['sapi'];
-
+    protected $guarded = [
+        'id'
+    ];
     public function sapi()
     {
         return $this->belongsTo(Sapi::class, 'id_sapi');

@@ -13,7 +13,9 @@ class Jurnal extends Model
     use HasFactory;
 
     protected $with = ['kodeJurnal'];
-
+    protected $guarded = [
+        'id'
+    ];
 
     public function debit()
     {

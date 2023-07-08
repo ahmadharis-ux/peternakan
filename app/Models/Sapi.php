@@ -12,7 +12,9 @@ class Sapi extends Model
 {
 
     use HasFactory;
-
+    protected $guarded = [
+        'id'
+    ];
     protected $with = [
         'jenisSapi',
         // 'markupSapi'

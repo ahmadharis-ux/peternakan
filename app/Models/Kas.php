@@ -15,7 +15,9 @@ class Kas extends Model
     use HasFactory;
 
     protected $with = ['kredit', 'debit'];
-
+    protected $guarded = [
+        'id'
+    ];
     public function kredit()
     {
         return $this->hasOne(Kredit::class, 'id_kas');

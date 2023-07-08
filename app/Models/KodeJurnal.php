@@ -9,14 +9,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class KodeJurnal extends Model
 {
-	use HasFactory;
-
-	public function user()
-	{
-		return $this->belongsTo(User::class,'id_author');
-	}
-	public function jurnal()
-	{
-		return $this->hasMany(Jurnal::class);
-	}
+    use HasFactory;
+    protected $guarded = [
+        'id'
+    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_author');
+    }
+    public function jurnal()
+    {
+        return $this->hasMany(Jurnal::class);
+    }
 }

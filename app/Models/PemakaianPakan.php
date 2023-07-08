@@ -16,6 +16,9 @@ class PemakaianPakan extends Model
         'markup'
     ];
 
+    protected $guarded = [
+        'id'
+    ];
 
     use HasFactory;
     function pakan()

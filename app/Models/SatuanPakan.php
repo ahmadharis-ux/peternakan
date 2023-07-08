@@ -10,17 +10,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SatuanPakan extends Model
 {
-	use HasFactory;
-	function pemakaianPakan()
-	{
-		return $this->hasMany(PemakaianPakan::class, 'id_satuan_pakan');
-	}
-	function stockPakan()
-	{
-		return $this->hasMany(StokPakan::class, 'id_satuan_pakan');
-	}
-	function detailPembelianPakan()
-	{
-		return $this->hasMany(DetailPembelianPakan::class, 'id_satuan_pakan');
-	}
+    use HasFactory;
+    protected $guarded = [
+        'id'
+    ];
+    function pemakaianPakan()
+    {
+        return $this->hasMany(PemakaianPakan::class, 'id_satuan_pakan');
+    }
+    function stockPakan()
+    {
+        return $this->hasMany(StokPakan::class, 'id_satuan_pakan');
+    }
+    function detailPembelianPakan()
+    {
+        return $this->hasMany(DetailPembelianPakan::class, 'id_satuan_pakan');
+    }
 }

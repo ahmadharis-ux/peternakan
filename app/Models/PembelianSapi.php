@@ -13,6 +13,9 @@ class PembelianSapi extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
     protected $with = ['detailPembelianSapi', 'operasionalPembelianSapi'];
 
     public function detailPembelianSapi()

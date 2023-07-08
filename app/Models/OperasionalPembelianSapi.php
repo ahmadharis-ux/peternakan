@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OperasionalPembelianSapi extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-
-	public function pembelianSapi()
-	{
-		return $this->belongsTo(PembelianSapi::class);
-	}
+    protected $guarded = [
+        'id'
+    ];
+    public function pembelianSapi()
+    {
+        return $this->belongsTo(PembelianSapi::class);
+    }
 }

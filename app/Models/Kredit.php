@@ -23,6 +23,10 @@ class Kredit extends Model
         'transaksiKredit'
     ];
 
+    protected $guarded = [
+        'id'
+    ];
+
     public function kas()
     {
         return $this->belongsTo(Kas::class, 'id_kas');

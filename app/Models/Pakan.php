@@ -11,28 +11,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pakan extends Model
 {
-	use HasFactory;
+    use HasFactory;
+    protected $guarded = [
+        'id'
+    ];
+    function detailPembelianPakan()
+    {
+        return $this->hasMany(DetailPembelianPakan::class, 'id_pakan');
+    }
+    function detailPemakaianPakan()
+    {
+        return $this->hasMany(DetailPemakaianPakan::class, 'id_pakan');
+    }
+    function pemakaianPakan()
+    {
+        return $this->hasMany(PemakaianPakan::class, 'id_pakan');
+    }
+    function stockPakan()
+    {
+        return $this->hasMany(StokPakan::class, 'id_pakan');
+    }
 
-	function detailPembelianPakan()
-	{
-		return $this->hasMany(DetailPembelianPakan::class, 'id_pakan');
-	}
-	function detailPemakaianPakan()
-	{
-		return $this->hasMany(DetailPemakaianPakan::class, 'id_pakan');
-	}
-	function pemakaianPakan()
-	{
-		return $this->hasMany(PemakaianPakan::class, 'id_pakan');
-	}
-	function stockPakan()
-	{
-		return $this->hasMany(StokPakan::class, 'id_pakan');
-	}
-
-	function user()
-	{
-		return $this->hasMany(User::class, 'id_pakan');
-	}
-
+    function user()
+    {
+        return $this->hasMany(User::class, 'id_pakan');
+    }
 }

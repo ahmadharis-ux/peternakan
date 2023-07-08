@@ -10,7 +10,9 @@ class OperasionalPenjualanSapi extends Model
 {
 
     use HasFactory;
-
+    protected $guarded = [
+        'id'
+    ];
     public function penjualanSapi()
     {
         return $this->belongsTo(PenjualanSapi::class, 'id_penjualan_sapi');

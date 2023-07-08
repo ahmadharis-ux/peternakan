@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MasukTabungan extends Model
 {
-	use HasFactory;
-
-	public function rekening()
-	{
-		return $this->belongsTo(Rekening::class, 'id_rekening');
-	}
+    use HasFactory;
+    protected $guarded = [
+        'id'
+    ];
+    public function rekening()
+    {
+        return $this->belongsTo(Rekening::class, 'id_rekening');
+    }
 }

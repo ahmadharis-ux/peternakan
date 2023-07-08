@@ -9,7 +9,9 @@ class TransaksiKredit extends Model
 {
     use HasFactory;
 
-
+    protected $guarded = [
+        'id'
+    ];
     public function kredit()
     {
         return $this->belongsTo(Kredit::class, 'id_kredit');
