@@ -60,9 +60,9 @@ Route::get('/home', function () {
 });
 
 // testpage
-// Route::get('/test', function (Request $request) {
-//     return 'you found the testpage!';
-// });
+Route::get('/test', function (Request $request) {
+    return 'you found the testpage!';
+});
 
 
 

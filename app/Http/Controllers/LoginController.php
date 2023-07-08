@@ -40,7 +40,7 @@ class LoginController extends Controller
     {
         // AUTO LOGIN SEMENTARA =======================
         // default role = accounting
-        return $this->autoLogin('owner');
+        // return $this->autoLogin('owner');
         // return $this->autoLogin();
         // =======================
 

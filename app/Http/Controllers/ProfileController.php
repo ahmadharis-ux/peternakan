@@ -44,9 +44,6 @@ class ProfileController extends Controller
             'telepon' => 'nullable',
         ]);
 
-        // return $request;
-        dd($request);
-
         // foto profil
         if ($request->hasFile('foto_profil')) {
             // Hapus foto sebelumnya
