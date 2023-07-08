@@ -54,7 +54,7 @@ class LoginController extends Controller
         $loginAttempt =  (Auth::attempt($credentials));
 
         if (!$loginAttempt) {
-            return redirect()->back();
+            return redirect()->back()->with('error', "Kredensial salah!");
         }
         $user = Auth::user();
 

@@ -78,7 +78,7 @@ class ProfileController extends Controller
 
     function changePassword(Request $request)
     {
-        $old = Hash::make($request->oldpassword);
+        $old = ($request->oldpassword);
         $new = $request->newpassword;
         $renew = $request->renewpassword;
 
@@ -88,15 +88,14 @@ class ProfileController extends Controller
 
         $current = User::find(myId())->password;
 
-        return [
-            $old,
-            $current,
-            $old === $current
-        ];
 
-        if ($old !== $current) {
+
+
+        if (!Hash::check($old, $current)) {
             return redirect()->back()->with('error', 'Password salah!');
         }
+
+
 
         $user = User::find(myId());
         $user->password = Hash::make($new);
