@@ -45,7 +45,7 @@ class ProfileController extends Controller
         ]);
 
         // return $request;
-        dd($request);
+        // dd($request);
 
         // foto profil
         if ($request->hasFile('foto_profil')) {
