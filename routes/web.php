@@ -61,7 +61,11 @@ Route::get('/home', function () {
 
 // testpage
 Route::get('/test', function (Request $request) {
-    return 'you found the testpage!';
+    return 'testpage!';
+});
+
+Route::get('/welcome', function (Request $request) {
+    return view('welcome');
 });
 
 
