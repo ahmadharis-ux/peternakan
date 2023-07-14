@@ -8,9 +8,6 @@ use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
 use App\Models\DetailPenjualanSapi;
 
-
-
-
 function userPunyaTtd()
 {
     return auth()->user()->foto_ttd !== null;
