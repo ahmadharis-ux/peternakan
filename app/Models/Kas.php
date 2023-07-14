@@ -71,7 +71,7 @@ class Kas extends Model
 
     public static function idTerakhir()
     {
-        return Kas::latest()->get()[0]->id;
+        return Kas::latest()->first()->id;
     }
 
     public static function kreditBaru()

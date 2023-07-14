@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('id_pihak_kedua')->unsigned();
             $table->unsignedInteger('nominal')->default(0);
             $table->string('keterangan');
-            $table->unsignedInteger('adm')->default(0);
+            $table->unsignedInteger('adm')->nullable();
             $table->boolean('lunas')->default(false);
             $table->date('tenggat')->nullable();
 
