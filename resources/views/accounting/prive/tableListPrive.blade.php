@@ -1,4 +1,4 @@
-<table id="example" class="display " style="width:100%">
+<table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -16,7 +16,7 @@
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $prive->created_at }}</td>
                 <td>{{ $prive->keterangan }}</td>
-                <td>{{ $prive->pihakKedua->nama_depan }}</td>
+                <td>{{ $prive->pihakKedua->fullname() }}</td>
                 <td><span class="text-secondary text-end">Rp</span> {{ number_format($prive->nominal) }}</td>
 
             </tr>

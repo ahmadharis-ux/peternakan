@@ -5,6 +5,7 @@ namespace App\Http\Controllers\accounting;
 use App\Models\Kas;
 use App\Models\Sapi;
 use App\Models\User;
+use App\Models\Faktur;
 use App\Models\Jurnal;
 use App\Models\Kredit;
 use App\Models\Rekening;
@@ -13,12 +14,13 @@ use Illuminate\Http\Request;
 use App\Models\PembelianSapi;
 use Illuminate\Support\Carbon;
 use App\Models\TransaksiKredit;
+use Illuminate\Support\Facades\DB;
 use App\Models\DetailPembelianSapi;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\Faktur;
-use App\Models\OperasionalPembelianSapi;
 use App\Providers\PdfServiceProvider;
 use Illuminate\Support\Facades\Storage;
+use App\Models\OperasionalPembelianSapi;
 
 class PembelianSapiController extends Controller
 {
@@ -45,74 +47,85 @@ class PembelianSapiController extends Controller
 
     public function store(Request $request)
     {
-        $idJurnalHutang = 1;
-        $today = carbonNow();
+        DB::beginTransaction();
+        try {
+            $idJurnalHutang = 1;
+            Kas::kreditBaru();
+            $dataKreditBaru = [
+                "id_kas" => Kas::idTerakhir(),
+                "id_author" => auth()->user()->id,
+                "id_pihak_kedua" => $request->id_pihak_kedua,
+                "id_jurnal" => $idJurnalHutang,
+                "keterangan" => $request->keterangan,
+            ];
 
-        Kas::kreditBaru();
-        $dataKreditBaru = [
-            "id_kas" => Kas::idTerakhir(),
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $request->id_pihak_kedua,
-            "id_jurnal" => $idJurnalHutang,
-            "keterangan" => $request->keterangan,
-            "created_at" => $today,
-        ];
+            Kredit::create($dataKreditBaru);
 
-        Kredit::insert($dataKreditBaru);
+            $dataPembelianSapiBaru = [
+                "id_author" => auth()->user()->id,
+                "id_kredit" => Kredit::idTerakhir(),
+            ];
 
-        $dataPembelianSapiBaru = [
-            "id_author" => auth()->user()->id,
-            "id_kredit" => Kredit::idTerakhir(),
-            "created_at" => $today,
-        ];
+            PembelianSapi::create($dataPembelianSapiBaru);
 
-        PembelianSapi::insert($dataPembelianSapiBaru);
-        return redirect()->back();;
+            DB::commit();
+            Log::alert("pembelian sapi tersimpan");
+            return redirect()->back()->with('success', "Pembelian sapi tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan pembelian sapi");
+        }
     }
 
     public function storeDetail(Request $request)
     {
-        $kiloan = $request->opsi_beli == 'kiloan';
-        $idPembelianSapi = $request->id_pembelian_sapi;
+        try {
+            $kiloan = $request->opsi_beli == 'kiloan';
+            $idPembelianSapi = $request->id_pembelian_sapi;
 
-        $idJenisSapi = $request->id_jenis_sapi;
-        $hargaSapi = $request->total_harga;
-        $bobot = $request->bobot;
-        $eartag = $request->eartag;
-        $jenisKelamin = $request->jenis_kelamin;
+            $idJenisSapi = $request->id_jenis_sapi;
+            $hargaSapi = $request->total_harga;
+            $bobot = $request->bobot;
+            $eartag = $request->eartag;
+            $jenisKelamin = $request->jenis_kelamin;
 
 
-        $detailPembelianSapiBaru = [
-            "id_pembelian_sapi" => $idPembelianSapi,
-            "id_jenis_sapi" => $idJenisSapi,
-            "jenis_kelamin" => $jenisKelamin,
-            "eartag" => $eartag,
-            "bobot" => $bobot,
-            "kiloan" => $kiloan,
-            "harga" => $hargaSapi,
-            // "kondisi" => $request->kondisi,
-            "keterangan" => $request->keterangan,
-            "created_at" => carbonNow(),
-        ];
+            $detailPembelianSapiBaru = [
+                "id_pembelian_sapi" => $idPembelianSapi,
+                "id_jenis_sapi" => $idJenisSapi,
+                "jenis_kelamin" => $jenisKelamin,
+                "eartag" => $eartag,
+                "bobot" => $bobot,
+                "kiloan" => $kiloan,
+                "harga" => $hargaSapi,
+                "keterangan" => $request->keterangan,
+            ];
 
-        DetailPembelianSapi::insert($detailPembelianSapiBaru);
+            DetailPembelianSapi::create($detailPembelianSapiBaru);
 
-        $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
+            $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
 
-        Kredit::tambahNominal($idKredit, $hargaSapi);
-        Kredit::updateStatusLunas($idKredit);
+            Kredit::tambahNominal($idKredit, $hargaSapi);
+            Kredit::updateStatusLunas($idKredit);
 
-        $sapi = [
-            "id_jenis_sapi" => $idJenisSapi,
-            "eartag" => $eartag,
-            "harga_pokok" => $hargaSapi,
-            "bobot" => $bobot,
-            "jenis_kelamin" => $jenisKelamin,
-        ];
+            $sapi = [
+                "id_jenis_sapi" => $idJenisSapi,
+                "eartag" => $eartag,
+                "harga_pokok" => $hargaSapi,
+                "bobot" => $bobot,
+                "jenis_kelamin" => $jenisKelamin,
+            ];
 
-        Sapi::insert($sapi);
+            Sapi::create($sapi);
 
-        return redirect()->back();
+            DB::commit();
+            return redirect()->back()->with('success', "Detail tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan detail");
+        }
     }
 
     public function storeOperasional(Request $request)
@@ -127,7 +140,7 @@ class PembelianSapiController extends Controller
             'created_at' => carbonNow(),
         ];
 
-        OperasionalPembelianSapi::insert($operasionalPembelianSapiBaru);
+        OperasionalPembelianSapi::create($operasionalPembelianSapiBaru);
 
         $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
 

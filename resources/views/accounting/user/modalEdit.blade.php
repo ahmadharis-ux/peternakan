@@ -7,7 +7,7 @@
                   @method('put')
                   <div class="modal-header">
                       <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit data {{ $namaRoleDipilih }}:
-                          {{ $user->fullname }}</h1>
+                          {{ $user->fullname() }}</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
 
@@ -52,17 +52,7 @@
                               required>
                       </div>
 
-                      {{-- <div class="col-sm-12 mb-2">
-                          <label for="">Password</label>
-                          <input type="password" name="password" class="form-control" value="{{ $user->nama_depan }}"
-                              required>
-                      </div>
 
-                      <div class="col-sm-12 mb-2">
-                          <label for="">Konfirmasi password</label>
-                          <input type="password" name=" value="{{ $user->nama_depan }}"konfirmasi_password" required
-                              class="form-control">
-                      </div> --}}
 
 
                   </div>

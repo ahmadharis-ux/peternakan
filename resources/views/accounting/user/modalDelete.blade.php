@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="modal-body p-5">
-                    <p>Hapus user {{ $user->fullname }}?</p>
+                    <p>Hapus user {{ $user->fullname() }}?</p>
                 </div>
 
 

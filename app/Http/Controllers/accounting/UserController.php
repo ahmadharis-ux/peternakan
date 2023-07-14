@@ -42,8 +42,6 @@ class UserController extends Controller
             $role = ucfirst($role);
         }
 
-        $listUser = withFullname($listUser);
-
         $pageData = [
             'title' => 'User - ' . $role,
             'heading' => 'List - ' . $role,

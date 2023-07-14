@@ -21,10 +21,10 @@
 
             </div>
 
-            <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex justify-content-between flex-row">
 
                 {{-- table pilih sapi --}}
-                <div class="card  recent-sales overflow-auto">
+                <div class="card recent-sales overflow-auto">
                     <div class="card-body p-3">
                         @include('accounting.pemakaian_pakan.tablePilihSapi')
                     </div>
@@ -43,7 +43,7 @@
                                 <select name="id_pekerja" class="form-select" required value>
                                     <option disabled selected>-- Pilih pekerja --</option>
                                     @foreach ($listPekerja as $pekerja)
-                                        <option value="{{ $pekerja->id }}">{{ $pekerja->fullname }}</option>
+                                        <option value="{{ $pekerja->id }}">{{ $pekerja->fullname() }}</option>
                                     @endforeach
                                 </select>
 

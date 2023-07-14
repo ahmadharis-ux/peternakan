@@ -2,7 +2,7 @@
 </p>
 
 
-<table id="example" class="display " style="width:100%">
+<table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -21,7 +21,7 @@
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $kas->created_at }}</td>
-                <td>{{ $kas->pihakKedua->fullname }}</td>
+                <td>{{ $kas->pihakKedua->fullname() }}</td>
                 <td>{{ $kas->keterangan }}</td>
                 <td class="text-end">{{ number_format($kas->isKredit ? 0 : $kas->nominal) }}</td>
                 <td class="text-end">{{ number_format($kas->isKredit ? $kas->nominal : 0) }}</td>

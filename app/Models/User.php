@@ -143,7 +143,6 @@ class User extends Authenticatable
     public static function getSupplierSapi()
     {
         $listSupplierSapi = User::where('id_role', '5')->get();
-        $listSupplierSapi = withFullname($listSupplierSapi);
 
         return  $listSupplierSapi;
     }
@@ -151,7 +150,6 @@ class User extends Authenticatable
     public static function getSupplierPakan()
     {
         $listSupplierPakan = User::where('id_role', '4')->get();
-        $listSupplierPakan = withFullname($listSupplierPakan);
 
         return  $listSupplierPakan;
     }
@@ -159,7 +157,6 @@ class User extends Authenticatable
     public static function getPekerja()
     {
         $listSupplierPakan = User::where('id_role', '7')->get();
-        $listSupplierPakan = withFullname($listSupplierPakan);
 
         return  $listSupplierPakan;
     }
@@ -167,14 +164,12 @@ class User extends Authenticatable
     public static function getCustomer()
     {
         $listCustomer = User::where('id_role', '6')->get();
-        $listCustomer = withFullname($listCustomer);
 
         return  $listCustomer;
     }
     public static function getOwner()
     {
         $listOwner = User::where('id_role', '1')->get();
-        $listOwner = withFullname($listOwner);
 
         return  $listOwner;
     }

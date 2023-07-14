@@ -17,12 +17,12 @@
 
                     <img src="{{ get_profil_pic() }}" class="img-cropped rounded-circle"
                         style="width: 35px; height: 35px;"alt="Profile">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->nama_depan }}</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->fullname() }}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>{{ auth()->user()->nama_depan }}</h6>
+                        <h6>{{ auth()->user()->fullname() }}</h6>
                         <span>{{ auth()->user()->role->name }}</span>
                     </li>
                     <li>

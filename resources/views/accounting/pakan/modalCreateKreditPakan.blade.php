@@ -13,7 +13,7 @@
                     <select name="id_pihak_kedua" id="" class="form-select" required>
                         <option disabled selected value="">-- Supplier Pakan -- </option>
                         @foreach ($ListSupplierPakan as $supplier)
-                            <option value="{{ $supplier->id }}">{{ $supplier->nama_depan }}</option>
+                            <option value="{{ $supplier->id }}">{{ $supplier->fullname() }}</option>
                         @endforeach
                     </select>
                     <div class="col-sm-12">

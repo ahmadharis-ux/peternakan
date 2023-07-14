@@ -148,7 +148,7 @@ class Kas extends Model
 
             $h->author = $author;
             $h->pihakKedua = $pihakKedua;
-            User::getFullname($h->pihakKedua);
+            // User::getFullname($h->pihakKedua);
 
             $h->isKredit = isset($h->id_kredit);
 
@@ -166,8 +166,5 @@ class Kas extends Model
         });
 
         return $histori;
-
-        // dd($listIdAuthor, $listIdPihakKedua);
-        // dd($listIdUser);
     }
 }

@@ -6,7 +6,7 @@
             <div class="d-inline-block">
                 <span>Pekerja: </span>
                 <a href="/acc/user/{{ $pekerja->id }}/detail">
-                    <span class="fw-bold">{{ $pekerja->nama_depan }} {{ $pekerja->nama_belakang }}</span>
+                    <span class="fw-bold">{{ $pekerja->fullname() }}</span>
                 </a>
             </div>
         </div>
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="d-flex flex-row justify-content-start">
+        <div class="d-flex justify-content-start flex-row">
 
             {{-- table sapi dipakan --}}
             <div class="card recent-sales me-3" style="min-width: 400px; max-width:100%">

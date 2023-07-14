@@ -1,4 +1,4 @@
-<table id="example" class="display " style="width:100%">
+<table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -14,7 +14,7 @@
         @foreach ($listUser as $user)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $user->fullname }}</td>
+                <td>{{ $user->fullname() }}</td>
                 <td>{{ $user->role->nama }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->telepon }}</td>
@@ -29,7 +29,7 @@
                     </a>
 
                     <button data-bs-toggle="modal" data-bs-target="#modalEditUser-{{ $user->id }}"
-                        class="btn btn-warning text-white btn-sm mx-1">
+                        class="btn btn-warning btn-sm mx-1 text-white">
                         <div class="icon">
                             <i class="bi bi-pencil-fill"></i>
                         </div>

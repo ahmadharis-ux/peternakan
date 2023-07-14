@@ -20,7 +20,7 @@
 
                     <p class="fs-4">
                         <span>Pekerja:</span>
-                        <span class="fw-bold">{{ $pekerja->fullname }}</span>
+                        <span class="fw-bold">{{ $pekerja->fullname() }}</span>
                     </p>
 
                     <div class="col-sm-12">

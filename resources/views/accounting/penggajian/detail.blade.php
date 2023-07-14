@@ -1,6 +1,6 @@
 @php
     $pekerja->fullname = "$pekerja->nama_depan $pekerja->nama_belakang";
-
+    
 @endphp
 
 
@@ -8,7 +8,7 @@
 @section('container')
     <section class="section dashboard">
 
-        <p>{{ $pekerja->fullname }}</p>
+        <p>{{ $pekerja->fullname() }}</p>
         <p>{{ $waktuKredit }}</p>
 
         {{-- card filter bulan dan tahun --}}

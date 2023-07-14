@@ -16,7 +16,7 @@
                           {{-- <input type="hidden" name="author" value="{{ auth()->user()->name }}" required> --}}
                           <select name="user_id" id="" class="form-select">
                               @foreach ($listSupplierSapi as $supplier)
-                                  <option value="{{ $supplier->id }}">{{ $supplier->fullname }}
+                                  <option value="{{ $supplier->id }}">{{ $supplier->fullname() }}
                                   </option>
                               @endforeach
                           </select>

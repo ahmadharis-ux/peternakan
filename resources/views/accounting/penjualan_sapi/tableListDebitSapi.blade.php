@@ -1,4 +1,4 @@
-<table id="example" class="display " style="width:100%">
+<table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -16,7 +16,7 @@
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $debitSapi->created_at }}</td>
-                <td>{{ $debitSapi->pihakKedua->nama_depan }}</td>
+                <td>{{ $debitSapi->pihakKedua->fullname() }}</td>
                 <td>{{ $debitSapi->keterangan }}</td>
                 <td><span class="text-secondary">Rp</span> {{ number_format($debitSapi->nominal) }}</td>
                 <td>

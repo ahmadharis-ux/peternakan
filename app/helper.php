@@ -8,33 +8,12 @@ use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
 use App\Models\DetailPenjualanSapi;
 
-function withFullname($userList)
-{
-    for ($i = 0; $i < sizeof($userList); $i++) {
-        $user = $userList[$i];
-        $fullName = "$user->nama_depan $user->nama_belakang";
 
-        $userList[$i]->fullname = $fullName;
-    }
 
-    return $userList;
-}
-
-function myId()
-{
-    return auth()->user()->id;
-}
 
 function userPunyaTtd()
 {
     return auth()->user()->foto_ttd !== null;
-}
-
-function getUserFullname($user)
-{
-    $fullName = "$user->nama_depan $user->nama_belakang";
-    $user->fullname = $fullName;
-    return $fullName;
 }
 
 function carbonNow()

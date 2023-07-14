@@ -1,4 +1,4 @@
-<table id="example" class="display " style="width:100%">
+<table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col" class="col-1">#</th>
@@ -15,7 +15,7 @@
         @foreach ($listPekerja as $pekerja)
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
-                <td>{{ $pekerja->fullname }}</td>
+                <td>{{ $pekerja->fullname() }}</td>
                 <td>
                     <a href="/acc/gaji/pekerja/{{ $pekerja->id }}" class="btn btn-primary">
                         <div class="icon">

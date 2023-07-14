@@ -1,5 +1,5 @@
 @php
-    $userIsAuthor = $debit->id_author === myId();
+    $userIsAuthor = $debit->id_author === auth()->user()->id;
 @endphp
 
 @extends('layouts.main')

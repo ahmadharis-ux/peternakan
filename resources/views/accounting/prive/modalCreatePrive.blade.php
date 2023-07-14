@@ -34,7 +34,7 @@
                                 <select required name="id_pihak_kedua" id="" class="form-select mb-3">
                                     <option disabled selected value>-- Pilih owner --</option>
                                     @foreach ($listOwner as $owner)
-                                        <option value="{{ $owner->id }}">{{ $owner->nama_depan }}</option>
+                                        <option value="{{ $owner->id }}">{{ $owner->fullname() }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -61,22 +61,22 @@
 
                         {{-- info bank --}}
                         <div class="col d-flex flex-column">
-                            <div class="d-flex flex-row justify-content-between">
+                            <div class="d-flex justify-content-between flex-row">
                                 <div class="text-secondary">Bank</div>
                                 <div id="namaBank"></div>
                             </div>
 
-                            <div class="d-flex flex-row justify-content-between">
+                            <div class="d-flex justify-content-between flex-row">
                                 <div class="text-secondary">Atas nama</div>
                                 <div id="atasNama"></div>
                             </div>
 
-                            <div class="d-flex flex-row justify-content-between">
+                            <div class="d-flex justify-content-between flex-row">
                                 <div class="text-secondary">Nomor rekening</div>
                                 <div id="nomorRekening"></div>
                             </div>
 
-                            <div class="d-flex flex-row justify-content-between mb-5">
+                            <div class="d-flex justify-content-between mb-5 flex-row">
                                 <div class="text-secondary">Saldo</div>
                                 <div id="saldo"></div>
                             </div>

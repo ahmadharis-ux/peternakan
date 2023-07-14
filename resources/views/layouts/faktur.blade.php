@@ -116,7 +116,7 @@
                     @php
                         $pk = ($isKredit ? $kredit : $debit)->pihakKedua;
                     @endphp
-                    <span class="fw-bold my-2">{{ getUserFullname($pk) }}</span>
+                    <span class="fw-bold my-2">{{ $pk->fullname() }}</span>
                     <span>{{ $pk->email }}</span>
                     <span>{{ $pk->telepon }}</span>
                     <span>{{ $pk->alamat }}</span>
@@ -199,7 +199,7 @@
                             <img src="{{ asset(Storage::url(auth()->user()->foto_ttd)) }}" width="150px"
                                 class="my-3">
                         </div>
-                        <span class="fw-bold"> {{ getUserFullname($author) }}</span>
+                        <span class="fw-bold"> {{ $author->fullname() }}</span>
                     </div>
                 </div>
 

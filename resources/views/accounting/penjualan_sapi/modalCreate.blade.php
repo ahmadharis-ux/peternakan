@@ -14,7 +14,7 @@
                           <label for="">Customer</label>
                           <select name="id_pihak_kedua" id="" class="form-select">
                               @foreach ($listCustomer as $customer)
-                                  <option value="{{ $customer->id }}">{{ $customer->fullname }}
+                                  <option value="{{ $customer->id }}">{{ $customer->fullname() }}
                                   </option>
                               @endforeach
                           </select>

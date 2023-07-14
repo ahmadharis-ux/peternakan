@@ -1,4 +1,4 @@
-<table id="example" class="display " style="width:100%">
+<table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col" class="col-1">#</th>
@@ -15,7 +15,7 @@
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $kredit->created_at }}</td>
-                <td>{{ $kredit->pihakKedua->nama_depan }}</td>
+                <td>{{ $kredit->pihakKedua->fullname() }}</td>
                 <td>{{ $kredit->keterangan }}</td>
                 <td>Rp {{ number_format($kredit->nominal) }}</td>
                 <td>[nominal]</td>

@@ -7,7 +7,7 @@
 @section('container')
     <section class="section dashboard">
 
-        <p>{{ $pekerja->fullname }}</p>
+        <p>{{ $pekerja->fullname() }}</p>
 
         {{-- table list penggajian pekerja per bulan --}}
         <div class="card recent-sales overflow-auto">

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_kas')->unsigned();
             $table->foreignId('id_jurnal')->unsigned();
             $table->foreignId('id_author')->unsigned();
-            // $table->foreignId('id_pihak_kedua')->unsigned();
+            $table->foreignId('id_pihak_kedua')->unsigned();
             $table->unsignedInteger('nominal')->default(0);
             $table->string('keterangan')->nullable();
             $table->boolean('lunas')->default(false);

@@ -1,5 +1,5 @@
 @php
-    $userIsAuthor = $kredit->id_author === myId();
+    $userIsAuthor = $kredit->id_author === auth()->user()->id;
 @endphp
 
 @extends('layouts.main')

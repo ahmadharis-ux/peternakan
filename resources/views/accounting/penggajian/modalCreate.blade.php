@@ -14,7 +14,7 @@
                           <label for="">Supplier Sapi</label>
                           <select name="id_pihak_kedua" id="" class="form-select">
                               @foreach ($listSupplierSapi as $supplier)
-                                  <option value="{{ $supplier->id }}">{{ $supplier->fullname }}
+                                  <option value="{{ $supplier->id }}">{{ $supplier->fullname() }}
                                   </option>
                               @endforeach
                           </select>

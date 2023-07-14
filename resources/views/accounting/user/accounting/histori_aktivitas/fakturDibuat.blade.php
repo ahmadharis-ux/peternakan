@@ -23,7 +23,7 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $faktur->created_at }}</td>
                         <td>{{ $faktur->nomor_faktur }}</td>
-                        <td>{{ getUserFullname($faktur->pihakKedua) }}</td>
+                        <td>{{ $faktur->pihakKedua->fullname() }}</td>
                         <td>
                             @if ($faktur->subjek)
                                 {{ $faktur->subjek }}
