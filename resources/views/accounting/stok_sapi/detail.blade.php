@@ -104,7 +104,7 @@
                                     <br>
                                     <label>Laba Kotor: </label> Rp {{ number_format($labakotor) }}
                                     <br>
-                                    @if ($riwayatpemberianpakan->created_at > getDetailPenjualanSapibyId($sapi->id)->created_at)
+                                    @if ($riwayatpemberianpakan->created_at > $sapi->detailPenjualanSapi()->created_at)
                                         <label>Biaya Pakan Sebelum Di Ambil : Rp
                                             {{ number_format($biayapakansebelumdiambil) }} </label>
                                     @else

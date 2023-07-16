@@ -36,6 +36,7 @@ use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
+use App\Models\Sapi;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,7 +67,6 @@ Route::get('/home', function () {
 
 // testpage
 Route::get('/testa', function (Request $request) {
-    // return User::latest()->get();
 });
 
 Route::get('/welcome', function (Request $request) {

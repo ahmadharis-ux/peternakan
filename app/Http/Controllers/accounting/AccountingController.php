@@ -39,7 +39,7 @@ class AccountingController extends Controller
             'totalSaldo' => Rekening::getTotalSaldo(),
             'jumlahNilaiPembelianPakan' => DetailPembelianPakan::jumlahNilaiPembelianPakan(),
             'jumlahNilaiPemakaianPakan' => DetailPemakaianPakan::jumlahNilaiPemakaianPakan(),
-            'dataGrafikTransaksi' => getDataGrafikTransaksi($request),
+            'dataGrafikTransaksi' => Kas::getDataGrafikTransaksi($request),
 
         ];
 

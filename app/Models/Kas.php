@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use stdClass;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Debit;
 use App\Models\Kredit;
+use Carbon\CarbonPeriod;
+use Illuminate\Http\Request;
 use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
 use Illuminate\Support\Facades\DB;
@@ -164,5 +169,61 @@ class Kas extends Model
         });
 
         return $histori;
+    }
+
+    public static function getDataGrafikTransaksi(Request $request)
+    {
+        $dt = Carbon::now();
+        $awalBulan = $dt->startOfMonth()->toDateString();
+        $akhirBulan = $dt->endOfMonth()->toDateString();
+
+        $fromDate = $request->query('from_date') ?? $awalBulan;
+        $toDate = $request->query('to_date') ?? $akhirBulan;
+
+        $period = CarbonPeriod::create($fromDate, $toDate);
+        $dateList = [];
+        foreach ($period as $date) {
+            $dateList[] = $date->toDateString();
+        }
+
+        $listTransaksiDebit = TransaksiDebit::whereBetween('created_at', [$fromDate, $toDate])->get();
+        $listTransaksiKredit = TransaksiKredit::whereBetween('created_at', [$fromDate, $toDate])->get();
+
+        $listTransaksiDebit->each(function ($trx) {
+            $date = Carbon::create($trx->created_at)->toDateString();
+            $trx->createdDate = $date;
+        });
+
+        $listTransaksiKredit->each(function ($trx) {
+            $date = Carbon::create($trx->created_at)->toDateString();
+            $trx->createdDate = $date;
+        });
+
+        $trxByDate = $listTransaksiDebit->groupBy('createdDate');
+        $trxDebitByDate = $trxByDate->map(function ($trxList) {
+            return $trxList->sum('nominal');
+        });
+
+        $trxByDate = $listTransaksiKredit->groupBy('createdDate');
+        $trxKreditByDate = $trxByDate->map(function ($trxList) {
+            return $trxList->sum('nominal');
+        });
+
+        $trxDebit = [];
+        $trxKredit = [];
+
+        foreach ($dateList as $date) {
+            $trxDebit[] = $trxDebitByDate[$date] ?? 0;
+            $trxKredit[] = $trxKreditByDate[$date] ?? 0;
+        }
+
+        $graphData = new stdClass();
+        $graphData->fromDate = $fromDate;
+        $graphData->toDate = $toDate;
+        $graphData->dateList = json_encode($dateList);
+        $graphData->trxKredit = collect($trxKredit);
+        $graphData->trxDebit = collect($trxDebit);
+
+        return $graphData;
     }
 }
