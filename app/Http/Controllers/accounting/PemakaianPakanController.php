@@ -23,7 +23,7 @@ class PemakaianPakanController extends Controller
             'active' => "operasional kandang",
             'listPemakaianPakan' => PemakaianPakan::all(),
         ];
-        // dd($pageData);
+
         return view('accounting.pemakaian_pakan.index', $pageData);
     }
 
@@ -43,17 +43,17 @@ class PemakaianPakanController extends Controller
 
     public function store(Request $request)
     {
-        $today = carbonNow();
+        $today = Carbon::now();
 
         $pemakaianPakan = [
             "id_author" => auth()->user()->id,
             "id_pekerja" => $request->id_pekerja,
             "total_pengeluaran" => $request->total_pengeluaran,
             "keterangan" => $request->keterangan,
-            "created_at" => $today,
+
         ];
 
-        PemakaianPakan::insert($pemakaianPakan);
+        PemakaianPakan::create($pemakaianPakan);
         $idPemakaianPakanTerakhir = PemakaianPakan::getIdTerakhir();
 
         $listIdStokPakanDipakai = $request->stok_dipilih;
@@ -64,11 +64,11 @@ class PemakaianPakanController extends Controller
                 "id_stok_pakan" => $listIdStokPakanDipakai[$i],
                 "subtotal" =>  $request->subtotal_pakan[$i],
                 "qty" => $request->qty_pakan[$i],
-                "created_at" => Carbon::now(),
+
                 // "keterangan" => $request->keterangan,
             ];
 
-            DetailPemakaianPakan::insert($detailPemakaianPakan);
+            DetailPemakaianPakan::create($detailPemakaianPakan);
         }
 
         $listIdSapiDipakan = $request->sapi_terpilih;
@@ -78,10 +78,10 @@ class PemakaianPakanController extends Controller
                 "id_sapi" => $listIdSapiDipakan[$i],
                 "markup" => $request->markup,
                 "markup_pembulatan" => $request->markup_bulat,
-                "created_at" => carbonNow(),
+
             ];
 
-            MarkupSapi::insert($markupSapi);
+            MarkupSapi::create($markupSapi);
         }
 
         return redirect('/acc/pemakaian_pakan');

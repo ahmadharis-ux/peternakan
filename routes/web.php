@@ -1,21 +1,26 @@
 <?php
 
+use App\Models\Kas;
+
 use App\Models\Role;
 
 use App\Models\User;
-
+use App\Models\Kredit;
 use Illuminate\Http\Request;
+
+use App\Models\PembelianSapi;
 use Illuminate\Support\Facades\Route;
+
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\LoginController;
+
 use App\Http\Controllers\DaftarController;
-
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\AdminController;
-
 use App\Http\Controllers\owner\OwnerController;
+use App\Http\Controllers\owner\RekeningController;
 use App\Http\Controllers\accounting\SapiController;
 use App\Http\Controllers\accounting\UserController;
 use App\Http\Controllers\accounting\DebitController;
@@ -31,8 +36,6 @@ use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
-use App\Http\Controllers\admin\RoleController;
-use App\Http\Controllers\owner\RekeningController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +64,7 @@ Route::get('/home', function () {
 
 // testpage
 Route::get('/test', function (Request $request) {
-    return 'testpage!';
+    return User::latest()->get();
 });
 
 Route::get('/welcome', function (Request $request) {
@@ -109,6 +112,7 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 Route::middleware(['auth', 'role:Accounting'])->group(function () {
     Route::prefix('acc')->group(function () {
 
+        // dashboard
         Route::get('/', [AccountingController::class, 'index']);
 
         //detail total saldo dan aset

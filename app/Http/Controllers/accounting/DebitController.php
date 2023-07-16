@@ -46,10 +46,9 @@ class DebitController extends Controller
             "id_pihak_kedua" => Debit::find($idDebit)->id_pihak_kedua,
             "id_rekening" => $idRekening,
             "nominal" => $nominalBayar,
-            "created_at" => carbonNow(),
         ];
 
-        TransaksiDebit::insert($transaksiDebit);
+        TransaksiDebit::create($transaksiDebit);
         Debit::updateStatusLunas($idDebit);
         Rekening::pemasukan($idRekening, $nominalBayar);
 

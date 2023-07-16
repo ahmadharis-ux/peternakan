@@ -76,17 +76,15 @@ class Kas extends Model
 
     public static function kreditBaru()
     {
-        Kas::insert([
+        Kas::create([
             "is_kredit" => true,
-            "created_at" => carbonNow(),
         ]);
     }
 
     public static function debitBaru()
     {
-        Kas::insert([
+        Kas::create([
             "is_kredit" => false,
-            "created_at" => carbonNow(),
         ]);
     }
 

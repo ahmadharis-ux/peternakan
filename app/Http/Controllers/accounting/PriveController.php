@@ -30,7 +30,7 @@ class PriveController extends Controller
 	{
 		$idJurnalPrive = 6;
 		Kas::kreditBaru();
-		$today = carbonNow();
+		$today = Carbon::now();
 
 		$dataKreditPrive = [
 			"id_kas" => Kas::idTerakhir(),
@@ -42,10 +42,10 @@ class PriveController extends Controller
 			"adm" => $request->adm,
 			"tenggat" => $request->tenggat,
 			"lunas" => true,
-			"created_at" => $today,
+
 		];
 
-		Kredit::insert($dataKreditPrive);
+		Kredit::create($dataKreditPrive);
 		$idRekening = $request->id_rekening;
 		$nominalBayar = $request->nominal;
 		$adm = $request->adm;
@@ -56,9 +56,9 @@ class PriveController extends Controller
 			"nominal" => $nominalBayar,
 			"keterangan" => $request->keterangan,
 			"adm" => $adm,
-			"created_at" => $today,
+
 		];
-		TransaksiKredit::insert($dataTransaksiKredit);
+		TransaksiKredit::create($dataTransaksiKredit);
 		Rekening::pengeluaran($idRekening, $nominalBayar + $adm);
 		return redirect()->back();
 	}

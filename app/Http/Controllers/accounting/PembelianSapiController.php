@@ -45,8 +45,11 @@ class PembelianSapiController extends Controller
         return view('accounting.pembelian_sapi.index', $pageData);
     }
 
+
     public function store(Request $request)
     {
+
+
         DB::beginTransaction();
         try {
             $idJurnalHutang = 1;
@@ -137,7 +140,7 @@ class PembelianSapiController extends Controller
             'id_pembelian_sapi' => $idPembelianSapi,
             'harga' => $hargaOperasional,
             'keterangan' => $request->keterangan,
-            'created_at' => carbonNow(),
+
         ];
 
         OperasionalPembelianSapi::create($operasionalPembelianSapiBaru);
@@ -177,7 +180,8 @@ class PembelianSapiController extends Controller
     public function invoice(PembelianSapi $pembelianSapi, Request $request)
     {
         $kredit = $pembelianSapi->kredit()->first();
-        $nomorFaktur = "INV_" . getTimestamp();
+        $timestamp = str_replace(['-', ':', ' '], [""], Carbon::now()->toDateTimeString());
+        $nomorFaktur = "INV_" . $timestamp;
 
 
         $pageData = [
@@ -188,7 +192,8 @@ class PembelianSapiController extends Controller
             "author" => auth()->user(),
             "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
-            "tanggalCetak" => tanggalSekarang(),
+            "tanggalCetak" => Carbon::now()->isoFormat('D MMMM, Y'),
+            "today" => str_replace('-', '/', Carbon::today()->toDateString()),
 
         ];
 

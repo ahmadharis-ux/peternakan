@@ -2,36 +2,12 @@
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use App\Models\MarkupSapi;
 use Illuminate\Http\Request;
 use App\Models\TransaksiDebit;
 use App\Models\TransaksiKredit;
 use App\Models\DetailPenjualanSapi;
 
-function userPunyaTtd()
-{
-    return auth()->user()->foto_ttd !== null;
-}
 
-function carbonNow()
-{
-    return Carbon::now();
-}
-
-function getTimestamp()
-{
-    return str_replace(['-', ':', ' '], [""], carbonNow()->toDateTimeString());
-}
-
-function carbonToday()
-{
-    return str_replace('-', '/', Carbon::today()->toDateString());
-}
-
-function tanggalSekarang()
-{
-    return Carbon::now()->isoFormat('D MMMM, Y');
-}
 
 function getDetailPenjualanSapibyId($idSapi)
 {
@@ -109,7 +85,6 @@ function get_profil_pic()
 function get_ttd()
 {
     $pic = Storage::url(auth()->user()->foto_ttd);
-    // $default = asset('assets/img/no-signature.svg');
 
     if ($pic == "/storage/") {
         return false;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\accounting;
 
+use Carbon\Carbon;
 use App\Models\Kas;
 use App\Models\Sapi;
 use App\Models\User;
@@ -41,7 +42,7 @@ class PenjualanSapiController extends Controller
     public function store(Request $request)
     {
         $id_jurnal_piutang = 2;
-        $today = carbonNow();
+        $today = Carbon::now();
 
         Kas::debitBaru();
 
@@ -51,16 +52,16 @@ class PenjualanSapiController extends Controller
             "id_pihak_kedua" => $request->id_pihak_kedua,
             "id_jurnal" => $id_jurnal_piutang,
             "keterangan" => $request->keterangan,
-            "created_at" => $today,
+
         ];
-        Debit::insert($dataDebitBaru);
+        Debit::create($dataDebitBaru);
 
         $dataPenjualanSapiBaru = [
             "id_author" => auth()->user()->id,
             "id_debit" => Debit::idTerakhir(),
-            "created_at" => $today,
+
         ];
-        PenjualanSapi::insert($dataPenjualanSapiBaru);
+        PenjualanSapi::create($dataPenjualanSapiBaru);
 
         return redirect('/acc/piutang');
     }
@@ -81,10 +82,10 @@ class PenjualanSapiController extends Controller
             "harga" => $hargaSapi,
             // "kondisi" => $request->kondisi,
             "keterangan" => $request->keterangan,
-            "created_at" => carbonNow(),
+
         ];
 
-        DetailPenjualanSapi::insert($detailPenjualanSapi);
+        DetailPenjualanSapi::create($detailPenjualanSapi);
         $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
 
         Debit::tambahNominal($idDebit, $hargaSapi);
@@ -103,10 +104,10 @@ class PenjualanSapiController extends Controller
             'id_penjualan_sapi' => $idPenjualanSapi,
             'harga' => $hargaOperasional,
             'keterangan' => $request->keterangan,
-            'created_at' => carbonNow(),
+
         ];
 
-        OperasionalPenjualanSapi::insert($operasionalPenjualanSapiBaru);
+        OperasionalPenjualanSapi::create($operasionalPenjualanSapiBaru);
 
         $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
 
@@ -145,8 +146,8 @@ class PenjualanSapiController extends Controller
     public function invoice(PenjualanSapi $penjualanSapi, Request $request)
     {
         $debit = $penjualanSapi->debit()->first();
-        $nomorFaktur = "INV_" . getTimestamp();
-
+        $timestamp = str_replace(['-', ':', ' '], [""], Carbon::now()->toDateTimeString());
+        $nomorFaktur = "INV_" . $timestamp;
         $pageData = [
             "title" => "Invoice penjualan sapi $penjualanSapi->id",
             "penjualanSapi" => $penjualanSapi,
@@ -155,7 +156,8 @@ class PenjualanSapiController extends Controller
             "author" => auth()->user(),
             "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
-            "tanggalCetak" => tanggalSekarang(),
+            "tanggalCetak" => Carbon::now()->isoFormat('D MMMM, Y'),
+            "today" => str_replace('-', '/', Carbon::today()->toDateString()),
         ];
 
         $fakturBaru = [

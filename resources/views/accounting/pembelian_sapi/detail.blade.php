@@ -1,5 +1,6 @@
 @php
     $userIsAuthor = $kredit->id_author === auth()->user()->id;
+    $userPunyaTtd = auth()->user()->foto_ttd !== null;
 @endphp
 
 @extends('layouts.main')
@@ -96,11 +97,11 @@
                             @if ($userIsAuthor)
                                 <div class="d-flex flex-column">
                                     <div class="d-flex justify-content-end">
-                                        <button class="btn btn-primary {{ userPunyaTtd() ? '' : 'disabled btn-secondary' }}"
+                                        <button class="btn btn-primary {{ $userPunyaTtd ? '' : 'disabled btn-secondary' }}"
                                             data-bs-toggle="modal" data-bs-target="#modalCetakFaktur">Cetak
                                             faktur</button>
                                     </div>
-                                    @if (userPunyaTtd() == false)
+                                    @if ($userPunyaTtd == false)
                                         <small class="text-muted">Anda belum punya tanda tangan. <a
                                                 href="/editprofile">Upload
                                                 di sini</a></small>

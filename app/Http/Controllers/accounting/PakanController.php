@@ -67,10 +67,9 @@ class PakanController extends Controller
     {
         $validasi = [
             'nama' => $request->nama,
-            "created_at" => Carbon::now(),
             'id_author' => auth()->user()->id,
         ];
-        Pakan::insert($validasi);
+        Pakan::create($validasi);
         return redirect()->back();
     }
     public function storeSatuan(Request $request)
@@ -79,13 +78,12 @@ class PakanController extends Controller
             'nama' => $request->nama,
             // 'id_author' => auth()->user()->id,
         ];
-        SatuanPakan::insert($validasi);
+        SatuanPakan::create($validasi);
         return redirect()->back();
     }
     function storePembelianPakan(Request $request)
     {
         $idJurnalPakan = 3;
-        $today = carbonNow();
 
         Kas::kreditBaru();
         $dataKreditBaru = [
@@ -94,18 +92,16 @@ class PakanController extends Controller
             "id_pihak_kedua" => $request->id_pihak_kedua,
             "id_jurnal" => $idJurnalPakan,
             "keterangan" => $request->keterangan,
-            "created_at" => $today,
         ];
 
-        Kredit::insert($dataKreditBaru);
+        Kredit::create($dataKreditBaru);
 
         $dataPembelianPakanBaru = [
             "id_author" => auth()->user()->id,
             "id_kredit" => Kredit::idTerakhir(),
-            "created_at" => $today,
         ];
 
-        PembelianPakan::insert($dataPembelianPakanBaru);
+        PembelianPakan::create($dataPembelianPakanBaru);
         return redirect()->back();;
     }
     function storeDetailPembelianPakan(Request $request)
@@ -126,11 +122,10 @@ class PakanController extends Controller
             "qty" => $qty,
             "keterangan" => $keterangan,
             "subtotal" => $subtotal,
-            "created_at" => carbonNow(),
         ];
         // dd($detailPembelianPakan);
 
-        DetailPembelianPakan::insert($detailPembelianPakan);
+        DetailPembelianPakan::create($detailPembelianPakan);
 
         $idKredit = PembelianPakan::find($idpembelianPakan)->kredit->id;
 
@@ -144,7 +139,7 @@ class PakanController extends Controller
             "stok" => $qty,
         ];
 
-        StokPakan::insert($stokpakan);
+        StokPakan::create($stokpakan);
 
         return redirect()->back();
     }
@@ -182,10 +177,10 @@ class PakanController extends Controller
             'id_pembelian_pakan' => $idPembelianPakan,
             'harga' => $hargaOperasional,
             'keterangan' => $request->keterangan,
-            'created_at' => carbonNow(),
+
         ];
 
-        OperasionalPembelianPakan::insert($operasionalPembelianPakanBaru);
+        OperasionalPembelianPakan::create($operasionalPembelianPakanBaru);
 
         $idKredit = PembelianPakan::find($idPembelianPakan)->kredit->id;
 
@@ -197,8 +192,11 @@ class PakanController extends Controller
 
     public function invoice(PembelianPakan $pembelianPakan, Request $request)
     {
+
         $kredit = $pembelianPakan->kredit()->first();
-        $nomorFaktur = "INV_" . getTimestamp();
+
+        $timestamp = str_replace(['-', ':', ' '], [""], Carbon::now()->toDateTimeString());
+        $nomorFaktur = "INV_" . $timestamp;
 
         $pageData = [
             "title" => "Invoice pembelian pakan $pembelianPakan->id",
@@ -208,7 +206,8 @@ class PakanController extends Controller
             "author" => auth()->user(),
             "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
-            "tanggalCetak" => tanggalSekarang(),
+            "tanggalCetak" => Carbon::now()->isoFormat('D MMMM, Y'),
+            "today" => str_replace('-', '/', Carbon::today()->toDateString()),
         ];
 
         $fakturBaru = [

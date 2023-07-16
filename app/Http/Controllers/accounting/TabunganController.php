@@ -20,7 +20,7 @@ class TabunganController extends Controller
 	function index()
 	{
 		$idJurnalTabungan = 5;
-		
+
 		$pageData = [
 			'title' => 'Buku - Tabungan',
 			'heading' => 'Buku - Tabungan',
@@ -38,7 +38,7 @@ class TabunganController extends Controller
 		$idJurnalTabungan = 5;
 		$idOwner = User::find(1);
 		Kas::kreditBaru();
-		$today = carbonNow();
+		$today = Carbon::now();
 
 		$dataKreditTabungan = [
 			"id_kas" => Kas::idTerakhir(),
@@ -49,13 +49,13 @@ class TabunganController extends Controller
 			"keterangan" => $request->keterangan,
 			"adm" => $request->adm,
 			"lunas" => true,
-			"created_at" => $today,
+
 		];
 
 		// return $dataKreditTabungan;
 
 
-		Kredit::insert($dataKreditTabungan);
+		Kredit::create($dataKreditTabungan);
 		$idRekening = $request->id_rekening;
 		$nominalBayar = $request->nominal;
 		$adm = $request->adm;
@@ -67,10 +67,10 @@ class TabunganController extends Controller
 			"nominal" => $nominalBayar,
 			"keterangan" => $request->keterangan,
 			"adm" => $adm,
-			"created_at" => $today,
+
 		];
 
-		TransaksiKredit::insert($dataTransaksiKredit);
+		TransaksiKredit::create($dataTransaksiKredit);
 		Rekening::pengeluaran($idRekening, $nominalBayar + $adm);
 		return redirect()->back();
 	}

@@ -8,6 +8,7 @@ use App\Models\JenisSapi;
 use App\Models\Sapi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SapiController extends Controller
 {
@@ -24,9 +25,7 @@ class SapiController extends Controller
         $filtered = $filterJenis || $filterStatus || $filterKondisi;
 
         if ($filtered) {
-            // return request();
 
-            // $listSapi = DB::table('sapis');
             $listSapi = new Sapi();
 
             if ($filterJenis) {
@@ -45,7 +44,6 @@ class SapiController extends Controller
 
 
             $listSapi = $listSapi->get();
-            // return $listSapi;
         } else {
             $listSapi = Sapi::all();
         }
@@ -79,6 +77,7 @@ class SapiController extends Controller
             'heading' => "Sapi " . $sapi->eartag,
             'active' => "dashboard",
             'sapi' => $sapi,
+            'detailPenjualanSapi' => DetailPenjualanSapi::where('id_sapi', $sapi->id)->first(),
         ];
 
         return view('accounting.stok_sapi.detail', $pageData);
@@ -95,17 +94,21 @@ class SapiController extends Controller
 
     public function setAmbilSapi(Sapi $sapi)
     {
+        try {
+            DB::transaction(function () use ($sapi) {
+                $sapi->status = "SOLD";
+                $sapi->save();
 
-        DB::transaction(function () use ($sapi) {
-            $sapi->status = "SOLD";
-            $sapi->save();
+                $detailPenjualanSapi = $sapi->detailPenjualanSapi()->first();
+                $detailPenjualanSapi->tanggal_pengambilan = Carbon::now();
+                $detailPenjualanSapi->save();
+            });
 
-            $detailPenjualanSapi = $sapi->detailPenjualanSapi()->first();
-            $detailPenjualanSapi->tanggal_pengambilan = carbonNow();
-            $detailPenjualanSapi->save();
-        });
-
-        return redirect()->back();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Log::error('gagal ambil sapi');
+            return redirect()->back()->with('error', 'gagal ambil sapi');
+        }
     }
 
     public function destroy(Sapi $sapi)

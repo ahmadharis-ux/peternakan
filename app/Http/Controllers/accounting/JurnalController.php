@@ -36,11 +36,10 @@ class JurnalController extends Controller
             'nama' => $request->nama_jurnal,
             'id_kode_jurnal' => $request->id_kode_jurnal,
             'id_author' => auth()->user()->id,
-            'created_at' => Carbon::now(),
         ];
 
 
-        Jurnal::insert($dataJurnalBaru);
+        Jurnal::create($dataJurnalBaru);
         return redirect()->back();
     }
 

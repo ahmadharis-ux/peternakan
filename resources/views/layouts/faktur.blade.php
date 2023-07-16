@@ -70,7 +70,7 @@
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Tanggal</span>
-                        <span>{{ carbonToday() }}</span>
+                        <span>{{ $today }}</span>
                     </div>
 
                     <div class="d-flex justify-content-between">
