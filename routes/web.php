@@ -62,16 +62,20 @@ Route::get('/home', function () {
     }
 });
 
+
+
 // testpage
-Route::get('/test', function (Request $request) {
-    return User::latest()->get();
+Route::get('/testa', function (Request $request) {
+    // return User::latest()->get();
 });
 
 Route::get('/welcome', function (Request $request) {
     return view('welcome');
 });
 
-
+Route::post('/acc/hutang', function (Request $request) {
+    return $request;
+})->middleware('auth', 'role:Accounting');
 
 // ================================ OWNER
 Route::middleware(['auth', 'role:Owner'])->group(function () {

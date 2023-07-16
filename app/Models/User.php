@@ -3,10 +3,22 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Role;
+use App\Models\Pakan;
+use App\Models\Kredit;
+use App\Models\Rekening;
+use App\Models\JenisSapi;
+use App\Models\PembelianSapi;
+use App\Models\PenjualanSapi;
+use App\Models\PemakaianPakan;
+use App\Models\PembelianPakan;
+use App\Models\TransaksiKredit;
+use App\Models\RiwayatBobotSapi;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -183,5 +195,33 @@ class User extends Authenticatable
     function fullname()
     {
         return $this->nama_depan . " " . $this->nama_belakang;
+    }
+
+    function get_profil_pic()
+    {
+        $pic = Storage::url($this->foto_profil);
+        $default = asset('assets/img/user-default.svg');
+
+        if ($pic == '/storage/') {
+            return $default;
+        }
+
+        return $pic;
+    }
+
+    function get_ttd()
+    {
+        $pic = Storage::url($this->foto_ttd);
+
+        if ($pic == '/storage/') {
+            return false;
+        }
+
+        return $pic;
+    }
+
+    function userPunyaTtd()
+    {
+        return $this->foto_ttd !== null;
     }
 }

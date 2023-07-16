@@ -2,7 +2,6 @@
 @section('container')
     @include('components.alert')
 
-
     <section class="section profile">
 
 
@@ -11,7 +10,8 @@
 
                 <div class="card">
                     <div class="card-body profile-card d-flex flex-column align-items-center pt-4">
-                        <img src="{{ get_profil_pic() }}" width="100px" height="100px" class="img-cropped rounded-circle my-3">
+                        <img src="{{ auth()->user()->get_profil_pic() }}" width="100px" height="100px"
+                            class="img-cropped rounded-circle my-3">
                         <h2>{{ auth()->user()->name }}</h2>
                         <span>{{ auth()->user()->role->name }}</span>
                     </div>
@@ -80,8 +80,8 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Tanda tangan</div>
                                     <div class="col-lg-9 col-md-8">
-                                        @if (get_ttd())
-                                            <img src="{{ get_ttd() }}" width="150px" class="my-3">
+                                        @if (auth()->user()->userPunyaTtd())
+                                            <img src="{{ auth()->user()->get_ttd() }}" width="150px" class="my-3">
                                         @else
                                             <span class="text-muted">(Belum ada tanda tangan)</span>
                                         @endif
