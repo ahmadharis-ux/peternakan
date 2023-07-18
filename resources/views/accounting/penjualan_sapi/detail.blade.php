@@ -1,5 +1,5 @@
 @php
-    $userIsAuthor = $debit->id_author === auth()->user()->id;
+    $userIsAuthor = $debit->id_author == auth()->user()->id;
     $userPunyaTtd = auth()->user()->foto_ttd !== null;
 @endphp
 

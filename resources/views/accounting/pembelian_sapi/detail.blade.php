@@ -1,6 +1,7 @@
 @php
-    $userIsAuthor = $kredit->id_author === auth()->user()->id;
+    $userIsAuthor = $kredit->id_author == auth()->user()->id;
     $userPunyaTtd = auth()->user()->foto_ttd !== null;
+    
 @endphp
 
 @extends('layouts.main')
