@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DetailPenjualanSapi;
 use App\Models\JenisSapi;
 use App\Models\Sapi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -79,6 +80,7 @@ class SapiController extends Controller
             'sapi' => $sapi,
             'detailPenjualanSapi' => DetailPenjualanSapi::where('id_sapi', $sapi->id)->first(),
         ];
+        // dd($pageData);
 
         return view('accounting.stok_sapi.detail', $pageData);
     }
