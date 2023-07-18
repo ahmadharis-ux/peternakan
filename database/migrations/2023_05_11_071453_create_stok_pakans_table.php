@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('stok_pakans', function (Blueprint $table) {
             $table->id();
-			$table->foreignId('id_pakan')->unsigned();
-			$table->foreignId('id_satuan_pakan')->unsigned();
-			$table->foreignId('id_author')->nullable();
-			$table->unsignedInteger('harga');
+            $table->foreignId('id_pakan')->unsigned();
+            $table->foreignId('id_satuan_pakan')->unsigned();
+            $table->foreignId('id_author')->nullable();
+            $table->unsignedBigInteger('harga');
             $table->integer('stok');
 
-			$table->timestamps();
-			$table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakans');
-			$table->foreign('id_pakan')->references('id')->on('pakans');
-			$table->foreign('id_author')->references('id')->on('users');
+            $table->timestamps();
+            $table->foreign('id_pakan')->references('id')->on('pakans');
+            $table->foreign('id_satuan_pakan')->references('id')->on('satuan_pakans');
+            $table->foreign('id_author')->references('id')->on('users');
         });
     }
 

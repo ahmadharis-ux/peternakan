@@ -133,14 +133,17 @@
         inputNominal.keyup(function() {
             const nominal = parseInt($(this).val())
 
-            const invalidNominal = nominal > currentRekening.saldo || nominal > sisaPembayaran
+
+            const invalidNominal = nominal > currentRekening.saldo
 
             if (invalidNominal) {
                 btnSimpan.attr('disabled', 'disabled')
                 btnSimpan.text('Nominal tidak valid!')
 
-                inputNominal.addClasss('is-invalid')
+                // inputNominal.addClasss('is-invalid')
+                console.log('invalid');
             } else {
+                console.log('valid');
                 btnSimpan.removeAttr('disabled')
                 btnSimpan.text('Simpan')
 

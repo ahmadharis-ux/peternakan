@@ -2,8 +2,7 @@
 @section('container')
 
     @php
-        $penjualanSapi = getDetailPenjualanSapibyId($sapi->id);
-        
+        $detailPenjualanSapi
     @endphp
     <section class="section dashboard">
         <div class="col-12">
