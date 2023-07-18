@@ -31,7 +31,7 @@ class PakanController extends Controller
     public function index()
     {
         $idJurnalPakan = 3;
-        $listPembelianPakan = Pakan::where('id_author', auth()->user()->idate)->get();
+        $listPembelianPakan = Pakan::where('id_author', auth()->user()->id)->get();
 
         $pageData = [
             'title' => 'Buku - Pakan',
@@ -70,6 +70,7 @@ class PakanController extends Controller
             'nama' => $request->nama,
             'id_author' => auth()->user()->id,
         ];
+
         Pakan::create($validasi);
         return redirect()->back();
     }

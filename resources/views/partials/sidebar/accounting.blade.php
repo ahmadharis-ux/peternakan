@@ -103,6 +103,11 @@
                 <i class="bi bi-circle"></i><span>Owner</span>
             </a>
         </li>
+        <li>
+            <a href="/acc/user/pekerja" class="{{ $title == 'User - Pekerja' ? 'active' : '' }}">
+                <i class="bi bi-circle"></i><span>Pekerja</span>
+            </a>
+        </li>
     </ul>
 </li>
 
