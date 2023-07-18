@@ -2,7 +2,7 @@
       aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-              <form action="/acc/piutang/" method="post" enctype="multipart/form-data">
+              <form action="/acc/piutang" method="post" enctype="multipart/form-data">
                   @csrf
                   <div class="modal-header">
                       <h1 class="modal-title fs-5" id="staticBackdropLabel">Kas Piutang</h1>
