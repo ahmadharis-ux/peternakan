@@ -38,7 +38,8 @@ class PakanController extends Controller
             'heading' => 'Buku - Pakan',
             'active' => 'buku',
             'ListSatuan' => SatuanPakan::all(),
-            'ListPakan' => $listPembelianPakan,
+            // 'ListPakan' => $listPembelianPakan, ?
+            'ListPakan' => Pakan::all(),
             'ListStokPakan' => StokPakan::all(),
             'ListSupplierPakan' => User::getSupplierPakan(),
             'listKreditPakan' => Kredit::where('id_jurnal', $idJurnalPakan)->get(),
@@ -106,6 +107,8 @@ class PakanController extends Controller
     }
     function storeDetailPembelianPakan(Request $request)
     {
+        // return $request;
+
         $idpembelianPakan = $request->id_pembelian_pakan;
         $idpakan = $request->id_pakan;
         $id_satuan_pakan = $request->id_satuan_pakan;
@@ -123,7 +126,6 @@ class PakanController extends Controller
             "keterangan" => $keterangan,
             "subtotal" => $subtotal,
         ];
-        // dd($detailPembelianPakan);
 
         DetailPembelianPakan::create($detailPembelianPakan);
 

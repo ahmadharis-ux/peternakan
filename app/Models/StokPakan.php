@@ -11,7 +11,7 @@ class StokPakan extends Model
     protected $guarded = [
         'id'
     ];
-    protected $fillable = ['harga', 'qty'];
+    // protected $fillable = ['harga', 'qty'];
 
     protected $with = ['pakan', 'satuanPakan'];
 
