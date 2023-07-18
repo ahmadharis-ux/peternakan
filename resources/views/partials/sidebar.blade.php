@@ -28,12 +28,13 @@
          @endswitch
 
          {{-- testpage --}}
-         {{-- <li class="nav-item">
+         <li class="nav-item">
              <a class="nav-link {{ $active != 'dashboard' ? 'collapsed' : '' }}" href="/test">
                  <i class="bi bi-grid"></i>
                  <span>Testpage</span>
              </a>
-         </li> --}}
+         </li>
+
 
      </ul>
  </aside>
