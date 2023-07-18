@@ -73,192 +73,130 @@ Route::get('/welcome', function (Request $request) {
     return view('welcome');
 });
 
-Route::post('/acc/hutang', function (Request $request) {
-    return $request;
-})->middleware('auth', 'role:Accounting');
-
 // ================================ OWNER
-Route::middleware(['auth', 'role:Owner'])->group(function () {
-    Route::prefix('owner')->group(function () {
-        Route::get('/', [OwnerController::class, 'index']);
+Route::middleware(['auth', 'role:Owner'])->prefix('owner')->group(function () {
+    Route::get('/', [OwnerController::class, 'index']);
 
-        Route::prefix('/rekening')->group(function () {
-            Route::get('/', [RekeningController::class, 'index']);
-            Route::post('/', [RekeningController::class, 'store']);
-            Route::put('/{rekening}', [RekeningController::class, 'update']);
-            Route::delete('/{rekening}', [RekeningController::class, 'destroy']);
-        });
+    Route::prefix('/rekening')->group(function () {
+        Route::get('/', [RekeningController::class, 'index']);
+        Route::post('/', [RekeningController::class, 'store']);
+        Route::put('/{rekening}', [RekeningController::class, 'update']);
+        Route::delete('/{rekening}', [RekeningController::class, 'destroy']);
     });
 });
 
 // ================================ ADMIN
-Route::middleware(['auth', 'role:Admin'])->group(function () {
-    Route::prefix('admin')->group(function () {
+Route::middleware(['auth', 'role:Admin'])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index']);
 
-        Route::get('/', [AdminController::class, 'index']);
+    Route::prefix('/users')->group(function () {
+        Route::get('/', [AdminController::class, 'users']);
+        Route::put('/editrole/{user}', [AdminController::class, 'editRole']);
+    });
 
-        Route::prefix('/users')->group(function () {
-            Route::get('/', [AdminController::class, 'users']);
-            Route::put('/editrole/{user}', [AdminController::class, 'editRole']);
-        });
-
-        Route::prefix('/roles')->group(function () {
-            Route::get('/', [RoleController::class, 'index']);
-            // Route::get('/', [RoleController::class, 'index']);
-            Route::post('/', [RoleController::class, 'store']);
-            Route::put('/{role}', [RoleController::class, 'update']);
-            Route::delete('/{role}', [RoleController::class, 'destroy']);
-        });
+    Route::prefix('/roles')->group(function () {
+        Route::get('/', [RoleController::class, 'index']);
+        // Route::get('/', [RoleController::class, 'index']);
+        Route::post('/', [RoleController::class, 'store']);
+        Route::put('/{role}', [RoleController::class, 'update']);
+        Route::delete('/{role}', [RoleController::class, 'destroy']);
     });
 });
 
 // ================================ ACCOUNTING
-Route::middleware(['auth', 'role:Accounting'])->group(function () {
-    Route::prefix('acc')->group(function () {
+Route::middleware(['auth', 'role:Accounting'])->get('/acc', [AccountingController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/total_saldo', [AccountingController::class, 'detailSaldoDanAset']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/rincian_hutang', [AccountingController::class, 'RincianHutangPerusahaan']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/rincian_piutang', [AccountingController::class, 'RincianPiutangPerusahaan']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/kas', [AccountingController::class, 'kas']);
 
-        // dashboard
-        Route::get('/', [AccountingController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/hutang', [PembelianSapiController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/hutang/{id}', [PembelianSapiController::class, 'show']);
+// Route::middleware(['auth', 'role:Accounting'])->post('/acc/hutang', [PembelianSapiController::class, 'store']);
+// Route::middleware(['auth', 'role:Accounting'])->post('/acc/hutang', function (Request $request) {
+//     return "hutang baru";
+// });
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/hutang/detail', [PembelianSapiController::class, 'storeDetail']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/hutang/operasional', [PembelianSapiController::class, 'storeOperasional']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/hutang/transaksi', [KreditController::class, 'storeTransaksi']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/hutang/{pembelianSapi}/invoice', [PembelianSapiController::class, 'invoice']);
 
-        //detail total saldo dan aset
-        Route::get('/total_saldo', [AccountingController::class, 'detailSaldoDanAset']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/piutang', [PenjualanSapiController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/piutang/{id}', [PenjualanSapiController::class, 'show']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/piutang/detail', [PenjualanSapiController::class, 'storeDetail']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/piutang', [PenjualanSapiController::class, 'store']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/piutang/operasional', [PenjualanSapiController::class, 'storeOperasional']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/piutang/transaksi', [DebitController::class, 'storeTransaksi']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/piutang/{penjualanSapi}/invoice', [PenjualanSapiController::class, 'invoice']);
 
-        //detail hutang
-        Route::get('/rincian_hutang', [AccountingController::class, 'RincianHutangPerusahaan']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/gaji', [PenggajianController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/gaji/pekerja/{id}', [PenggajianController::class, 'showPenggajianPekerja']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/gaji/{id}', [PenggajianController::class, 'show']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/gaji', [PenggajianController::class, 'store']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/gaji/transaksi', [KreditController::class, 'storeTransaksi']);
 
-        //detail putang
-        Route::get('/rincian_piutang', [AccountingController::class, 'RincianPiutangPerusahaan']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/tabungan', [TabunganController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/tabungan', [TabunganController::class, 'store']);
 
-        // Kas
-        Route::get('/kas', [AccountingController::class, 'kas']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/kodejurnal', [KodeJurnalController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/kodejurnal', [KodeJurnalController::class, 'store']);
+Route::middleware(['auth', 'role:Accounting'])->put('/acc/kodejurnal/{id}', [KodeJurnalController::class, 'edit']);
+Route::middleware(['auth', 'role:Accounting'])->delete('/acc/kodejurnal/delete/{id}', [KodeJurnalController::class, 'destroy']);
 
-        // Hutang
-        Route::prefix('hutang')->group(function () {
-            Route::get('/', [PembelianSapiController::class, 'index']);
-            Route::get('/{id}', [PembelianSapiController::class, 'show']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/jurnal', [JurnalController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/jurnal/{id}', [JurnalController::class, 'show']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/jurnal', [JurnalController::class, 'store']);
+Route::middleware(['auth', 'role:Accounting'])->put('/acc/jurnal/{id}', [JurnalController::class, 'update']);
+Route::middleware(['auth', 'role:Accounting'])->delete('/acc/jurnal/{id}', [JurnalController::class, 'destroy']);
 
-            Route::post('/', [PembelianSapiController::class, 'store']);
-            Route::post('/detail', [PembelianSapiController::class, 'storeDetail']);
-            Route::post('/operasional', [PembelianSapiController::class, 'storeOperasional']);
-            Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
-            Route::post('/{pembelianSapi}/invoice', [PembelianSapiController::class, 'invoice']);
-        });
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/sapi', [SapiController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/sapi/{sapi}', [SapiController::class, 'show']);
+Route::middleware(['auth', 'role:Accounting'])->put('/acc/sapi/{sapi}/ambil', [SapiController::class, 'setAmbilSapi']);
+Route::middleware(['auth', 'role:Accounting'])->put('/acc/sapi/{id}', [SapiController::class, 'update']);
 
-        // Piutang
-        Route::prefix('piutang')->group(function () {
-            Route::get('/', [PenjualanSapiController::class, 'index']);
-            Route::get('/{id}', [PenjualanSapiController::class, 'show']);
-            Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/prive', [PriveController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/prive', [PriveController::class, 'store']);
 
-            Route::post('/', [PenjualanSapiController::class, 'store']);
-            Route::post('/detail', [PenjualanSapiController::class, 'storeDetail']);
-            Route::post('/operasional', [PenjualanSapiController::class, 'storeOperasional']);
-            Route::post('/transaksi', [DebitController::class, 'storeTransaksi']);
-            Route::post('/{penjualanSapi}/invoice', [PenjualanSapiController::class, 'invoice']);
-        });
-
-        // Gaji
-        Route::prefix('gaji')->group(function () {
-            Route::get('/', [PenggajianController::class, 'index']);
-            Route::get('/pekerja/{id}', [PenggajianController::class, 'showPenggajianPekerja']);
-            Route::get('/{id}', [PenggajianController::class, 'show']);
-
-            Route::post('/', [PenggajianController::class, 'store']);
-            Route::post('/transaksi', [KreditController::class, 'storeTransaksi']);
-        });
-
-        // Tabungan
-        Route::prefix('tabungan')->group(function () {
-            Route::get('/', [TabunganController::class, 'index']);
-            Route::post('/', [TabunganController::class, 'store']);
-        });
-
-        //Kode Jurnal
-        Route::prefix('kodejurnal')->group(function () {
-            Route::get('/', [KodeJurnalController::class, 'index']);
-            Route::post('/', [KodeJurnalController::class, 'store']);
-            Route::put('/{id}', [KodeJurnalController::class, 'edit']);
-            Route::delete('/delete/{id}', [KodeJurnalController::class, 'destroy']);
-        });
-
-        // Jurnal
-        Route::prefix('jurnal')->group(function () {
-            Route::get('/', [JurnalController::class, 'index']);
-            Route::get('/{id}', [JurnalController::class, 'show']);
-
-            Route::post('/', [JurnalController::class, 'store']);
-            Route::put('/{id}', [JurnalController::class, 'update']);
-            Route::delete('/{id}', [JurnalController::class, 'destroy']);
-        });
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/pakan', [PakanController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/pakan', [PakanController::class, 'store']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/pakan/{id}', [PakanController::class, 'showDetail']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/pakan/detail', [PakanController::class, 'storeDetailPembelianPakan']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/pakan/satuan', [PakanController::class, 'storeSatuan']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/pakan/pembelian', [PakanController::class, 'storePembelianPakan']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/pakan/operasional', [PakanController::class, 'storeOperasional']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/pakan/{pembelianPakan}', [PakanController::class, 'invoice']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/pakan/{pembelianPakan}/invoice', [PakanController::class, 'invoice']);
 
 
-        // Sapi
-        Route::prefix('sapi')->group(function () {
-            Route::get('/', [SapiController::class, 'index']);
-            Route::get('/{sapi}', [SapiController::class, 'show']);
-
-            // Route::post('/', [SapiController::class, 'store']);
-            Route::put('/{sapi}/ambil', [SapiController::class, 'setAmbilSapi']);
-            Route::put('/{id}', [SapiController::class, 'update']);
-            // Route::delete('/{id}', [SapiController::class, 'destroy']);
-
-        });
-
-        // prive
-        Route::prefix('prive')->group(function () {
-            Route::get('/', [PriveController::class, 'index']);
-            Route::post('/', [PriveController::class, 'store']);
-        });
-
-        // Pakan
-        Route::prefix('pakan')->group(function () {
-            Route::get('/', [PakanController::class, 'index']);
-            Route::post('/', [PakanController::class, 'store']);
-
-            Route::get('/{id}', [PakanController::class, 'showDetail']);
-            Route::post('/detail', [PakanController::class, 'storeDetailPembelianPakan']);
-            Route::post('/satuan', [PakanController::class, 'storeSatuan']);
-            Route::post('/pembelian', [PakanController::class, 'storePembelianPakan']);
-            Route::post('/operasional', [PakanController::class, 'storeOperasional']);
-            Route::post('/{pembelianPakan}', [PakanController::class, 'invoice']);
-            Route::post('/{pembelianPakan}/invoice', [PakanController::class, 'invoice']);
-        });
-
-
-
-        // USER
-        Route::prefix('user')->group(function () {
-            Route::get('/{role}', [UserController::class, 'index']);
-            Route::get('/{id}/detail', [UserController::class, 'show']);
-            Route::get('/{id}/detail/akuntan', [UserController::class, 'showLogActivity']);
-
-            // customer
-            Route::get('/{idUser}/piutang/{idDebit}', [UserController::class, 'showPiutang']);
-
-            // supplier sapi / pakan
-            Route::get('/{idUser}/hutang/{idKredit}', [UserController::class, 'showHutang']);
-
-
-            Route::post('/', [UserController::class, 'store']);
-            Route::put('/{id}', [UserController::class, 'update']);
-            Route::delete('/{id}', [UserController::class, 'destroy']);
-        });
-
-        // Pemakaian pakan
-        Route::prefix('pemakaian_pakan')->group(function () {
-            Route::get('/', [PemakaianPakanController::class, 'index']);
-            Route::get('/create', [PemakaianPakanController::class, 'create']);
-            Route::get('/{pemakaianPakan}', [PemakaianPakanController::class, 'show']);
-
-            Route::post('/', [PemakaianPakanController::class, 'store']);
-        });
-
-        // invoice
-        Route::post('invoice/print', [InvoiceController::class, 'print']);
-    });
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/hutang', function () {
+    return "hutang baru";
 });
 
-// rute biasa==================================
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/user/', function () {
+    return "user baru";
+});
 
+
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/user/{role}', [UserController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/user/{id}/detail', [UserController::class, 'show']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/user/{id}/detail/akuntan', [UserController::class, 'showLogActivity']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/user/{idUser}/piutang/{idDebit}', [UserController::class, 'showPiutang']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/user/{idUser}/hutang/{idKredit}', [UserController::class, 'showHutang']);
+// Route::middleware(['auth', 'role:Accounting'])->post('/acc/user/', [UserController::class, 'store']);
+Route::middleware(['auth', 'role:Accounting'])->put('/acc/user/{id}', [UserController::class, 'update']);
+Route::middleware(['auth', 'role:Accounting'])->delete('/acc/user/{id}', [UserController::class, 'destroy']);
+
+
+
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/pemakaian_pakan', [PemakaianPakanController::class, 'index']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/pemakaian_pakan/create', [PemakaianPakanController::class, 'create']);
+Route::middleware(['auth', 'role:Accounting'])->get('/acc/pemakaian_pakan/{pemakaianPakan}', [PemakaianPakanController::class, 'show']);
+Route::middleware(['auth', 'role:Accounting'])->post('/acc/pemakaian_pakan', [PemakaianPakanController::class, 'store']);
+
+Route::post('/acc/invoice/print', [InvoiceController::class, 'print']);
+
+
+// rute biasa==================================
 Route::middleware('auth')->group(function () {
     Route::post('/changepass', [LoginController::class, 'changePassword']);
     Route::post('/logout', [LoginController::class, 'logout']);
