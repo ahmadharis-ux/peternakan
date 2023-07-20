@@ -39,8 +39,7 @@ class AccountingController extends Controller
             'totalSaldo' => Rekening::getTotalSaldo(),
             'jumlahNilaiPembelianPakan' => DetailPembelianPakan::jumlahNilaiPembelianPakan(),
             'jumlahNilaiPemakaianPakan' => DetailPemakaianPakan::jumlahNilaiPemakaianPakan(),
-            'dataGrafikTransaksi' => Kas::getDataGrafikTransaksi($request),
-
+            'dataGrafikTransaksi' => Kas::getDataGrafikTransaksi($request)
         ];
 
         return view('accounting.index', $pageData);
@@ -48,18 +47,20 @@ class AccountingController extends Controller
 
     function kas()
     {
-        $historiKas = Kas::getHistoryTransaksi();
-        return $historiKas;
+        $historiTransaksi = Kas::getHistoryTransaksi();
+
+        // return $historiTransaksi;
 
         $pageData = [
             'title' => 'Buku - Kas',
             'heading' => 'Accounting',
             'active' => 'buku',
             'listRekening' => Rekening::all(),
-            'historiKas' => $historiKas,
+            'historiTransaksi' => $historiTransaksi,
             'listSupplierSapi' => User::getSupplierSapi(),
             'listCustomer' => User::getCustomer(),
-
+            'listPekerja' => User::getPekerja(),
+            'listSupplierPakan' => User::getSupplierPakan(),
         ];
 
         return view('accounting.kas.index', $pageData);

@@ -1,5 +1,9 @@
 @extends('layouts.main')
 @section('container')
+    <div class="alert alert-warning text-center">
+        This page is still under construction
+    </div>
+
     <section class="section dashboard">
 
         <!-- Recent Sales -->
@@ -10,7 +14,7 @@
                     <h5 class="card-title">Kas</h5>
                     <div class="row">
                         <div class="col-sm">
-
+                            {{-- btn pilih jenis transaksi --}}
                         </div>
 
                         {{-- table rekening --}}
@@ -24,7 +28,9 @@
                     <hr>
 
                     {{-- table list kas --}}
-                    @include('accounting.kas.tableListKas')
+                    {{-- @include('accounting.kas.tableListKas') --}}
+                    @include('accounting.kas.tableHistoriTransaksi')
+
 
                 </div>
 

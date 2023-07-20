@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('container')
     <section class="section dashboard">
+
         <div class="row">
 
             <!-- Left side columns -->
@@ -25,19 +26,18 @@
                     </div>
 
                     <!-- Piutang Card -->
-                    <div class="d-none col-xxl-8 col-md-6">
-                        <a href="/acc/rincian_piutang">
-                            <div class="card info-card revenue-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Piutang</h5>
-                                    <div class="d-flex align-items-center">
-                                        <div class="ps-3">
-                                            <h6>Rp {{ number_format($totalPiutang) }}</h6>
-                                        </div>
+                    <div class="col-xxl-8 col-md-6">
+                        {{-- <a href="/acc/rincian_piutang"> --}}
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Piutang</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="ps-3">
+                                        <h6>Rp {{ number_format($totalPiutang) }}</h6>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
 
                     </div>
 
