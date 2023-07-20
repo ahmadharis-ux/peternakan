@@ -100,7 +100,7 @@ class Kas extends Model
         $kasView = $listKas->map(function ($kas) {
             $category = $kas->is_kredit ? 'kredit' : 'debit';
 
-            $kas->pihakKedua = $kas[$category]->pihakKedua->nama_depan;
+            $kas->pihakKedua = $kas[$category]->pihakKedua->fullname();
             $kas->jurnal = $kas[$category]->jurnal->nama;
             $kas->keterangan = $kas[$category]->keterangan;
             $kas->nominal = $kas[$category]->nominal;
@@ -121,7 +121,7 @@ class Kas extends Model
         $query = "SELECT
                     id,
                     id_author,
-                    -- id_pihak_kedua,
+                    id_pihak_kedua,
                     id_kredit,
                     null as id_debit,
                     id_rekening,
@@ -135,7 +135,7 @@ class Kas extends Model
                 SELECT
                     id,
                     id_author,
-                    -- id_pihak_kedua,
+                    id_pihak_kedua,
                     null as id_kredit,
                     id_debit,
                     id_rekening,
@@ -150,43 +150,54 @@ class Kas extends Model
 
         $histori = collect(DB::select($query));
 
+        // set isKredit boolean
+        $histori->each(function ($h) {
+            $h->isKredit = $h->id_kredit != null;
+        });
+
+
+
         $listIdAuthor = $histori->map(function ($h) {
             return $h->id_author;
         })->unique();
 
-        $listIdPihakKedua = $histori->map(function ($h) {
-            return $h->id_pihak_kedua;
-        })->unique();
+        // $listIdPihakKedua = $histori->map(function ($h) {
+        //     return $h->id_pihak_kedua;
+        // })->unique();
 
-        $listIdUser = $listIdAuthor->concat($listIdPihakKedua);
+        $listIdUser = $listIdAuthor;
+        // ->concat($listIdPihakKedua);
+
         $listUser = collect(User::whereIn('id', $listIdUser)->get());
+
+        // return $listUser;
 
         $listDebit = collect(Debit::all());
         $listKredit = collect(Kredit::all());
 
         // set author, pihak kedua, debit, kredit, jurnal
-        $histori->each(function ($h) use ($listUser, $listDebit, $listKredit) {
-            $author = $listUser->where('id', $h->id_author)->first();
-            $pihakKedua = $listUser->where('id', $h->id_pihak_kedua)->first();
+        // $histori->each(function ($h) use ($listUser, $listDebit, $listKredit) {
+        //     $author = $listUser->where('id', $h->id_author)->first();
+        //     $pihakKedua = $listUser->where('id', $h->id_pihak_kedua)->first();
 
-            $h->author = $author;
-            $h->pihakKedua = $pihakKedua;
-            // User::getFullname($h->pihakKedua);
+        //     $h->author = $author;
+        //     $h->pihakKedua = $pihakKedua;
+        //     // User::getFullname($h->pihakKedua);
 
-            $h->isKredit = isset($h->id_kredit);
+        //     $h->isKredit = isset($h->id_kredit);
 
-            if ($h->isKredit) {
-                $h->kredit = $listKredit->where('id', $h->id_kredit)->first();
-                $h->jurnal = $h->kredit->jurnal;
-                $idKredit = $h->kredit->id;
-                $h->linkDetail = "/acc/piutang/$idKredit";
-            } else {
-                $h->debit = $listDebit->where('id', $h->id_debit)->first();
-                $h->jurnal = $h->debit->jurnal;
-                $idDebit = $h->debit->id;
-                $h->linkDetail = "/acc/piutang/$idDebit";
-            }
-        });
+        //     if ($h->isKredit) {
+        //         $h->kredit = $listKredit->where('id', $h->id_kredit)->first();
+        //         $h->jurnal = $h->kredit->jurnal;
+        //         $idKredit = $h->kredit->id;
+        //         $h->linkDetail = "/acc/piutang/$idKredit";
+        //     } else {
+        //         $h->debit = $listDebit->where('id', $h->id_debit)->first();
+        //         $h->jurnal = $h->debit->jurnal;
+        //         $idDebit = $h->debit->id;
+        //         $h->linkDetail = "/acc/piutang/$idDebit";
+        //     }
+        // });
 
         return $histori;
     }

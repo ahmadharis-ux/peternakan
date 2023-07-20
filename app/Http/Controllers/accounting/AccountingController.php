@@ -49,6 +49,7 @@ class AccountingController extends Controller
     function kas()
     {
         $historiKas = Kas::getHistoryTransaksi();
+        return $historiKas;
 
         $pageData = [
             'title' => 'Buku - Kas',

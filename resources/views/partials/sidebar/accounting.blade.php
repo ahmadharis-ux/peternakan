@@ -20,6 +20,11 @@
             <a href="/acc/kas" class="{{ $title == 'Buku - Kas' ? 'active' : '' }}">
                 <i class="bi bi-circle"></i><span>Kas</span>
             </a>
+            {{-- <a onclick="alert('under construction')" href="#"
+                class="{{ $title == 'Buku - Kas' ? 'active' : '' }}">
+                <i class="bi bi-circle"></i><span>Kas</span>
+            </a> --}}
+
         </li>
         <li>
             <a href="/acc/hutang" class="{{ $title == 'Buku - Hutang' ? 'active' : '' }}">

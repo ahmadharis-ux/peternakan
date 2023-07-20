@@ -1,7 +1,3 @@
-<p>
-</p>
-
-
 <table id="example" class="display" style="width:100%">
     <thead>
         <tr>
@@ -21,12 +17,18 @@
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $kas->created_at }}</td>
-                <td>{{ $kas->pihakKedua->fullname() }}</td>
+                <td>{{ $kas->pihakKedua }}</td>
                 <td>{{ $kas->keterangan }}</td>
-                <td class="text-end">{{ number_format($kas->isKredit ? 0 : $kas->nominal) }}</td>
-                <td class="text-end">{{ number_format($kas->isKredit ? $kas->nominal : 0) }}</td>
-                <td>???</td>
-                <td>{{ $kas->jurnal->nama }}</td>
+
+                {{-- debit --}}
+                <td class="text-end">{{ number_format($kas->is_kredit ? 0 : $kas->nominal) }}</td>
+
+                {{-- kredit --}}
+                <td class="text-end">{{ number_format($kas->is_kredit ? $kas->nominal : 0) }}</td>
+
+
+                <td>[saldo]</td>
+                <td>{{ $kas->jurnal }}</td>
                 <td>
                     <a href="{{ $kas->linkDetail }}" class="btn btn-sm btn-primary"><span><i
                                 class="bi-eye-fill"></i></span></a>
