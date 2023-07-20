@@ -119,11 +119,31 @@ class Kas extends Model
         // hampura heeh, skema urang asa ruwet kieu. kudu make sql manual sagala wkwkwk
 
         $query = "SELECT
-                    id, id_author, id_pihak_kedua, id_kredit, null as id_debit, id_rekening, nominal, keterangan, adm, created_at, updated_at
+                    id,
+                    id_author,
+                    -- id_pihak_kedua,
+                    id_kredit,
+                    null as id_debit,
+                    id_rekening,
+                    nominal,
+                    keterangan,
+                    adm,
+                    created_at,
+                    updated_at
                     FROM transaksi_kredits
                 UNION ALL
                 SELECT
-                    id, id_author, id_pihak_kedua, null as id_kredit, id_debit, id_rekening, nominal, keterangan, null as adm, created_at, updated_at
+                    id,
+                    id_author,
+                    -- id_pihak_kedua,
+                    null as id_kredit,
+                    id_debit,
+                    id_rekening,
+                    nominal,
+                    keterangan,
+                    null as adm,
+                    created_at,
+                    updated_at
                 FROM transaksi_debits
 
                 ORDER BY created_at";
