@@ -201,6 +201,8 @@ class PakanController extends Controller
         $timestamp = str_replace(['-', ':', ' '], [""], Carbon::now()->toDateTimeString());
         $nomorFaktur = "INV_" . $timestamp;
 
+        $today = str_replace('-', '/', Carbon::today()->toDateString());
+
         $pageData = [
             "title" => "Invoice pembelian pakan $pembelianPakan->id",
             "pembelianPakan" => $pembelianPakan,
@@ -209,8 +211,8 @@ class PakanController extends Controller
             "author" => auth()->user(),
             "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
-            "tanggalCetak" => Carbon::now()->isoFormat('D MMMM, Y'),
-            "today" => str_replace('-', '/', Carbon::today()->toDateString()),
+            "tanggalCetak" => $today,
+            "tanggalDibuat" => $today,
         ];
 
         $fakturBaru = [

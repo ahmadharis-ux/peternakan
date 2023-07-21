@@ -183,6 +183,7 @@ class PembelianSapiController extends Controller
         $timestamp = str_replace(['-', ':', ' '], [""], Carbon::now()->toDateTimeString());
         $nomorFaktur = "INV_" . $timestamp;
 
+        $today = str_replace('-', '/', Carbon::today()->toDateString());
 
         $pageData = [
             "title" => "Invoice pembelian sapi $pembelianSapi->id",
@@ -192,8 +193,8 @@ class PembelianSapiController extends Controller
             "author" => auth()->user(),
             "nomorFaktur" => $nomorFaktur,
             "jatuhTempo" => str_replace('-', '/', $request->jatuh_tempo),
-            "tanggalCetak" => Carbon::now()->isoFormat('D MMMM, Y'),
-            "today" => str_replace('-', '/', Carbon::today()->toDateString()),
+            "tanggalCetak" => $today,
+            "tanggalDibuat" => $today,
 
         ];
 

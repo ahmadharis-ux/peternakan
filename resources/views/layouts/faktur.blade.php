@@ -70,7 +70,12 @@
 
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">Tanggal</span>
-                        <span>{{ $today }}</span>
+                        <span>{{ $tanggalDibuat }}</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold">Tanggal cetak</span>
+                        <span>{{ $tanggalCetak }}</span>
                     </div>
 
                     <div class="d-flex justify-content-between">
@@ -196,8 +201,7 @@
                     <div class="d-flex flex-column justify-content-start align-items-center">
                         <span class="fw-bold"> {{ $tanggalCetak }}</span>
                         <div>
-                            <img src="{{ asset(Storage::url(auth()->user()->foto_ttd)) }}" width="150px"
-                                class="my-3">
+                            <img src="/foto_ttd/{{ auth()->user()->id }}" width="150px" class="my-3">
                         </div>
                         <span class="fw-bold"> {{ $author->fullname() }}</span>
                     </div>

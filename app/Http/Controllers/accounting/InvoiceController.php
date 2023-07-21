@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\accounting;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Debit;
 use App\Models\Faktur;
@@ -9,8 +10,8 @@ use App\Models\Kredit;
 use Hamcrest\Core\IsNot;
 use Illuminate\Http\Request;
 use App\Models\TransaksiDebit;
-use App\Models\TransaksiKredit;
 
+use App\Models\TransaksiKredit;
 use App\Models\DetailPembelianSapi;
 use App\Models\DetailPenjualanSapi;
 use App\Http\Controllers\Controller;
@@ -28,12 +29,7 @@ class InvoiceController extends Controller
 
         $faktur = Faktur::where('nomor_faktur', $nomorFaktur)->first();
 
-
-
         $fakturPageData = (json_decode($faktur->page_data, false));
-
-        // $debit = Debit::find($faktur->id_debit);
-        // $kredit = Kredit::find($faktur->id_kredit);
 
         $debit = $fakturPageData->debit ?? null;
         if ($debit !== null) {
@@ -140,6 +136,8 @@ class InvoiceController extends Controller
             $pembelianPakan->operasionalPembelianPakan = $listOperasionalPembelianPakan;
         }
 
+        $today = str_replace('-', '/', Carbon::today()->toDateString());
+
         $pageData = [
             "title" => $fakturPageData->title,
             "subjek" => $faktur->subjek,
@@ -151,13 +149,10 @@ class InvoiceController extends Controller
             "author" => User::find($faktur->id_author),
             "nomorFaktur" => $faktur->nomor_faktur,
             "jatuhTempo" => $fakturPageData->jatuhTempo,
-            "tanggalCetak" => $fakturPageData->tanggalCetak,
+            "tanggalCetak" => $today,
+            "tanggalDibuat" => $$fakturPageData->tanggalDibuat,
+
         ];
-
-
-        // return ($fakturPageData->penjualanSapi);
-
-
 
 
         if ($penjualanSapi !== null) {

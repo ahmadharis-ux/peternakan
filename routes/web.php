@@ -36,6 +36,7 @@ use App\Http\Controllers\accounting\PenggajianController;
 use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
+use App\Http\Controllers\FileController;
 use App\Models\Sapi;
 
 /*
@@ -72,6 +73,10 @@ Route::get('/testa', function (Request $request) {
 Route::get('/welcome', function (Request $request) {
     return view('welcome');
 });
+
+// fotoan atuh browww
+Route::get('/foto_profil/{user}', [FileController::class, 'getProfilePic']);
+Route::get('/foto_ttd/{user}', [FileController::class, 'getFotoTtd']);
 
 // ================================ OWNER
 Route::middleware(['auth', 'role:Owner'])->prefix('owner')->group(function () {

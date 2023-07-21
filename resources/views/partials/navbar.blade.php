@@ -15,7 +15,7 @@
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
 
-                    <img src="{{ auth()->user()->get_profil_pic() }}" class="img-cropped rounded-circle"
+                    <img src="/foto_profil/{{ auth()->user()->id }}" class="img-cropped rounded-circle"
                         style="width: 35px; height: 35px;"alt="Profile">
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->fullname() }}</span>
                 </a><!-- End Profile Iamge Icon -->

@@ -113,8 +113,6 @@ class UserController extends Controller
         $listTransaksiDebitDihandle = TransaksiDebit::where('id_author', $idUser)->get();
         $listTransaksiKreditDihandle = TransaksiKredit::where('id_author', $idUser)->get();
 
-        // return $listFakturDihandle;
-
         $pageData = [
             'title' => 'User - ' . $role,
             'heading' => $user->fullname,
