@@ -146,11 +146,16 @@
 
                 const maxQty = stok.stok
 
-                let input = $(this).val()
+                let input = parseInt($(this).val());
 
                 if (input > maxQty) {
                     $(this).val(maxQty)
                     input = maxQty
+                }
+
+                if (input < 1 || isNaN(input)) {
+                    $(this).val()
+                    input = 0
                 }
 
                 nominal = input * stok.harga
@@ -172,7 +177,7 @@
                 updateMarkup()
             }
 
-            // $(inputSetQty).keyup(handleChangeQty)
+            $(inputSetQty).keyup(handleChangeQty)
             $(inputSetQty).change(handleChangeQty)
             $(cbPilih).change(handleTogglePakan)
 
@@ -223,7 +228,7 @@
                 const markup = $("input[name=markup]").val()
 
                 const pekerja = $("select[name=id_pekerja]").val()
-                console.log(pekerja)
+                // console.log(pekerja)
 
                 const valid = markup > 0 && pekerja != null
 
