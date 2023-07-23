@@ -29,6 +29,6 @@ class DetailPemakaianPakan extends Model
     }
     public static function jumlahNilaiPemakaianPakan()
     {
-        return DetailPemakaianPakan::all()->sum('subtotal');
+        return DetailPemakaianPakan::sum('subtotal');
     }
 }

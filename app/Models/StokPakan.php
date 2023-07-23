@@ -13,7 +13,7 @@ class StokPakan extends Model
     ];
     // protected $fillable = ['harga', 'qty'];
 
-    protected $with = ['pakan', 'satuanPakan'];
+    protected $with = ['pakan', 'satuanPakan', 'sisaStok'];
 
     function pakan()
     {
@@ -32,5 +32,10 @@ class StokPakan extends Model
     function getSisaPakan()
     {
         return StokPakan::all()->sum('stok');
+    }
+
+    function sisaStok()
+    {
+        return $this->stok - $this->detailPemakaianPakan->sum('qty');
     }
 }

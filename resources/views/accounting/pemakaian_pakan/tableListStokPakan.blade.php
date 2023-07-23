@@ -1,13 +1,17 @@
 {{-- {{ $listStokPakan }} --}}
 <h5>Pilih pakan</h5>
 
-<table id="example" class="display " style="width:100%">
+{{-- @foreach ($listStokPakan as $item)
+    <p class="mb-5">{{ $item }}</p>
+@endforeach --}}
+
+<table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col"></th>
             <th scope="col">#</th>
             <th scope="col">Jenis</th>
-            <th scope="col">Stok</th>
+            <th scope="col">Sisa stok</th>
             <th scope="col">Harga</th>
             <th scope="col">Qty</th>
             <th scope="col">Satuan</th>
@@ -23,10 +27,10 @@
                 </td>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $stokPakan->pakan->nama }}</td>
-                <td>{{ $stokPakan->stok - $stokPakan->detailPemakaianPakan->sum('qty') }}</td>
+                <td class="fw-bold">{{ $stokPakan->sisaStok() }}</td>
                 <td class="text-end">Rp {{ number_format($stokPakan->harga) }}</td>
                 <td>
-                    <input type="number" class="form-control inputSetQty" style="width:6rem" min="0"
+                    <input type="number" class="form-control" style="width:6rem" min="0"
                         max="{{ $stokPakan->stok - $stokPakan->detailPemakaianPakan->sum('qty') }}"
                         data-id-stok="{{ $stokPakan->id }}" name="qty_pakan[]" id="inputQty-{{ $stokPakan->id }}"
                         disabled>

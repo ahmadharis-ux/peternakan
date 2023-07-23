@@ -36,6 +36,7 @@ use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
 use App\Http\Controllers\FileController;
+use App\Models\DetailPemakaianPakan;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +66,10 @@ Route::get('/home', function () {
 
 
 // testpage
-Route::get('/testa', function (Request $request) {
+Route::get('/test', function (Request $request) {
+
+    // return DetailPemakaianPakan::all()->sum('subtotal');
+    return DetailPemakaianPakan::sum('subtotal');
 });
 
 Route::get('/welcome', function (Request $request) {

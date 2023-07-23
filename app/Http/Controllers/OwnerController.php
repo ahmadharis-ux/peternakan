@@ -24,16 +24,14 @@ class OwnerController extends Controller
 {
     function index()
     {
-        $aa = new DetailPembelianPakan();
-        $a = $aa->jumlahNilaiPembelianPakan();
-        $bb = new DetailPemakaianPakan();
-        $b = $bb->jumlahNilaiPemakaianPakan();
+        $a = DetailPembelianPakan::jumlahNilaiPembelianPakan();
+        $b = DetailPemakaianPakan::jumlahNilaiPemakaianPakan();
         $tanggalIni = Carbon::now()->format('Y-m-d');
         $kredit = TransaksiKredit::whereDate('created_at', $tanggalIni)->get();
         $debit = TransaksiDebit::whereDate('created_at', $tanggalIni)->get();
 
         $semuaTransaksi = $kredit->concat($debit)->sortByDesc('created_at');
-        
+
         $pageData = [
             'title' => 'Dashboard - Owner',
             'heading' => 'owner',

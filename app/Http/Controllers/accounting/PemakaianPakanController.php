@@ -34,10 +34,13 @@ class PemakaianPakanController extends Controller
             'heading' => "Pemakaian pakan baru",
             'active' => "operasional kandang",
             'listPemakaianPakan' => PemakaianPakan::all(),
-            'listStokPakan' => StokPakan::all(),
+            'listStokPakan' => StokPakan::where('stok', '>', 0)->get(),
             'listSapi' => Sapi::getSapiTersedia(),
             'listPekerja' => User::getPekerja(),
         ];
+
+        // return StokPakan::where('stok', '>', 0)->get();?
+
         return view('accounting.pemakaian_pakan.create', $pageData);
     }
 

@@ -36,6 +36,6 @@ class DetailPembelianPakan extends Model
 
     public static function jumlahNilaiPembelianPakan()
     {
-        return DetailPembelianPakan::all()->sum('subtotal');
+        return DetailPembelianPakan::sum('subtotal');
     }
 }
