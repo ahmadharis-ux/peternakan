@@ -20,7 +20,6 @@ class PenggajianController extends Controller
             'heading' => "Buku - Gaji",
             'active' => "buku",
             'listPekerja' => User::getPekerja(),
-
         ];
 
         return view('accounting.penggajian.index', $pageData);
@@ -56,7 +55,6 @@ class PenggajianController extends Controller
         $idJurnalGaji = 4;
 
         $pekerja = User::find($id);
-        $pekerja->fullname = "$pekerja->nama_depan $pekerja->nama_belakang";
 
         $listKreditPenggajian = Kredit::where('id_pihak_kedua', $pekerja->id)
             ->where('id_jurnal', $idJurnalGaji);
@@ -66,14 +64,17 @@ class PenggajianController extends Controller
             ->whereYear('created_at', Carbon::now()->year)->get();
 
 
+        $listKreditPenggajian = $listKreditPenggajian->get();
+
         $pageData = [
             'title' => "Buku - Gaji",
             'heading' => "Buku - Gaji",
             'active' => "buku",
             'pekerja' => $pekerja,
-            'listKreditPenggajian' => $listKreditPenggajian->get(),
+            'listKreditPenggajian' => $listKreditPenggajian,
             'penggajianBulanIni' => $penggajianBulanIni,
         ];
+
 
         return view('accounting.penggajian.indexPenggajianPekerja', $pageData);
     }

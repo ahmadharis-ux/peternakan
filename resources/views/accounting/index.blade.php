@@ -7,7 +7,6 @@
             <!-- Left side columns -->
             <div class="col-lg-8">
                 <div class="row">
-
                     <!-- Hutang Card -->
                     <div class="col-xxl-8 col-md-6">
                         <a href="/acc/rincian_hutang">
@@ -38,12 +37,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <!-- Saldo Card -->
-                    <a href="acc/total_saldo">
-                        <div class="col-xxl-8 col-xl-12">
+                    <div class="col-xxl-8 col-md-6">
+                        <a href="acc/total_saldo">
                             <div class="card info-card customers-card">
                                 <div class="card-body">
                                     <h5 class="card-title">Total Saldo</h5>
@@ -56,8 +54,24 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+
+                    <!-- Stok Sapi Card -->
+                    <div class="col-xxl-8 col-md-6">
+                        <a href="/acc/sapi">
+                            <div class="card info-card customers-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Stok Sapi</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="ps-3">
+                                            <h6>{{ $stokSapi }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                     <hr>
 
                     <!-- Total Pakan Card -->
@@ -76,24 +90,6 @@
 
                             </div>
                         </a>
-                    </div>
-
-                    <!-- Stok Sapi Card -->
-                    <div class="col-xxl-4 col-xl-12">
-                        <a href="/acc/sapi">
-                            <div class="card info-card customers-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Stok Sapi</h5>
-                                    <div class="d-flex align-items-center">
-                                        <div class="ps-3">
-                                            <h6>{{ $stokSapi }}</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-
                     </div>
 
                 </div>

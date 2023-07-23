@@ -6,7 +6,7 @@
             <th scope="col">Keterangan</th>
             <th scope="col">Penerima</th>
             <th scope="col">Nominal</th>
-            {{-- <th scope="col">Saldo</th> --}}
+            <th scope="col">Adm</th>
             {{-- <th scope="col">Jurnal</th> --}}
         </tr>
     </thead>
@@ -18,6 +18,7 @@
                 <td>{{ $tabungan->keterangan }}</td>
                 <td>{{ $tabungan->pihakKedua->fullname() }}</td>
                 <td><span class="text-secondary text-end">Rp</span> {{ number_format($tabungan->nominal) }}</td>
+                <td><span class="text-secondary text-end">Rp</span> {{ number_format($tabungan->adm) }}</td>
 
             </tr>
         @endforeach

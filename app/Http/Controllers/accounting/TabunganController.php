@@ -66,6 +66,7 @@ class TabunganController extends Controller
             "id_kredit" => Kredit::idTerakhir(),
             "id_rekening" => $idRekening,
             "nominal" => $nominalBayar,
+            "id_pihak_kedua" => $request->id_pihak_kedua,
             "keterangan" => $request->keterangan,
             "adm" => $adm,
 

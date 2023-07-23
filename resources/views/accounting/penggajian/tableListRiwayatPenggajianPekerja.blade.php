@@ -7,18 +7,24 @@
             <th scope="col">Keterangan</th>
             <th scope="col">Nominal</th>
             <th scope="col">Tunai</th>
+            <th scope="col">Sisa</th>
             <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
         @foreach ($listKreditPenggajian as $kredit)
+            @php
+                $gajiTerbayar = $kredit->transaksiKredit->sum('nominal');
+            @endphp
+
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $kredit->created_at }}</td>
                 <td>{{ $kredit->pihakKedua->fullname() }}</td>
                 <td>{{ $kredit->keterangan }}</td>
                 <td>Rp {{ number_format($kredit->nominal) }}</td>
-                <td>[nominal]</td>
+                <td>Rp {{ number_format($gajiTerbayar) }}</td>
+                <td>Rp {{ number_format($kredit->nominal - $gajiTerbayar) }}</td>
                 <td>
                     <a href="/acc/gaji/{{ $kredit->id }}" class="btn btn-primary">
                         <div class="icon">

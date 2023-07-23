@@ -82,7 +82,6 @@
                                 <div id="saldo"></div>
                             </div>
 
-
                             <div class="d-flex justify-content-between flex-row">
                                 <div class="text-secondary">Nominal pengeluaran</div>
                                 <div id="nominalPengeluaran">0 </div>
@@ -139,12 +138,6 @@
 
         function setDisplayAngka(nominal, adm) {
 
-
-            // console.log(
-            //     nominal,
-            //     adm,
-            // );
-
             $total = `Rp ${nominal+adm}`;
 
             $("#nominalPengeluaran").text(nominal)
@@ -198,7 +191,6 @@
             btnSimpan.removeAttr('disabled')
             btnSimpan.text('Simpan')
             $("#totalPengeluaran").removeClass('text-danger')
-
 
             // inputNominal.removeClass('is-invalid')
         }
