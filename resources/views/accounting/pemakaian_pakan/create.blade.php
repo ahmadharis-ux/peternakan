@@ -172,7 +172,7 @@
                 updateMarkup()
             }
 
-            $(inputSetQty).keyup(handleChangeQty)
+            // $(inputSetQty).keyup(handleChangeQty)
             $(inputSetQty).change(handleChangeQty)
             $(cbPilih).change(handleTogglePakan)
 

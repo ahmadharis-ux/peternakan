@@ -6,6 +6,7 @@
             <th scope="col">Keterangan</th>
             <th scope="col">Pelaku</th>
             <th scope="col">Nominal</th>
+            <th scope="col">Adm</th>
             {{-- <th scope="col">Saldo</th> --}}
             {{-- <th scope="col">Jurnal</th> --}}
         </tr>
@@ -18,6 +19,7 @@
                 <td>{{ $prive->keterangan }}</td>
                 <td>{{ $prive->pihakKedua->fullname() }}</td>
                 <td><span class="text-secondary text-end">Rp</span> {{ number_format($prive->nominal) }}</td>
+                <td><span class="text-secondary text-end">Rp</span> {{ number_format($prive->adm) }}</td>
 
             </tr>
         @endforeach

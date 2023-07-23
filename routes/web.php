@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\Kredit;
 use Illuminate\Http\Request;
 
-use App\Models\PembelianSapi;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Storage;
@@ -37,7 +36,6 @@ use App\Http\Controllers\accounting\PembelianSapiController;
 use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
 use App\Http\Controllers\FileController;
-use App\Models\Sapi;
 
 /*
 |--------------------------------------------------------------------------

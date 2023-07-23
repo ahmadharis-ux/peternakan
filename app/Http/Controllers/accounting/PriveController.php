@@ -25,13 +25,20 @@ class PriveController extends Controller
             'listRekening' => Rekening::all(),
         ];
 
+        // return Kredit::where('id_jurnal', 6)->get();
+
         return view('accounting.prive.index', $pageData);
     }
     function store(Request $request)
     {
         $idJurnalPrive = 6;
+
+        $nominalBayar = $request->nominal;
+        $adm = $request->adm;
+        $totalPengeluaran = $nominalBayar + $adm;
+
+
         Kas::kreditBaru();
-        $today = Carbon::now();
 
         $dataKreditPrive = [
             "id_kas" => Kas::idTerakhir(),
@@ -43,24 +50,25 @@ class PriveController extends Controller
             "adm" => $request->adm,
             "tenggat" => $request->tenggat,
             "lunas" => true,
-
         ];
+
+
 
         Kredit::create($dataKreditPrive);
         $idRekening = $request->id_rekening;
-        $nominalBayar = $request->nominal;
-        $adm = $request->adm;
         $dataTransaksiKredit = [
             "id_author" => auth()->user()->id,
             "id_kredit" => Kredit::idTerakhir(),
             "id_rekening" => $idRekening,
             "nominal" => $nominalBayar,
+            "id_pihak_kedua" => $request->id_pihak_kedua,
             "keterangan" => $request->keterangan,
             "adm" => $adm,
 
         ];
+
         TransaksiKredit::create($dataTransaksiKredit);
-        Rekening::pengeluaran($idRekening, $nominalBayar + $adm);
+        Rekening::pengeluaran($idRekening, $totalPengeluaran);
         return redirect()->back();
     }
 }

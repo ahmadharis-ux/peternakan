@@ -12,6 +12,7 @@
                 <div class="modal-body">
                     <div class="row mt-2 px-5">
 
+                        {{-- inputs --}}
                         <div class="col">
 
                             <div class="col-sm-12">
@@ -80,9 +81,23 @@
                                 <div class="text-secondary">Saldo</div>
                                 <div id="saldo"></div>
                             </div>
+
+
+                            <div class="d-flex justify-content-between flex-row">
+                                <div class="text-secondary">Nominal pengeluaran</div>
+                                <div id="nominalPengeluaran">0 </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between flex-row">
+                                <div class="text-secondary">Adm</div>
+                                <div id="nominalAdm">0</div>
+                            </div>
+
+                            <div class="d-flex justify-content-between flex-row">
+                                <div class="text-secondary">Total Pengeluaran</div>
+                                <div id="totalPengeluaran">0</div>
+                            </div>
                         </div>
-
-
 
                     </div>
                 </div>
@@ -99,6 +114,7 @@
     $(document).ready(function() {
         const btnSimpan = $("#btnSimpan")
         const inputNominal = $("input[name=nominal]")
+        const inputAdm = $("input[name=adm]")
 
         const listRekening = {!! $listRekening !!}
         const firstRekening = listRekening[0]
@@ -121,34 +137,92 @@
             $("#saldo").text(saldo)
         }
 
-        setSelectedRekening(firstRekening)
+        function setDisplayAngka(nominal, adm) {
 
+
+            // console.log(
+            //     nominal,
+            //     adm,
+            // );
+
+            $total = `Rp ${nominal+adm}`;
+
+            $("#nominalPengeluaran").text(nominal)
+            $("#nominalAdm").text(adm)
+            $("#totalPengeluaran").text($total)
+        }
+
+        function validasiNominalDanAdm() {
+            let nominal = parseInt($(inputNominal).val())
+            let adm = parseInt($(inputAdm).val())
+
+            console.log(nominal);
+
+            if (isNaN(nominal)) {
+                nominal = 0
+            }
+            if (isNaN(adm)) {
+                adm = 0
+            }
+
+            setDisplayAngka(nominal, adm);
+
+
+            const totalNominal = nominal + adm;
+
+            const nominalKosong = nominal < 1
+            const pengeluaranKegedeanBro = totalNominal > currentRekening.saldo
+            const invalidAtuh = nominalKosong || pengeluaranKegedeanBro;
+
+            console.log({
+                '1 nominalKosong': nominalKosong,
+                '2 kegedean': pengeluaranKegedeanBro,
+                '3 invalid': invalidAtuh,
+            });
+
+
+            if (invalidAtuh) {
+                btnSimpan.attr('disabled', 'disabled')
+                btnSimpan.text('Nominal tidak valid!')
+
+                $("#totalPengeluaran").addClass('text-danger')
+
+
+                // fitur tambahan jang ngke. wkwkw
+                // inputNominal.addClass('is-invalid')
+
+                return console.log('invalid');
+            }
+
+            console.log('valid');
+            btnSimpan.removeAttr('disabled')
+            btnSimpan.text('Simpan')
+            $("#totalPengeluaran").removeClass('text-danger')
+
+
+            // inputNominal.removeClass('is-invalid')
+        }
+
+
+        // inisialisasi
+        setSelectedRekening(firstRekening)
+        validasiNominalDanAdm()
+
+        // listeners
+        inputNominal.change(validasiNominalDanAdm)
+        inputNominal.keyup(validasiNominalDanAdm)
+        inputAdm.change(validasiNominalDanAdm)
+        inputAdm.keyup(validasiNominalDanAdm)
+
+        // ganti rekening
         $("select[name=id_rekening]").change(function() {
             const selectedRekeningId = $(this).val()
             const selectedRekening = listRekening.find((rekening) => rekening.id == selectedRekeningId)
 
             setSelectedRekening(selectedRekening)
+            validasiNominalDanAdm()
         })
 
-        inputNominal.keyup(function() {
-            const nominal = parseInt($(this).val())
 
-
-            const invalidNominal = nominal > currentRekening.saldo
-
-            if (invalidNominal) {
-                btnSimpan.attr('disabled', 'disabled')
-                btnSimpan.text('Nominal tidak valid!')
-
-                // inputNominal.addClasss('is-invalid')
-                console.log('invalid');
-            } else {
-                console.log('valid');
-                btnSimpan.removeAttr('disabled')
-                btnSimpan.text('Simpan')
-
-                inputNominal.removeClass('is-invalid')
-            }
-        })
     })
 </script>
