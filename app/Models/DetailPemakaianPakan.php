@@ -25,7 +25,7 @@ class DetailPemakaianPakan extends Model
 
     function stokPakan()
     {
-        return $this->belongsTo(StokPakan::class, 'id_pemakaian_pakan');
+        return $this->belongsTo(StokPakan::class, 'id_stok_pakan');
     }
     public static function jumlahNilaiPemakaianPakan()
     {

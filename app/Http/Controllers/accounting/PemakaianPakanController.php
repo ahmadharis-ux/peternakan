@@ -43,14 +43,12 @@ class PemakaianPakanController extends Controller
 
     public function store(Request $request)
     {
-        $today = Carbon::now();
 
         $pemakaianPakan = [
             "id_author" => auth()->user()->id,
             "id_pekerja" => $request->id_pekerja,
             "total_pengeluaran" => $request->total_pengeluaran,
             "keterangan" => $request->keterangan,
-
         ];
 
         PemakaianPakan::create($pemakaianPakan);
@@ -64,8 +62,6 @@ class PemakaianPakanController extends Controller
                 "id_stok_pakan" => $listIdStokPakanDipakai[$i],
                 "subtotal" =>  $request->subtotal_pakan[$i],
                 "qty" => $request->qty_pakan[$i],
-
-                // "keterangan" => $request->keterangan,
             ];
 
             DetailPemakaianPakan::create($detailPemakaianPakan);
@@ -89,8 +85,6 @@ class PemakaianPakanController extends Controller
 
     public function show(PemakaianPakan $pemakaianPakan)
     {
-        // return $pemakaianPakan;
-        $pekerja = User::find($pemakaianPakan->id_pekerja);
         $markup = $pemakaianPakan->markup[0]->markup;
         $markupPembulatan = $pemakaianPakan->markup[0]->markup_pembulatan;
 
@@ -104,8 +98,9 @@ class PemakaianPakanController extends Controller
             'pemakaianPakan' => $pemakaianPakan,
             'listDetailPemakaianPakan' => $pemakaianPakan->detailPemakaianPakan,
             'listMarkup' => $pemakaianPakan->markup,
-            'pekerja' => $pekerja,
+            'pekerja' => $pemakaianPakan->pekerja(),
         ];
+
 
         return view('accounting.pemakaian_pakan.detail', $pageData);
     }

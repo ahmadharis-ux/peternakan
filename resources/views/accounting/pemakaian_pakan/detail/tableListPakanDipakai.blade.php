@@ -1,6 +1,6 @@
 <h5>Pakan digunakan ({{ sizeof($listDetailPemakaianPakan) }})</h5>
 
-<table id="example" class="display " style="width:100%">
+<table id="example" class="display" style="width:100%">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -20,10 +20,10 @@
             <tr>
                 <td class="fw-bold">{{ $loop->iteration }}</td>
                 <td>{{ $stokPakan->pakan->nama }}</td>
-                <td class="text-end pe-5">Rp {{ number_format($stokPakan->harga) }}</td>
+                <td class="pe-5 text-end">Rp {{ number_format($stokPakan->harga) }}</td>
                 <td>{{ $detail->qty }}</td>
                 <td>{{ $stokPakan->satuanPakan->nama }}</td>
-                <td class="text-end pe-5">Rp {{ number_format($detail->subtotal) }}</td>
+                <td class="pe-5 text-end">Rp {{ number_format($detail->subtotal) }}</td>
             </tr>
         @endforeach
     </tbody>

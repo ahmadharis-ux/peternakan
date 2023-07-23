@@ -41,7 +41,7 @@ class PemakaianPakan extends Model
 
     function pekerja()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'id_pekerja')->first();
     }
 
     function markup()

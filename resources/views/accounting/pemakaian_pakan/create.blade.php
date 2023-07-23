@@ -24,11 +24,14 @@
             <div class="d-flex justify-content-between flex-row">
 
                 {{-- table pilih sapi --}}
-                <div class="card recent-sales overflow-auto">
-                    <div class="card-body p-3">
-                        @include('accounting.pemakaian_pakan.tablePilihSapi')
+                <div>
+                    <div class="card recent-sales overflow-auto">
+                        <div class="card-body p-3">
+                            @include('accounting.pemakaian_pakan.tablePilihSapi')
+                        </div>
                     </div>
                 </div>
+
 
                 <div style="width: 50%" class="d-flex flex-column">
                     <div>
@@ -59,6 +62,11 @@
                             <input type="hidden" name="total_pengeluaran">
                             <input type="hidden" name="markup">
                             <input type="hidden" name="markup_bulat">
+
+                            <div class="col-sm-12 my-3">
+                                <label for="">Keterangan</label>
+                                <textarea name="keterangan" class="form-control" placeholder="keterangan" id="" cols="30" rows="10">asdfadf</textarea>
+                            </div>
 
                             <div class="d-flex justify-content-end">
                                 <input class="btn btn-primary mt-3" type="submit" value="Simpan" disabled>
