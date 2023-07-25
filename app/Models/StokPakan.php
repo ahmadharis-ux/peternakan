@@ -13,7 +13,7 @@ class StokPakan extends Model
     ];
     // protected $fillable = ['harga', 'qty'];
 
-    protected $with = ['pakan', 'satuanPakan', 'sisaStok'];
+    protected $with = ['pakan', 'satuanPakan'];
 
     function pakan()
     {

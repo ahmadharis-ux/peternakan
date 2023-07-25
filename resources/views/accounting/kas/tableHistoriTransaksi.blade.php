@@ -29,7 +29,7 @@
                 <td class="text-end">{{ number_format($trx->isKredit ? $trx->nominal : 0) }}</td>
 
 
-                <td>[saldo]</td>
+                <td class="text-end">{{ number_format($trx->current_saldo) }}</td>
                 <td>{{ $trx->jurnal->nama }}</td>
                 <td>{{ $trx->author->fullname() }}</td>
                 <td>

@@ -14,6 +14,8 @@ use App\Models\SatuanPakan;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
 use App\Models\PembelianPakan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Models\DetailPembelianPakan;
 use App\Providers\PdfServiceProvider;
@@ -85,66 +87,83 @@ class PakanController extends Controller
     }
     function storePembelianPakan(Request $request)
     {
-        $idJurnalPakan = 3;
 
-        Kas::kreditBaru();
-        $dataKreditBaru = [
-            "id_kas" => Kas::idTerakhir(),
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $request->id_pihak_kedua,
-            "id_jurnal" => $idJurnalPakan,
-            "keterangan" => $request->keterangan,
-        ];
+        DB::beginTransaction();
+        try {
+            $idJurnalPakan = 3;
 
-        Kredit::create($dataKreditBaru);
+            Kas::kreditBaru();
+            $dataKreditBaru = [
+                "id_kas" => Kas::idTerakhir(),
+                "id_author" => auth()->user()->id,
+                "id_pihak_kedua" => $request->id_pihak_kedua,
+                "id_jurnal" => $idJurnalPakan,
+                "keterangan" => $request->keterangan,
+            ];
 
-        $dataPembelianPakanBaru = [
-            "id_author" => auth()->user()->id,
-            "id_kredit" => Kredit::idTerakhir(),
-        ];
+            Kredit::create($dataKreditBaru);
 
-        PembelianPakan::create($dataPembelianPakanBaru);
-        return redirect()->back();;
+            $dataPembelianPakanBaru = [
+                "id_author" => auth()->user()->id,
+                "id_kredit" => Kredit::idTerakhir(),
+            ];
+
+            PembelianPakan::create($dataPembelianPakanBaru);
+
+
+            DB::commit();
+            return redirect()->back()->with('success', "Pembelian pakan tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan pembelian pakan");
+        }
     }
     function storeDetailPembelianPakan(Request $request)
     {
-        // return $request;
+        DB::beginTransaction();
+        try {
 
-        $idpembelianPakan = $request->id_pembelian_pakan;
-        $idpakan = $request->id_pakan;
-        $id_satuan_pakan = $request->id_satuan_pakan;
-        $harga_satuan = $request->harga;
-        $qty = $request->qty;
-        $keterangan = $request->keterangan;
-        $subtotal = $harga_satuan * $qty;
+            $idpembelianPakan = $request->id_pembelian_pakan;
+            $idpakan = $request->id_pakan;
+            $id_satuan_pakan = $request->id_satuan_pakan;
+            $harga_satuan = $request->harga;
+            $qty = $request->qty;
+            $keterangan = $request->keterangan;
+            $subtotal = $harga_satuan * $qty;
 
-        $detailPembelianPakan = [
-            "id_pembelian_pakan" => $idpembelianPakan,
-            "id_pakan" => $idpakan,
-            "id_satuan_pakan" => $id_satuan_pakan,
-            "harga" => $harga_satuan,
-            "qty" => $qty,
-            "keterangan" => $keterangan,
-            "subtotal" => $subtotal,
-        ];
+            $detailPembelianPakan = [
+                "id_pembelian_pakan" => $idpembelianPakan,
+                "id_pakan" => $idpakan,
+                "id_satuan_pakan" => $id_satuan_pakan,
+                "harga" => $harga_satuan,
+                "qty" => $qty,
+                "keterangan" => $keterangan,
+                "subtotal" => $subtotal,
+            ];
 
-        DetailPembelianPakan::create($detailPembelianPakan);
+            DetailPembelianPakan::create($detailPembelianPakan);
 
-        $idKredit = PembelianPakan::find($idpembelianPakan)->kredit->id;
+            $idKredit = PembelianPakan::find($idpembelianPakan)->kredit->id;
 
-        Kredit::tambahNominal($idKredit, $subtotal);
-        Kredit::updateStatusLunas($idKredit);
+            Kredit::tambahNominal($idKredit, $subtotal);
+            Kredit::updateStatusLunas($idKredit);
 
-        $stokpakan = [
-            "id_pakan" => $idpakan,
-            "id_satuan_pakan" => $id_satuan_pakan,
-            "harga" => $harga_satuan,
-            "stok" => $qty,
-        ];
+            $stokpakan = [
+                "id_pakan" => $idpakan,
+                "id_satuan_pakan" => $id_satuan_pakan,
+                "harga" => $harga_satuan,
+                "stok" => $qty,
+            ];
 
-        StokPakan::create($stokpakan);
-
-        return redirect()->back();
+            StokPakan::create($stokpakan);
+            DB::commit();
+            return redirect()->back()->with('success', "Detail tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan detail");
+        }
     }
 
     public function showDetail($id)
@@ -173,24 +192,32 @@ class PakanController extends Controller
 
     public function storeOperasional(Request $request)
     {
-        $idPembelianPakan = $request->id_pembelian_pakan;
-        $hargaOperasional = $request->harga;
+        DB::beginTransaction();
+        try {
+            $idPembelianPakan = $request->id_pembelian_pakan;
+            $hargaOperasional = $request->harga;
 
-        $operasionalPembelianPakanBaru = [
-            'id_pembelian_pakan' => $idPembelianPakan,
-            'harga' => $hargaOperasional,
-            'keterangan' => $request->keterangan,
+            $operasionalPembelianPakanBaru = [
+                'id_pembelian_pakan' => $idPembelianPakan,
+                'harga' => $hargaOperasional,
+                'keterangan' => $request->keterangan,
 
-        ];
+            ];
 
-        OperasionalPembelianPakan::create($operasionalPembelianPakanBaru);
+            OperasionalPembelianPakan::create($operasionalPembelianPakanBaru);
 
-        $idKredit = PembelianPakan::find($idPembelianPakan)->kredit->id;
+            $idKredit = PembelianPakan::find($idPembelianPakan)->kredit->id;
 
-        Kredit::tambahNominal($idKredit, $hargaOperasional);
-        Kredit::updateStatusLunas($idKredit);
+            Kredit::tambahNominal($idKredit, $hargaOperasional);
+            Kredit::updateStatusLunas($idKredit);
+            DB::commit();
 
-        return redirect()->back();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan Operasional");
+        }
     }
 
     public function invoice(PembelianPakan $pembelianPakan, Request $request)

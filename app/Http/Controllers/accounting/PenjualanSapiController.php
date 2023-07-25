@@ -11,7 +11,9 @@ use App\Models\Faktur;
 use App\Models\Rekening;
 use Illuminate\Http\Request;
 use App\Models\PenjualanSapi;
+use Illuminate\Support\Facades\DB;
 use App\Models\DetailPenjualanSapi;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Providers\PdfServiceProvider;
 use Illuminate\Support\Facades\Storage;
@@ -41,80 +43,109 @@ class PenjualanSapiController extends Controller
 
     public function store(Request $request)
     {
-        $id_jurnal_piutang = 2;
-        $today = Carbon::now();
+        DB::beginTransaction();
+        try {
+            $id_jurnal_piutang = 2;
 
-        Kas::debitBaru();
+            Kas::debitBaru();
 
-        $dataDebitBaru = [
-            "id_kas" => Kas::idTerakhir(),
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $request->id_pihak_kedua,
-            "id_jurnal" => $id_jurnal_piutang,
-            "keterangan" => $request->keterangan,
+            $dataDebitBaru = [
+                "id_kas" => Kas::idTerakhir(),
+                "id_author" => auth()->user()->id,
+                "id_pihak_kedua" => $request->id_pihak_kedua,
+                "id_jurnal" => $id_jurnal_piutang,
+                "keterangan" => $request->keterangan,
 
-        ];
-        Debit::create($dataDebitBaru);
+            ];
+            Debit::create($dataDebitBaru);
 
-        $dataPenjualanSapiBaru = [
-            "id_author" => auth()->user()->id,
-            "id_debit" => Debit::idTerakhir(),
+            $dataPenjualanSapiBaru = [
+                "id_author" => auth()->user()->id,
+                "id_debit" => Debit::idTerakhir(),
 
-        ];
-        PenjualanSapi::create($dataPenjualanSapiBaru);
-
-        return redirect('/acc/piutang');
+            ];
+            PenjualanSapi::create($dataPenjualanSapiBaru);
+            DB::commit();
+            Log::alert("penjualan sapi tersimpan");
+            return redirect()->back()->with('success', "Penjualan sapi tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan penjualan sapi");
+        }
     }
 
     public function storeDetail(Request $request)
     {
-        $idPenjualanSapi = $request->id_penjualan_sapi;
-        $kiloan = $request->opsi_beli == 'kiloan';
-        $idSapi = $request->id_sapi;
-        $hargaSapi = $request->total_harga;
 
-        $detailPenjualanSapi = [
-            "id_penjualan_sapi" => $request->id_penjualan_sapi,
-            "id_sapi" => $idSapi,
-            // "eartag" => $request->eartag,
-            "bobot" => $request->bobot,
-            "kiloan" => $kiloan,
-            "harga" => $hargaSapi,
-            // "kondisi" => $request->kondisi,
-            "keterangan" => $request->keterangan,
 
-        ];
+        DB::beginTransaction();
+        try {
+            $idPenjualanSapi = $request->id_penjualan_sapi;
+            $kiloan = $request->opsi_beli == 'kiloan';
+            $idSapi = $request->id_sapi;
+            $hargaSapi = $request->total_harga;
 
-        DetailPenjualanSapi::create($detailPenjualanSapi);
-        $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
+            $detailPenjualanSapi = [
+                "id_penjualan_sapi" => $request->id_penjualan_sapi,
+                "id_sapi" => $idSapi,
+                // "eartag" => $request->eartag,
+                "bobot" => $request->bobot,
+                "kiloan" => $kiloan,
+                "harga" => $hargaSapi,
+                // "kondisi" => $request->kondisi,
+                "keterangan" => $request->keterangan,
 
-        Debit::tambahNominal($idDebit, $hargaSapi);
-        Debit::updateStatusLunas($idDebit);
-        Sapi::terjual($idSapi);
+            ];
 
-        return redirect()->back();
+            DetailPenjualanSapi::create($detailPenjualanSapi);
+            $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
+
+            Debit::tambahNominal($idDebit, $hargaSapi);
+            Debit::updateStatusLunas($idDebit);
+            Sapi::terjual($idSapi);
+
+            DB::commit();
+            return redirect()->back()->with('success', "Detail tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan detail");
+        }
     }
 
     public function storeOperasional(Request $request)
     {
-        $idPenjualanSapi = $request->id_penjualan_sapi;
-        $hargaOperasional = $request->harga;
 
-        $operasionalPenjualanSapiBaru = [
-            'id_penjualan_sapi' => $idPenjualanSapi,
-            'harga' => $hargaOperasional,
-            'keterangan' => $request->keterangan,
 
-        ];
 
-        OperasionalPenjualanSapi::create($operasionalPenjualanSapiBaru);
+        DB::beginTransaction();
+        try {
+            $idPenjualanSapi = $request->id_penjualan_sapi;
+            $hargaOperasional = $request->harga;
 
-        $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
+            $operasionalPenjualanSapiBaru = [
+                'id_penjualan_sapi' => $idPenjualanSapi,
+                'harga' => $hargaOperasional,
+                'keterangan' => $request->keterangan,
 
-        Debit::tambahNominal($idDebit, $hargaOperasional);
-        Debit::updateStatusLunas($idDebit);
+            ];
 
-        return redirect()->back();
+            OperasionalPenjualanSapi::create($operasionalPenjualanSapiBaru);
+
+            $idDebit = PenjualanSapi::find($idPenjualanSapi)->debit->id;
+
+            Debit::tambahNominal($idDebit, $hargaOperasional);
+            Debit::updateStatusLunas($idDebit);
+
+            DB::commit();
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan Operasional");
+        }
     }
 
 

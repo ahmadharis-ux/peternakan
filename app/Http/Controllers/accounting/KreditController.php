@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\accounting;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Kredit;
 use App\Models\Rekening;
-use App\Models\TransaksiKredit;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\TransaksiKredit;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class KreditController extends Controller
 {
@@ -45,24 +47,37 @@ class KreditController extends Controller
         $adm = $request->adm;
 
         if ($nominalBayar > $sisaKredit) {
-            return redirect()->back()->withErrors('Nominal pembayaran melebihi sisa kredit!');
+            $msg = 'Nominal pembayaran melebihi sisa kredit!';
+            Log::error($msg);
+            return redirect()->back()->withErrors($msg);
         }
 
-        $transaksiKredit = [
-            "id_kredit" => $idKredit,
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => Kredit::find($idKredit)->id_pihak_kedua,
-            "id_rekening" => $idRekening,
-            "nominal" => $nominalBayar,
-            "keterangan" => $request->keterangan,
-            "adm" => $adm,
-        ];
+        DB::beginTransaction();
+        try {
+            Rekening::pengeluaran($idRekening, $nominalBayar + $adm);
 
-        TransaksiKredit::create($transaksiKredit);
-        Kredit::updateStatusLunas($idKredit);
-        Rekening::pengeluaran($idRekening, $nominalBayar + $adm);
+            $transaksiKredit = [
+                "id_kredit" => $idKredit,
+                "id_author" => auth()->user()->id,
+                "id_pihak_kedua" => Kredit::find($idKredit)->id_pihak_kedua,
+                "id_rekening" => $idRekening,
+                "nominal" => $nominalBayar,
+                "keterangan" => $request->keterangan,
+                "adm" => $adm,
+                "current_saldo" => Rekening::getTotalSaldo(),
+            ];
 
-        return redirect()->back();
+            TransaksiKredit::create($transaksiKredit);
+            Kredit::updateStatusLunas($idKredit);
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'transaksi berhasil dilakukan');
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error("trx kredit gagal disimpan: $e");
+            return redirect()->back()->with('error', 'transaksi gagal');
+        }
     }
 
     public function show(Kredit $kredit)

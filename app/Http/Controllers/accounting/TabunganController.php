@@ -9,6 +9,8 @@ use App\Models\Kredit;
 use App\Models\Rekening;
 use Illuminate\Http\Request;
 use App\Models\TransaksiKredit;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class TabunganController extends Controller
@@ -36,44 +38,54 @@ class TabunganController extends Controller
     function store(Request $request)
     {
 
-        $idJurnalTabungan = 5;
-        $idOwner = User::find(1);
-        Kas::kreditBaru();
-        $today = Carbon::now();
-
-        $dataKreditTabungan = [
-            "id_kas" => Kas::idTerakhir(),
-            "id_jurnal" => $idJurnalTabungan,
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $request->id_pihak_kedua,
-            "nominal" => $request->nominal,
-            "keterangan" => $request->keterangan,
-            "adm" => $request->adm,
-            "lunas" => true,
-
-        ];
-
-        // return $dataKreditTabungan;
 
 
-        Kredit::create($dataKreditTabungan);
-        $idRekening = $request->id_rekening;
-        $nominalBayar = $request->nominal;
-        $adm = $request->adm;
+        DB::beginTransaction();
+        try {
+            $idJurnalTabungan = 5;
+            Kas::kreditBaru();
 
-        $dataTransaksiKredit = [
-            "id_author" => auth()->user()->id,
-            "id_kredit" => Kredit::idTerakhir(),
-            "id_rekening" => $idRekening,
-            "nominal" => $nominalBayar,
-            "id_pihak_kedua" => $request->id_pihak_kedua,
-            "keterangan" => $request->keterangan,
-            "adm" => $adm,
+            $dataKreditTabungan = [
+                "id_kas" => Kas::idTerakhir(),
+                "id_jurnal" => $idJurnalTabungan,
+                "id_author" => auth()->user()->id,
+                "id_pihak_kedua" => $request->id_pihak_kedua,
+                "nominal" => $request->nominal,
+                "keterangan" => $request->keterangan,
+                "adm" => $request->adm,
+                "lunas" => true,
 
-        ];
+            ];
 
-        TransaksiKredit::create($dataTransaksiKredit);
-        Rekening::pengeluaran($idRekening, $nominalBayar + $adm);
-        return redirect()->back();
+
+
+
+            Kredit::create($dataKreditTabungan);
+            $idRekening = $request->id_rekening;
+            $nominalBayar = $request->nominal;
+            $adm = $request->adm;
+
+            Rekening::pengeluaran($idRekening, $nominalBayar + $adm);
+
+            $dataTransaksiKredit = [
+                "id_author" => auth()->user()->id,
+                "id_kredit" => Kredit::idTerakhir(),
+                "id_rekening" => $idRekening,
+                "nominal" => $nominalBayar,
+                "id_pihak_kedua" => $request->id_pihak_kedua,
+                "keterangan" => $request->keterangan,
+                "adm" => $adm,
+                "current_saldo" => Rekening::getTotalSaldo(),
+            ];
+
+            TransaksiKredit::create($dataTransaksiKredit);
+
+            DB::commit();
+            return redirect()->back()->with('success', "Tabungan tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan tabungan");
+        }
     }
 }
