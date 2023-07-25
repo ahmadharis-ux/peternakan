@@ -6,6 +6,8 @@ use App\Models\Debit;
 use App\Models\Rekening;
 use Illuminate\Http\Request;
 use App\Models\TransaksiDebit;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class DebitController extends Controller
@@ -25,9 +27,6 @@ class DebitController extends Controller
 
     public function storeTransaksi(Request $request)
     {
-        // $that = Debit::getSisaPembayaran(1);
-        // return $that;
-
         $idDebit = $request->id_debit;
         $idRekening = $request->id_rekening;
         $sisaDebit = Debit::getSisaPembayaran($idDebit);
@@ -35,24 +34,37 @@ class DebitController extends Controller
 
 
         if ($nominalBayar > $sisaDebit) {
-            return redirect()->back()->withErrors('Nominal pembayaran melebihi sisa debit!');
+            if ($nominalBayar > $sisaDebit) {
+                $msg = 'Nominal pembayaran melebihi sisa debit!';
+                Log::error($msg);
+                return redirect()->back()->withErrors($msg);
+            }
         }
 
-        // return $request;
+        DB::beginTransaction();
+        try {
+            Rekening::pemasukan($idRekening, $nominalBayar);
 
-        $transaksiDebit = [
-            "id_debit" => $idDebit,
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => Debit::find($idDebit)->id_pihak_kedua,
-            "id_rekening" => $idRekening,
-            "nominal" => $nominalBayar,
-        ];
+            $transaksiDebit = [
+                "id_debit" => $idDebit,
+                "id_author" => auth()->user()->id,
+                "id_pihak_kedua" => Debit::find($idDebit)->id_pihak_kedua,
+                "id_rekening" => $idRekening,
+                "nominal" => $nominalBayar,
+                "current_saldo" => Rekening::getTotalSaldo(),
 
-        TransaksiDebit::create($transaksiDebit);
-        Debit::updateStatusLunas($idDebit);
-        Rekening::pemasukan($idRekening, $nominalBayar);
+            ];
 
-        return redirect()->back();
+            TransaksiDebit::create($transaksiDebit);
+            Debit::updateStatusLunas($idDebit);
+            DB::commit();
+
+            return redirect()->back()->with('success', 'transaksi berhasil dilakukan');
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error("trx debit gagal disimpan: $e");
+            return redirect()->back()->with('error', 'transaksi gagal');
+        }
     }
 
 

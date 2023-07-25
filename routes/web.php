@@ -68,7 +68,6 @@ Route::get('/home', function () {
 // testpage
 Route::get('/test', function (Request $request) {
 
-    // return DetailPemakaianPakan::all()->sum('subtotal');
     return DetailPemakaianPakan::sum('subtotal');
 });
 

@@ -5,11 +5,13 @@ namespace App\Http\Controllers\accounting;
 use App\Models\Kas;
 use App\Models\User;
 use App\Models\Kredit;
+use App\Models\Rekening;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use App\Http\Controllers\Controller;
-use App\Models\Rekening;
 use App\Models\TransaksiKredit;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class PenggajianController extends Controller
 {
@@ -33,21 +35,32 @@ class PenggajianController extends Controller
 
     public function store(Request $request)
     {
-        $idJurnalGaji = 4;
 
-        Kas::kreditBaru();
-        $dataKreditBaru = [
-            "id_kas" => Kas::idTerakhir(),
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $request->id_pihak_kedua,
-            "id_jurnal" => $idJurnalGaji,
-            "nominal" => $request->nominal,
-            "keterangan" => $request->keterangan ?? 'gaji pekerja $pekerja->id',
 
-        ];
+        DB::beginTransaction();
+        try {
+            $idJurnalGaji = 4;
 
-        Kredit::create($dataKreditBaru);
-        return redirect()->back();;
+            Kas::kreditBaru();
+            $dataKreditBaru = [
+                "id_kas" => Kas::idTerakhir(),
+                "id_author" => auth()->user()->id,
+                "id_pihak_kedua" => $request->id_pihak_kedua,
+                "id_jurnal" => $idJurnalGaji,
+                "nominal" => $request->nominal,
+                "keterangan" => $request->keterangan ?? 'gaji pekerja $pekerja->id',
+
+            ];
+
+            Kredit::create($dataKreditBaru);
+
+            DB::commit();
+            return redirect()->back()->with('success', "Penggajian tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan penggajian");
+        }
     }
 
     public function showPenggajianPekerja($id)

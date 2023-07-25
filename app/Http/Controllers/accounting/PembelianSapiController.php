@@ -48,8 +48,6 @@ class PembelianSapiController extends Controller
 
     public function store(Request $request)
     {
-
-
         DB::beginTransaction();
         try {
             $idJurnalHutang = 1;
@@ -83,6 +81,7 @@ class PembelianSapiController extends Controller
 
     public function storeDetail(Request $request)
     {
+        DB::beginTransaction();
         try {
             $kiloan = $request->opsi_beli == 'kiloan';
             $idPembelianSapi = $request->id_pembelian_sapi;
@@ -133,24 +132,33 @@ class PembelianSapiController extends Controller
 
     public function storeOperasional(Request $request)
     {
-        $idPembelianSapi = $request->id_pembelian_sapi;
-        $hargaOperasional = $request->harga;
+        DB::beginTransaction();
+        try {
+            $idPembelianSapi = $request->id_pembelian_sapi;
+            $hargaOperasional = $request->harga;
 
-        $operasionalPembelianSapiBaru = [
-            'id_pembelian_sapi' => $idPembelianSapi,
-            'harga' => $hargaOperasional,
-            'keterangan' => $request->keterangan,
+            $operasionalPembelianSapiBaru = [
+                'id_pembelian_sapi' => $idPembelianSapi,
+                'harga' => $hargaOperasional,
+                'keterangan' => $request->keterangan,
 
-        ];
+            ];
 
-        OperasionalPembelianSapi::create($operasionalPembelianSapiBaru);
+            OperasionalPembelianSapi::create($operasionalPembelianSapiBaru);
 
-        $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
+            $idKredit = PembelianSapi::find($idPembelianSapi)->kredit->id;
 
-        Kredit::tambahNominal($idKredit, $hargaOperasional);
-        Kredit::updateStatusLunas($idKredit);
+            Kredit::tambahNominal($idKredit, $hargaOperasional);
+            Kredit::updateStatusLunas($idKredit);
 
-        return redirect()->back();
+            DB::commit();
+
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan Operasional");
+        }
     }
 
     public function show($id)

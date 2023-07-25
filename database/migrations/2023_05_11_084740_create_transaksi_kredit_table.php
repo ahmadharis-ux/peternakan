@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('keterangan')->nullable();
             $table->unsignedInteger('nominal')->default(0);
             $table->unsignedInteger('adm')->default(0)->nullable();
+            $table->unsignedInteger('current_saldo');
+
 
             $table->timestamps();
 

@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Kas;
+use App\Models\User;
+use App\Models\Pakan;
 use App\Models\Hutang;
 use App\Models\Jurnal;
-use App\Models\Kas;
+use App\Models\Salary;
 use App\Models\Kashbon;
-use App\Models\Operasional;
-use App\Models\Pakan;
-use App\Models\PemakaianPakan;
-use App\Models\Pembayaran;
-use App\Models\PembelianPakan;
 use App\Models\Piutang;
 use App\Models\Rekening;
-use App\Models\Salary;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Models\Pembayaran;
+use App\Models\Operasional;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use PhpParser\Node\Expr\New_;
+use App\Models\PemakaianPakan;
+use App\Models\PembelianPakan;
 use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class AccController extends Controller
 {

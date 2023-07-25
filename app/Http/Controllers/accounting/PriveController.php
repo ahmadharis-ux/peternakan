@@ -10,6 +10,8 @@ use App\Models\Kredit;
 use App\Models\Rekening;
 use Illuminate\Http\Request;
 use App\Models\TransaksiKredit;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class PriveController extends Controller
@@ -31,44 +33,50 @@ class PriveController extends Controller
     }
     function store(Request $request)
     {
-        $idJurnalPrive = 6;
+        DB::beginTransaction();
+        try {
+            $idJurnalPrive = 6;
+            $nominalBayar = $request->nominal;
+            $adm = $request->adm;
+            $totalPengeluaran = $nominalBayar + $adm;
 
-        $nominalBayar = $request->nominal;
-        $adm = $request->adm;
-        $totalPengeluaran = $nominalBayar + $adm;
+            Kas::kreditBaru();
 
+            $dataKreditPrive = [
+                "id_kas" => Kas::idTerakhir(),
+                "id_jurnal" => $idJurnalPrive,
+                "id_author" => auth()->user()->id,
+                "id_pihak_kedua" => $request->id_pihak_kedua,
+                "nominal" => $request->nominal,
+                "keterangan" => $request->keterangan,
+                "adm" => $request->adm,
+                "tenggat" => $request->tenggat,
+                "lunas" => true,
+            ];
 
-        Kas::kreditBaru();
+            Kredit::create($dataKreditPrive);
 
-        $dataKreditPrive = [
-            "id_kas" => Kas::idTerakhir(),
-            "id_jurnal" => $idJurnalPrive,
-            "id_author" => auth()->user()->id,
-            "id_pihak_kedua" => $request->id_pihak_kedua,
-            "nominal" => $request->nominal,
-            "keterangan" => $request->keterangan,
-            "adm" => $request->adm,
-            "tenggat" => $request->tenggat,
-            "lunas" => true,
-        ];
+            $idRekening = $request->id_rekening;
+            Rekening::pengeluaran($idRekening, $totalPengeluaran);
 
+            $dataTransaksiKredit = [
+                "id_author" => auth()->user()->id,
+                "id_kredit" => Kredit::idTerakhir(),
+                "id_rekening" => $idRekening,
+                "nominal" => $nominalBayar,
+                "id_pihak_kedua" => $request->id_pihak_kedua,
+                "keterangan" => $request->keterangan,
+                "adm" => $adm,
+                "current_saldo" => Rekening::getTotalSaldo(),
+            ];
 
-
-        Kredit::create($dataKreditPrive);
-        $idRekening = $request->id_rekening;
-        $dataTransaksiKredit = [
-            "id_author" => auth()->user()->id,
-            "id_kredit" => Kredit::idTerakhir(),
-            "id_rekening" => $idRekening,
-            "nominal" => $nominalBayar,
-            "id_pihak_kedua" => $request->id_pihak_kedua,
-            "keterangan" => $request->keterangan,
-            "adm" => $adm,
-
-        ];
-
-        TransaksiKredit::create($dataTransaksiKredit);
-        Rekening::pengeluaran($idRekening, $totalPengeluaran);
-        return redirect()->back();
+            TransaksiKredit::create($dataTransaksiKredit);
+            DB::commit();
+            return redirect()->back()->with('success', "Prive tersimpan");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+            return redirect()->back()->with('error', "Gagal menyimpan prive");
+        }
     }
 }
