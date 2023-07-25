@@ -150,7 +150,7 @@ class InvoiceController extends Controller
             "nomorFaktur" => $faktur->nomor_faktur,
             "jatuhTempo" => $fakturPageData->jatuhTempo,
             "tanggalCetak" => $today,
-            "tanggalDibuat" => $$fakturPageData->tanggalDibuat,
+            "tanggalDibuat" => $fakturPageData->tanggalDibuat,
 
         ];
 
