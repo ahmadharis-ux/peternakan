@@ -12,6 +12,7 @@ use App\Models\TransaksiKredit;
 use App\Http\Controllers\Controller;
 use App\Models\Faktur;
 use App\Models\PemakaianPakan;
+use App\Models\PembelianPakan;
 use App\Models\PembelianSapi;
 use App\Models\PenjualanSapi;
 
@@ -163,6 +164,7 @@ class UserController extends Controller
         $role = $user->role->nama;
 
         $pembelianSapi = PembelianSapi::where('id_kredit', $idKredit)->first();
+        $pembelianPakan = PembelianPakan::where('id_kredit', $idKredit)->first();
 
 
         $pageData = [
@@ -173,6 +175,7 @@ class UserController extends Controller
             'kredit' => Kredit::find($idKredit),
             'listRiwayatTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
             'pembelianSapi' => $pembelianSapi,
+            'pembelianPakan' => $pembelianPakan,
 
         ];
 
