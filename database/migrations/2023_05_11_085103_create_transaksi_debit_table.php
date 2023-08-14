@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('id_pihak_kedua')->unsigned();
             $table->foreignId('id_debit')->unsigned();
             $table->foreignId('id_rekening')->unsigned();
-            $table->unsignedInteger('nominal')->default(0);
-            $table->unsignedInteger('current_saldo');
+            $table->unsignedBigInteger('nominal')->default(0);
+            $table->unsignedBigInteger('current_saldo');
             $table->string('keterangan')->nullable();
 
             // $table->unsignedInteger('adm')->default(0)->nullable();

@@ -2,14 +2,56 @@
 @section('container')
     <section class="section dashboard">
         <div class="col-12">
-            <div class="card recent-sales overflow-auto">
+
+            <div class="row">
+                {{-- jenis pakan --}}
+                <div class="col">
+                    <div class="card recent-sales overflow-auto">
+                        <div class="card-body">
+                            <h5 class="card-title">Daftar Jenis pakan</h5>
+                            @include('accounting.pakan.tableListJenisPakan')
+                        </div>
+                    </div>
+                </div>
+
+                {{-- jenis pakan --}}
+                <div class="col">
+                    <div class="card recent-sales overflow-auto">
+                        <div class="card-body">
+                            <h5 class="card-title">Daftar satuan</h5>
+                            @include('accounting.pakan.tableListSatuan')
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    {{-- stok pakan --}}
+                    <div class="col">
+                        <div class="card recent-sales overflow-auto">
+                            <div class="card-body">
+                                <h5 class="card-title">Stok pakan</h5>
+
+                                <a href="/acc/pemakaian_pakan" class="btn btn-sm btn-primary mb-3">Pakai Pakan <i
+                                        class="bi bi-cart-plus-fill"></i></a>
+
+                                @include('accounting.pakan.tableListStokPakan')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {{-- hapus --}}
+            <div class="d-none card recent-sales overflow-auto">
                 <div class="card-body">
                     <h5 class="card-title">{{ $heading }} </h5>
                     <div class="row">
                         <div class="col">
                             <div class="container mb-3">
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#modalCreateJenisPakan">Tambah Pakan</button>
+
                                 <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
                                     data-bs-target="#modalJenisPakan">Lihat Data Jenis Pakan</button>
                             </div>
@@ -24,48 +66,25 @@
                             <label for="">Stok Pakan</label>
 
 
-                            <a href="/acc/pemakaian_pakan" class="btn btn-sm btn-primary">Pakai Pakan <i
-                                    class="bi bi-cart-plus-fill"></i></a>
 
-                            {{-- table Stok Pakan --}}
-                            <table class="table mt-2">
-                                <thead>
-                                    <tr>
-                                        <td>#</td>
-                                        <td>Nama Pakan</td>
-                                        <td>Stok</td>
-                                        <td>Nilai Aset</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($ListStokPakan as $pakan)
-                                        @php
-                                            $nilaiAset = $pakan->harga * $pakan->stok;
-                                            $sisaStok = $pakan->stok - $pakan->detailPemakaianPakan->sum('qty');
-                                        @endphp
 
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pakan->pakan->nama }}</td>
-                                            <td>{{ $sisaStok }} {{ $pakan->satuanPakan->nama }}</td>
-                                            <td>Rp {{ number_format($nilaiAset) }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+
             <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-                    <h5 class="card-title">Daftar Transaksi Pakan</h5>
+                    <h5 class="card-title">Daftar Hutang Pakan</h5>
                     <button type="button" class="btn btn-sm btn-primary mb-3" data-bs-toggle="modal"
                         data-bs-target="#modalCreateKreditPakan">Beli Pakan</button>
                     {{-- table --}}
                     @include('accounting.pakan.tableTransaksi')
                 </div>
             </div>
+
         </div>
     </section>
 

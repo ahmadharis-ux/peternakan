@@ -1,6 +1,9 @@
 @php
     $listDetailPenjualan = $debit->penjualanSapi->detailPenjualanSapi;
     $listOperasionalPenjualan = $debit->penjualanSapi->operasionalPenjualanSapi;
+    
+    $userIsAuthor = $debit->id_author == auth()->user()->id;
+    $userPunyaTtd = auth()->user()->foto_ttd !== null;
 @endphp
 
 
@@ -12,10 +15,33 @@
         </h5>
 
         {{-- id piutang --}}
-        <div class="fs-5">
-            <span>ID piutang : </span>
-            <span class="fw-bold"> {{ $debit->id }}</span>
+        <div class="d-flex justify-content-between mb-3">
+            <div class="fs-5">
+                <span>ID piutang : </span>
+                <span class="fw-bold"> {{ $debit->id }}</span>
+            </div>
+
+            {{-- btn cetak faktur --}}
+            <div class="d-flex justify-content-end">
+                @if ($userIsAuthor)
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-success {{ $userPunyaTtd ? '' : 'disabled btn-secondary' }}"
+                                data-bs-toggle="modal" data-bs-target="#modalCetakFaktur">Cetak
+                                faktur</button>
+                        </div>
+                        @if ($userPunyaTtd == false)
+                            <small class="text-muted">Anda belum punya tanda tangan. <a href="/editprofile">Upload
+                                    di sini</a></small>
+                        @endif
+                    </div>
+                @endif
+            </div>
+
         </div>
+
+
+
 
         {{-- table sapi dibeli --}}
         <div class="card recent-sales">
@@ -160,6 +186,11 @@
         </div>
         </div>
     </section>
+
+    @if ($userIsAuthor)
+        @include('accounting.penjualan_sapi.modalCetakFaktur')
+    @endif
+
 
 
     <script>

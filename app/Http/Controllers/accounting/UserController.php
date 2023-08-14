@@ -12,6 +12,8 @@ use App\Models\TransaksiKredit;
 use App\Http\Controllers\Controller;
 use App\Models\Faktur;
 use App\Models\PemakaianPakan;
+use App\Models\PembelianSapi;
+use App\Models\PenjualanSapi;
 
 class UserController extends Controller
 {
@@ -139,6 +141,7 @@ class UserController extends Controller
         $user = User::find($idUser);
         User::getFullname($user);
         $role = $user->role->nama;
+        $penjualanSapi = PenjualanSapi::where('id_debit', $idDebit)->first();
 
         $pageData = [
             'title' => 'User - ' . $role,
@@ -147,10 +150,39 @@ class UserController extends Controller
             'user' => $user,
             'debit' => Debit::find($idDebit),
             'listRiwayatTransaksi' => TransaksiDebit::where('id_debit', $idDebit)->get(),
+            'penjualanSapi' => $penjualanSapi,
         ];
 
         return view('accounting.user.customer.detailPiutang', $pageData);
     }
+
+    public function showHutang($idUser, $idKredit)
+    {
+        $user = User::find($idUser);
+        User::getFullname($user);
+        $role = $user->role->nama;
+
+        $pembelianSapi = PembelianSapi::where('id_kredit', $idKredit)->first();
+
+
+        $pageData = [
+            'title' => 'User - ' . $role,
+            'heading' => $user->fullname . ' - Piutang',
+            'active' => 'user',
+            'user' => $user,
+            'kredit' => Kredit::find($idKredit),
+            'listRiwayatTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
+            'pembelianSapi' => $pembelianSapi,
+
+        ];
+
+        $roleSlug = str_replace(' ', '_', $role);
+        $roleSlug = strtolower($roleSlug);
+
+
+        return view('accounting.user.' . $roleSlug . '.detailHutang', $pageData);
+    }
+
 
     function showLogActivity($idUser)
     {
@@ -174,27 +206,5 @@ class UserController extends Controller
         ];
 
         return view('accounting.user.accounting.tableListAktivitas', $pageData);
-    }
-
-    public function showHutang($idUser, $idKredit)
-    {
-        $user = User::find($idUser);
-        User::getFullname($user);
-        $role = $user->role->nama;
-
-        $pageData = [
-            'title' => 'User - ' . $role,
-            'heading' => $user->fullname . ' - Piutang',
-            'active' => 'user',
-            'user' => $user,
-            'kredit' => Kredit::find($idKredit),
-            'listRiwayatTransaksi' => TransaksiKredit::where('id_kredit', $idKredit)->get(),
-        ];
-
-        $roleSlug = str_replace(' ', '_', $role);
-        $roleSlug = strtolower($roleSlug);
-
-
-        return view('accounting.user.' . $roleSlug . '.detailHutang', $pageData);
     }
 }

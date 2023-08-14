@@ -1,6 +1,9 @@
 @php
     $listDetailPembelian = $kredit->pembelianSapi->detailPembelianSapi;
     $listOperasionalPembelian = $kredit->pembelianSapi->operasionalPembelianSapi;
+    
+    $userIsAuthor = $kredit->id_author == auth()->user()->id;
+    $userPunyaTtd = auth()->user()->foto_ttd !== null;
 @endphp
 
 
@@ -11,11 +14,33 @@
             {{ $heading }}
         </h5>
 
-        {{-- id hutang --}}
-        <div class="fs-5">
-            <span>ID hutang : </span>
-            <span class="fw-bold"> {{ $kredit->id }}</span>
+
+        <div class="d-flex justify-content-between mb-3">
+            {{-- id hutang --}}
+            <div class="fs-5">
+                <span>ID hutang : </span>
+                <span class="fw-bold"> {{ $kredit->id }}</span>
+            </div>
+
+            {{-- btn cetak faktur --}}
+            <div class="d-flex justify-content-end">
+                @if ($userIsAuthor)
+                    <div class="d-flex flex-column">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary {{ $userPunyaTtd ? '' : 'disabled btn-secondary' }}"
+                                data-bs-toggle="modal" data-bs-target="#modalCetakFaktur">Cetak
+                                faktur</button>
+                        </div>
+                        @if ($userPunyaTtd == false)
+                            <small class="text-muted">Anda belum punya tanda tangan. <a href="/editprofile">Upload
+                                    di sini</a></small>
+                        @endif
+                    </div>
+                @endif
+            </div>
+
         </div>
+
 
         {{-- table sapi dibeli --}}
         <div class="card recent-sales">
@@ -141,6 +166,9 @@
         </div>
         </div>
 
+        @if ($userIsAuthor)
+            @include('accounting.pembelian_sapi.modalCetakFaktur')
+        @endif
 
     </section>
 @endsection

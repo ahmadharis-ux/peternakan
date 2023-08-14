@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreignId('id_kredit')->unsigned();
             $table->foreignId('id_rekening')->unsigned();
             $table->string('keterangan')->nullable();
-            $table->unsignedInteger('nominal')->default(0);
-            $table->unsignedInteger('adm')->default(0)->nullable();
-            $table->unsignedInteger('current_saldo');
+            $table->unsignedBigInteger('nominal')->default(0);
+            $table->unsignedBigInteger('adm')->default(0)->nullable();
+            $table->unsignedBigInteger('current_saldo');
 
 
             $table->timestamps();

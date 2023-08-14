@@ -40,6 +40,8 @@ class KreditController extends Controller
 
     public function storeTransaksi(Request $request)
     {
+        // return $request;
+
         $idKredit = $request->id_kredit;
         $idRekening = $request->id_rekening;
         $sisaKredit = Kredit::getSisaPembayaran($idKredit);

@@ -15,12 +15,12 @@
             <div class="card-title px-3">Profile {{ $user->role->nama }}</div>
             <div class="card-body">
                 <div class="container mb-2">
-                    <table class="table table-striped ">
+                    <table class="table-striped table">
                         <tr>
 
 
                             <th class="col-4">Nama </th>
-                            <td>{{ $fullname }}</td>
+                            <td>{{ $user->fullname() }}</td>
                         </tr>
                         <tr>
                             <th class="col-4">Email</th>

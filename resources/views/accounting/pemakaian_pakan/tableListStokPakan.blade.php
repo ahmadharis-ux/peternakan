@@ -30,7 +30,7 @@
                 <td class="fw-bold">{{ $stokPakan->sisaStok() }}</td>
                 <td class="text-end">Rp {{ number_format($stokPakan->harga) }}</td>
                 <td>
-                    <input type="number" class="form-control" style="width:6rem" min="0"
+                    <input type="number" class="form-control inputSetQty" style="width:6rem" min="0"
                         max="{{ $stokPakan->stok - $stokPakan->detailPemakaianPakan->sum('qty') }}"
                         data-id-stok="{{ $stokPakan->id }}" name="qty_pakan[]" id="inputQty-{{ $stokPakan->id }}"
                         disabled>

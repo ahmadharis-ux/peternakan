@@ -155,7 +155,7 @@
                 const maxQty = stok.stok
 
                 let input = parseInt($(this).val());
-
+                console.log(input);
                 if (input > maxQty) {
                     $(this).val(maxQty)
                     input = maxQty
@@ -165,6 +165,8 @@
                     $(this).val()
                     input = 0
                 }
+
+
 
                 nominal = input * stok.harga
                 $(`#input-nominal-pakan-${idStok}`).removeAttr('disabled')
