@@ -80,7 +80,7 @@ class SapiController extends Controller
             'sapi' => $sapi,
             'detailPenjualanSapi' => DetailPenjualanSapi::where('id_sapi', $sapi->id)->first(),
         ];
-        // dd($pageData);
+        // return($pageData);
 
         return view('accounting.stok_sapi.detail', $pageData);
     }

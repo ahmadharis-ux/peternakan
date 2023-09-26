@@ -13,7 +13,7 @@ class LoginController extends Controller
     {
         $credentials = [
             "email" => "$role@gmail.com",
-            "password" => "password"
+            "password" => "password123"
         ];
 
         $loginAttempt =  (Auth::attempt($credentials));

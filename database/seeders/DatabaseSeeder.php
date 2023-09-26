@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        // ============= akun utama
         User::create(
             [
                 "nama_depan" => "Super",
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
                 "id_role" => 2,
                 "email" => "admin@gmail.com",
                 "email_verified_at" => now(),
-                "password" => Hash::make("password"),
+                "password" => Hash::make("password123"),
                 "remember_token" => Str::random(10),
             ],
         );
@@ -61,7 +62,7 @@ class DatabaseSeeder extends Seeder
                 "id_role" => 1,
                 "email" => "owner@gmail.com",
                 "email_verified_at" => now(),
-                "password" => Hash::make("password"),
+                "password" => Hash::make("password123"),
                 "remember_token" => Str::random(10),
             ],
         );
@@ -73,11 +74,13 @@ class DatabaseSeeder extends Seeder
                 "id_role" => 3,
                 "email" => "accounting@gmail.com",
                 "email_verified_at" => now(),
-                "password" => Hash::make("password"),
+                "password" => Hash::make("password123"),
                 "remember_token" => Str::random(10),
             ],
 
         );
+        // =============
+
 
 
         // User::factory(20)->create();
@@ -90,7 +93,7 @@ class DatabaseSeeder extends Seeder
                     "id_role" => 6,
                     "email" => "customer" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
-                    "password" => Hash::make("password"),
+                    "password" => Hash::make("password123"),
                     "remember_token" => Str::random(10),
                 ],
 
@@ -100,12 +103,12 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 3; $i++) {
             User::create(
                 [
-                    "nama_depan" => "ssapi",
+                    "nama_depan" => "supplier sapi ",
                     "nama_belakang" => $i + 1,
                     "id_role" => 5,
                     "email" => "supplier_sapi" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
-                    "password" => Hash::make("password"),
+                    "password" => Hash::make("password123"),
                     "remember_token" => Str::random(10),
                 ],
 
@@ -115,12 +118,12 @@ class DatabaseSeeder extends Seeder
         for ($i = 0; $i < 3; $i++) {
             User::create(
                 [
-                    "nama_depan" => "spakan",
+                    "nama_depan" => "supplier sapi ",
                     "nama_belakang" => $i + 1,
                     "id_role" => 4,
                     "email" => "supplier_pakan" . $i + 1 . "@gmail.com",
                     "email_verified_at" => now(),
-                    "password" => Hash::make("password"),
+                    "password" => Hash::make("password123"),
                     "remember_token" => Str::random(10),
                 ],
 
@@ -142,7 +145,7 @@ class DatabaseSeeder extends Seeder
                 // "id_user" => $val["id_user"],
                 "atas_nama" => $val["atas_nama"],
                 "bank" => $val["bank"],
-                "saldo" => 1000,
+                "saldo" => 9999999999,
                 "updated_at" => Carbon::now(),
             ]);
         }
@@ -230,12 +233,11 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Sapi::factory(5)->create();
+        // Sapi::factory(5)->create();
     }
 
     function seedStokPakan()
     {
-
         for ($i = 0; $i < 10; $i++) {
             StokPakan::create([
                 "id_pakan" => mt_rand(0, 2),
@@ -251,7 +253,8 @@ class DatabaseSeeder extends Seeder
         $this->seedRoleAndUser();
         $this->seedRekening();
         $this->seedKodeJurnalAndJurnal();
-        $this->seedSatuanPakanAndPakan();
+
+        // $this->seedSatuanPakanAndPakan();
         $this->seedJenisSapiAndSapi();
         // $this->seedStokPakan();
     }
