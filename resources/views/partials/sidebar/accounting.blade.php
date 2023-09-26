@@ -139,6 +139,13 @@
             </a>
         </li>
 
+        <li>
+            <a href="/acc/jenis_sapi" class="{{ $title == 'Jenis sapi' ? 'active' : '' }}">
+                <i class="bi bi-circle"></i><span>Jenis sapi</span>
+            </a>
+        </li>
+
+
     </ul>
 </li>
 

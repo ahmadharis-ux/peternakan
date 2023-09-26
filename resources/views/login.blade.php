@@ -72,7 +72,7 @@
 
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <div class="pt-4 pb-2">
+                                    <div class="pb-2 pt-4">
                                         <h5 class="card-title fs-4 pb-0 text-center">Login</h5>
                                     </div>
 
@@ -102,11 +102,7 @@
                                                 <button class="btn btn-primary w-100" type="submit">Login</button>
                                             </div>
 
-                                            <div class="col-12">
-                                                <p class="small mb-0">Belum punya akun? <a href="/daftar">Daftar
-                                                        Akun</a>
-                                                </p>
-                                            </div>
+
 
                                         </div>
                                     </form>

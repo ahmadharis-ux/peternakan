@@ -37,6 +37,7 @@ use App\Http\Controllers\accounting\PenjualanSapiController;
 use App\Http\Controllers\accounting\PemakaianPakanController;
 use App\Http\Controllers\FileController;
 use App\Models\DetailPemakaianPakan;
+use App\Http\Controllers\accounting\JenisSapiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -183,6 +184,16 @@ Route::middleware(['auth', 'role:Accounting'])->prefix('acc')->group(function ()
         Route::post('/', [JurnalController::class, 'store']);
         Route::put('/{id}', [JurnalController::class, 'update']);
         Route::delete('/{id}', [JurnalController::class, 'destroy']);
+    });
+
+    // jenis sapi
+    Route::prefix('jenis_sapi')->group(function () {
+        Route::get('/', [JenisSapiController::class, 'index']);
+        Route::get('/{id}', [JenisSapiController::class, 'show']);
+
+        Route::post('/', [JenisSapiController::class, 'store']);
+        Route::put('/{id}', [JenisSapiController::class, 'update']);
+        Route::delete('/{id}', [JenisSapiController::class, 'destroy']);
     });
 
 

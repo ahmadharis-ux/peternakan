@@ -3,7 +3,7 @@
     $totalKreditPakan = $listDetailPembelian->sum('subtotal');
     $totalOperasional = $listOperasionalPembelian->sum('harga');
     $totalKredit = $totalKreditPakan + $totalOperasional;
-
+    
     // pembayaran
     $totalBayar = $listRiwayatTransaksi->sum('nominal');
     $sisaPembayaran = $totalKredit - $totalBayar;
@@ -47,7 +47,7 @@
 
                             <div class="col-sm-12 mb-3">
                                 <label for="">Nominal</label>
-                                <div class="d-flex ">
+                                <div class="d-flex">
                                     <input id="inputNominal" type="number" min="0" max="{{ $sisaPembayaran }}"
                                         class="form-control" name="nominal" required>
 
@@ -64,27 +64,27 @@
                         </div>
 
                         <div class="col d-flex flex-column">
-                            <div class="d-flex flex-row justify-content-between">
+                            <div class="d-flex justify-content-between flex-row">
                                 <div class="text-secondary">Bank</div>
                                 <div id="namaBank"></div>
                             </div>
 
-                            <div class="d-flex flex-row justify-content-between">
+                            <div class="d-flex justify-content-between flex-row">
                                 <div class="text-secondary">Atas nama</div>
                                 <div id="atasNama"></div>
                             </div>
 
-                            <div class="d-flex flex-row justify-content-between">
+                            <div class="d-flex justify-content-between flex-row">
                                 <div class="text-secondary">Nomor rekening</div>
                                 <div id="nomorRekening"></div>
                             </div>
 
-                            <div class="d-flex flex-row justify-content-between mb-5">
+                            <div class="d-flex justify-content-between mb-5 flex-row">
                                 <div class="text-secondary">Saldo</div>
                                 <div id="saldo"></div>
                             </div>
 
-                            <div class="d-flex flex-row justify-content-between fw-bold">
+                            <div class="d-flex justify-content-between fw-bold flex-row">
                                 <div class="text-secondary">Sisa pembayaran</div>
                                 <div>Rp {{ number_format($sisaPembayaran) }}</div>
                             </div>
@@ -153,7 +153,7 @@
                 btnSimpan.attr('disabled', 'disabled')
                 btnSimpan.text('Nominal tidak valid!')
 
-                inputNominal.addClasss('is-invalid')
+                inputNominal.addClass('is-invalid')
 
 
             } else {
